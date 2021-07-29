@@ -28,12 +28,12 @@ design:
     padding: ["20px", "0", "20px", "0"]
 ---
 
-**[AusTraits ARDC webpage](https://ardc.edu.au/project/austraits/)**
+**[ARDC webpage](https://ardc.edu.au/project/austraits/)**
 
-**[AusTraits Zenodo page](http://doi.org/10.5281/zenodo.5112001.)**
+**[Zenodo page](http://doi.org/10.5281/zenodo.5112001.)**
 
 **[AusTraits Github repository](https://github.com/traitecoevo/austraits)**
 
 **[AusTraits.build Github repository](https://github.com/traitecoevo/austraits.build)**
-
+b
 **[AusTraits API]() In development**
