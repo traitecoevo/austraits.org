@@ -35,5 +35,5 @@ design:
 **[AusTraits Github repository](https://github.com/traitecoevo/austraits)**
 
 **[AusTraits.build Github repository](https://github.com/traitecoevo/austraits.build)**
-b
-**[AusTraits API]() In development**
+
+**[AusTraits API]() (In development)**
