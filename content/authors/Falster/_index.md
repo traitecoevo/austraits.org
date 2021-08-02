@@ -1,17 +1,17 @@
 ---
 # Display name
-title: Daniel Falster
+title: Assoc. Prof. Daniel Falster
 
 # Is this the primary user of the site?
 superuser: true
 
 # Role/position/tagline
-role: Associate Professor and Project Lead
+role: Joint project lead
 
 # Organizations/Affiliations to show in About widget
 organizations:
 - name: UNSW Sydney
-  url: https://www.stanford.edu/
+  url: http://danielfalster.com
 
 # Short bio (displayed in user profile at end of posts)
 bio: My research interests include
@@ -24,27 +24,26 @@ user_groups: ["Team Members"]
 education:
   courses:
   - course: PhD
-    institution:
-    year:
+    institution: Macquarie University, Australia
+    year: 2010
 
 # Social/Academic Networking
 # For available icons, see: https://wowchemy.com/docs/getting-started/page-builder/#icons
 #   For an email link, use "fas" icon pack, "envelope" icon, and a link in the
 #   form "mailto:your-email@example.com" or "/#contact" for contact widget.
 social:
-- icon: envelope
-  icon_pack: fas
-  link: '/#contact'
-
-- icon: graduation-cap  # Alternatively, use `google-scholar` icon from `ai` icon pack
-  icon_pack: fas
-  link: https://scholar.google.co.uk/citations?user=sIwtMXoAAAAJ
+- icon: google-scholar  # Alternatively, use `google-scholar` icon from `ai` icon pack
+  icon_pack: ai
+  link: http://scholar.google.com/citations?hl=en&user=QXMISwEAAAAJ
+- icon: twitter
+  icon_pack: fab
+  link: https://twitter.com/adaptive_plant
 - icon: github
   icon_pack: fab
-  link: https://github.com/gcushen
+  link: https://github.com/traitecoevo
 - icon: linkedin
   icon_pack: fab
-  link: https://www.linkedin.com/
+  link: https://www.linkedin.com/in/danielfalster/
 
 # Link to a PDF of your resume/CV.
 # To use: copy your resume to `static/uploads/resume.pdf`, enable `ai` icons in `params.toml`,

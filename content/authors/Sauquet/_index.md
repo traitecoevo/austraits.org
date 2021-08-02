@@ -1,16 +1,16 @@
 ---
 # Display name
-title: Herve Sauquet
+title: Dr Hervé Sauquet
 
 # Is this the primary user of the site?
 superuser: true
 
 # Role/position/tagline
-role: Senior Research Scientist
+role: Joint project lead
 
 # Organizations/Affiliations to show in About widget
 organizations:
-- name: The Royal Botanical Gardens Sydney
+- name: Royal Botanic Gardens & Domain Trust Sydney Australia  
   url: https://www.rbgsyd.nsw.gov.au/science/our-science-staff/dr-herve-sauquet
 
 # Short bio (displayed in user profile at end of posts)
@@ -32,19 +32,15 @@ education:
 #   For an email link, use "fas" icon pack, "envelope" icon, and a link in the
 #   form "mailto:your-email@example.com" or "/#contact" for contact widget.
 social:
-- icon: envelope
-  icon_pack: fas
-  link: '/#contact'
-
-- icon: graduation-cap  # Alternatively, use `google-scholar` icon from `ai` icon pack
-  icon_pack: fas
-  link: https://scholar.google.co.uk/citations?user=sIwtMXoAAAAJ
+- icon: twitter
+  icon_pack: fab
+  link: https://twitter.com/hsauquet_rbgsyd
+- icon: google-scholar  # Alternatively, use `google-scholar` icon from `ai` icon pack
+  icon_pack: ai
+  link: https://scholar.google.com/citations?user=eHU_qlwAAAAJ&hl=en&oi=ao
 - icon: github
   icon_pack: fab
-  link: https://github.com/gcushen
-- icon: linkedin
-  icon_pack: fab
-  link: https://www.linkedin.com/
+  link: https://github.com/eflowerproject
 
 # Link to a PDF of your resume/CV.
 # To use: copy your resume to `static/uploads/resume.pdf`, enable `ai` icons in `params.toml`,

@@ -18,7 +18,7 @@ content:
     - Team Members
 
 authors:
-  - <Falster>
+  - Falster
   - Gallagher
   - Wenk
   - Sauquet
