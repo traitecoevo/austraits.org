@@ -1,13 +1,13 @@
 ---
 # An instance of the Pages widget.
 # Documentation: https://wowchemy.com/docs/page-builder/
-widget: blank
+widget:
 
 # This file represents a page section.
-headless: true
+headless: false
 
 # Order that this section appears on the page.
-weight: 40
+weight:
 
 title: Funding
 subtitle:
@@ -38,4 +38,6 @@ design:
   #   3 = Card
   #   4 = Citation (publication only)
   view: 2
+
+
 ---

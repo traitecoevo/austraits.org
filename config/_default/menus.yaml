@@ -13,11 +13,8 @@ main:
   - name: Collaborators
     url: '#collaborators'
     weight: 30
-  - name: Partner
+  - name: Partners
     url: '#partners'
-    weight: 40
-  - name: Funding
-    url: '#funding'
     weight: 40
   - name: Publications
     url: '#publications'

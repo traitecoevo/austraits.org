@@ -1,7 +1,7 @@
 ---
 # An instance of the Featurette widget.
 # Documentation: https://wowchemy.com/docs/page-builder/
-widget: featurette
+widget: blank
 
 # This file represents a page section.
 headless: true
@@ -21,13 +21,21 @@ feature:
   icon_pack: fab
   name: UNSW Sydney
 - description:
-  icon: 
+  icon: wsulogo
+  icon_pack: custom
+  name: Western Sydney University
+- description:
+  icon:
+  icon_pack: fab
+  name: Macquarie University
+- description:
+  icon:
   icon_pack: fas
   name: Australian Research Data Commons
 - description:
   icon:
   icon_pack: fas
-  name: The Royal Botanical Garden Sydney
+  name: The Royal Botanical Garden and Domain Trust Sydney
 - description:
   icon:
   icon_pack: fas
@@ -41,6 +49,8 @@ feature:
   icon_pack: fas
   name: UNSW ResTech
 
+  design:
+    columns: '1'
 # Uncomment to use emoji icons.
 #- icon: ':smile:'
 #  icon_pack: emoji
@@ -56,3 +66,4 @@ feature:
 #  name: Surfing
 #  description: 90%
 ---
+{{< gallery album="PartnerLogos" >}}

@@ -5,7 +5,7 @@
 
 # Appearance
 
-theme: forest
+theme: default
 day_night: false
 font: ''
 font_size: L
@@ -20,7 +20,7 @@ twitter: ''
 
 # Contact (edit or remove options as required)
 
-email: austraits@gmail.com
+email: austraits.database@gmail.com
 phone:
 address:
   street: UNSW Sydney
@@ -34,14 +34,9 @@ coordinates:
   longitude: '151.235528'
 directions:
 office_hours:
-  - 'Monday 10:00 to 13:00'
-  - 'Wednesday 09:00 to 10:00'
+
 appointment_url:
 contact_links:
-  - icon: twitter
-    icon_pack: fab
-    name: DM Me
-    link: 'https://twitter.com/Twitter'
 
 # Site header
 
