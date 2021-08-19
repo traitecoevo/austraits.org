@@ -7,7 +7,7 @@ widget: pages
 headless: true
 
 # Order that this section appears on the page.
-weight: 25
+weight: 30
 
 title: Upcoming Workshops
 subtitle:

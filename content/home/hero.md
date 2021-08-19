@@ -13,8 +13,9 @@ cta_note:
   label:
 design:
   background:
-    color: '#808080'
-    text_color_light: true
+    color: '#fff'
+text:
+   color: '#808080'
 advanced:
   css_class: fullscreen
 ---

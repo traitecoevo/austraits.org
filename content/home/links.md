@@ -26,7 +26,14 @@ design:
     text_color_light: false
   spacing:
     padding: ["20px", "0", "20px", "0"]
+
+  cta:
+      url: 'https://ardc.edu.au/project/austraits/'
+      label: ARDC webpage
+      icon_pack:
+      icon:
 ---
+
 
 **[ARDC webpage](https://ardc.edu.au/project/austraits/)**
 
@@ -35,5 +42,7 @@ design:
 **[AusTraits Github repository](https://github.com/traitecoevo/austraits)**
 
 **[AusTraits.build Github repository](https://github.com/traitecoevo/austraits.build)**
+
+      [AusTraits.build webpage]
 
 **[AusTraits API]() (In development)**
