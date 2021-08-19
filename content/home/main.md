@@ -31,4 +31,4 @@ An AusTraits R package accompanies the current first public release of AusTraits
 Over the coming years AusTraits aims to grow into a national data asset, by merging in additional legacy datasets, soliciting newly collected datasets from diverse research labs, further developing the database structure, and enhancing data quality through the publication of trait definitions and continued development of error checking protocols. During this timeframe, AusTraits will also initiate the public sharing of the data resource, establishing an API and distributing the data through a selection of biodiversity portals.
 
 
-{{< figure src="austraitsflowchart.png" caption="A conceptual flow chart of the different AusTraits components" numbered="false" >}}
+{{< figure src="austraitsflowchart.png" caption="A conceptual flow chart of the different AusTraits components" numbered="false" width="5000">}}
