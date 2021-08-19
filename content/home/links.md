@@ -35,14 +35,20 @@ design:
 ---
 
 
-**[ARDC webpage](https://ardc.edu.au/project/austraits/)**
+**[ARDC webpage](https://ardc.edu.au/project/austraits/)**  - AusTraits is currently funded by a 2.5 year grant from the Australian Research Data Commons, matched by funding from our data partners. The ARDC website provides an AusTraits project overview and additional details of the services provided by ARDC to enhance this project.
 
-**[Zenodo page](http://doi.org/10.5281/zenodo.5112001.)**
 
-**[AusTraits Github repository](https://github.com/traitecoevo/austraits)**
 
-**[AusTraits.build Github repository](https://github.com/traitecoevo/austraits.build)**
+**[Zenodo page](http://doi.org/10.5281/zenodo.5112001.)** - The most recent AusTraits data release can be downloaded directly from the Zenodo repository.
 
-      [AusTraits.build webpage]
+
+**[AusTraits Github repository](https://github.com/traitecoevo/austraits)** - Visiting the AusTraits Github repository to install a copy of the AusTraits R package. This package facilities the download and exploration of the AusTraits database in R.
+
+
+**[AusTraits.build Github repository](https://github.com/traitecoevo/austraits.build)** - The individual datasets and metadata amalgamated into the AusTraits database are archived on the AusTraits.build Github repository, together with the code required to build AusTraits.
+
+
+
+
 
 **[AusTraits API]() (In development)**

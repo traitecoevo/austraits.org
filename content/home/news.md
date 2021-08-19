@@ -9,18 +9,18 @@ headless: true
 # Order that this section appears on the page.
 weight: 15
 
-title: Latest News
+title: Latest News and Events
 subtitle: ''
 
 content:
   # Page type to display. E.g. post, talk, publication...
-  page_type: 
+  page_type:
   # Choose how much pages you would like to display (0 = all pages)
-  count: 1
+  count: 3
   # Choose how many pages you would like to offset by
   offset: 0
   # Page order: descending (desc) or ascending (asc) date.
-  order: desc
+  order: asc
   # Filter on criteria
   filters:
     tag: ''

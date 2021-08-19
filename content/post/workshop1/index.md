@@ -1,10 +1,10 @@
 ---
-title: Workshop 2 - Traits
+title: Seed Traits Workshop
 
-event: Traits Workshop 2
-event_url: https://example.org
+event: Seed Traits Workshop
+event_url:
 
-location: CANBR
+location: TBD
 address:
   street:
   city:
@@ -12,13 +12,13 @@ address:
   postcode:
   country: Australia
 
-summary: Second AusTraits workshop to refine trait definitions
+summary: First AusTraits workshop to refine trait definitions
 abstract: Collaborate with other researchers to refine trait definitions
 
 # Talk start and end times.
 #   End time can optionally be hidden by prefixing the line with `#`.
-date: "2021-10-02T13:00:00Z"
-date_end: "2021-10-02T15:00:00Z"
+date: "2021-10-28T13:00:00Z"
+date_end: "2021-10-29T15:00:00Z"
 all_day: false
 
 # Schedule page publish date (NOT talk date).
