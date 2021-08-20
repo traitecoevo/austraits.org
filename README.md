@@ -7,10 +7,12 @@
 install.packages("blogdown")
 library(blogdown) 
 
-#install HUGO
+# install HUGO
 blogdown::install_hugo()
 ```
 ### Build the site locally
+
+Set the website folder as the working directory
 
 ```r
 blogdown::serve_site()
