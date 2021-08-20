@@ -1,6 +1,20 @@
-Website for AusTraits built using HUGO 
+# Website for AusTraits built using HUGO via blogdown
 
-Use R package blogdown to build the website
+### Install `blogdown` and HUGO in R Studio 
 
-To build the website install `blogdown` in R Studio
+```r
+# install blogdown
+install.packages("blogdown")
+library(blogdown) 
 
+#install HUGO
+blogdown::install_hugo()
+```
+### Build the site locally
+
+```r
+blogdown::serve_site
+
+# To stop the server
+blogdow::stop_server
+```
