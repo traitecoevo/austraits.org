@@ -13,8 +13,8 @@ blogdown::install_hugo()
 ### Build the site locally
 
 ```r
-blogdown::serve_site
+blogdown::serve_site()
 
 # To stop the server
-blogdow::stop_server
+blogdown::stop_server()
 ```
