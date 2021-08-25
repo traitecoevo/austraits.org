@@ -17,7 +17,7 @@ main:
 #    url: 'https://github.com/traitecoevo/austraits'
 #    weight: 17
   - name: Team
-    url: '#team'
+    url: '#team/'
     weight: 20
   - name: Contributors
     url: 'contributors/'

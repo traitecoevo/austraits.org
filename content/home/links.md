@@ -10,7 +10,7 @@ headless: true
 # Order that this section appears on the page.
 weight: 15
 
-title: Project Website Links
+title: Accessing and Using AusTraits
 subtitle:
 
 design:
@@ -33,17 +33,17 @@ design:
 ---
 
 
-**[ARDC webpage](https://ardc.edu.au/project/austraits/)**  - AusTraits is currently funded by a 2.5 year grant from the Australian Research Data Commons, matched by funding from our data partners. The ARDC website provides an AusTraits project overview and additional details of the services provided by ARDC to enhance this project.
+
+## Accessing and using AusTraits
 
 
-
-**[Zenodo page](http://doi.org/10.5281/zenodo.5112001.)** - The most recent AusTraits data release can be downloaded directly from the Zenodo repository.
-
-
-**[AusTraits R Package Website](https://traitecoevo.github.io/austraits/)** Visit the AusTraits R Package website for information for downloading AusTraits using R. This package facilities the download and exploration of the AusTraits database in R.
+**[Zenodo](http://doi.org/10.5281/zenodo.5112001.)** - The most recent AusTraits data release can be downloaded directly from the Zenodo repository.
 
 
-**[AusTraits R Package Github repository](https://github.com/traitecoevo/austraits)** - Visit the AusTraits Github repository for the AusTraits R Package source code.
+**[AusTraits R Package](https://traitecoevo.github.io/austraits/)** Visit the AusTraits R Package website for information for downloading AusTraits using R. This package facilities the download and exploration of the AusTraits database in R.
+
+
+## Contributing new data to AusTraits
 
 
 **[AusTraits.build Github repository](https://github.com/traitecoevo/austraits.build)** - The individual datasets and metadata amalgamated into the AusTraits database are archived on the AusTraits.build Github repository, together with the code required to build AusTraits.
@@ -53,3 +53,5 @@ design:
 
 
 **[AusTraits API]() (In development)**
+
+**[ARDC](https://ardc.edu.au/project/austraits/)**  - AusTraits is currently funded by a 2.5 year grant from the Australian Research Data Commons, matched by funding from our data partners. The ARDC website provides an AusTraits project overview and additional details of the services provided by ARDC to enhance this project.
