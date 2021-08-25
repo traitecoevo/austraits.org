@@ -3,23 +3,23 @@
 title: Assoc. Prof. Rachel Gallagher
 
 # Is this the primary user of the site?
-superuser: true
+superuser: false
 
 # Role/position/tagline
 role: Joint project lead
 
 # Organizations/Affiliations to show in About widget
 organizations:
-- name: HIE Western Sydney University
+- name: Western Sydney University - HIE
   url: https://www.westernsydney.edu.au/hie
 
 # Short bio (displayed in user profile at end of posts)
-bio: My research interests include
+bio: 
 
 # Interests to show in About widget
 interests:
 
-user_groups: ["Team Members"]
+user_groups: ["Core Team"]
 # Education to show in About widget
 education:
   courses:
@@ -61,3 +61,7 @@ email: ""
 # Highlight the author in author lists? (true/false)
 highlight_name: false
 ---
+
+### Biography
+
+Rachel is a Senior Lecturer in Plant Ecology and Conservation Science at Macquarie University. Rachael works to ensure that plants are protected and recognised for their vital contribution to society. She runs a research program investigating plant diversity and adaptation, including experimental and field studies of plant responses to key threatening processes such as climate change. Rachael’s research draws on national and international initiatives on plant traits and ranges, several of which she contributes to directly as co-curator of the national AusTraits database. She uses these rich sources of data to inform continental and global scale studies in plant biogeography. Rachael is a current member of the Commonwealth Threatened Species Scientific Committee.

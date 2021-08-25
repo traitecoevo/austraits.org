@@ -24,7 +24,7 @@ all_day: false
 # Schedule page publish date (NOT talk date).
 publishDate: "2021-08-01T00:00:00Z"
 
-authors: [Sauquet, Wenk]
+authors: []
 tags: []
 
 # Is this a featured talk? (true/false)

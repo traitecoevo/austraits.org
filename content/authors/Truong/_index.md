@@ -3,23 +3,23 @@
 title: Dr Gary Truong
 
 # Is this the primary user of the site?
-superuser: true
+superuser: false
 
 # Role/position/tagline
 role: Project officer
 
 # Organizations/Affiliations to show in About widget
 organizations:
-- name: UNSW Sydney, Australia
+- name: UNSW Sydney
   url: http://bees.unsw.edu.au
 
 # Short bio (displayed in user profile at end of posts)
-bio: My research interests include
+bio:
 
 # Interests to show in About widget
 interests:
 
-user_groups: ["Team Members"]
+user_groups: ["Core Team"]
 # Education to show in About widget
 education:
   courses:
@@ -53,3 +53,6 @@ email: ""
 # Highlight the author in author lists? (true/false)
 highlight_name: false
 ---
+
+### Biography
+Gary is the AusTraits Project Officer working to improve the code for building the database. He is also involved with building and maintaining the AusTraits website and the development of the Austraits API.

@@ -3,7 +3,7 @@
 title: Assoc. Prof. Daniel Falster
 
 # Is this the primary user of the site?
-superuser: true
+superuser: false
 
 # Role/position/tagline
 role: Joint project lead
@@ -14,12 +14,12 @@ organizations:
   url: http://danielfalster.com
 
 # Short bio (displayed in user profile at end of posts)
-bio: My research interests include
+bio: 
 
 # Interests to show in About widget
 interests:
 
-user_groups: ["Team Members"]
+user_groups: ["Core Team"]
 # Education to show in About widget
 education:
   courses:
@@ -58,3 +58,6 @@ email: ""
 # Highlight the author in author lists? (true/false)
 highlight_name: false
 ---
+
+### Biography
+Daniel is an Associate Professor and ARC Future Fellow at University of New South Wales Sydney. His work focuses on describing, both empirically and in process-based models, how plant traits structure  an individual’s life cycle, and how communities with diverse trait- and species mixtures are assembled. He is a co-founder of the international Open Traits Network, lead developer of Austraits, and contributor to several other open data resources.

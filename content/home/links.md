@@ -1,6 +1,4 @@
 ---
-# An instance of the Blank widget.
-# Documentation: https://wowchemy.com/docs/getting-started/page-builder/
 widget: blank
 
 # Activate this widget? true/false
@@ -42,7 +40,10 @@ design:
 **[Zenodo page](http://doi.org/10.5281/zenodo.5112001.)** - The most recent AusTraits data release can be downloaded directly from the Zenodo repository.
 
 
-**[AusTraits Github repository](https://github.com/traitecoevo/austraits)** - Visiting the AusTraits Github repository to install a copy of the AusTraits R package. This package facilities the download and exploration of the AusTraits database in R.
+**[AusTraits R Package Website](https://traitecoevo.github.io/austraits/)** Visit the AusTraits R Package website for information for downloading AusTraits using R. This package facilities the download and exploration of the AusTraits database in R.
+
+
+**[AusTraits R Package Github repository](https://github.com/traitecoevo/austraits)** - Visit the AusTraits Github repository for the AusTraits R Package source code.
 
 
 **[AusTraits.build Github repository](https://github.com/traitecoevo/austraits.build)** - The individual datasets and metadata amalgamated into the AusTraits database are archived on the AusTraits.build Github repository, together with the code required to build AusTraits.

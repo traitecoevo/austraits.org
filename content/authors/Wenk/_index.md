@@ -3,23 +3,23 @@
 title: Dr Elizabeth Wenk
 
 # Is this the primary user of the site?
-superuser: true
+superuser: false
 
 # Role/position/tagline
 role: Project manager
 
 # Organizations/Affiliations to show in About widget
 organizations:
-- name: UNSW Sydney, Australia
+- name: UNSW Sydney
   url: https://www.unsw.edu.au/
 
 # Short bio (displayed in user profile at end of posts)
-bio: My research interests include
+bio: 
 
 # Interests to show in About widget
 interests:
 
-user_groups: ["Team Members"]
+user_groups: ["Core Team"]
 # Education to show in About widget
 education:
   courses:
@@ -57,3 +57,7 @@ email: ""
 # Highlight the author in author lists? (true/false)
 highlight_name: false
 ---
+
+### Biography
+
+Lizzy is the AusTraits Project Manager and has worked on the database since near its inception. She has a broad background in plant trait ecology, with a particular interest in diversity of functional traits displayed by co-occurring species. A parallel career path sees her writing hiking and natural history guides for California’s Sierra Nevada.

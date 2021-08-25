@@ -29,8 +29,6 @@ image:
   preview_only: false
 
 authors:
-- Elizabeth Wenk
-- Daniel Falster
 
 tags:
 

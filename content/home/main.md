@@ -32,3 +32,8 @@ Over the coming years AusTraits aims to grow into a national data asset, by merg
 
 
 {{< figure src="austraitsflowchart.png" caption="A conceptual flow chart of the different AusTraits components" numbered="false" width="5000">}}
+
+
+#### For further information on the AusTraits database structure click [here](database/)
+
+#### For information on our data policy click [here](policy/)
