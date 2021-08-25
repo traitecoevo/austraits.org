@@ -7,7 +7,7 @@ main:
   - name: Project Links
     url: '#links'
     weight: 10
-  - name: Database
+  - name: Database Structure
     url: 'database/'
     weight: 15
   - name: Data Policy
