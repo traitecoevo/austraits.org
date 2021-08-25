@@ -35,5 +35,6 @@ Over the coming years AusTraits aims to grow into a national data asset, by merg
 
 
 #### For further information on the AusTraits database structure click [here](database/)
+#### The database page provides additional graphics and vignettes to further explore the database structure.
 
 #### For information on our data policy click [here](policy/)
