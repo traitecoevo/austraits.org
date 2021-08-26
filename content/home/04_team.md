@@ -17,6 +17,7 @@ content:
   user_groups:
     - Core Team
 
+
 authors:
 
 # Choose the user profile to display

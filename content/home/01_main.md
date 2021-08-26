@@ -2,6 +2,7 @@
 widget: blank
 headless: true
 weight: 10
+active: true
 title:
 hero_media:
 cta:
@@ -18,6 +19,7 @@ text:
    color: '#808080'
 advanced:
   css_class: fullscreen
+
 ---
 
 ![screen reader text](austraitslogo.jpg)

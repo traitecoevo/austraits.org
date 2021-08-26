@@ -4,30 +4,30 @@
 #   The weight parameter defines the order that the links will appear in.
 
 main:
-  - name: Project Links
-    url: '#links'
+  - name: How to access
+    url: '#02_access_use'
     weight: 10
   - name: Database Structure
     url: 'database/'
     weight: 15
-  - name: Data Policy
-    url: 'policy/'
-    weight: 16
+#  - name: Data Policy
+#    url: 'policy/'
+#    weight: 16
 # - name: AusTraits R Package
 #    url: 'https://github.com/traitecoevo/austraits'
 #    weight: 17
   - name: Team
-    url: '#team/'
+    url: 'team/'
     weight: 20
   - name: Contributors
     url: 'contributors/'
     weight: 40
   - name: Partners
-    url: '#partners'
+    url: '#05_partners'
     weight: 30
 #  - name: Publications
 #    url: '#publications'
 #    weight: 50
   - name: Contact
-    url: '#contact'
+    url: '#08_contact'
     weight: 70

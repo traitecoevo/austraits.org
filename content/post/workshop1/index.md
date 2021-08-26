@@ -53,3 +53,11 @@ url_video: ""
 #   Otherwise, set `projects = []`.
 
 ---
+First AusTraits workshop to refine seed trait definitions
+
+#### Workshop format TBD
+
+
+List of participants
+- Elizabeth Wenk
+- Herve Sauquet
