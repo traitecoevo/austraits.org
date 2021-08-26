@@ -31,27 +31,30 @@ design:
       icon_pack:
       icon:
 ---
+### Access and use
+A compiled version of AusTraits is available for download on **[Zenodo](http://doi.org/10.5281/zenodo.5112001.)**. As detailed on Zenodo, AusTraits has been released under an open source licence (CC-BY), enabling re-use by the community. 
 
+An AusTraits R package accompanies the public release of AusTraits. This package allows the seamless download of AusTraits and includes a selection of functions that facilitate the exploration and use of AusTraits. Visit **[AusTraits R Package](https://traitecoevo.github.io/austraits/)** to access and learn more about this resource.
 
+{{< figure src="austraitsflowchart.png" caption="A conceptual flow chart of the different AusTraits components" numbered="false" width="5000">}}
 
-## Accessing and using AusTraits
+### Learn more
+AusTraits is a relational database, with 11 elements, jointly storing the trait data, study metadata, and information about the AusTraits structure and build. Visualisations of these elements and the linkages between them are **[here](database/)** to orient AusTraits users. Further information on AusTraits is available on the project's **[GitHub repository](http://traitecoevo.github.io/austraits.build/index.html)**, including vignettes on **[trait definitions](http://traitecoevo.github.io/austraits.build/articles/Trait_definitions.html)** and **[AusTraits structure](http://traitecoevo.github.io/austraits.build/articles/austraits_structure.html)**. 
 
+# Enhancing and Expanding AusTraits
 
-**[Zenodo](http://doi.org/10.5281/zenodo.5112001.)** - The most recent AusTraits data release can be downloaded directly from the Zenodo repository.
+### Growing AusTraits into a national data asset
+From 2021-2023 we are funded by an Australian Research Data Commons (ARDC) grant as an Australian Data Partnerships project. The **[ARDC investment](https://ardc.edu.au/project/austraits/)**, together with co-investment from our 19 partners institutions, will expand AusTrait's data coverage and enhance data quality, allowing AusTraits to emerge as a national data asset. The AusTraits **[core team](team/)** and broader **[team of partners](authors/)** are jointly working on a collection of work packages to achieve this goal.
 
+### Contributing new data to AusTraits
+To contribute trait data to AusTraits, please fill in the **[contact box](contact/)** below. Briefly, we require your data contribution as a spreadsheet in conjunction with accompanying metadata. 
 
-**[AusTraits R Package](https://traitecoevo.github.io/austraits/)** Visit the AusTraits R Package website for information for downloading AusTraits using R. This package facilities the download and exploration of the AusTraits database in R.
+A **[vignette](http://traitecoevo.github.io/austraits.build/articles/adding_data.html)** offers a detailed glance at the data entry process, with introductory sections on ideal sumbission formats near the top of the article.
 
+We also accept any legacy datasets, either from your archives or transcribed from published data sources.
 
-## Contributing new data to AusTraits
+### Formalise vocabulary
+The AusTraits team will be leading a series of workshops over the coming two years to review and more fully document trait definitions and allowable trait values (*terms* for categorical variables and *ranges* for continuous variables). Our first **[workshop](news/)** will review trait definitions associated with seeds and germination.
 
-
-**[AusTraits.build Github repository](https://github.com/traitecoevo/austraits.build)** - The individual datasets and metadata amalgamated into the AusTraits database are archived on the AusTraits.build Github repository, together with the code required to build AusTraits.
-
-
-
-
-
-**[AusTraits API]() (In development)**
-
-**[ARDC](https://ardc.edu.au/project/austraits/)**  - AusTraits is currently funded by a 2.5 year grant from the Australian Research Data Commons, matched by funding from our data partners. The ARDC website provides an AusTraits project overview and additional details of the services provided by ARDC to enhance this project.
+### Enhanced access options
+The AusTraits team is in the process of developing a project API. Once completed, the database will be accessable by querying the API or through biodiversity portals. Coming in 2022.
