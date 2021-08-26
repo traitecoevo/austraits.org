@@ -3,22 +3,6 @@ widget: blank
 headless: true
 weight: 10
 active: true
-title:
-hero_media:
-cta:
-  label: '**Access v3.0.2 on Zenodo**'
-  url: http://doi.org/10.5281/zenodo.5112001
-cta_alt:
-
-cta_note:
-  label:
-design:
-  background:
-    color: '#fff'
-text:
-   color: '#808080'
-advanced:
-  css_class: fullscreen
 
 ---
 

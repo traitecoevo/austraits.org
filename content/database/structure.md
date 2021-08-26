@@ -1,6 +1,6 @@
 ---
 # title: AusTraits database - structure and contents
-
+widget: blank
 
 ---
 
