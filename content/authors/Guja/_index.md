@@ -1,6 +1,8 @@
 ---
 title: Dr Lydia Guja
 
+weight: 150
+
 organizations:
 - name: Centre for Australian National Biodiversity Research
   url: https://www.nespthreatenedspecies.edu.au/people/lydia-guja

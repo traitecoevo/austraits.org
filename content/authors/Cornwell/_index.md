@@ -1,6 +1,8 @@
 ---
 title: Assoc. Prof.  Will Cornwell
 
+weight: 125
+
 organizations:
 - name: UNSW Sydney
   url: https://research.unsw.edu.au/people/associate-professor-will-cornwell

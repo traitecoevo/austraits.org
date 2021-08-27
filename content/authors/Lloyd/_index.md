@@ -1,6 +1,8 @@
 ---
 title: Dr Hannah Lloyd
 
+weight: 155
+
 organizations:
 - name: NSW Department of Planning, Industry and Envrionment
   url:

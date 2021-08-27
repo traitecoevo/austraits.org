@@ -1,6 +1,8 @@
 ---
 title: Anthony Whalen
 
+weight: 210
+
 organizations:
 - name: Parks Australia, Department of Agriculture, Water and the Environment
   url:

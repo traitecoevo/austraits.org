@@ -1,6 +1,8 @@
 ---
 title: Dr Haylee Weaver
 
+weight: 205
+
 organizations:
 - name: Department of Agriculture, Water and the Environment
   url:

@@ -1,6 +1,8 @@
 ---
 title: Assoc. Prof. Ben Sparrow
 
+weight: 185
+
 organizations:
 - name: University of Adelaide
   url: https://researchers.adelaide.edu.au/profile/ben.sparrow  

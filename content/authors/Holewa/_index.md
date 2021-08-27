@@ -1,6 +1,8 @@
 ---
 title: Hamish Holewa
 
+weight: 150
+
 organizations:
 - name: Atlas of Living Australia, CSIRO
   url:

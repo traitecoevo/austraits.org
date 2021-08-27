@@ -1,6 +1,8 @@
 ---
 title: Dr Greg Guerin
 
+weight: 145
+
 organizations:
 - name: University of Adelaide
   url: https://www.adelaide.edu.au/directory/greg.guerin#

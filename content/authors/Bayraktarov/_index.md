@@ -1,6 +1,8 @@
 ---
 title: Dr Elisa Bayraktarov
 
+weight: 115
+
 organizations:
 - name: EcoCommons, Griffith University
   url:

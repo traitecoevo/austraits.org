@@ -1,6 +1,8 @@
 ---
 title: Dr Carl Gosper
 
+weight: 135
+
 organizations:
 - name: WA Department of Biodiversity, Conservation and Attractions
   url:

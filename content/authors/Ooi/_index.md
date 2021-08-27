@@ -1,6 +1,8 @@
 ---
 title: Dr Mark Ooi
 
+weight: 175
+
 organizations:
 - name: UNSW Sydney
   url: https://research.unsw.edu.au/people/dr-mark-ooi

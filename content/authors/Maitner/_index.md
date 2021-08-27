@@ -1,6 +1,8 @@
 ---
 title: Dr Brian Maitner
 
+weight: 160
+
 organizations:
 - name: University of Connecticut
   url: https://github.com/bmaitner

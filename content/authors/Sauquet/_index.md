@@ -2,6 +2,8 @@
 # Display name
 title: Dr Hervé Sauquet
 
+weight: 30
+
 # Is this the primary user of the site?
 superuser: false
 

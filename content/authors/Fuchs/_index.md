@@ -1,6 +1,8 @@
 ---
 title: Anne Fuchs
 
+weight: 130
+
 organizations:
 - name: Parks Australia, Department of Agriculture, Water and the Environment
   url:

@@ -1,6 +1,8 @@
 ---
 title: Dr Russell Barrett
 
+weight: 110
+
 organizations:
 - name:  Royal Botanic Gardens and Domain Trust Sydney
   url: https://www.rbgsyd.nsw.gov.au/Science/Our-Science-Staff/Dr-Russell-Barrett

@@ -1,6 +1,8 @@
 ---
 title: Prof. Caroline Gross
 
+weight: 140
+
 organizations:
 - name: University of New England
   url: https://www.une.edu.au/staff-profiles/jbruhl?a=79798

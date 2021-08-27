@@ -1,6 +1,8 @@
 ---
 title: Dr Kevin Thiele
 
+weight: 195
+
 organizations:
 - name: Taxonomy Australia
   url: https://www.taxonomyaustralia.org.au/tcd/Kevin-Thiele

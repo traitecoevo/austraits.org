@@ -1,6 +1,8 @@
 ---
 title: Dr James McCarthy
 
+weight: 165
+
 organizations:
 - name: Landcare New Zealand
   url: https://www.landcareresearch.co.nz/about-us/our-people/james-mccarthy

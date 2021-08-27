@@ -2,6 +2,8 @@
 # Display name
 title: Assoc. Prof. Rachel Gallagher
 
+weight: 20
+
 # Is this the primary user of the site?
 superuser: false
 

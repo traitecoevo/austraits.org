@@ -1,6 +1,8 @@
 ---
 title: Prof. Peter Vesk
 
+weight: 200
+
 organizations:
 - name: University of Melbourne
   url: https://findanexpert.unimelb.edu.au/profile/100084-peter-vesk

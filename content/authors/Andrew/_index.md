@@ -1,6 +1,8 @@
 ---
 title: Dr Samuel Andrew
 
+weight: 100
+
 organizations:
 - name: CSIRO
   url: https://research.csiro.au/environomics/our-people/early-career-researchers-separate-bios/dr-samuel-andrew/

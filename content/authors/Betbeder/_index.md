@@ -1,6 +1,8 @@
 ---
 title: Luc Betbeder-Matibet
 
+weight: 120
+
 organizations:
 - name: UNSW Sydney - Research Technology Services
   url:

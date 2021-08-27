@@ -1,6 +1,8 @@
 ---
 title: Assoc. Prof. Rachel Standish
 
+weight: 190
+
 organizations:
 - name: Murdoch University
   url: http://profiles.murdoch.edu.au/myprofile/rachel-standish/

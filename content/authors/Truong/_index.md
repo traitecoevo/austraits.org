@@ -2,6 +2,8 @@
 # Display name
 title: Dr Gary Truong
 
+weight: 50
+
 # Is this the primary user of the site?
 superuser: false
 

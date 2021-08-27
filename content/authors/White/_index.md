@@ -1,6 +1,8 @@
 ---
 title: Dr Matt White
 
+weight: 215
+
 organizations:
 - name: Arthur Rylah Institute for Environmental Research
   url: https://www.ari.vic.gov.au/about-us/staff

@@ -1,6 +1,8 @@
 ---
 title: Prof. Ian Wright
 
+weight: 220
+
 organizations:
 - name: Macquarie University
   url: https://researchers.mq.edu.au/en/persons/ian-wright
