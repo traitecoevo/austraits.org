@@ -53,11 +53,17 @@ url_video: ""
 #   Otherwise, set `projects = []`.
 
 ---
-First AusTraits workshop to refine seed trait definitions
+This will be our first in a series of workshops to refine and document the trait definitions used to build AusTraits. Our first workshop will be focused on a collection of traits related to seeds, germination and seedlings. 
+<br>  
 
-#### Workshop format TBD
+##### Workshop organisers
+- **Elizabeth Wenk**, UNSW
+- **Herve Sauquet**, UNSW
+- **Lydia Guja**, Centre for Australian National Biodiversity Research
 
-
-List of participants
-- Elizabeth Wenk
-- Herve Sauquet
+##### Workshop participants
+- **Russell Barrett**, Royal Botanic Gardens and Domain Trust Sydney
+- **Carl Gosper**, Department of Biodiversity, Conservation and Attractions, Western Australia
+- **Greg Jordan**, University of Tasmania
+- **Mark Ooi**, UNSW
+- **Karen Sommerville**, Royal Botanic Gardens and Domain Trust Sydney
