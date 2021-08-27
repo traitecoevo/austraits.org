@@ -23,3 +23,6 @@ authors:
 # See https://wowchemy.com/docs/get-started/#introduce-yourself
 author:
 ---
+
+**Our core AusTraits team is supported in maintaining, expanding, and enhancing AusTraits by a team of <ins>**[ARDC project grant partners](team_subpage/)**</ins>.**
+**The creation of the AusTraits database was only possible because of the <ins>**[researchers](https://doi.org/10.5281/zenodo.3568417)**</ins> who contributed data to this endeavor.**  

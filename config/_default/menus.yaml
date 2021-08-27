@@ -19,15 +19,15 @@ main:
 # - name: AusTraits R Package
 #    url: 'https://github.com/traitecoevo/austraits'
 #    weight: 17
-  - name: Team
-    url: 'team/'
+  - name: ARDC project team and partners
+    url: 'team_subpage/'
     weight: 20
-  - name: Contributors
+  - name: Data contributors
     url: 'contributors/'
     weight: 40
-  - name: Partners
-    url: '#05_partners'
-    weight: 30
+#  - name: Partners
+#    url: '#05_partners'
+#    weight: 30
 #  - name: Publications
 #    url: '#publications'
 #    weight: 50
