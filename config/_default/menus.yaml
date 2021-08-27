@@ -7,7 +7,10 @@ main:
   - name: How to access
     url: '#02_access_use'
     weight: 10
-  - name: Database Structure
+  - name: Ongoing efforts
+    url: '#03_expand'
+    weight: 12
+  - name: Database structure
     url: 'database/'
     weight: 15
 #  - name: Data Policy
