@@ -19,14 +19,16 @@ design:
     image:
     image_darken: 1.0
     image_parallax: true
-    image_position: center
+    image_position: right
     image_size: cover
     text_color_light: false
   spacing:
     padding: ["20px", "0", "20px", "0"]
+  background-color: white
 
 ---
 ### Access and use
+
 A compiled version of AusTraits is available for download on <ins>**[Zenodo](https://doi.org/10.5281/zenodo.3568417)**</ins>. As detailed on Zenodo, AusTraits has been released under an open source licence (CC-BY), enabling re-use by the community.
 
 An R package accompanies the public release of AusTraits. This package allows the seamless download of AusTraits and includes a selection of functions that facilitate the exploration and use of AusTraits. Visit <ins>**[AusTraits R Package](https://traitecoevo.github.io/austraits/)**</ins> to access and learn more about this resource.

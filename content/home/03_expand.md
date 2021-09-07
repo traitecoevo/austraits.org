@@ -9,7 +9,7 @@ headless: true
 
 # Order that this section appears on the page.
 weight: 15
-
+color: white
 title: Enhancing and Expanding AusTraits
 subtitle:
 
@@ -19,13 +19,14 @@ design:
     image:
     image_darken: 1.0
     image_parallax: true
-    image_position: center
-    image_size: cover
+    image_position: right
+    image_size: contain
     text_color_light: false
   spacing:
     padding: ["20px", "0", "20px", "0"]
 
 ---
+<div style="background-color:white">
 
 ### Growing AusTraits into a national data asset
 From 2021-2023 we are funded by a Australian Research Data Commons (ARDC) grant through their Australian Data Partnerships program. The <ins>**[ARDC investment](https://ardc.edu.au/project/austraits/)**</ins>, together with co-investment from our 19 partner institutions, will expand AusTraits' data coverage and enhance data quality, allowing AusTraits to emerge as a national data asset. The AusTraits <ins>**[core team](#04_team)**</ins> and broader <ins>**[team of ARDC partners](team/)**</ins> are jointly working on a collection of work packages to achieve this goal.
