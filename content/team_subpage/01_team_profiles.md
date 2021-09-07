@@ -27,4 +27,4 @@ author:
 
 AusTraits is funded from 2021-2023 by a Australian Research Data Commons (ARDC) <ins>**[grant](https://ardc.edu.au/project/austraits/)**</ins> through their Australian Data Partnerships program. This funding allows a broad team of ARDC grant partners to expand AusTraits data coverage and enhance data quality. 
 
-If you would like to contribute data or expertise to AusTraits please fill out the <ins>**[contact form](contact/)**</ins> or read more about our current <ins>**[work packages](cexpand/)**</ins>. 
+If you would like to contribute data or expertise to AusTraits please fill out the <ins>**[contact form](/#08_contact)**</ins> or read more about our current <ins>**[work packages](/#03_expand)**</ins>. 

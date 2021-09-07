@@ -1,7 +1,7 @@
 ---
 title: Contributors
 ---
-## <ins>**[Contact us](contact/)**</ins> if you have data to contribute.  
+## <ins>**[Contact us](/#08_contact)**</ins> if you have data to contribute.  
 
 AusTraits continues to integrate both newly collected and legacy datasets, with future Zenodo releases planned.  
 

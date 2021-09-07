@@ -28,12 +28,12 @@ design:
 ---
 
 ### Growing AusTraits into a national data asset
-From 2021-2023 we are funded by a Australian Research Data Commons (ARDC) grant through their Australian Data Partnerships program. The <ins>**[ARDC investment](https://ardc.edu.au/project/austraits/)**</ins>, together with co-investment from our 19 partner institutions, will expand AusTraits' data coverage and enhance data quality, allowing AusTraits to emerge as a national data asset. The AusTraits <ins>**[core team](#04_team)**</ins> and broader <ins>**[team of ARDC partners](team/)**</ins> are jointly working on a collection of work packages to achieve this goal.
+From 2021-2023 we are funded by a Australian Research Data Commons (ARDC) grant through their Australian Data Partnerships program. The <ins>**[ARDC investment](https://ardc.edu.au/project/austraits/)**</ins>, together with co-investment from our 19 partner institutions, will expand AusTraits' data coverage and enhance data quality, allowing AusTraits to emerge as a national data asset. The AusTraits <ins>**[core team](#04_team)**</ins> and broader <ins>**[team of ARDC partners](team_subpage/)**</ins> are jointly working on a collection of work packages to achieve this goal.
 
 [{{< figure src="ARDC.png" width="300">}}](https://ardc.edu.au/project/austraits/)
 
 ### Contributing new data to AusTraits
-To contribute trait data to AusTraits, please fill in the <ins>**[contact box](contact/)**</ins> below. Briefly, we require your data contribution as a spreadsheet in conjunction with accompanying metadata.
+To contribute trait data to AusTraits, please <ins>**[contact](#08_contact)**</ins> us. Briefly, we require your data contribution as a spreadsheet in conjunction with accompanying metadata.
 
 A <ins>**[vignette](http://traitecoevo.github.io/austraits.build/articles/adding_data.html)**</ins> offers a detailed glance at the data entry process, with introductory sections on ideal submission formats near the top of the article.
 
