@@ -7,7 +7,7 @@ active: true
 design:
   background:
     # Name of image in `assets/media/`.
-    image: banksia.JPG
+    image:
     # Darken the image? Range 0-1 where 0 is transparent and 1 is opaque.
     image_darken: 0.8
     #  Options are `cover` (default), `contain`, or `actual` size.
@@ -19,7 +19,7 @@ design:
     # Text color (true=light, false=dark, or remove for the dynamic theme color).
     text_color_light: false
   spacing:
-    padding: ["0px", "350px", "20px", "0px"]
+    padding: ["0px", "20px", "20px", "0px"]
 ---
 <div style="background-color:white">
 
@@ -29,4 +29,4 @@ AusTraits is an open-source, harmonized database of Australian plant trait data.
 
 AusTraits integrates plant trait data collected by researchers from diverse disciplines, including functional plant biology, plant physiology, plant taxonomy, and conservation biology. By harmonizing and error checking values, linking all AusTraits data entries to detailed metadata, and documenting trait and trait values definitions, AusTraits is a resource researchers can trust and use for their research agendas with minimal additional filtering or manipulations.  
 
-[{{< figure src="contribute_button.png" width="600">}}](#08_contact)
+[{{< figure src="contribute_button.png" width="600" >}}](mailto:austraits.database@gmail.com)

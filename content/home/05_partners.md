@@ -14,7 +14,7 @@ title: Partners
 design:
   columns: "2"
   background:
-    image: plants/bell.JPG
+    image:
     image_darken: 1.0
     image_parallax: true
     image_position: right
