@@ -13,4 +13,4 @@ user_groups: ["Advisory Committee"]
 
 ### Biography
 
-Claire Farrell is a Senior Lecturer in the department of Ecosystem and Forest Sciences, focusing on Green Infrastructure. Her main research interest involves using plants to make cities more liveable through urban greening. Her focus is on plant selection for survival and high performance landscapes, especially developing green roofs for Australian conditions.
+Claire Farrell is a Senior Lecturer in the department of Ecosystem and Forest Sciences, focusing on Green Infrastructure. Her main research interest involves using plants to make cities more liveable through urban greening. Her focus is on plant selection for survival and high performance landscapes, including developing green roofs for Australian conditions.
