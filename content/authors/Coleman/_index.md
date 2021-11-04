@@ -1,11 +1,5 @@
 ---
-# Display name
-title: Dr Gary Truong
-
-weight: 50
-
-# Is this the primary user of the site?
-superuser: false
+title: David Coleman
 
 # Role/position/tagline
 role: Project officer
@@ -26,7 +20,7 @@ user_groups: ["Core Team"]
 education:
   courses:
   - course: PhD
-    institution: UNSW Sydney
+    institution: USyd
     year: 2021
 
 
@@ -35,12 +29,13 @@ education:
 #   For an email link, use "fas" icon pack, "envelope" icon, and a link in the
 #   form "mailto:your-email@example.com" or "/#contact" for contact widget.
 social:
-- icon: google-scholar
-  icon_pack: ai
-  link: https://scholar.google.com/citations?user=LjKRJBkAAAAJ
+- icon: twitter
+  icon_pack: fab
+  link: https://twitter.com/davedoesscience
 - icon: github
   icon_pack: fab
-  link: https://github.com/GaryTruong
+  link: https://github.com/dcol2804
+
 
 # Link to a PDF of your resume/CV.
 # To use: copy your resume to `static/uploads/resume.pdf`, enable `ai` icons in `params.toml`,
@@ -58,4 +53,4 @@ highlight_name: false
 
 ### Biography
 
-Gary is working to improve the code for building the database. He is also involved with building and maintaining the AusTraits website.
+David is a working to develop data formats for the Austraits API and to ensure ease of use in accessing AusTraits data for partners and stakeholders.
