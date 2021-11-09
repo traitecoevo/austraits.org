@@ -1,5 +1,5 @@
 ---
-title: Dr. Cecile Gueidan
+title: Dr Cecile Gueidan
 
 weight: 345
 
