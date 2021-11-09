@@ -1,5 +1,5 @@
 ---
-title: Dr. Bek Christensen
+title: Dr Bek Christensen
 
 weight: 320
 

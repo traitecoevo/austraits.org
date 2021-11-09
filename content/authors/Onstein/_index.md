@@ -1,5 +1,5 @@
 ---
-title: Dr. Renske Onstein
+title: Dr Renske Onstein
 
 weight: 360
 

@@ -1,5 +1,5 @@
 ---
-title: Dr. Claire Farrell
+title: Dr Claire Farrell
 
 weight: 330
 

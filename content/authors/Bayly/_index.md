@@ -1,5 +1,5 @@
 ---
-title: Dr. Mike Bayly
+title: Dr Mike Bayly
 
 weight: 305
 
