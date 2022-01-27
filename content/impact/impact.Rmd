@@ -1,7 +1,7 @@
 ---
 title: Impact of AusTraits
 widget: blank
-output: github_document
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
@@ -13,29 +13,43 @@ library(dplyr)
 ```
 
 
-<script type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>/div>
+<script type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>
 
 By providing a curated, open source and FAIR big data resource, AusTraits aims to transform research on the Australian flora. This page tracks our impact to date. The page was last updated on `r Sys.Date()`. For the latest impact, see links provided below.
 
-## Dataset downlaods
+## Dataset downloads
 
 AusTraits is provided as an open access data set via Zenodo, with multiple releases available, grouped under a "Concept DOI": [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3583418.svg)](https://doi.org/10.5281/zenodo.3583418) 
 
-[Zenodo tracks](https://www.projectcounter.org/code-practice-research-data/repositories-that-have-implemented-the-code-of-practice-for-research-data/) usage of AusTraits, following the [Counter Code of Practive for Research Data](https://www.projectcounter.org/code-practice-research-data/). The latest values are available at the above link. As of  `r Sys.Date()` the data has been accessed as follows:
+[Zenodo tracks](https://www.projectcounter.org/code-practice-research-data/repositories-that-have-implemented-the-code-of-practice-for-research-data/) usage of AusTraits, following the [Counter Code of Practice for Research Data](https://www.projectcounter.org/code-practice-research-data/). The latest values are available at the above link. As of  `r Sys.Date()` the data has been accessed as follows:
 
 ```{r}
-link <- "https://zenodo.org/api/records/3568417"
+# read details from Zenodo
 
-# Issue -- Visiting the link via browser returns a json including stats, but 
-# these are missing when querying via R???
-# x <- httr::GET(link, httr::add_headers(`Content-Type`=  "application/json")) %>% 
-#  httr::content(as = "text") %>% jsonlite::fromJSON()
-# names(x)
+# only update if cached file is  > 1 day old
 
-json_3568417 <- readLines(link) 
-writeLines(json_3568417, paste("3568417.json"))
+filename <- "3568417.json"
 
-x <- json_3568417 %>% jsonlite::fromJSON()
+file_age <- function(filename) {
+  lubridate::as.period(Sys.time() - file.info(filename)$mtime, unit="hours") %>% 
+    as.numeric("days")  
+}
+
+# Determine file age
+if(file.exists(filename)) {
+  file_age_days <- file_age(filename) 
+} else {
+  file_age_days <- 10
+}
+ 
+# Download if necessary 
+if(file_age_days > 1) {
+  link <- "https://zenodo.org/api/records/3568417"
+  writeLines(readLines(link), filename)
+}
+
+# read data
+x <- jsonlite::fromJSON(filename)
 
 # Extract stats
 stats_3568417 <- tibble(
@@ -67,6 +81,7 @@ stats_3568417 %>% kableExtra::kable()
 ## Data Descriptor
 ```{r}
 cites_austraits <- scholar::get_article_cite_history("QXMISwEAAAAJ", "K3LRdlH-MEoC")
+
 ```
 
 The original paper describing AusTraits data was published in *Scientific Data*:
@@ -96,21 +111,32 @@ data <-
 data$cite %>% writeLines()
 ```
 
+## Coneference presentations
+
+The AusTraits team has delivered talks about AusTraits at multiple conferences and workshops:
+
+- Gallagher et al "Plant trait composition at the continental scale: using AusTraits to map trait variation and functional diversity across Australia", Ecological Society of Australia, 23 November 2021
+- Wenk et al "Introduction to AusTraits", Ecological Society of Australia, 23 November 2021
+- Wenk et al "An introduction to AusTraits"; Genomics for Australian Plants (GAP) phylogenomics mini symposium, 16 November 2021.
+- Sauquet et al "AusTraits: a national database on the traits of Australia's complete flora", DiveRS working group (Monetpellier, France), November 25 2021
+- Sauquet et al "AusTraits: a national database on the traits of Australia's complete flora", Australasian Systematic Botany Society Annual Conference, 12-16 July 2021
+
+
 ## Social media
 
 Here are of the nice things the community is saying about AusTraits --
 
-`r blogdown::shortcode("tweet", id= "1463020322274234370", user = "hj_whiterabbit")`
+`r blogdown::shortcode("tweet", id= 1463020322274234370, user = "hj_whiterabbit")`
 
-`r blogdown::shortcode("tweet", id= "1463421260076138499", user = "nicrodemo")`
+`r blogdown::shortcode("tweet", id= 1463421260076138499, user = "nicrodemo")`
 
-`r blogdown::shortcode("tweet", id= "1448168356218118144", user = "SallyArchibald")`
+`r blogdown::shortcode("tweet", id= 1448168356218118144, user = "SallyArchibald")`
 
-`r blogdown::shortcode("tweet", id= "1444438004802592768", user = "davidtng")`
+`r blogdown::shortcode("tweet", id= 1444438004802592768, user = "davidtng")`
 
-`r blogdown::shortcode("tweet", id= "1448452700123795458", user = "hsauquet_rbgsyd")`
+`r blogdown::shortcode("tweet", id= 1448452700123795458, user = "hsauquet_rbgsyd")`
 
-`r blogdown::shortcode("tweet", id= "1448393376735264768", user = "rubyecology")`
+`r blogdown::shortcode("tweet", id= 1448393376735264768, user = "rubyecology")`
 
-`r blogdown::shortcode("tweet", id= "1445575788867248129", user = "ARDC_AU")`
+`r blogdown::shortcode("tweet", id= 1445575788867248129, user = "ARDC_AU")`
 
