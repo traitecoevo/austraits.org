@@ -31,8 +31,5 @@ AusTraits integrates plant trait data collected by researchers from diverse disc
 
 An AusTraits data paper was recently published in *Scientific Data* and is available at: [10.1038/s41597-021-01006-6](http://doi.org/10.1038/s41597-021-01006-6). 
 
-Dataset on Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3583418.svg)](https://doi.org/10.5281/zenodo.3583418)
-
-<script type="text/javascript" src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>Almetric score:<div class="altmetric-embed" data-badge-type="donut" data-altmetric-id="114271024">Almetrics:</div>
 
 [{{< figure src="contribute_button.png" width="600" >}}](contributors/)
