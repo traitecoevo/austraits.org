@@ -126,17 +126,17 @@ The AusTraits team has delivered talks about AusTraits at multiple conferences a
 
 Here are of the nice things the community is saying about AusTraits --
 
-`r blogdown::shortcode("tweet", id= 1463020322274234370, user = "hj_whiterabbit")`
+`r blogdown::shortcode("tweet", 1463020322274234370)`
 
-`r blogdown::shortcode("tweet", id= 1463421260076138499, user = "nicrodemo")`
+`r blogdown::shortcode("tweet", 1463421260076138499)`
 
-`r blogdown::shortcode("tweet", id= 1448168356218118144, user = "SallyArchibald")`
+`r blogdown::shortcode("tweet", 1448168356218118144)`
 
-`r blogdown::shortcode("tweet", id= 1444438004802592768, user = "davidtng")`
+`r blogdown::shortcode("tweet", 1444438004802592768)`
 
-`r blogdown::shortcode("tweet", id= 1448452700123795458, user = "hsauquet_rbgsyd")`
+`r blogdown::shortcode("tweet", 1448452700123795458)`
 
-`r blogdown::shortcode("tweet", id= 1448393376735264768, user = "rubyecology")`
+`r blogdown::shortcode("tweet", 1448393376735264768)`
 
-`r blogdown::shortcode("tweet", id= 1445575788867248129, user = "ARDC_AU")`
+`r blogdown::shortcode("tweet", 1445575788867248129)`
 
