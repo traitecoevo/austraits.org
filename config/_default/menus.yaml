@@ -22,6 +22,9 @@ main:
   - name: ARDC project team and partners
     url: 'team_subpage/'
     weight: 20
+  - name: Impact
+    url: 'impact/'
+    weight: 25
   - name: Data contributors
     url: 'contributors/'
     weight: 40
