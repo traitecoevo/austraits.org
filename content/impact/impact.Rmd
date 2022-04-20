@@ -21,7 +21,7 @@ By providing a curated, open source and FAIR big data resource, AusTraits aims t
 
 AusTraits is provided as an open access data set via Zenodo, with multiple releases available, grouped under a "Concept DOI": [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3583418.svg)](https://doi.org/10.5281/zenodo.3583418) 
 
-[Zenodo tracks](https://www.projectcounter.org/code-practice-research-data/repositories-that-have-implemented-the-code-of-practice-for-research-data/) usage of AusTraits, following the [Counter Code of Practice for Research Data](https://www.projectcounter.org/code-practice-research-data/). The latest values are available at the above link. As of  `r Sys.Date()` the data has been accessed as follows:
+[Zenodo tracks](https://www.projectcounter.org/code-practice-research-data/repositories-that-have-implemented-the-code-of-practice-for-research-data/) usage of AusTraits, following the [Counter Code of Practice for Research Data](https://www.projectcounter.org/code-practice-research-data/). The latest values are available at the above link. As of `r Sys.Date()` the data has been accessed as follows:
 
 ```{r}
 # read details from Zenodo
