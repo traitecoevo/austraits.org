@@ -1,6 +1,6 @@
 ---
 # Display name
-title: Assoc. Prof. Rachel Gallagher
+title: Assoc. Prof. Rachael Gallagher
 
 weight: 20
 
@@ -66,4 +66,4 @@ highlight_name: false
 
 ### Biography
 
-Rachel is a Senior Lecturer in Plant Ecology and Conservation Science at Macquarie University. Rachael works to ensure that plants are protected and recognised for their vital contribution to society. She runs a research program investigating plant diversity and adaptation, including experimental and field studies of plant responses to key threatening processes such as climate change. Rachael’s research draws on national and international initiatives on plant traits and ranges, several of which she contributes to directly as co-curator of the national AusTraits database. She uses these rich sources of data to inform continental and global scale studies in plant biogeography. Rachael is a current member of the Commonwealth Threatened Species Scientific Committee.
+Rachel is a Associate Professor in Plant Ecology and Conservation Science at Western Sydney University. Rachael works to ensure that plants are protected and recognised for their vital contribution to society. She runs a research program investigating plant diversity and adaptation, including experimental and field studies of plant responses to key threatening processes such as climate change. Rachael’s research draws on national and international initiatives on plant traits and ranges, several of which she contributes to directly as co-curator of the national AusTraits database. She uses these rich sources of data to inform continental and global scale studies in plant biogeography. Rachael is a current member of the Commonwealth Threatened Species Scientific Committee.
