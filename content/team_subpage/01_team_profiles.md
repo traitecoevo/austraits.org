@@ -18,6 +18,7 @@ content:
     - Core Team
     - Team
     - Advisory Committee
+    - Alumni
 
 authors:
 # Choose the user profile to display
