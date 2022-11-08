@@ -1,7 +1,7 @@
 ---
-title: Seed Traits Workshop
+title: Vocabulary Workshops
 
-event: Seed Traits Workshop
+event: Vocabulary Workshops
 event_url:
 
 location: TBD
@@ -12,14 +12,14 @@ address:
   postcode:
   country: Australia
 
-summary: First AusTraits workshop to refine trait definitions
+summary: AusTraits workshops to refine trait definitions
 abstract: Collaborate with other researchers to refine trait definitions
 
 # Talk start and end times.
 #   End time can optionally be hidden by prefixing the line with `#`.
-date: "2021-10-28T13:00:00Z"
-date_end: "2021-10-29T15:00:00Z"
-all_day: false
+#date: "2021-10-28T13:00:00Z"
+#date_end: "2021-10-29T15:00:00Z"
+#all_day: false
 
 # Schedule page publish date (NOT talk date).
 publishDate: "2021-08-01T00:00:00Z"
@@ -53,7 +53,9 @@ url_video: ""
 #   Otherwise, set `projects = []`.
 
 ---
-This will be our first in a series of workshops to refine and document the trait definitions used to build AusTraits. Our first workshop will be focused on a collection of traits related to seeds, germination and seedlings. 
+Over the past year we have conducted two workshops to refine and document the trait definitions used to build AusTraits. These workshops have brought together researchers from different disciplines, ranging from plant ecologists to systematists, who use AusTraits to answer correspondingly different research questions The forum allows us to jointly determine the scope of traits, trait definitions and allowable trait values that meet everyone's research needs.
+
+The first workshop was focused on a collection of traits related to seeds, germination and seedlings. 
 <br>  
 
 ##### Workshop organisers
@@ -67,3 +69,20 @@ This will be our first in a series of workshops to refine and document the trait
 - **Greg Jordan**, University of Tasmania
 - **Mark Ooi**, UNSW
 - **Karen Sommerville**, Royal Botanic Gardens and Domain Trust Sydney
+
+The second workshop was focused on a collection of traits related to plant growth form and morphological leaf traits. 
+<br>  
+
+##### Workshop organisers
+- **Elizabeth Wenk**, UNSW
+- **Herve Sauquet**, UNSW
+
+##### Workshop participants
+- **Russell Barrett**, Royal Botanic Gardens and Domain Trust Sydney
+- **Greg Jordan**, University of Tasmania
+- **Andy Leigh**, University of Technology, Sydney
+- **Pat Lu-Irving**, Royal Botanic Gardens and Domain Trust Sydney 
+- **Peter Vesk**, University of Melbourne
+- **Ian Wright**, Hawkesbury Institute for the Environment, University of Western Sydney
+
+In early 2023 we will be holding a workshop on traits that shape plant fire response and conducting some informal reviews of traits capturing physiological function.
