@@ -8,6 +8,7 @@ widget: blank
 
 AusTraits is a relational database, with 11 elements.
 
+{{< figure src="11 AusTraits elements.svg" width="600">}}
 
 {{< figure src="AusTraits_database_structure.svg" width="800">}}
 
