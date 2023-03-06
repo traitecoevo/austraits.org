@@ -63,7 +63,7 @@ stats_3568417 <- tibble(
     x$stats$downloads, 
     x$stats$unique_views,
     x$stats$unique_downloads, 
-    format(x$stats$volume/1E6, digits = 0)
+    format(x$stats$volume/1E6, digits = TRUE)
   ),
   `All versions` = 
   c(
@@ -71,7 +71,7 @@ stats_3568417 <- tibble(
     x$stats$version_downloads, 
     x$stats$version_unique_views,
     x$stats$version_unique_downloads, 
-    format(x$stats$version_volume/1E6, digits = 0)
+    format(x$stats$version_volume/1E6, digits = TRUE)
   ))
 
 stats_3568417 %>% kableExtra::kable()
@@ -111,10 +111,11 @@ data <-
 data$cite %>% writeLines()
 ```
 
-## Coneference presentations
+## Conference presentations
 
 The AusTraits team has delivered talks about AusTraits at multiple conferences and workshops:
 
+- Wenk et al "The AusTraits database structure and R package: introducing a tool for building ecological trait databases", Ecological Society of Australia, 1 December 2022
 - Wenk et al "Documenting the AusTraits ontology", ARDC Vocabulary Symposium, 15 November 2022
 - Wenk et al "The AusTraits data structure and R package: introducing a tool for building ecological trait databases", Open Traits Network, 1 September 2022
 - Gallagher et al "Plant trait composition at the continental scale: using AusTraits to map trait variation and functional diversity across Australia", Ecological Society of Australia, 23 November 2021
