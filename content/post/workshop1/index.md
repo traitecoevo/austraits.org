@@ -85,4 +85,26 @@ The second workshop was focused on a collection of traits related to plant growt
 - **Peter Vesk**, University of Melbourne
 - **Ian Wright**, Hawkesbury Institute for the Environment, University of Western Sydney
 
-In early 2023 we will be holding a workshop on traits that shape plant fire response and conducting some informal reviews of traits capturing physiological function.
+The third workshop was focused on traits that shape plant fire response and plant regeneration following disturbance.
+<br>  
+
+##### Workshop organisers
+- **Elizabeth Wenk**, UNSW
+- **Rachael Gallagher**, Western Sydney University
+
+##### Workshop participants
+- **Tony Auld**, NSW Department of Planning and Environment
+- **Russell Barrett**, Royal Botanic Gardens and Domain Trust Sydney
+- **Carl Gosper**, Department of Biodiversity, Conservation and Attractions, Western Australia
+- **Tom LeBreton**, UNSW
+- **Rachael Nolan**, Western Sydney University
+- **Matt White**, Victorian Department of Environment, Land, Water and Planning
+
+In addition we have called upon the expertise of key experts in the fields of plant gas exchange and photosystem performance, hydraulics and other water relations traits, and floral structure to review additional traits.
+
+##### Expert reviewers
+- **Tim Brodribb**, University of Tasmania
+- **Brendan Choat**, Western Sydney University
+- **David Ellsworth**, Western Sydney University
+- **Belinda Medlyn**, Western Sydney University
+- **Herve Sauquet**, UNSW
