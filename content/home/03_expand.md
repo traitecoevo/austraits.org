@@ -29,10 +29,9 @@ design:
 <div style="background-color:white">
 
 ### Growing AusTraits into a national data asset
-From 2021-2023 we are funded by a Australian Research Data Commons (ARDC) grant through their Australian Data Partnerships program. The <ins>**[ARDC investment](https://ardc.edu.au/project/austraits/)**</ins>, together with co-investment from our 19 partner institutions, will expand AusTraits' data coverage and enhance data quality, allowing AusTraits to emerge as a national data asset. The AusTraits <ins>**[core team](#04_team)**</ins> and broader <ins>**[team of ARDC partners](team_subpage/)**</ins> are jointly working on a collection of work packages to achieve this goal.
+The AusTraits project received <ins>**[investment](https://doi.org/10.47486/DP720)**</ins> from 2021-2023 from the Australian Research Data Commons [(ARDC)](https://ardc.edu.au). The ARDC is funded by the National Collaborative Research Infrastructure Strategy [(NCRIS)](https://www.education.gov.au/ncris). The investment, together with co-investment from our 19 partner institutions, will expand AusTraits' data coverage and enhance data quality, allowing AusTraits to emerge as a national data asset. The AusTraits <ins>**[core team](#04_team)**</ins> and broader <ins>**[team of ARDC partners](team_subpage/)**</ins> are jointly working on a collection of work packages to achieve this goal.
 
-[{{< figure src="ARDC2.png" width="300">}}](https://ardc.edu.au/project/austraits/)
-[{{< figure src="ncris.png" width="200">}}](https://www.education.gov.au/ncris)
+[{{< figure src="ARDC-NCRIS.png" width="500">}}](https://ardc.edu.au)
 
 ### Contributing new data to AusTraits
 To contribute trait data to AusTraits, please <ins>**[contact](#08_contact)**</ins> us. Briefly, we require your data contribution as a spreadsheet in conjunction with accompanying metadata.
