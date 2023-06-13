@@ -44,7 +44,7 @@ if(file.exists(filename)) {
  
 # Download if necessary 
 if(file_age_days > 1) {
-  link <- "https://zenodo.org/api/records/3568417"
+  link <- "https://zenodo.org/api/records/7583087"
   writeLines(readLines(link), filename)
 }
 
@@ -52,7 +52,7 @@ if(file_age_days > 1) {
 x <- jsonlite::fromJSON(filename)
 
 # Extract stats
-stats_3568417 <- tibble(
+stats <- tibble(
   Metric = 
   c(
     "Views", "Downloads", "Unique views", "Unique downloads", "Data volume (MB)"
@@ -74,20 +74,23 @@ stats_3568417 <- tibble(
     format(x$stats$version_volume/1E6, digits = TRUE)
   ))
 
-stats_3568417 %>% kableExtra::kable()
+stats %>% kableExtra::kable()
+```
 
 
+<!--
+Datacite can retrieve citations to doi, but most people cite our paper so not including
 <body>
   <script src="https://unpkg.com/vue@^2/dist/vue.min.js"></script>
     <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.0.0/webcomponents-loader.js"></script>
   <script src="https://unpkg.com/data-metrics-badge/dist/data-metrics-badge.min.js"></script>
-  <data-metrics-badge doi="10.7272/q6g15xs4" display="regular"></data-metrics-badge> 
+  <data-metrics-badge doi="10.5281/zenodo.3568417" display="regular"></data-metrics-badge> 
 </body>
-
-```
+--->
 
     
 ## Data Descriptor
+
 ```{r}
 cites_austraits <- scholar::get_article_cite_history("QXMISwEAAAAJ", "K3LRdlH-MEoC")
 
@@ -95,9 +98,9 @@ cites_austraits <- scholar::get_article_cite_history("QXMISwEAAAAJ", "K3LRdlH-ME
 
 The original paper describing AusTraits data was published in *Scientific Data*:
 
-* Falster, Gallagher, Wenk, Wright, Indiarto, Andrew, ... (2021) AusTraits, a curated plant trait database for the Australian flora. *Scientific data*: 8 (1), 1-20 [10.1038/s41597-021-01006-6](http://doi.org/10.1038/s41597-021-01006-6). 
+* Falster D, Gallagher R, Wenk EH, Wright IJ, Indiarto D, Andrew SC, Baxter C, Lawson J, Allen S, Fuchs A, Monro A, Kar F, Adams MA, Ahrens CW, Alfonzetti M, Angevin T, Apgaua DMG, Arndt S, Atkin OK, Atkinson J, Auld T, Baker A, von Balthazar M, Bean A, Blackman CJ, Bloomfield K, Bowman DMJS, Bragg J, Brodribb TJ, Buckton G, Burrows G, Caldwell E, Camac J, Carpenter R, Catford JA, Cawthray GR, Cernusak LA, Chandler G, Chapman AR, Cheal D, Cheesman AW, Chen S.-C, Choat B, Clinton B, Clode PL, Coleman H, Cornwell WK, Cosgrove M, Crisp M, Cross E, Crous KY, Cunningham S, Curran T, Curtis E, Daws MI, DeGabriel JL, Denton MD, Dong N, Du P, Duan H, Duncan DH, Duncan RP, Duretto M, Dwyer JM, Edwards C, Esperon-Rodriguez M, Evans JR, Everingham SE, Farrell C, Firn J, Fonseca CR, French BJ, Frood D, Funk JL, Geange SR, Ghannoum O, Gleason SM, Gosper CR, Gray E, Groom PK, Grootemaat S, Gross C, Guerin G, Guja L, Hahs AK, Harrison MT, Hayes PE, Henery M, Hochuli D, Howell J, Huang G, Hughes L, Huisman J, Ilic J, Jagdish A, Jin D, Jordan G, Jurado E, Kanowski J, Kasel S, Kellermann J, Kenny B, Kohout M, Kooyman RM, Kotowska MM, Lai HR, Laliberté E, Lambers H, Lamont BB, Lanfear R, van Langevelde F, Laughlin DC, Laugier-Kitchener B.-A, Laurance S, Lehmann CER, Leigh A, Leishman MR, Lenz T, Lepschi B, Lewis JD, Lim F, Liu U, Lord J, Lusk CH, Macinnis-Ng C, McPherson H, Magallón S, Manea A, López-Martinez A, Mayfield M, McCarthy JK, Meers T, van der Merwe M, Metcalfe DJ, Milberg P, Mokany K, Moles AT, Moore BD, Moore N, Morgan JW, Morris W, Muir A, Munroe S, Nicholson Á, Nicolle D, Nicotra AB, Niinemets Ü, North T, O’Reilly-Nugent A, O’Sullivan OS, Oberle B, Onoda Y, Ooi MKJ, Osborne CP, Paczkowska G, Pekin B, Guilherme Pereira C, Pickering C, Pickup M, Pollock LJ, Poot P, Powell JR, Power SA, Prentice IC, Prior L, Prober SM, Read J, Reynolds V, Richards AE, Richardson B, Roderick ML, Rosell JA, Rossetto M, Rye B, Rymer PD, Sams MA, Sanson G, Sauquet H, Schmidt S, Schönenberger J, Schulze E.-D, Sendall K, Sinclair S, Smith B, Smith R, Soper F, Sparrow B, Standish RJ, Staples TL, Stephens R, Szota C, Taseski G, Tasker E, Thomas F, Tissue DT, Tjoelker MG, Tng DYP, de Tombeur F, Tomlinson K, Turner NC, Veneklaas EJ, Venn S, Vesk P, Vlasveld C, Vorontsova MS, Warren CA, Warwick N, Weerasinghe LK, Wells J, Westoby M, White M, Williams NSG, Wills J, Wilson PG, Yates C, Zanne AE, Zemunik G, Ziemińska K (2021) AusTraits, a curated plant trait database for the Australian flora. *Scientific data*: 8 (1), 1-20 [10.1038/s41597-021-01006-6](http://doi.org/10.1038/s41597-021-01006-6). 
 
-Thus far, the paper has been cited [`r sum(cites_austraits$cites)` times](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=QXMISwEAAAAJ&sortby=pubdate&citation_for_view=QXMISwEAAAAJ:K3LRdlH-MEoC
+Thus far, the paper has been [cited > 50 times](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=QXMISwEAAAAJ&sortby=pubdate&citation_for_view=QXMISwEAAAAJ:K3LRdlH-MEoC
 ), as indicated by Google Scholar. 
 
 The Altmetics of the paper capture it's broader coverage for further details see the [articles metrics page](https://nature.altmetric.com/details/114271024): 
