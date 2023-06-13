@@ -20,3 +20,8 @@ blogdown::serve_site()
 # To stop the server
 blogdown::stop_server()
 ```
+
+### Regenerating any pages from Rmd
+
+While `blogdown::serve_site()`, any pages that are generated from Rmd files (e.g. content/impact/impact.html) are automatically regenerated when you save the soruce.
+
