@@ -40,5 +40,7 @@ design:
 Below are some recent publications using AusTraits. You can access a full list of publications via [AusTraits on Google Scholar](https://scholar.google.com/citations?user=VFFY9AQAAAAJ).
 
 - Falster DS, Gallagher RV, et al. (2021) AusTraits, a curated plant trait database for the Australian flora. *Scientific Data* 8, 254. doi: [10.1038/s41597-021-01006-6](http://doi.org/10.1038/s41597-021-01006-6)
+- Coleman, D, Gallagher RV, Falster D, Sauquet H, and Wenk E (2023) A Workflow to Create Trait Databases from Collections of Textual Taxonomic Descriptions. *Ecological Informatics* 78: 102312. doi: [10.1016/j.ecoinf.2023.102312](https://doi.org/10.1016/j.ecoinf.2023.102312)
+- Wenk, EH, Sauquet H, Gallagher RV, Brownlee R, Boettiger C, ColemanD , Yang S, et al. (2023) The AusTraits Plant Dictionary. *bioRxiv*. doi: [10.1101/2023.06.16.545047](https://doi.org/10.1101/2023.06.16.545047).
 - Andrew SC et al. (2021) Functional diversity of the Australian flora: Strong links to species richness and climate. *Journal of Vegetation Science* 32. doi: [10.1111/jvs.13018](http://doi.org/10.1111/jvs.13018)
 - Gallagher RV et al. (2021) High fire frequency and the impact of the 2019–2020 megafires on Australian plant diversity. *Diversity and Distributions* 27: 1166–1179. doi: [10.1111/ddi.13265](http://doi.org/10.1111/ddi.13265)
