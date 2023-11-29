@@ -19,7 +19,7 @@ By providing a curated, open source and FAIR big data resource, AusTraits aims t
 
 ## Dataset downloads
 
-AusTraits is provided as an open access data set via Zenodo, with multiple releases available, grouped under a "Concept DOI": [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3583418.svg)](https://doi.org/10.5281/zenodo.3583418) 
+AusTraits is provided as an open access data set via Zenodo, with multiple releases available, grouped under a "Concept DOI": [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3568417.svg)](https://doi.org/10.5281/zenodo.3568417) 
 
 [Zenodo tracks](https://www.projectcounter.org/code-practice-research-data/repositories-that-have-implemented-the-code-of-practice-for-research-data/) usage of AusTraits, following the [Counter Code of Practice for Research Data](https://www.projectcounter.org/code-practice-research-data/). The latest values are available at the above link. As of `r Sys.Date()` the data has been accessed as follows:
 
@@ -127,15 +127,27 @@ data$cite %>% writeLines()
 
 The AusTraits team has delivered talks about AusTraits at multiple conferences and workshops:
 
-- Wenk et al "The AusTraits database structure and R package: introducing a tool for building ecological trait databases", Ecological Society of Australia, 1 December 2022
-- Wenk et al "Documenting the AusTraits ontology", ARDC Vocabulary Symposium, 15 November 2022
-- Wenk et al "The AusTraits data structure and R package: introducing a tool for building ecological trait databases", Open Traits Network, 1 September 2022
-- Gallagher et al "Plant trait composition at the continental scale: using AusTraits to map trait variation and functional diversity across Australia", Ecological Society of Australia, 23 November 2021
+- Sauquet et al "AusTraits: Australia's plant trait database ", Biosystematics 2023, 28 November 2023.
+- Wenk et al "Building the AusTraits Plant Dictionary", ARDC Vocabulary Symposium, 14 November 2023.
+- Falster et al "AusTraits: Why biological collections are key to operationalising trait-based methods", ALA & GBIF Symposium on The Changing Face of Biological Collections, 20 October 2023.
+- Wenk et al "The AusTraits Plant Trait Database and Workflow", International Association of Vegetation Scientists, 4 September 2023.
+- Wenk et al "traits.build - An R package for building harmonized trait databases using the AusTraits workflow", Ecological Society of America, 9 August 2023.
+- Wenk et al "The AusTraits database structure and R package: introducing a tool for building ecological trait databases", Ecological Society of Australia, 1 December 2022.
+- Wenk et al "Documenting the AusTraits ontology", ARDC Vocabulary Symposium, 15 November 2022.
+- Wenk et al "The AusTraits data structure and R package: introducing a tool for building ecological trait databases", Open Traits Network, 1 September 2022.
+- Gallagher et al "Plant trait composition at the continental scale: using AusTraits to map trait variation and functional diversity across Australia", Ecological Society of Australia, 23 November 2021.
 - Wenk et al "Introduction to AusTraits", Ecological Society of Australia, 23 November 2021
 - Wenk et al "An introduction to AusTraits"; Genomics for Australian Plants (GAP) phylogenomics mini symposium, 16 November 2021.
 - Sauquet et al "AusTraits: a national database on the traits of Australia's complete flora", DiveRS working group (Monetpellier, France), November 25 2021
 - Sauquet et al "AusTraits: a national database on the traits of Australia's complete flora", Australasian Systematic Botany Society Annual Conference, 12-16 July 2021
 
+## AusTraits workshops
+
+AusTraits workshops or stalls have beem held at:
+
+- Australian National University (September 2023)
+- University of Melbourne (October 2023)
+- Biosystematics 2023 (November 2023)
 
 ## Social media
 
