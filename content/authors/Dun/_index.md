@@ -15,7 +15,7 @@ bio:
 # Interests to show in About widget
 interests:
 
-user_groups: ["Core Team"]
+user_groups: ["Alumni"]
 # Education to show in About widget
 education:
   courses:
