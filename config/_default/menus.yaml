@@ -7,8 +7,11 @@ main:
   - name: How to access
     url: '#02_access_use'
     weight: 10
+  - name: AusTraits products
+    url: '#03a_outputs'
+    weight: 12
   - name: Ongoing efforts
-    url: '#03_expand'
+    url: '#03b_expand'
     weight: 12
   - name: Database structure
     url: 'database/'
