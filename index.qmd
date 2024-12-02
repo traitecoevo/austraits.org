@@ -12,5 +12,5 @@ An AusTraits data paper was published in *Scientific Data* in 2021 and is availa
 
 ::: {.callout-tip}
 ## Help grow AusTraits
-Learn more on how you can [collaborate and contribute](contribitors.qmd) to AusTraits
+Learn more on how you can [collaborate and contribute](contributors.qmd) to AusTraits
 :::
