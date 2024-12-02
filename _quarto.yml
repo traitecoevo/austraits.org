@@ -1,0 +1,22 @@
+project:
+  type: website
+
+website:
+  title: "AusTraits"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: access.qmd
+        text: How to access
+      - href: contributors.qmd
+        text: Data contributors
+
+format:
+  html:
+    theme: simplex
+    css: styles.css
+    toc: true
+
+editor: source
+
