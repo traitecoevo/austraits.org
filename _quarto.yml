@@ -11,7 +11,8 @@ website:
         text: Software and Outputs
       - href: efforts.qmd
         text: Ongoing Efforts
-      - text: Structure
+      - href: structure.qmd
+        text: Structure
       - text: Our Team + Partners
       - text: Our Impact
       - href: contributors.qmd

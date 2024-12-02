@@ -1,0 +1,10 @@
+# Stucture of Austraits Database
+
+AusTraits is a relational database.
+
+::: {.callout-tip}
+## Learn more
+Details of the structure of the database are found **[here](https://traitecoevo.github.io/traits.build-book/database_structure.html)**, as well as definitions and allowable parameters for all metadata associated with each AusTraits study.
+:::
+
+The element definitions contains definitions for each trait and trait value (range of numeric values or list of categorical values) allowable in AusTraits. The trait concepts used by AusTraits are published in the **[AusTraits Plant Dictionary](https://w3id.org/APD)**. 
