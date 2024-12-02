@@ -3,6 +3,7 @@ project:
 
 website:
   title: "AusTraits"
+  
   navbar:
     left:
       - href: access.qmd
@@ -13,7 +14,8 @@ website:
         text: Ongoing Efforts
       - href: structure.qmd
         text: Structure
-      - text: Our Team + Partners
+      - href: team/team-partners.qmd
+        text: Our Team + Partners
       - text: Our Impact
       - href: contributors.qmd
         text: Data Contributors
@@ -22,6 +24,7 @@ website:
   search: 
     location: navbar
 
+
 format:
   html:
     theme: simplex
@@ -29,4 +32,5 @@ format:
     toc: true
 
 editor: source
+
 

@@ -1,0 +1,30 @@
+---
+title: Meet the Team
+format:
+  html:
+    css: styles.css
+---
+
+**Our core AusTraits team is supported in maintaining, expanding, and enhancing AusTraits by a team of [ARDC project grant partners](team_subpage/)**.
+
+
+**The creation of the AusTraits database was only possible because of the [researchers](https://doi.org/10.5281/zenodo.3568417) who contributed data to this endeavour.**  
+
+
+```{=html}
+<div class="team-grid">
+  <div class="team-member">
+    <img src="team/Wenk/avatar.jpg" class="team-photo">
+    <h3>Dr. Elizabeth Wenk</h3>
+    <p>Project Manager</p>
+  </div>
+  <div class="team-member">
+    <img src="team/Falster/avatar.jpg" class="team-photo">
+    <h3>Assoc. Prof. Daniel Falster</h3>
+    <p>Joint Project Lead</p>
+  </div>
+  <!-- Add more team members as needed -->
+</div>
+
+```
+
