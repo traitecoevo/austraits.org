@@ -1,4 +1,4 @@
-[**Contact us**](/#08_contact) if you have data to contribute.
+[**Contact us**](contact.qmd) if you have data to contribute.
 
 AusTraits continues to integrate both newly collected and legacy datasets, with future Zenodo releases planned.
 

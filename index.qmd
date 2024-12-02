@@ -11,5 +11,6 @@ AusTraits integrates plant trait data collected by researchers from diverse disc
 An AusTraits data paper was published in *Scientific Data* in 2021 and is available at: [10.1038/s41597-021-01006-6](http://doi.org/10.1038/s41597-021-01006-6). 
 
 ::: {.callout-tip}
+## Help grow AusTraits
 Learn more on how you can [collaborate and contribute](contribitors.qmd) to AusTraits
 :::

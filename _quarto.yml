@@ -5,12 +5,21 @@ website:
   title: "AusTraits"
   navbar:
     left:
-      - href: index.qmd
-        text: Home
       - href: access.qmd
-        text: How to access
+        text: Access and Usage
+      - href: outputs.qmd
+        text: Software and Outputs
+      - href: efforts.qmd
+        text: Ongoing Efforts
+      - text: Structure
+      - text: Our Team + Partners
+      - text: Our Impact
       - href: contributors.qmd
-        text: Data contributors
+        text: Data Contributors
+      - href: contact.qmd
+        text: Contact Us
+  search: 
+    location: navbar
 
 format:
   html:
