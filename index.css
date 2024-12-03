@@ -1,0 +1,32 @@
+.partners-footer {
+  background-color: #f9f9f9;
+  padding: 20px;
+  text-align: center;
+  border-top: 1px solid #ddd;
+}
+
+.partners-footer h4 {
+  margin-bottom: 20px;
+  font-size: 1.5em;
+}
+
+.partners-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 20px;
+  justify-items: center;
+  align-items: center;
+}
+
+.partner-logo {
+  max-width: 100%;
+  max-height: 100px; /* Adjust for a consistent height */
+  object-fit: contain; /* Ensures the image retains its aspect ratio */
+  filter: grayscale(100%);
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.partner-logo:hover {
+  filter: none; /* Removes grayscale on hover */
+  transform: scale(1.1); /* Slightly enlarges the logo */
+}

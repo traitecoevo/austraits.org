@@ -16,7 +16,8 @@ website:
         text: Structure
       - href: team/team-partners.qmd
         text: Our Team + Partners
-      - text: Our Impact
+      - href: impact.qmd
+        text: Our Impact
       - href: contributors.qmd
         text: Data Contributors
       - href: contact.qmd
