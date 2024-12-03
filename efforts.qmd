@@ -1,3 +1,9 @@
+---
+format:
+  html:
+    include-after-body: _footer.html
+    css: index.css
+---
 ### AusTraits funding
 The AusTraits project is currently receiving investment from the Australian Research Data Commons **[(ARDC)](https://ardc.edu.au)** through their **[Plant Research Data Commons](https://ardc.edu.au/planet-research-data-commons/)** program. From 2021-2023 AusTraits received ARDC **[investment](https://doi.org/10.47486/DP720)** through their **[Australian Data Partnerships](https://ardc.edu.au/program/australian-data-partnerships/)** program, to grow the database into a National Data Asset. The ARDC is funded by the National Collaborative Research Infrastructure Strategy **[(NCRIS)](https://www.education.gov.au/ncris)**. The AusTraits **[core team](#04_team)** and broader **[team of ARDC partners](team_subpage/)** are jointly working on a collection of work packages to achieve this goal.
 
