@@ -1,0 +1,23 @@
+/* css styles */
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.team-member {
+  padding: 10px;
+}
+
+.team-photo {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #ccc;
+  margin-bottom: 10px;
+}
+

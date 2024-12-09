@@ -1,27 +1,17 @@
-# Website for AusTraits built using HUGO via blogdown
+## austraits.org
 
-### Install `blogdown` and HUGO in R Studio 
+This repository contains the source code to create the austraits.org website https://austraits.org/
 
-```r
-# install blogdown
-install.packages("blogdown")
-library(blogdown) 
+### To render the website locally: 
 
-# install HUGO
-blogdown::install_hugo()
-```
-### Build the site locally
+1. Install the [Quarto](https://quarto.org/docs/download/) software
+2. Clone this repository to your local computer
+3. Open the .Rproj file using RStudio
+4. Click on any .qmd files and click on Render.
 
-Set the website folder as the working directory
+Alternatively,
 
-```r
-blogdown::serve_site()
+1. Navigate to the 'Terminal' pane and type `quarto render` and hit enter
+2. Once the book has been rendered and the terminal is free, type `quarto preview` and hit enter
 
-# To stop the server
-blogdown::stop_server()
-```
-
-### Regenerating any pages from Rmd
-
-While `blogdown::serve_site()`, any pages that are generated from Rmd files (e.g. content/impact/impact.html) are automatically regenerated when you save the soruce.
-
+This should open the book in your View Pane or default browser

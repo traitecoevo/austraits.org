@@ -1,0 +1,166 @@
+---
+engine: knitr
+execute:
+  freeze: auto
+  include: false
+---
+
+```{r}
+library(tidyverse)
+```
+
+
+By providing a curated, open source and FAIR big data resource, AusTraits aims to transform research on the Australian flora. This page tracks our impact to date. 
+
+::: callout-note
+This page was last updated on `{r} Sys.Date()`. For the latest impact, see links provided below.
+:::
+
+## Dataset downloads
+
+AusTraits is provided as an open access data set via Zenodo, with multiple releases available, grouped under a "Concept DOI": [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3568417.svg)](https://doi.org/10.5281/zenodo.3568417) 
+
+[Zenodo](https://www.projectcounter.org/code-practice-research-data/repositories-that-have-implemented-the-code-of-practice-for-research-data/) tracks usage of AusTraits, following the [Counter Code of Practice for Research Data](https://www.projectcounter.org/code-practice-research-data/). The latest values are available at the above link. As of `r Sys.Date()` the data has been accessed as follows:
+
+```{r}
+# read details from Zenodo
+
+# only update if cached file is  > 1 day old
+
+filename <- "3568417.json"
+
+file_age <- function(filename) {
+  lubridate::as.period(Sys.time() - file.info(filename)$mtime, unit="hours") %>% 
+    as.numeric("days")  
+}
+
+# Determine file age
+if(file.exists(filename)) {
+  file_age_days <- file_age(filename) 
+} else {
+  file_age_days <- 10
+}
+ 
+# Download if necessary 
+if(file_age_days > 1) {
+  link <- "https://zenodo.org/api/records/7583087"
+  writeLines(readLines(link), filename)
+}
+
+# read data
+x <- jsonlite::fromJSON(filename)
+
+# Extract stats
+stats <- tibble(
+  Metric = 
+  c(
+    "Views", "Downloads", "Unique views", "Unique downloads"
+  ), 
+  `Latest version` = 
+  c(
+    x$stats$views, 
+    x$stats$downloads, 
+    x$stats$unique_views,
+    x$stats$unique_downloads
+    # format(x$stats$volume/1E6, digits = TRUE)
+  ),
+  `All versions` = 
+  c(
+    x$stats$version_views, 
+    x$stats$version_downloads, 
+    x$stats$version_unique_views,
+    x$stats$version_unique_downloads
+    # format(x$stats$version_volume/1E6, digits = TRUE)
+  ))
+
+stats %>% kableExtra::kable()
+```
+
+
+<!--
+Datacite can retrieve citations to doi, but most people cite our paper so not including
+<body>
+  <script src="https://unpkg.com/vue@^2/dist/vue.min.js"></script>
+    <script src="https://unpkg.com/@webcomponents/webcomponentsjs@2.0.0/webcomponents-loader.js"></script>
+  <script src="https://unpkg.com/data-metrics-badge/dist/data-metrics-badge.min.js"></script>
+  <data-metrics-badge doi="10.5281/zenodo.3568417" display="regular"></data-metrics-badge> 
+</body>
+--->
+
+    
+## Data Descriptor
+
+```{r}
+cites_austraits <- scholar::get_article_cite_history("QXMISwEAAAAJ", "K3LRdlH-MEoC")
+
+```
+
+The original paper describing AusTraits data was published in *Scientific Data*:
+
+* Falster D, Gallagher R, Wenk EH, Wright IJ, Indiarto D, Andrew SC, Baxter C, Lawson J, Allen S, Fuchs A, Monro A, Kar F, Adams MA, Ahrens CW, Alfonzetti M, Angevin T, Apgaua DMG, Arndt S, Atkin OK, Atkinson J, Auld T, Baker A, von Balthazar M, Bean A, Blackman CJ, Bloomfield K, Bowman DMJS, Bragg J, Brodribb TJ, Buckton G, Burrows G, Caldwell E, Camac J, Carpenter R, Catford JA, Cawthray GR, Cernusak LA, Chandler G, Chapman AR, Cheal D, Cheesman AW, Chen S.-C, Choat B, Clinton B, Clode PL, Coleman H, Cornwell WK, Cosgrove M, Crisp M, Cross E, Crous KY, Cunningham S, Curran T, Curtis E, Daws MI, DeGabriel JL, Denton MD, Dong N, Du P, Duan H, Duncan DH, Duncan RP, Duretto M, Dwyer JM, Edwards C, Esperon-Rodriguez M, Evans JR, Everingham SE, Farrell C, Firn J, Fonseca CR, French BJ, Frood D, Funk JL, Geange SR, Ghannoum O, Gleason SM, Gosper CR, Gray E, Groom PK, Grootemaat S, Gross C, Guerin G, Guja L, Hahs AK, Harrison MT, Hayes PE, Henery M, Hochuli D, Howell J, Huang G, Hughes L, Huisman J, Ilic J, Jagdish A, Jin D, Jordan G, Jurado E, Kanowski J, Kasel S, Kellermann J, Kenny B, Kohout M, Kooyman RM, Kotowska MM, Lai HR, Laliberté E, Lambers H, Lamont BB, Lanfear R, van Langevelde F, Laughlin DC, Laugier-Kitchener B.-A, Laurance S, Lehmann CER, Leigh A, Leishman MR, Lenz T, Lepschi B, Lewis JD, Lim F, Liu U, Lord J, Lusk CH, Macinnis-Ng C, McPherson H, Magallón S, Manea A, López-Martinez A, Mayfield M, McCarthy JK, Meers T, van der Merwe M, Metcalfe DJ, Milberg P, Mokany K, Moles AT, Moore BD, Moore N, Morgan JW, Morris W, Muir A, Munroe S, Nicholson Á, Nicolle D, Nicotra AB, Niinemets Ü, North T, O’Reilly-Nugent A, O’Sullivan OS, Oberle B, Onoda Y, Ooi MKJ, Osborne CP, Paczkowska G, Pekin B, Guilherme Pereira C, Pickering C, Pickup M, Pollock LJ, Poot P, Powell JR, Power SA, Prentice IC, Prior L, Prober SM, Read J, Reynolds V, Richards AE, Richardson B, Roderick ML, Rosell JA, Rossetto M, Rye B, Rymer PD, Sams MA, Sanson G, Sauquet H, Schmidt S, Schönenberger J, Schulze E.-D, Sendall K, Sinclair S, Smith B, Smith R, Soper F, Sparrow B, Standish RJ, Staples TL, Stephens R, Szota C, Taseski G, Tasker E, Thomas F, Tissue DT, Tjoelker MG, Tng DYP, de Tombeur F, Tomlinson K, Turner NC, Veneklaas EJ, Venn S, Vesk P, Vlasveld C, Vorontsova MS, Warren CA, Warwick N, Weerasinghe LK, Wells J, Westoby M, White M, Williams NSG, Wills J, Wilson PG, Yates C, Zanne AE, Zemunik G, Ziemińska K (2021) AusTraits, a curated plant trait database for the Australian flora. *Scientific data*: 8 (1), 1-20 [10.1038/s41597-021-01006-6](http://doi.org/10.1038/s41597-021-01006-6). 
+
+Thus far, the paper has been [cited > 80 times](https://scholar.google.com/citations?view_op=view_citation&hl=en&user=QXMISwEAAAAJ&sortby=pubdate&citation_for_view=QXMISwEAAAAJ:K3LRdlH-MEoC
+), as indicated by Google Scholar. 
+
+The Altmetics of the paper capture its broader coverage. For further details see the [articles metrics page](https://nature.altmetric.com/details/114271024): 
+
+<div data-badge-details="right" data-badge-type="donut" data-doi="10.1038/s41597-021-01006-6" data-condensed="true" class="altmetric-embed"></div>
+
+
+Below is a selection of papers using the AusTraits database:
+
+```{r, results='asis'}
+data <- 
+  scholar::get_publications("VFFY9AQAAAAJ") %>% as_tibble() %>%
+  filter(pubid != "u-x6o8ySG0sC") %>%
+  arrange(desc(year)) %>%
+  mutate(
+       link = sprintf("https://scholar.google.com/citations?view_op=view_citation&citation_for_view=VFFY9AQAAAAJ:%s", pubid),
+       cite =  sprintf("- %s (%s) %s. *%s*: %s [(link)](%s)", author, year, title, journal, number, link)
+  )
+
+data$cite %>% writeLines()
+```
+
+## Conference presentations
+
+The AusTraits team has delivered talks about AusTraits at multiple conferences and workshops:
+
+- Sauquet et al. "AusTraits: Australia's plant trait database ", Biosystematics 2023, 28 November 2023.
+- Wenk et al. "Building the AusTraits Plant Dictionary", ARDC Vocabulary Symposium, 14 November 2023.
+- Falster et al. "AusTraits: Why biological collections are key to operationalising trait-based methods", ALA & GBIF Symposium on The Changing Face of Biological Collections, 20 October 2023.
+- Wenk et al. "The AusTraits Plant Trait Database and Workflow", International Association of Vegetation Scientists, 4 September 2023.
+- Wenk et al. "traits.build - An R package for building harmonized trait databases using the AusTraits workflow", Ecological Society of America, 9 August 2023.
+- Wenk et al. "The AusTraits database structure and R package: introducing a tool for building ecological trait databases", Ecological Society of Australia, 1 December 2022.
+- Wenk et al. "Documenting the AusTraits ontology", ARDC Vocabulary Symposium, 15 November 2022.
+- Wenk et al. "The AusTraits data structure and R package: introducing a tool for building ecological trait databases", Open Traits Network, 1 September 2022.
+- Gallagher et al. "Plant trait composition at the continental scale: using AusTraits to map trait variation and functional diversity across Australia", Ecological Society of Australia, 23 November 2021.
+- Wenk et al. "Introduction to AusTraits", Ecological Society of Australia, 23 November 2021
+- Wenk et al. "An introduction to AusTraits"; Genomics for Australian Plants (GAP) phylogenomics mini symposium, 16 November 2021.
+- Sauquet et al. "AusTraits: a national database on the traits of Australia's complete flora", DiveRS working group (Monetpellier, France), November 25 2021
+- Sauquet et al. "AusTraits: a national database on the traits of Australia's complete flora", Australasian Systematic Botany Society Annual Conference, 12-16 July 2021
+
+## AusTraits workshops
+
+AusTraits workshops or stalls have been held at:
+
+- Ecological Society of Australia (November 2022)
+- Australian National University (September 2023)
+- University of Melbourne (October 2023)
+- Biosystematics 2023 (November 2023)
+- Australian PlantBank, Royal Botanic Gardens and Domain Trust (December 2023)
+
+## Social media
+
+Here are of the nice things the community is saying about AusTraits 
+
+{{< tweet user=hj_whiterabbit id=1463020322274234370 >}}
+
+{{< tweet user=nicrodemo id=1448168356218118144 >}}
+
+{{< tweet user=SallyArchibald id=1444438004802592768 >}}
+
+{{< tweet user=davidtng id=1448393376735264768 >}}
+
+{{< tweet user=hsauquet_bgsyd id=1445575788867248129 >}}
+

@@ -1,0 +1,56 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "---\n",
+        "title: Meet the Team\n",
+        "format:\n",
+        "  html:\n",
+        "    css: styles.css\n",
+        "---\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "**Our core AusTraits team is supported in maintaining, expanding, and enhancing AusTraits by a team of [ARDC project grant partners](team_subpage/)**.\n",
+        "\n",
+        "\n",
+        "**The creation of the AusTraits database was only possible because of the [researchers](https://doi.org/10.5281/zenodo.3568417) who contributed data to this endeavour.**  \n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "```{html}\n",
+        "<div class=\"team-grid\">\n",
+        "  <div class=\"team-member\">\n",
+        "    <img src=\"team/team/Wenk/avatar.jpg\" class=\"team-photo\">\n",
+        "    <h3>Dr. Elizabeth Wenk</h3>\n",
+        "    <p>Project Manager</p>\n",
+        "  </div>\n",
+        "  <div class=\"team-member\">\n",
+        "    <img src=\"team/team/Falster/avatar.jpg\" class=\"team-photo\">\n",
+        "    <h3>Assoc. Prof. Daniel Falster</h3>\n",
+        "    <p>Joint Project Lead</p>\n",
+        "  </div>\n",
+        "  <!-- Add more team members as needed -->\n",
+        "</div>\n",
+        "\n",
+        "```"
+      ],
+      "id": "d458e563"
+    }
+  ],
+  "metadata": {
+    "kernelspec": {
+      "name": "python3",
+      "language": "python",
+      "display_name": "Python 3 (ipykernel)",
+      "path": "/Users/fontikar/miniforge3/share/jupyter/kernels/python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 5
+}

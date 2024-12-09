@@ -1,0 +1,38 @@
+project:
+  type: website
+
+website:
+  title: "AusTraits"
+  
+  navbar:
+    left:
+      - href: access.qmd
+        text: Access and Usage
+      - href: outputs.qmd
+        text: Software and Outputs
+      - href: efforts.qmd
+        text: Ongoing Efforts
+      - href: structure.qmd
+        text: Structure
+      - href: team/team-partners.qmd
+        text: Our Team
+      - href: impact.qmd
+        text: Our Impact
+      - href: contributors.qmd
+        text: Data Contributors
+      - href: contact.qmd
+        text: Contact Us
+  search: 
+    location: navbar
+
+
+format:
+  html:
+    theme: simplex
+    css: styles.css
+    toc: true
+
+editor: source
+
+execute:
+  freeze: auto
