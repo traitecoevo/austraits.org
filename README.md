@@ -1,6 +1,6 @@
 ## austraits.org
 
-This repository contains the source code to create the austraits.org website
+This repository contains the source code to create the austraits.org website https://austraits.org/
 
 ### To render the website locally: 
 
