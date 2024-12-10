@@ -1,19 +1,26 @@
 on:
   workflow_dispatch:
   push:
-    branches: main
+    branches: master
+  pull_request:
+    branches: master
 
 name: Quarto Publish
 
 jobs:
   build-deploy:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v4 
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
+        
+      - name: Setup renv
+        uses: r-lib/actions/setup-renv@v2
+        with:
+          cache-version: 1
 
       - name: Render and Publish 
         uses: quarto-dev/quarto-actions/publish@v2
