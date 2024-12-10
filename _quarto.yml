@@ -22,6 +22,8 @@ website:
         text: Data Contributors
       - href: contact.qmd
         text: Contact Us
+      - href: https://github.com/traitecoevo/austraits.org
+        icon: github
 
   search: 
     location: navbar
