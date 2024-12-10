@@ -11,11 +11,3 @@ We would love to hear from you to:
 - receive any feedback you might have
 
 You can leave a comment below or directly reach us at [austraits.database@gmail.com](mailto:austraits.database@gmail.com)
-
-```{r, warning=FALSE, echo=FALSE}
-library(leaflet)
-leaflet() |> 
-  addTiles() |>   # Add default OpenStreetMap map tiles
-  addMarkers(lng=151.2313, lat=-33.9173, popup="UNSW Sydney")
-```
-
