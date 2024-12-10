@@ -6,22 +6,23 @@ website:
   
   navbar:
     left:
-      - href: access.qmd
+      - href: index.html#access-and-usage
         text: Access and Usage
-      - href: outputs.qmd
-        text: Software and Outputs
-      - href: efforts.qmd
-        text: Ongoing Efforts
-      - href: structure.qmd
+      - href: index.html#structure
         text: Structure
-      - href: team/team-partners.qmd
-        text: Our Team
+      - href: index.html#software-and-outputs
+        text: Software and Outputs
+      - href: index.html#ongoing-efforts
+        text: Ongoing Efforts
       - href: impact.qmd
         text: Our Impact
+      - href: team/team-partners.qmd
+        text: Our Team
       - href: contributors.qmd
         text: Data Contributors
       - href: contact.qmd
         text: Contact Us
+
   search: 
     location: navbar
 
