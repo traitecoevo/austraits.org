@@ -67,6 +67,7 @@ The element definitions contains definitions for each trait and trait value (ran
 ::: {.img-float}
 <a href="https://github.com/traitecoevo/traits.build">
 ![](images/traits.build_hex.png){width=30% style="float: right; margin: 50px;"}
+</a>
 :::
 
 Prompted by interest from other research groups to use the AusTraits pipeline to aggregate databases for other taxonomic groups or different clusters of traits, the R code underlying AusTraits has been developed into a standalone R package, **[{traits.build}](https://github.com/traitecoevo/traits.build)**. Extensive documentation for how to create a trait database using the {traits.build} workflow is available in an accompanying online **[book](https://traitecoevo.github.io/traits.build-book/)**. A second GitHub repository, **[traits.build-template](https://traitecoevo.github.io/traits.build-template/)**, hosts a series of template files to launch your team into creating with traits.build.
