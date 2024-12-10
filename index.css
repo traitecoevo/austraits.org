@@ -30,3 +30,10 @@
   filter: none; /* Removes grayscale on hover */
   transform: scale(1.1); /* Slightly enlarges the logo */
 }
+
+.divider {
+  border: none;
+  height: 3px;
+  background: linear-gradient(to right, #4caf50, #2196f3);
+  margin: 50px 0; /* Adds 50px space above and below */
+}

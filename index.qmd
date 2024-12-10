@@ -2,7 +2,7 @@
 title: ""
 format:
   html:
-    toc: FALSE
+    toc: TRUE
     include-after-body: _footer.html
     css: index.css
 lightbox: true
@@ -23,6 +23,8 @@ An AusTraits data paper was published in *Scientific Data* in 2021 and is availa
 ## Help grow AusTraits
 Learn more on how you can [collaborate and contribute](contributors.qmd) to AusTraits
 :::
+
+<div class="divider"></div>
 
 ### Access and Usage
 
@@ -53,7 +55,11 @@ Details of the structure of the database are found **[here](https://traitecoevo.
 
 The element definitions contains definitions for each trait and trait value (range of numeric values or list of categorical values) allowable in AusTraits. The trait concepts used by AusTraits are published in the **[AusTraits Plant Dictionary](https://w3id.org/APD)**. 
 
+<div class="divider"></div>
+
 ### Software and Outputs
+
+<br>
 
 #### traits.build: a data model, workflow and R package for building harmonised ecological trait databases
 
@@ -71,16 +77,21 @@ In addition to AusTraits, two other trait databases for disparate traits and tax
 
 A description of the traits.build data model, workflow and R package was published as a data paper in Ecological Informatics in August 2024 and is available at: **[doi: 10.1016/j.ecoinf.2024.102773](https://doi.org/10.1016/j.ecoinf.2024.102773)**.
 
+<br>
 
 #### austraits: the R interface to the AusTraits database
 
 ::: {.img-float}
 <a href="https://github.com/traitecoevo/austraits">
-![](images/austraits_hex.png){width=30% style="float: left; margin: 50px;"}
+![](images/austraits_hex.png){width=30% style="float: left; margin: 40px;"}
 </a>
 :::
 
+<br>
+
 austraits allow users to access, explore and wrangle data from traits.build relational databases. It is also an R interface to AusTraits, the Australian plant trait database. This package contains functions for joining data from various tables, filtering to specific records, combining multiple databases and visualising the distribution of the data. We expect this package will assist users in working with traits.build databases.
+
+<br><br><br>
 
 #### APCalign: an R package for aligning and updating names of Australian vascular plants
 
@@ -95,6 +106,8 @@ In Australia, the national taxonomic standard for vascular plants is the Austral
 The R code used by AusTraits to align names with the APC and APNI has been generalised into a standalone R package, **[{APCalign}](https://github.com/traitecoevo/APCalign)**, and accompanying ShinyApp that makes this workflow available to all researchers. It corrects typos, standardises syntax (including for phrase names), and updates names to the currently accepted taxon name (per the APC). The core functions within the package allow a user to read in a list of "original names" and output a list of names aligned to the APC.
 
 A description of the APCalign R package was published in the Australian Journal of Botany in May 2024 and is available at: **[doi: 10.1071/BT24014](https://doi.org/10.1071/BT24014)**.
+
+<br>
 
 #### The AusTraits Plant Dictionary (APD)
 
@@ -111,6 +124,8 @@ The AusTraits team held a series of **[workshops](post/workshop1/)** from 2021-2
 
 The APD was published as a data paper in Scientific Data in May 2024 and is available at: **[doi: 10.1038/s41597-024-03368-z](https://doi.org/10.1038/s41597-024-03368-z)**.
 
+<br>
+
 #### Transforming taxonomic descriptions into trait data tables
 
 Taxonomic descriptions for most of Australia's 30,000+ plant species are available in online floras maintained by state and national herbaria. One of our initiatives has been to use algorithms to extract key trait data from these paragraphs of information, providing an easy-to-search, tabular formulation of the taxonomic descriptions. This effort has led to the extraction of 570,000 distinct trait values across 36 traits. These data are available in AusTraits and the method used is described in **[Coleman et al. 2023](https://doi.org/10.1016/j.ecoinf.2023.102312)**.
@@ -119,8 +134,7 @@ For three traits, **[life history](https://w3id.org/APD/traits/trait_0030012)**,
 
 
 
-
-
+<div class="divider"></div>
 
 ### Ongoing Efforts
 
