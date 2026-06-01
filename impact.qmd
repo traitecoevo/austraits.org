@@ -6,7 +6,7 @@ execute:
 ---
 
 ```{r}
-library(tidyverse)
+library(dplyr)
 ```
 
 
@@ -163,4 +163,3 @@ Here are of the nice things the community is saying about AusTraits
 {{< tweet user=davidtng id=1448393376735264768 >}}
 
 {{< tweet user=hsauquet_bgsyd id=1445575788867248129 >}}
-

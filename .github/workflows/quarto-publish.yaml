@@ -16,11 +16,22 @@ jobs:
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
-        
-      - name: Setup renv
-        uses: r-lib/actions/setup-renv@v2
+
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
         with:
-          cache-version: 1
+          use-public-rspm: true
+
+      - name: Install R packages
+        shell: Rscript {0}
+        run: |
+          install.packages(c(
+            "dplyr",
+            "lubridate",
+            "jsonlite",
+            "kableExtra",
+            "scholar"
+          ))
 
       - name: Render and Publish 
         uses: quarto-dev/quarto-actions/publish@v2

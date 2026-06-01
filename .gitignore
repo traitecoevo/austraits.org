@@ -12,3 +12,7 @@ _site/
 
 
 /.quarto/
+
+**/*.quarto_ipynb
+renv/
+renv.lock

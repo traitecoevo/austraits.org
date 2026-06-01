@@ -34,10 +34,22 @@ function tweet(args, kwargs)
             .. '/status/'
             .. status_id
             .. '&align=center'
-
-        print(tweet_embed)
         
-        local mt, api_resp = pandoc.mediabag.fetch(tweet_embed)
+        local ok, mt, api_resp = pcall(pandoc.mediabag.fetch, tweet_embed)
+        if not ok or isEmpty(api_resp) then
+            local status_url = 'https://twitter.com/'
+                .. user
+                .. '/status/'
+                .. status_id
+
+            local fallback = '<a href="'
+                .. status_url
+                .. '">View tweet by @'
+                .. user
+                .. '</a>'
+
+            return pandoc.RawInline('html', fallback)
+        end
         
         -- generate a random number to append to the html div ID to avoid re-use
         local id = math.random(10000, 99999)
