@@ -12,9 +12,9 @@ To preview the website on your computer:
 1. Install the [Quarto](https://quarto.org/docs/download/) software
 2. Clone this repository to your local computer
 3. Open `austraits.org.Rproj` in RStudio
-4. Install the R packages needed for the impact page:
+4. Install the R package needed for the impact page:
    ```r
-   install.packages(c("dplyr", "lubridate", "jsonlite", "kableExtra", "scholar"))
+   install.packages("jsonlite")
    ```
 5. Click on any `.qmd` file and click **Render**
 
@@ -42,7 +42,7 @@ The most important files and folders are:
 - `team/team/*/avatar.jpg`: profile photos for team members.
 - `images/`: logos, diagrams, and other website images.
 - `_quarto.yml`: the main website settings, including the navigation menu.
-- `index.css`: custom styling for the main site.
+- `styles.css`: shared visual styling for the site.
 - `team/styles.css`: custom styling for the team pages.
 - `_footer.html`: shared footer content.
 - `_extensions/sellorm/social-embeds/`: shortcodes for embedded social media and videos.
@@ -120,10 +120,9 @@ To update a profile photo, replace `team/team/PersonName/avatar.jpg` with a new 
 The impact page uses:
 
 - `3568417.json` for cached Zenodo data
-- the `scholar` R package for Google Scholar information
 - `_freeze/impact/execute-results/html.json` for cached Quarto execution results
 
-Because the page depends on external services, it may occasionally fail if those services are down or change their behaviour. If the impact page needs a fresh update, run:
+The page is designed to render reliably from cached data. To refresh the cached Zenodo JSON, update `3568417.json`, then run:
 
 ```sh
 quarto render impact.qmd
@@ -131,24 +130,17 @@ quarto render impact.qmd
 
 Then check the rendered page at `_site/impact.html`.
 
-### Social Media Embeds
-
-Tweets and other embeds are handled by files in `_extensions/sellorm/social-embeds/`.
-
-Old tweets may disappear or become unavailable through X/Twitter. The Twitter shortcode is set up to fall back to a normal link if the embed cannot be loaded.
-
 ## Troubleshooting
 
 If rendering fails because an R package is missing, install the package named in the error message. The usual packages needed are:
 
 ```r
-install.packages(c("dplyr", "lubridate", "jsonlite", "kableExtra", "scholar"))
+install.packages("jsonlite")
 ```
 
 If the site renders locally but deployment fails, check the GitHub Actions log for the failing step. The most likely causes are:
 
 - an R package failed to install
-- an external service used by `impact.qmd` was unavailable
 - Netlify credentials need attention
 
 If in doubt, make a small change, run `quarto render`, and check the local preview before pushing.

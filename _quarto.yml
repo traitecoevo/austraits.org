@@ -1,27 +1,27 @@
 project:
   type: website
+  render:
+    - "*.qmd"
+    - "team/*.qmd"
 
 website:
   title: "AusTraits"
   
   navbar:
+    logo: images/austraits_hex.png
     left:
-      - href: index.html#access-and-usage
-        text: Access and Usage
-      - href: index.html#structure
-        text: Structure
-      - href: index.html#software-and-outputs
-        text: Software and Outputs
-      - href: index.html#ongoing-efforts
-        text: Ongoing Efforts
+      - href: index.html#access
+        text: Access
+      - href: index.html#software
+        text: Software
       - href: impact.qmd
-        text: Our Impact
+        text: Impact
       - href: team/team-partners.qmd
-        text: Our Team
+        text: Team
       - href: contributors.qmd
-        text: Data Contributors
+        text: Contribute
       - href: contact.qmd
-        text: Contact Us
+        text: Contact
     right:  
       - href: https://github.com/traitecoevo/austraits.org
         icon: github
@@ -35,6 +35,7 @@ format:
     theme: simplex
     css: styles.css
     toc: true
+    include-after-body: _footer.html
 
 editor: source
 
