@@ -119,10 +119,12 @@ To update a profile photo, replace `team/team/PersonName/avatar.jpg` with a new 
 
 The impact page uses:
 
-- `3568417.json` for cached Zenodo data
+- `data/zenodo/3568417.json` for cached Zenodo data
 - `_freeze/impact/execute-results/html.json` for cached Quarto execution results
 
-The page is designed to render reliably from cached data. To refresh the cached Zenodo JSON, update `3568417.json`, then run:
+The page is designed to render reliably from cached data. The `Refresh Zenodo Cache` GitHub Actions workflow can be run manually and is also scheduled monthly. When Zenodo metadata changes, it opens or updates a pull request with a refreshed `data/zenodo/3568417.json` and regenerated impact-page freeze output.
+
+To refresh locally instead, update `data/zenodo/3568417.json`, then run:
 
 ```sh
 quarto render impact.qmd

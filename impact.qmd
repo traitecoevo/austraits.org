@@ -21,7 +21,7 @@ AusTraits is available through Zenodo, with multiple releases grouped under the 
 Zenodo tracks repository usage following the [COUNTER Code of Practice for Research Data](https://www.projectcounter.org/code-practice-research-data/). The cards below use the cached Zenodo metadata stored in this repository so the site can render reliably without contacting external services each time.
 
 ```{r, results='asis'}
-filename <- "3568417.json"
+filename <- "data/zenodo/3568417.json"
 
 if (file.exists(filename)) {
   x <- jsonlite::fromJSON(filename)
