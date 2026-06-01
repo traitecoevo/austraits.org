@@ -32,6 +32,12 @@ a:hover {
 .navbar {
   --bs-navbar-padding-y: 0.35rem;
   --bs-navbar-brand-font-size: 1.05rem;
+  --bs-navbar-color: rgba(255, 255, 255, 0.86);
+  --bs-navbar-hover-color: var(--at-white);
+  --bs-navbar-active-color: var(--at-white);
+  --bs-navbar-brand-color: var(--at-white);
+  --bs-navbar-brand-hover-color: var(--at-white);
+  --bs-navbar-toggler-border-color: rgba(255, 255, 255, 0.35);
   background: var(--at-green-dark);
   box-shadow: 0 2px 12px rgba(18, 45, 33, 0.18);
 }
@@ -46,6 +52,7 @@ a:hover {
 }
 
 .navbar-title {
+  color: var(--at-white);
   font-size: 1.05rem;
   font-weight: 700;
   letter-spacing: 0;
@@ -53,8 +60,48 @@ a:hover {
 
 .navbar .nav-link {
   padding-inline: 0.62rem;
+  color: rgba(255, 255, 255, 0.86);
   font-size: 0.93rem;
   font-weight: 620;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link:focus,
+.navbar .nav-link.active,
+.navbar .nav-link.show {
+  color: var(--at-white);
+}
+
+.navbar .bi,
+.navbar #quarto-search,
+.navbar .quarto-navigation-tool {
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.navbar .bi:hover,
+.navbar #quarto-search:hover,
+.navbar .quarto-navigation-tool:hover {
+  color: var(--at-white);
+}
+
+.navbar #quarto-search button,
+.navbar #quarto-search svg,
+.navbar #quarto-search .aa-SubmitIcon,
+.navbar #quarto-search .aa-SubmitIcon path {
+  color: rgba(255, 255, 255, 0.86);
+  fill: currentColor;
+  stroke: currentColor;
+}
+
+.navbar #quarto-search button:hover,
+.navbar #quarto-search button:focus,
+.navbar #quarto-search button:hover svg,
+.navbar #quarto-search button:focus svg,
+.navbar #quarto-search button:hover .aa-SubmitIcon,
+.navbar #quarto-search button:focus .aa-SubmitIcon,
+.navbar #quarto-search button:hover .aa-SubmitIcon path,
+.navbar #quarto-search button:focus .aa-SubmitIcon path {
+  color: var(--at-white);
 }
 
 .navbar .dropdown-menu {
