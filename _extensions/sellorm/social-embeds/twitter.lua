@@ -42,11 +42,11 @@ function tweet(args, kwargs)
                 .. '/status/'
                 .. status_id
 
-            local fallback = '<p><a href="'
+            local fallback = '<a href="'
                 .. status_url
                 .. '">View tweet by @'
                 .. user
-                .. '</a></p>'
+                .. '</a>'
 
             return pandoc.RawInline('html', fallback)
         end
