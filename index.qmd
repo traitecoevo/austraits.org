@@ -1,177 +1,310 @@
 ---
 title: ""
+format:
+  html:
+    page-layout: full
+    toc: false
 lightbox: true
 execute:
   freeze: auto
 ---
 
 ```{=html}
-<section class="site-hero" aria-labelledby="hero-title">
-  <div class="hero-content">
-    <p class="eyebrow">Open trait data for Australian plants</p>
-    <h1 id="hero-title">AusTraits</h1>
-    <p class="hero-subtitle">A harmonised, open-source database of Australian plant trait data, built for reliable ecological research, biodiversity infrastructure, and conservation decision-making.</p>
-    <div class="hero-actions" aria-label="Primary actions">
-      <a class="btn-primary" href="https://doi.org/10.5281/zenodo.3568417"><i class="bi bi-cloud-arrow-down"></i> Download data</a>
-      <a class="btn-secondary" href="https://traitecoevo.github.io/austraits/"><i class="bi bi-code-slash"></i> Use the R package</a>
-      <a class="btn-secondary" href="contributors.html"><i class="bi bi-database-add"></i> Contribute data</a>
+<section class="platform-hero" aria-labelledby="hero-title">
+  <div class="platform-shell hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow">Open trait data for Australian plants</p>
+      <h1 id="hero-title">Explore AusTraits</h1>
+      <p class="hero-subtitle">Trait data for Australia's flora, harmonised and ready for ecological research, biodiversity infrastructure, and conservation decision-making.</p>
+      <div class="hero-actions" aria-label="Primary actions">
+        <a class="btn-primary" href="https://doi.org/10.5281/zenodo.3568417"><i class="bi bi-cloud-arrow-down"></i> Download data</a>
+        <a class="btn-secondary" href="https://traitecoevo.github.io/austraits/"><i class="bi bi-code-slash"></i> Use in R</a>
+        <a class="btn-secondary" href="contributors.html"><i class="bi bi-database-add"></i> Contribute data</a>
+      </div>
+    </div>
+    <div class="hero-preview" aria-label="AusTraits data preview">
+      <div class="preview-topline">
+        <span>AusTraits release</span>
+        <strong>v7.0.0</strong>
+      </div>
+      <div class="preview-tabs" aria-label="Preview data views">
+        <span class="is-active">Traits</span>
+        <span>Taxa</span>
+        <span>Sources</span>
+      </div>
+      <div class="preview-map">
+        <div class="map-caption">
+          <strong>Linked trait records</strong>
+          <span>taxonomy, methods, context, sources</span>
+        </div>
+        <span class="map-point point-one"></span>
+        <span class="map-point point-two"></span>
+        <span class="map-point point-three"></span>
+        <span class="map-point point-four"></span>
+      </div>
+      <div class="preview-table" aria-label="Trait record example">
+        <div><span>Taxon</span><strong>Eucalyptus pilularis</strong></div>
+        <div><span>Trait</span><strong>leaf area</strong></div>
+        <div><span>Value</span><strong>harmonised</strong></div>
+        <div><span>Source</span><strong>linked metadata</strong></div>
+      </div>
+      <div class="preview-status">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span>Versioned DOI with archived releases</span>
+      </div>
     </div>
   </div>
 </section>
 
-<div class="trust-strip" aria-label="AusTraits key facts">
-  <div class="trust-item">
-    <span class="trust-value">Nearly 500</span>
-    <span class="trust-label">plant traits</span>
-  </div>
-  <div class="trust-item">
-    <span class="trust-value">30,000+</span>
-    <span class="trust-label">Australian taxa</span>
-  </div>
-  <div class="trust-item">
-    <span class="trust-value">CC-BY 4.0</span>
-    <span class="trust-label">open data licence</span>
-  </div>
-  <div class="trust-item">
-    <span class="trust-value">FAIR</span>
-    <span class="trust-label">metadata-rich resource</span>
-  </div>
-  <div class="trust-item">
-    <span class="trust-value">2016+</span>
-    <span class="trust-label">community effort</span>
-  </div>
-</div>
-```
-
-AusTraits synthesises plant trait data from field campaigns, published literature, taxonomic monographs, and individual taxon descriptions. The database integrates contributions from functional plant biology, plant physiology, plant taxonomy, conservation biology, and related disciplines.
-
-All AusTraits entries are linked to detailed metadata, harmonised against trait definitions, and checked for consistency. The result is a trusted resource that researchers can use with minimal additional filtering or manipulation. The AusTraits data paper was published in *Scientific Data*: [10.1038/s41597-021-01006-6](https://doi.org/10.1038/s41597-021-01006-6).
-
-## Access
-
-```{=html}
-<p class="section-intro">Start with the access route that matches how you want to use the resource: download the full release, work in R, follow a tutorial, or connect through linked biodiversity platforms.</p>
-
-<div class="card-grid">
-  <a class="resource-card" href="https://doi.org/10.5281/zenodo.3568417">
-    <span class="card-icon"><i class="bi bi-cloud-arrow-down"></i></span>
-    <h3>Zenodo dataset</h3>
-    <p>Download compiled AusTraits releases under an open CC-BY 4.0 licence, grouped under the project concept DOI.</p>
-  </a>
-  <a class="resource-card" href="https://traitecoevo.github.io/austraits/">
-    <span class="card-icon"><i class="bi bi-braces"></i></span>
-    <h3>R interface</h3>
-    <p>Use the austraits R package to download, join, filter, explore, and visualise AusTraits data in analysis workflows.</p>
-  </a>
-  <a class="resource-card" href="https://traitecoevo.github.io/traits.build-book/AusTraits_tutorial.html">
-    <span class="card-icon"><i class="bi bi-journal-text"></i></span>
-    <h3>Tutorial</h3>
-    <p>Follow worked examples for exploring and analysing AusTraits data using the project tooling.</p>
-  </a>
-  <a class="resource-card" href="https://bie.ala.org.au/species/https://id.biodiversity.org.au/node/apni/2912814#ausTraits">
-    <span class="card-icon"><i class="bi bi-diagram-3"></i></span>
-    <h3>API and ALA integration</h3>
-    <p>Access taxon-level AusTraits summaries through Atlas of Living Australia trait tabs and linked raw downloads.</p>
-  </a>
-</div>
-```
-
-## Structure
-
-```{=html}
-<p class="section-intro">AusTraits is a relational, metadata-rich resource. Trait values, taxonomic concepts, methods, sources, and contextual information are kept explicit so users can trace and evaluate the data they use.</p>
-```
-
-::: {.image-panel}
-![](images/AusTraits_relational_tables.svg){fig-alt="Diagram showing the main relational tables in the AusTraits database."}
-:::
-
-::: {.callout-tip}
-## Learn more
-Detailed database structure, trait definitions, and metadata fields are documented in the [traits.build book](https://traitecoevo.github.io/traits.build-book/database_structure.html). Trait concepts are published in the [AusTraits Plant Dictionary](https://w3id.org/APD).
-:::
-
-## Software
-
-```{=html}
-<p class="section-intro">AusTraits is supported by a small ecosystem of open tools and reusable outputs that help researchers build, access, align, and interpret harmonised trait databases.</p>
-
-<div class="software-grid">
-  <article class="software-card">
-    <img src="images/traits.build_hex.png" alt="traits.build package logo">
-    <div>
-      <h3>traits.build</h3>
-      <p>A data model, workflow, and R package for building harmonised ecological trait databases, including the workflow behind AusTraits.</p>
-      <div class="card-actions">
-        <a href="https://github.com/traitecoevo/traits.build">GitHub</a>
-        <a href="https://traitecoevo.github.io/traits.build-book/">Book</a>
+<section class="page-band stats-band" aria-label="AusTraits key facts">
+  <div class="platform-shell">
+    <div class="trust-strip">
+      <div class="trust-item">
+        <span class="trust-value">500+</span>
+        <span class="trust-label">plant traits</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-value">34,000+</span>
+        <span class="trust-label">plant taxa</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-value">300+</span>
+        <span class="trust-label">data sources</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-value">CC-BY 4.0</span>
+        <span class="trust-label">open data licence</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-value">FAIR</span>
+        <span class="trust-label">metadata-rich resource</span>
       </div>
     </div>
-  </article>
-  <article class="software-card">
-    <img src="images/austraits_hex.png" alt="austraits R package logo">
+  </div>
+</section>
+
+<nav class="platform-quicknav" aria-label="Homepage sections">
+  <div class="platform-shell quicknav-grid">
+    <a href="#access"><span>01</span> Access</a>
+    <a href="#structure"><span>02</span> Structure</a>
+    <a href="#software"><span>03</span> Tools</a>
+    <a href="#data-products"><span>04</span> Data products</a>
+    <a href="#ongoing-work"><span>05</span> Reuse</a>
+  </div>
+</nav>
+
+<section class="page-band intro-band">
+  <div class="platform-shell intro-grid">
     <div>
-      <h3>austraits</h3>
-      <p>An R interface for downloading, joining, filtering, combining, and visualising data from AusTraits and related traits.build databases.</p>
-      <div class="card-actions">
-        <a href="https://github.com/traitecoevo/austraits">GitHub</a>
-        <a href="https://traitecoevo.github.io/austraits/">Documentation</a>
+      <p class="eyebrow on-light">Curated science infrastructure</p>
+      <h2>Built to make trait data reusable</h2>
+    </div>
+    <div class="intro-copy">
+      <p>AusTraits synthesises plant trait data from field campaigns, published literature, taxonomic monographs, and individual taxon descriptions. The database integrates contributions from functional plant biology, plant physiology, plant taxonomy, conservation biology, and related disciplines.</p>
+      <p>Entries are linked to detailed metadata, harmonised against trait definitions, and checked for consistency. The AusTraits data paper was published in <em>Scientific Data</em>: <a href="https://doi.org/10.1038/s41597-021-01006-6">10.1038/s41597-021-01006-6</a>.</p>
+    </div>
+  </div>
+</section>
+
+<section id="workflow" class="page-band workflow-band">
+  <div class="platform-shell">
+    <div class="section-header">
+      <p class="eyebrow on-light">How the platform works</p>
+      <h2>From scattered observations to reliable infrastructure</h2>
+      <p class="section-intro">AusTraits keeps the workflow visible: original sources are preserved, trait concepts are standardised, and releases are archived so analyses can be repeated later.</p>
+    </div>
+    <div class="workflow-grid">
+      <article class="workflow-card">
+        <span class="workflow-step">01</span>
+        <span class="card-icon"><i class="bi bi-collection"></i></span>
+        <h3>Assemble</h3>
+        <p>Bring together field data, literature tables, floras, taxonomic descriptions, and researcher-contributed datasets.</p>
+      </article>
+      <article class="workflow-card">
+        <span class="workflow-step">02</span>
+        <span class="card-icon"><i class="bi bi-diagram-3"></i></span>
+        <h3>Harmonise</h3>
+        <p>Align names, trait definitions, units, methods, value types, and metadata into a relational database.</p>
+      </article>
+      <article class="workflow-card">
+        <span class="workflow-step">03</span>
+        <span class="card-icon"><i class="bi bi-cloud-check"></i></span>
+        <h3>Publish</h3>
+        <p>Release versioned data, documentation, R tooling, and linked biodiversity outputs for reuse.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="access" class="page-band">
+  <div class="platform-shell">
+    <div class="section-header">
+      <p class="eyebrow on-light">Explore the resource</p>
+      <h2>Access AusTraits in the form you need</h2>
+      <p class="section-intro">Start with the route that matches how you want to use the resource: download a full release, work programmatically, follow a tutorial, or connect through linked biodiversity platforms.</p>
+    </div>
+    <div class="explore-grid">
+      <a class="resource-card" href="https://doi.org/10.5281/zenodo.3568417">
+        <span class="card-icon"><i class="bi bi-cloud-arrow-down"></i></span>
+        <h3>Dataset releases</h3>
+        <p>Download compiled AusTraits releases from Zenodo under an open CC-BY 4.0 licence.</p>
+      </a>
+      <a class="resource-card" href="https://traitecoevo.github.io/austraits/">
+        <span class="card-icon"><i class="bi bi-braces"></i></span>
+        <h3>R interface</h3>
+        <p>Download, join, filter, explore, and visualise AusTraits data in analysis workflows.</p>
+      </a>
+      <a class="resource-card" href="https://traitecoevo.github.io/traits.build-book/AusTraits_tutorial.html">
+        <span class="card-icon"><i class="bi bi-journal-text"></i></span>
+        <h3>Tutorials</h3>
+        <p>Follow worked examples for exploring and analysing data using project tooling.</p>
+      </a>
+      <a class="resource-card" href="https://bie.ala.org.au/species/https://id.biodiversity.org.au/node/apni/2912814#ausTraits">
+        <span class="card-icon"><i class="bi bi-diagram-3"></i></span>
+        <h3>ALA integration</h3>
+        <p>Access taxon-level trait summaries through Atlas of Living Australia pages.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="structure" class="page-band structure-band">
+  <div class="platform-shell feature-grid">
+    <div class="feature-copy">
+      <p class="eyebrow on-light">Traceable by design</p>
+      <h2>Every record keeps its context</h2>
+      <p class="section-intro">AusTraits is a relational, metadata-rich resource. Trait values, taxonomic concepts, methods, sources, and contextual information are kept explicit so users can trace and evaluate the data they use.</p>
+      <div class="feature-actions">
+        <a class="button text-button" href="https://traitecoevo.github.io/traits.build-book/database_structure.html">Database structure</a>
+        <a class="button text-button" href="https://w3id.org/APD">Plant Dictionary</a>
       </div>
     </div>
-  </article>
-  <article class="software-card">
-    <img src="images/APCalign_hex.png" alt="APCalign package logo">
-    <div>
-      <h3>APCalign</h3>
-      <p>An R package and Shiny app for aligning Australian vascular plant names to the Australian Plant Census and Australian Plant Names Index.</p>
-      <div class="card-actions">
-        <a href="https://github.com/traitecoevo/APCalign">GitHub</a>
-        <a href="https://doi.org/10.1071/BT24014">Paper</a>
+    <div class="image-panel structure-panel">
+      <img src="images/AusTraits_relational_tables.svg" alt="Diagram showing the main relational tables in the AusTraits database.">
+    </div>
+  </div>
+</section>
+
+<section id="software" class="page-band tools-band">
+  <div class="platform-shell">
+    <div class="section-header">
+      <p class="eyebrow on-light">Tools and outputs</p>
+      <h2>An ecosystem for harmonised trait data</h2>
+      <p class="section-intro">AusTraits is supported by open tools and reusable outputs that help researchers build, access, align, and interpret harmonised trait databases.</p>
+    </div>
+    <div class="tools-grid">
+      <article class="software-card">
+        <img src="images/traits.build_hex.png" alt="traits.build package logo">
+        <div>
+          <h3>traits.build</h3>
+          <p>A data model, workflow, and R package for building harmonised ecological trait databases.</p>
+          <div class="card-actions">
+            <a href="https://github.com/traitecoevo/traits.build">GitHub</a>
+            <a href="https://traitecoevo.github.io/traits.build-book/">Book</a>
+          </div>
+        </div>
+      </article>
+      <article class="software-card">
+        <img src="images/austraits_hex.png" alt="austraits R package logo">
+        <div>
+          <h3>austraits</h3>
+          <p>An R interface for accessing, wrangling, combining, and visualising AusTraits data.</p>
+          <div class="card-actions">
+            <a href="https://github.com/traitecoevo/austraits">GitHub</a>
+            <a href="https://traitecoevo.github.io/austraits/">Docs</a>
+          </div>
+        </div>
+      </article>
+      <article class="software-card">
+        <img src="images/APCalign_hex.png" alt="APCalign package logo">
+        <div>
+          <h3>APCalign</h3>
+          <p>An R package and Shiny app for aligning Australian vascular plant names.</p>
+          <div class="card-actions">
+            <a href="https://github.com/traitecoevo/APCalign">GitHub</a>
+            <a href="https://doi.org/10.1071/BT24014">Paper</a>
+          </div>
+        </div>
+      </article>
+      <article class="software-card">
+        <img src="images/APD_logo.png" alt="AusTraits Plant Dictionary logo">
+        <div>
+          <h3>Plant Dictionary</h3>
+          <p>A formal vocabulary for trait concepts, definitions, allowed values, units, and links.</p>
+          <div class="card-actions">
+            <a href="https://w3id.org/APD">Dictionary</a>
+            <a href="https://doi.org/10.1038/s41597-024-03368-z">Paper</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="data-products" class="page-band products-band">
+  <div class="platform-shell feature-grid reverse-feature">
+    <div class="feature-copy">
+      <p class="eyebrow on-light">Derived data products</p>
+      <h2>From raw records to reusable summaries</h2>
+      <p>AusTraits includes extracted trait values from taxonomic descriptions, including hundreds of thousands of values across key traits. The methods are described in <a href="https://doi.org/10.1016/j.ecoinf.2023.102312">Coleman et al. 2023</a>.</p>
+      <p>AusTraits has also gap-filled near-complete trait tables for core traits such as <a href="https://w3id.org/APD/traits/trait_0030012">life history</a>, <a href="https://w3id.org/APD/traits/trait_0030010">plant growth form</a>, and <a href="https://w3id.org/APD/traits/trait_0030019">woodiness</a>.</p>
+    </div>
+    <div class="data-product-panel">
+      <div class="data-product-row">
+        <span>Taxonomic descriptions</span>
+        <strong>570,000 values</strong>
+      </div>
+      <div class="data-product-row">
+        <span>Core gap-filled traits</span>
+        <strong>Near-complete tables</strong>
+      </div>
+      <div class="data-product-row">
+        <span>Future summaries</span>
+        <strong>Species and location outputs</strong>
       </div>
     </div>
-  </article>
-  <article class="software-card">
-    <img src="images/APD_logo.png" alt="AusTraits Plant Dictionary logo">
-    <div>
-      <h3>AusTraits Plant Dictionary</h3>
-      <p>A formal vocabulary for AusTraits trait concepts, including definitions, allowed values, units, keywords, and links to related ontologies.</p>
-      <div class="card-actions">
-        <a href="https://w3id.org/APD">Dictionary</a>
-        <a href="https://doi.org/10.1038/s41597-024-03368-z">Paper</a>
-      </div>
+  </div>
+</section>
+
+<section id="ongoing-work" class="page-band impact-band">
+  <div class="platform-shell">
+    <div class="section-header">
+      <p class="eyebrow on-light">Ongoing infrastructure</p>
+      <h2>Building blocks for Australian plant science</h2>
     </div>
-  </article>
-</div>
+    <div class="indicator-grid">
+      <article class="plain-card">
+        <h3>Data contributions</h3>
+        <p>New and legacy datasets from researchers, archives, reference books, and taxonomic monographs.</p>
+        <a href="contributors.html">Contribute data</a>
+      </article>
+      <article class="plain-card">
+        <h3>Trait coverage</h3>
+        <p>Expanding coverage for disturbance response, climate vulnerability, reproduction, and conservation.</p>
+      </article>
+      <article class="plain-card">
+        <h3>Synthetic summaries</h3>
+        <p>Species and species-by-location trait summaries for applied research and environmental assessment.</p>
+      </article>
+      <article class="plain-card">
+        <h3>Reusable workflows</h3>
+        <p>Support for other communities creating harmonised trait databases with traits.build.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="page-band cta-band">
+  <div class="platform-shell cta-grid">
+    <div>
+      <p class="eyebrow">Use AusTraits</p>
+      <h2>Reliable trait data for research, conservation, and infrastructure</h2>
+      <p>Download the latest release, work through the R package, or contribute data to improve coverage for the Australian flora.</p>
+    </div>
+    <div class="cta-actions">
+      <a class="btn-primary" href="https://doi.org/10.5281/zenodo.3568417"><i class="bi bi-cloud-arrow-down"></i> Download data</a>
+      <a class="btn-secondary" href="contributors.html"><i class="bi bi-database-add"></i> Contribute data</a>
+    </div>
+  </div>
+</section>
 ```
-
-### Additional Data Products
-
-Taxonomic descriptions for most Australian plant species are available through online floras. AusTraits includes extracted trait values from these descriptions, including hundreds of thousands of values across key traits. The methods are described in [Coleman et al. 2023](https://doi.org/10.1016/j.ecoinf.2023.102312).
-
-AusTraits has also gap-filled near-complete trait tables for core traits such as [life history](https://w3id.org/APD/traits/trait_0030012), [plant growth form](https://w3id.org/APD/traits/trait_0030010), and [woodiness](https://w3id.org/APD/traits/trait_0030019). Protocols and coverage are described in [10.1071/BT23111](https://doi.org/10.1071/BT23111).
-
-## Ongoing Work
-
-```{=html}
-<div class="work-grid">
-  <article class="plain-card">
-    <h3>Data contributions</h3>
-    <p>AusTraits continues to integrate newly collected and legacy datasets from researchers, archives, reference books, and taxonomic monographs.</p>
-    <a href="contributors.html">Contribute data</a>
-  </article>
-  <article class="plain-card">
-    <h3>Trait coverage</h3>
-    <p>The team expands coverage of key traits for disturbance response, climate vulnerability, reproduction, conservation, and environmental assessment.</p>
-  </article>
-  <article class="plain-card">
-    <h3>Synthetic summaries</h3>
-    <p>Work is underway to release species and species-by-location trait summaries as reliable building blocks for applied research and decision-making.</p>
-  </article>
-  <article class="plain-card">
-    <h3>Reusable infrastructure</h3>
-    <p>The AusTraits workflow supports other groups using traits.build to create harmonised trait databases for new taxa and trait domains.</p>
-  </article>
-</div>
-```
-
-AusTraits has received investment from the Australian Research Data Commons through national research data infrastructure programs, including support from the National Collaborative Research Infrastructure Strategy.
