@@ -79,6 +79,19 @@ The workflow can also be run manually from the GitHub Actions tab using **workfl
 
 Netlify authentication is handled by the `NETLIFY_AUTH_TOKEN` secret in GitHub. You should not need to edit this unless deployment credentials change.
 
+### Deployment Setup
+
+Production deploys and pull request previews are intentionally handled separately:
+
+- GitHub Actions publishes the production site to Netlify after changes land on `master`.
+- Netlify builds pull request previews through its connected GitHub repository integration.
+
+Do not add a `pull_request` trigger to `.github/workflows/quarto-publish.yaml`. That workflow uses the production Netlify credentials and publishes to the live `austraits.org` site.
+
+Netlify should have Deploy Previews enabled in the site dashboard. Pull requests should receive preview URLs such as `deploy-preview-123--austraits.netlify.app`, not replace the production domain.
+
+The `netlify.toml` file tells Netlify to publish `_site` and use the Quarto Netlify plugin. Its build ignore rule limits Netlify builds to deploy-preview contexts, so production publishing stays with GitHub Actions.
+
 ## Common Maintenance Tasks
 
 ### Edit an Existing Page
