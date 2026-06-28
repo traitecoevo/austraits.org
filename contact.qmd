@@ -1,14 +1,30 @@
 ---
+title: Contact
 comments:
   utterances:
     repo: traitecoevo/austraits.org
 ---
 
-We would love to hear from you to: 
+We would love to hear from you about AusTraits data, tools, collaborations, and reuse.
 
-- answer any questions you have about AusTraits
-- discuss potential collaborations
-- receive any feedback you might have
+```{=html}
+<div class="contact-grid">
+  <article class="contact-card">
+    <span class="card-icon"><i class="bi bi-database-add"></i></span>
+    <h3>Contribute data</h3>
+    <p>Discuss new datasets, legacy sources, metadata, or expert review.</p>
+  </article>
+  <article class="contact-card">
+    <span class="card-icon"><i class="bi bi-question-circle"></i></span>
+    <h3>Ask a question</h3>
+    <p>Get help with access, citation, data structure, or use in analysis workflows.</p>
+  </article>
+  <article class="contact-card">
+    <span class="card-icon"><i class="bi bi-chat-left-text"></i></span>
+    <h3>Share feedback</h3>
+    <p>Tell us what is useful, confusing, missing, or worth improving.</p>
+  </article>
+</div>
+```
 
-You can leave a comment below or directly reach us at [austraits.database@gmail.com](mailto:austraits.database@gmail.com)
-
+Email the team at [austraits.database@gmail.com](mailto:austraits.database@gmail.com), or leave a comment below.
