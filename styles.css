@@ -359,43 +359,6 @@ main.content {
   background: var(--at-cream);
 }
 
-.platform-quicknav {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  border-block: 1px solid var(--at-line);
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(8px);
-}
-
-.quicknav-grid {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-}
-
-.quicknav-grid a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.45rem;
-  min-height: 46px;
-  color: var(--at-ink);
-  font-size: 0.92rem;
-  font-weight: 550;
-  text-decoration: none;
-}
-
-.quicknav-grid a:hover,
-.quicknav-grid a:focus {
-  color: var(--at-green-dark);
-  background: var(--at-mint);
-}
-
-.quicknav-grid span {
-  color: var(--at-green);
-  font-size: 0.74rem;
-}
-
 .trust-strip,
 .metric-grid,
 .card-grid,
@@ -550,14 +513,6 @@ main.content {
   background: linear-gradient(90deg, var(--at-green), var(--at-blue), var(--at-gold));
 }
 
-.workflow-step {
-  display: block;
-  margin-bottom: 0.65rem;
-  color: var(--at-green);
-  font-size: 0.78rem;
-  font-weight: 700;
-}
-
 .resource-card {
   display: block;
   min-height: 100%;
@@ -649,16 +604,40 @@ main.content {
   gap: 1rem;
   min-height: 100%;
   padding: 1rem;
+  align-items: start;
+}
+
+.software-card > div {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.software-card .card-actions {
+  margin-top: auto;
+  padding-top: 0.7rem;
 }
 
 .software-card img {
-  width: 100%;
-  max-width: 72px;
-  aspect-ratio: 1;
+  width: 72px;
+  height: 72px;
   object-fit: contain;
 }
 
-.software-card .card-actions a,
+.software-card h3 {
+  font-size: 0.96rem;
+}
+
+.software-card p {
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+
+.software-card .card-actions a {
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
 .plain-card a {
   font-weight: 600;
 }

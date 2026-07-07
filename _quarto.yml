@@ -12,49 +12,16 @@ website:
     left:
       - href: index.qmd
         text: Platform
-      - text: Access
-        menu:
-          - href: index.html#access
-            text: Access overview
-          - href: https://doi.org/10.5281/zenodo.3568417
-            text: Zenodo dataset
-            target: _blank
-          - href: https://traitecoevo.github.io/austraits/
-            text: R package
-            target: _blank
-          - href: https://traitecoevo.github.io/traits.build-book/AusTraits_tutorial.html
-            text: Tutorial
-            target: _blank
-          - href: https://bie.ala.org.au/species/https%3A//id.biodiversity.org.au/node/apni/2899127#ausTraits
-            text: ALA trait pages
-            target: _blank
-      - text: Tools
-        menu:
-          - href: index.html#software
-            text: Overview
-          - href: https://traitecoevo.github.io/traits.build/
-            text: traits.build
-            target: _blank
-          - href: https://traitecoevo.github.io/austraits/
-            text: austraits R package
-            target: _blank
-          - href: https://traitecoevo.github.io/APCalign/
-            text: APCalign
-            target: _blank
-          - href: https://w3id.org/APD
-            text: AusTraits Plant Dictionary (APD)
-            target: _blank
+      - href: index.html#access
+        text: Access
+      - href: index.html#software
+        text: Tools
       - text: About
         menu:
           - href: team/team-partners.qmd
             text: Team
-          - href: contribute.qmd
-            text: Contribute
           - href: impact.qmd
             text: Impact
-          - href: https://github.com/traitecoevo/austraits.org
-            text: Website source
-            target: _blank
     right:
       - href: contribute.qmd
         text: Contribute
