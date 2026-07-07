@@ -43,6 +43,10 @@ execute:
         <span class="trust-value">400+</span>
         <span class="trust-label">data sources</span>
       </div>
+      <a class="trust-item trust-item-link" href="team/team-partners.html#data-contributors">
+        <span class="trust-value">340+</span>
+        <span class="trust-label">data contributors</span>
+      </a>
       <div class="trust-item">
         <span class="trust-value">CC-BY 4.0</span>
         <span class="trust-label">open data licence</span>
@@ -227,11 +231,11 @@ execute:
     <div>
       <p class="eyebrow">Get involved</p>
       <h2>Contribute data or get in touch</h2>
-      <p>We'd love to hear how you use AusTraits, and to help with contributing new or legacy datasets, access, or citation. Email <a href="mailto:austraits.database@gmail.com">austraits.database@gmail.com</a>.</p>
+      <p>AusTraits is built on data contributed by <a href="team/team-partners.html#data-contributors">340+ researchers</a>. We'd love to hear how you use AusTraits, and to help with contributing new or legacy datasets, access, or citation. Email <a href="mailto:austraits.database@gmail.com">austraits.database@gmail.com</a>.</p>
     </div>
     <div class="cta-actions">
       <a class="btn-primary" href="contribute.html"><i class="bi bi-database-add"></i> Contribute data</a>
-      <a class="btn-secondary" href="team/team-partners.html#contact"><i class="bi bi-envelope"></i> Contact the team</a>
+      <a class="btn-secondary" href="mailto:austraits.database@gmail.com"><i class="bi bi-envelope"></i> Contact the team</a>
     </div>
   </div>
 </section>

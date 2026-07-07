@@ -5,281 +5,248 @@ format:
     css: styles.css
 ---
 
-The AusTraits project received **[investment](https://doi.org/10.47486/DP720)** from 2021-2023 from the Australian Research Data Commons (ARDC). The ARDC is funded by the National Collaborative Research Infrastructure Strategy (NCRIS). This funding allows a broad team of ARDC grant partners to expand AusTraits data coverage and enhance data quality. 
-
 ## Core Team
 
-**Our core AusTraits team is supported in maintaining, expanding, and enhancing AusTraits by a team of ARDC project grant partners**.
+**Our core AusTraits team maintains, expands, and enhances AusTraits, supported by an advisory board and a wider community of AusTraits champions.**
 
 
 ```{=html}
 <div class="team-grid">
-  
+
   <div class="team-member">
     <img src="team/Falster/avatar.jpg" class="team-photo">
     <h5>Assoc. Prof. Daniel Falster</h5>
     <p>Joint Project Lead</p>
   </div>
-  
+
   <div class="team-member">
     <img src="team/Gallagher/avatar.jpg" class="team-photo">
     <h5>Assoc. Prof. Rachael Gallagher</h5>
     <p>Joint Project Lead</p>
   </div>
-  
+
   <div class="team-member">
     <img src="team/Sauquet/avatar.jpg" class="team-photo">
     <h5>Dr. Hervé Sauquet</h5>
     <p>Joint Project Lead</p>
   </div>
-  
+
   <div class="team-member">
     <img src="team/Wenk/avatar.jpg" class="team-photo">
     <h5>Dr. Elizabeth Wenk</h5>
     <p>Project Manager</p>
   </div>
-  
-  <div class="team-member">
-    <img src="team/Yang/avatar.jpg" class="team-photo">
-    <h5>Sophie Yang</h5>
-    <p>Project Officer</p>
-  </div>
-  
+
   <div class="team-member">
     <img src="team/Coleman/avatar.jpg" class="team-photo">
     <h5>Dr. David Coleman</h5>
     <p>Project Officer</p>
   </div>
-  
+
+  <div class="team-member">
+    <img src="team/Garg/avatar.jpg" class="team-photo">
+    <h5>Pushkal Garg</h5>
+    <p>Data Portal Developer</p>
+  </div>
+
+  <div class="team-member">
+    <img src="team/Martin/avatar.jpg" class="team-photo">
+    <h5>Julia Martin</h5>
+    <p>ARDC Program Manager</p>
+  </div>
+
   <!-- Add more team members as needed -->
 </div>
 
 ```
 
-## Team
+## Advisory Board
+
+**Our advisory board guides the strategic direction of AusTraits, bringing expertise from herbaria, botanic gardens, universities, and government.**
 
 ```{=html}
 <div class="team-grid">
-  
+
   <div class="team-member">
-    <img src="team/Andrew/avatar.jpg" class="team-photo">
-    <h5>Dr. Sam Andrew</h5>
-  </div>
-  
-  <div class="team-member">
-    <img src="team/Barrett/avatar.jpg" class="team-photo">
-    <h5>Dr. Russell Barrett</h5>
-  </div>
-  
-  <div class="team-member">
-    <img src="team/Bayraktarov/avatar.jpg" class="team-photo">
-    <h5>Dr. Elisa Bayraktarov</h5>
-  </div>
-  
-  <div class="team-member">
-    <img src="team/Betbeder/avatar.jpg" class="team-photo">
-    <h5>Luc Betbeder-Matibet</h5>
+    <img src="team/Crayn/avatar.jpg" class="team-photo">
+    <h5>Prof. Darren Crayn</h5>
+    <p>James Cook University</p>
   </div>
 
   <div class="team-member">
-    <img src="team/Cornwell/avatar.jpg" class="team-photo">
-    <h5>Assoc. Prof. Will Cornwell</h5>
-  </div>
-  
-  <div class="team-member">
     <img src="team/Fuchs/avatar.jpg" class="team-photo">
     <h5>Anne Fuchs</h5>
-  </div>  
+    <p>Dept. of Climate Change, Energy, the Environment and Water</p>
+  </div>
 
   <div class="team-member">
     <img src="team/Gosper/avatar.jpg" class="team-photo">
     <h5>Dr. Carl Gosper</h5>
-  </div>
-  
-  <div class="team-member">
-    <img src="team/Gross/avatar.jpg" class="team-photo">
-    <h5>Prof. Caroline Gross</h5>
+    <p>Dept. of Biodiversity, Conservation and Attractions (WA)</p>
   </div>
 
-  <div class="team-member">
-    <img src="team/Guerin/avatar.jpg" class="team-photo">
-    <h5>Prof. Greg Guerin</h5>
-  </div>
-  
   <div class="team-member">
     <img src="team/Guja/avatar.jpg" class="team-photo">
     <h5>Dr. Lydia Guja</h5>
-  </div>
-  
-  <div class="team-member">
-    <img src="team/Holewa/avatar.jpg" class="team-photo">
-    <h5>Hamish Holewa</h5>
+    <p>Australian National Botanic Gardens</p>
   </div>
 
   <div class="team-member">
-    <img src="team/Lloyd/avatar.jpg" class="team-photo">
-    <h5>Dr. Hannah Lloyd</h5>
+    <img src="team/Jordan/avatar.jpg" class="team-photo">
+    <h5>Prof. Greg Jordan</h5>
+    <p>University of Tasmania</p>
   </div>
 
   <div class="team-member">
-    <img src="team/Maitner/avatar.jpg" class="team-photo">
-    <h5>Dr. Brian Maitner</h5>
+    <img src="team/Kearney/avatar.jpg" class="team-photo">
+    <h5>Prof. Michael Kearney</h5>
+    <p>University of Melbourne</p>
   </div>
-  
+
   <div class="team-member">
-    <img src="team/McCarthy/avatar.jpg" class="team-photo">
-    <h5>Dr. James McCarthy</h5>
-  </div>  
-  
+    <img src="team/McPherson/avatar.jpg" class="team-photo">
+    <h5>Dr. Hannah McPherson</h5>
+    <p>Royal Botanic Garden Sydney</p>
+  </div>
+
   <div class="team-member">
-    <img src="team/Medlyn/avatar.jpg" class="team-photo">
-    <h5>Prof. Belinda Medlyn</h5>
-  </div>   
+    <img src="team/Nicotra/avatar.jpg" class="team-photo">
+    <h5>Prof. Adrienne Nicotra</h5>
+    <p>Australian National University</p>
+  </div>
+
+  <div class="team-member">
+    <img src="team/Offord/avatar.jpg" class="team-photo">
+    <h5>Dr. Cathy Offord</h5>
+    <p>Australian Botanic Garden, Mount Annan</p>
+  </div>
 
   <div class="team-member">
     <img src="team/Ooi/avatar.jpg" class="team-photo">
     <h5>Dr. Mark Ooi</h5>
-  </div>
-  
-  <div class="team-member">
-    <img src="team/Raulings/avatar.jpg" class="team-photo">
-    <h5>Dr. Elisa Raulings</h5>
-  </div>
-  
-  <div class="team-member">
-    <img src="team/Sparrow/avatar.jpg" class="team-photo">
-    <h5>Assoc. Prof. Ben Sparrow</h5>
+    <p>UNSW Sydney</p>
   </div>
 
   <div class="team-member">
-    <img src="team/Standish/avatar.jpg" class="team-photo">
-    <h5>Assoc Prof. Rachael Standish</h5>
-  </div>
-  
-  <div class="team-member">
-    <img src="team/Thiele/avatar.jpg" class="team-photo">
-    <h5>Dr. Kevin Thiele</h5>
+    <img src="team/Rumpff/avatar.jpg" class="team-photo">
+    <h5>Dr. Libby Rumpff</h5>
+    <p>Dept. of Climate Change, Energy, the Environment and Water</p>
   </div>
 
   <div class="team-member">
     <img src="team/Vesk/avatar.jpg" class="team-photo">
     <h5>Prof. Peter Vesk</h5>
+    <p>University of Melbourne</p>
   </div>
 
-  <div class="team-member">
-    <img src="team/Weaver/avatar.jpg" class="team-photo">
-    <h5>Dr. Haylee Weaver</h5>
-  </div>
-
-  <div class="team-member">
-    <img src="team/Whalen/avatar.jpg" class="team-photo">
-    <h5>Anthony Whalen</h5>
-  </div>
-  
-  <div class="team-member">
-    <img src="team/White/avatar.jpg" class="team-photo">
-    <h5>Dr. Matt White</h5>
-  </div>
-  
   <div class="team-member">
     <img src="team/Wright/avatar.jpg" class="team-photo">
     <h5>Prof. Ian Wright</h5>
-  </div>
-  
-  <!-- Add more team members as needed -->
-  
-</div>
-
-```
-
-## Advisory Committee
-
-```{=html}
-<div class="team-grid">
-  
-  <div class="team-member">
-    <img src="team/Bayly/avatar.jpg" class="team-photo">
-    <h5>Dr. Mike Bayly</h5>
-  </div>
-  
-    <div class="team-member">
-    <img src="team/Christensen/avatar.jpg" class="team-photo">
-    <h5>Dr. Bek Christensen</h5>
-  </div>
-  
-  <div class="team-member">
-    <img src="team/Farrell/avatar.jpg" class="team-photo">
-    <h5>Dr. Claire Farrell</h5>
+    <p>Western Sydney University</p>
   </div>
 
-  <div class="team-member">
-    <img src="team/Gueidan/avatar.jpg" class="team-photo">
-    <h5>Dr. Cecile Guedian</h5>
-  </div>
-  
-  <div class="team-member">
-    <img src="team/Onstein/avatar.jpg" class="team-photo">
-    <h5>Dr. Renske Onstein</h5>
-  </div>
-  
-  <div class="team-member">
-    <img src="team/Sparrow/avatar.jpg" class="team-photo">
-    <h5>Assoc. Prof. Ben Sparrow</h5>
-  </div>
-  
-  <div class="team-member">
-    <img src="team/Whalen/avatar.jpg" class="team-photo">
-    <h5>Anthony Whalen</h5>
-  </div>
   <!-- Add more team members as needed -->
 </div>
 
 ```
 
-## Alumni
+## Data Contributors
 
-```{=html}
-<div class="team-grid">
-  
-  <div class="team-member">
-    <img src="team/Truong/avatar.jpg" class="team-photo">
-    <h5>Dr. Gary Truong</h5>
-    <p>Project Officer</p>
-  </div>
-  
-    <div class="team-member">
-    <img src="team/Dun/avatar.jpg" class="team-photo">
-    <h5>Lily Dun</h5>
-    <p>Research Assistant</p>
-  </div>
-  <!-- Add more team members as needed -->
-</div>
+**The creation of the AusTraits database was only possible because of the researchers who contributed data to this endeavour. We gratefully acknowledge everyone listed below, drawn from the [AusTraits Zenodo record](https://doi.org/10.5281/zenodo.3568417).**
+
+```{r, echo=FALSE, results='asis', message=FALSE, warning=FALSE}
+candidates <- c("data/zenodo/3568417.json", "../data/zenodo/3568417.json")
+filename <- candidates[file.exists(candidates)][1]
+
+if (!is.na(filename)) {
+  x <- jsonlite::fromJSON(filename)
+  raw <- x$metadata$contributors$name
+
+  esc <- function(s) {
+    s <- gsub("&", "&amp;", s, fixed = TRUE)
+    s <- gsub("<", "&lt;", s, fixed = TRUE)
+    gsub(">", "&gt;", s, fixed = TRUE)
+  }
+  # reformat "Last, First" -> "First Last"
+  reformat <- function(n) {
+    parts <- strsplit(n, ",\\s*")[[1]]
+    if (length(parts) >= 2) paste(trimws(parts[2]), trimws(parts[1])) else trimws(n)
+  }
+
+  ord <- order(tolower(raw))                 # alphabetical by surname
+  display <- vapply(raw[ord], reformat, character(1))
+  display <- unique(display)
+
+  cat(sprintf("<p>%d researchers have contributed data to AusTraits.</p>\n", length(display)))
+  cat('<ul class="contributors-list">')
+  for (nm in display) cat(sprintf('<li>%s</li>', esc(nm)))
+  cat('</ul>')
+} else {
+  cat('<p>See the <a href="https://doi.org/10.5281/zenodo.3568417">AusTraits Zenodo record</a> for the full list of contributors.</p>')
+}
 ```
 
-**The creation of the AusTraits database was only possible because of the [researchers](https://doi.org/10.5281/zenodo.3568417) who contributed data to this endeavour.**
+## AusTraits Champions
 
-## Contact
-
-We would love to hear from you about AusTraits data, tools, collaborations, and reuse.
+**Over the years, many people have championed AusTraits — contributing data, expertise, and advocacy in a variety of roles. We gratefully acknowledge our current and past champions.**
 
 ```{=html}
-<div class="contact-grid">
-  <article class="contact-card">
-    <span class="card-icon"><i class="bi bi-database-add"></i></span>
-    <h3>Contribute data</h3>
-    <p>Discuss new datasets, legacy sources, metadata, or expert review.</p>
-  </article>
-  <article class="contact-card">
-    <span class="card-icon"><i class="bi bi-question-circle"></i></span>
-    <h3>Ask a question</h3>
-    <p>Get help with access, citation, data structure, or use in analysis workflows.</p>
-  </article>
-  <article class="contact-card">
-    <span class="card-icon"><i class="bi bi-chat-left-text"></i></span>
-    <h3>Share feedback</h3>
-    <p>Tell us what is useful, confusing, missing, or worth improving.</p>
-  </article>
-</div>
+<ul class="champions-list">
+  <li>Dr. Sam Andrew</li>
+  <li>Dr. Russell Barrett</li>
+  <li>Dr. Elisa Bayraktarov</li>
+  <li>Dr. Mike Bayly</li>
+  <li>Luc Betbeder-Matibet</li>
+  <li>Dr. Bek Christensen</li>
+  <li>Assoc. Prof. Will Cornwell</li>
+  <li>Lily Dun</li>
+  <li>Dr. Claire Farrell</li>
+  <li>Christopher Franks</li>
+  <li>Prof. Caroline Gross</li>
+  <li>Dr. Cécile Gueidan</li>
+  <li>Prof. Greg Guerin</li>
+  <li>Hamish Holewa</li>
+  <li>Kerry Levett</li>
+  <li>Dr. Hannah Lloyd</li>
+  <li>Dr. Brian Maitner</li>
+  <li>Dr. James McCarthy</li>
+  <li>Prof. Belinda Medlyn</li>
+  <li>Dr. Renske Onstein</li>
+  <li>Jon Smilie</li>
+  <li>Assoc. Prof. Ben Sparrow</li>
+  <li>Assoc. Prof. Rachael Standish</li>
+  <li>Dr. Kevin Thiele</li>
+  <li>Dr. Gary Truong</li>
+  <li>Dr. Haylee Weaver</li>
+  <li>Anthony Whalen</li>
+  <li>Dr. Matt White</li>
+  <li>Sophie Yang</li>
+</ul>
 ```
 
-Email the team at [austraits.database@gmail.com](mailto:austraits.database@gmail.com).
+## Past Partners & Supporters {#past-partners}
+
+**AusTraits grew through the support of many organisations over the years. We gratefully acknowledge our past partners and supporters.**
+
+```{=html}
+<div class="partners-grid past-partners-grid">
+  <a class="partner-logo-link" href="https://www.mq.edu.au/" target="_blank" rel="noopener" title="Macquarie University">
+    <img src="/images/Macquarie.png" alt="Macquarie University" class="partner-logo">
+  </a>
+  <a class="partner-logo-link" href="https://www.tern.org.au/" target="_blank" rel="noopener" title="TERN">
+    <img src="/images/TERN.png" alt="TERN" class="partner-logo">
+  </a>
+  <a class="partner-logo-link" href="https://ecocommons.org.au/" target="_blank" rel="noopener" title="EcoCommons">
+    <img src="/images/Ecocommons.png" alt="EcoCommons" class="partner-logo">
+  </a>
+  <a class="partner-logo-link" href="https://bccvl.org.au/" target="_blank" rel="noopener" title="BCCVL">
+    <img src="/images/BCCVL.png" alt="BCCVL" class="partner-logo">
+  </a>
+  <a class="partner-logo-link" href="https://www.environment.gov.au/science/abrs" target="_blank" rel="noopener" title="ABRS">
+    <img src="/images/ABRS.png" alt="ABRS" class="partner-logo">
+  </a>
+  <a class="partner-logo-link" href="https://www.landcareresearch.co.nz/" target="_blank" rel="noopener" title="Manaaki Whenua – Landcare Research">
+    <img src="/images/NZLCT.png" alt="Manaaki Whenua – Landcare Research" class="partner-logo">
+  </a>
+</div>
+```

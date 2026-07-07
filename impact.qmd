@@ -8,17 +8,17 @@ execute:
   message: false
 ---
 
-<p class="impact-lede">AusTraits is a curated, open, and FAIR data resource for Australian plant trait research. This page summarises visible indicators of use, reuse, and community engagement.</p>
+<p class="impact-lede">AusTraits is a curated, open, and FAIR data resource for Australian plant trait research. It is now widely reused &mdash; in ecological research, in national biodiversity infrastructure, and in statutory conservation decisions. This page brings together automated usage indicators alongside documented examples of that reuse.</p>
 
 ::: {.callout-note}
-This page was last rendered on `{r} Sys.Date()`. For the latest usage counts, follow the Zenodo DOI links below.
+This page was last rendered on `{r} Sys.Date()`. The usage cards draw on cached Zenodo metadata; for the latest counts, follow the Zenodo DOI links below.
 :::
 
-## Dataset Reach
+## Dataset reach
 
-AusTraits is available through Zenodo, with multiple releases grouped under the project concept DOI: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3568417.svg)](https://doi.org/10.5281/zenodo.3568417)
+AusTraits is released through Zenodo, with all versions grouped under a single concept DOI: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3568417.svg)](https://doi.org/10.5281/zenodo.3568417)
 
-Zenodo tracks repository usage following the [COUNTER Code of Practice for Research Data](https://www.projectcounter.org/code-practice-research-data/). The cards below use the cached Zenodo metadata stored in this repository so the site can render reliably without contacting external services each time.
+Zenodo tracks repository usage following the [COUNTER Code of Practice for Research Data](https://www.projectcounter.org/code-practice-research-data/). The cards below use cached Zenodo metadata stored in this repository so the page renders reliably without contacting external services.
 
 ```{r, results='asis'}
 filename <- "data/zenodo/3568417.json"
@@ -55,7 +55,9 @@ if (file.exists(filename)) {
 }
 ```
 
-## Data Descriptor
+## The resource paper
+
+The AusTraits data descriptor is published in *Scientific Data* and remains the primary citation for the resource.
 
 <div class="citation-card">
 Falster D, Gallagher R, Wenk EH, Wright IJ, Indiarto D, Andrew SC, Baxter C, Lawson J, Allen S, Fuchs A, Monro A, Kar F, Adams MA, Ahrens CW, Alfonzetti M, Angevin T, Apgaua DMG, Arndt S, Atkin OK, Atkinson J, Auld T, Baker A, von Balthazar M, Bean A, Blackman CJ, Bloomfield K, Bowman DMJS, Bragg J, Brodribb TJ, Buckton G, Burrows G, Caldwell E, Camac J, Carpenter R, Catford JA, Cawthray GR, Cernusak LA, Chandler G, Chapman AR, Cheal D, Cheesman AW, Chen S-C, Choat B, Clinton B, Clode PL, Coleman H, Cornwell WK, Cosgrove M, Crisp M, Cross E, Crous KY, Cunningham S, Curran T, Curtis E, Daws MI, DeGabriel JL, Denton MD, Dong N, Du P, Duan H, Duncan DH, Duncan RP, Duretto M, Dwyer JM, Edwards C, Esperon-Rodriguez M, Evans JR, Everingham SE, Farrell C, Firn J, Fonseca CR, French BJ, Frood D, Funk JL, Geange SR, Ghannoum O, Gleason SM, Gosper CR, Gray E, Groom PK, Grootemaat S, Gross C, Guerin G, Guja L, Hahs AK, Harrison MT, Hayes PE, Henery M, Hochuli D, Howell J, Huang G, Hughes L, Huisman J, Ilic J, Jagdish A, Jin D, Jordan G, Jurado E, Kanowski J, Kasel S, Kellermann J, Kenny B, Kohout M, Kooyman RM, Kotowska MM, Lai HR, Laliberte E, Lambers H, Lamont BB, Lanfear R, van Langevelde F, Laughlin DC, Laugier-Kitchener B-A, Laurance S, Lehmann CER, Leigh A, Leishman MR, Lenz T, Lepschi B, Lewis JD, Lim F, Liu U, Lord J, Lusk CH, Macinnis-Ng C, McPherson H, Magallon S, Manea A, Lopez-Martinez A, Mayfield M, McCarthy JK, Meers T, van der Merwe M, Metcalfe DJ, Milberg P, Mokany K, Moles AT, Moore BD, Moore N, Morgan JW, Morris W, Muir A, Munroe S, Nicholson A, Nicolle D, Nicotra AB, Niinemets U, North T, O'Reilly-Nugent A, O'Sullivan OS, Oberle B, Onoda Y, Ooi MKJ, Osborne CP, Paczkowska G, Pekin B, Guilherme Pereira C, Pickering C, Pickup M, Pollock LJ, Poot P, Powell JR, Power SA, Prentice IC, Prior L, Prober SM, Read J, Reynolds V, Richards AE, Richardson B, Roderick ML, Rosell JA, Rossetto M, Rye B, Rymer PD, Sams MA, Sanson G, Sauquet H, Schmidt S, Schonenberger J, Schulze E-D, Sendall K, Sinclair S, Smith B, Smith R, Soper F, Sparrow B, Standish RJ, Staples TL, Stephens R, Szota C, Taseski G, Tasker E, Thomas F, Tissue DT, Tjoelker MG, Tng DYP, de Tombeur F, Tomlinson K, Turner NC, Veneklaas EJ, Venn S, Vesk P, Vlasveld C, Vorontsova MS, Warren CA, Warwick N, Weerasinghe LK, Wells J, Westoby M, White M, Williams NSG, Wills J, Wilson PG, Yates C, Zanne AE, Zemunik G, Zieminska K (2021) AusTraits, a curated plant trait database for the Australian flora. <em>Scientific Data</em> 8, 254. <a href="https://doi.org/10.1038/s41597-021-01006-6">10.1038/s41597-021-01006-6</a>.
@@ -65,7 +67,62 @@ Citation counts change over time. For current citation information, see the [Goo
 
 <div data-badge-details="right" data-badge-type="donut" data-doi="10.1038/s41597-021-01006-6" data-condensed="true" class="altmetric-embed"></div>
 
-## Community Engagement
+## Informing conservation and national policy
+
+AusTraits is used directly in statutory conservation decisions. Trait data from the resource &mdash; including lifespan, age to reproductive maturity, fire-response strategy, seed weight, and dispersal syndrome &mdash; have been cited in more than 30 federal Conservation Advices prepared by the Threatened Species Scientific Committee for assessments under the *Environment Protection and Biodiversity Conservation Act 1999* (EPBC Act).
+
+The resource also underpinned the national response to the 2019&ndash;20 Black Summer bushfires, where harmonised fire-response data helped prioritise plant species for recovery and conservation planning.
+
+<figure class="impact-quote">
+  <blockquote>"Synthesised national information about plant response to fire was vital. If we hadn't had AusTraits, which harmonises hard-won data on fire response from hundreds of Australian scientists who are our contributors, it would have been doubly difficult to be able to do the work for the Threatened Species Commissioner."</blockquote>
+  <figcaption>&mdash; <strong>Prof. Rachael Gallagher</strong>, quoted in the <a href="https://ardc.edu.au/case-study/plant-trait-data-guides-australias-bushfire-recovery/" target="_blank" rel="noopener">ARDC Impact Booklet (2023)</a></figcaption>
+</figure>
+
+## Recognised national infrastructure
+
+AusTraits is supported through the Australian Research Data Commons (ARDC), enabled by the National Collaborative Research Infrastructure Strategy (NCRIS), and is framed by the ARDC as a national data asset.
+
+<figure class="impact-quote">
+  <blockquote>"AusTraits is now an internationally recognised gold-standard database that adheres to best practice in data standards at a national scale &hellip; the ARDC invests in curated national data assets and platforms such as AusTraits to accelerate research in Australia and beyond."</blockquote>
+  <figcaption>&mdash; <strong>Rosie Hicks</strong>, CEO, Australian Research Data Commons (2023)</figcaption>
+</figure>
+
+## Connecting to global trait science
+
+A published analysis found that combining AusTraits with the global [TRY plant trait database](https://www.try-db.org/) more than doubled the trait data available for the Australian flora, illustrating how much AusTraits adds to continental coverage for global analyses ([Maitner et al. 2023, *New Phytologist*](https://doi.org/10.1111/nph.18999)).
+
+The [AusTraits Plant Dictionary](https://w3id.org/APD) provides a formal, openly published vocabulary of trait concepts, definitions, allowed values, and units &mdash; the shared reference that makes trait data from different sources comparable and machine-readable.
+
+## New insights into the Australian flora
+
+By harmonising trait data at a continental scale, AusTraits lets researchers ask questions that no single dataset could answer before. Hundreds of studies now build on the resource; a small, representative selection is grouped below.
+
+**Fire and recovery**
+
+- Resprouting becomes steadily more common as fire frequency rises, while post-fire seeding peaks at intermediate frequencies &mdash; continental-scale confirmation of long-theorised links between fire strategy and fire regime ([Yang et al. 2025, *New Phytologist*](https://doi.org/10.1111/nph.20464)).
+- The 2019&ndash;20 megafires burnt large fractions of the ranges of fire-sensitive, seed-regenerating species, and a second fire within their maturation window would push many toward heightened extinction risk ([Gallagher et al. 2021, *Diversity and Distributions*](https://doi.org/10.1111/ddi.13265)).
+- Grouping species into trait-based functional types accurately predicts how plant abundance recovers after fire, across decades since the last burn ([Plumanns-Pouton et al. 2024, *Biological Conservation*](https://www.sciencedirect.com/science/article/pii/S0006320724001162)).
+
+**Climate, cities, and change**
+
+- Eucalypts that thrive as street and park trees in cities worldwide combine broad climatic niches with stress-tolerance traits such as small leaves, high leaf nitrogen, and dense wood ([Esperón-Rodríguez et al. 2024, *Global Ecology and Biogeography*](https://doi.org/10.1111/geb.13833)).
+- Across 454 eucalypt taxa, trait&ndash;climate relationships hold in both common gardens and the wild, showing these patterns reflect genetic adaptation rather than plastic responses to local conditions ([Britton et al. 2026, *New Phytologist*](https://doi.org/10.1111/nph.70930)).
+
+**Islands and range limits**
+
+- Plants on Australia's continental islands do not expand their ranges through ecological release; instead their cool range edge is contracted relative to the mainland ([Coleman et al. 2025, *Ecology Letters*](https://doi.org/10.1111/ele.70099)).
+- On small islands off Western Australia, community trait composition stays at a stable equilibrium despite up to ~60% turnover of species over four decades, extending island-biogeography theory to functional traits ([Schrader et al. 2023, *Journal of Biogeography*](https://doi.org/10.1111/jbi.14526)).
+
+**Community and continental patterns**
+
+- The functional diversity of the Australian flora rises with species richness and rainfall but falls under high summer temperatures, so a warming climate could reshape ecosystem trait diversity ([Andrew et al. 2021, *Journal of Vegetation Science*](https://doi.org/10.1111/jvs.13018)).
+- Community leaf area and canopy height are strongly filtered by climate &mdash; the tallest, largest-leaved vegetation occurs in warm, wet sites &mdash; while seed mass is only weakly related to climate ([Guerin et al. 2022, *Basic and Applied Ecology*](https://doi.org/10.1016/j.baae.2021.11.008)).
+- Pairing AusTraits with species distribution models produces continent-wide maps of key plant functional traits, giving managers and modellers spatial trait layers for predicting fuel loads, nutrient cycling, and responses to global change ([Andrew et al. 2025, *Global Ecology and Biogeography*](https://doi.org/10.1111/geb.70136)).
+- Across 83 years and more than 2,700 forest plots, tree mortality has risen across all of Australia's forest biomes as temperatures climb, with fast-growing, low-wood-density species dying fastest &mdash; a threat to forests' role as carbon sinks ([Lu et al. 2026, *Nature Plants*](https://doi.org/10.1038/s41477-025-02188-2)).
+
+For many more examples, browse the [full list of works citing the AusTraits resource paper](https://scholar.google.com/scholar?cites=13955903476754965983&as_sdt=2005&sciodt=0,5&hl=en) on Google Scholar.
+
+## Community engagement
 
 The AusTraits team has presented the project at ecological, biodiversity informatics, vocabulary, and systematics meetings, including:
 
@@ -78,27 +135,29 @@ The AusTraits team has presented the project at ecological, biodiversity informa
 - Ecological Society of Australia
 - Open Traits Network
 
-AusTraits workshops or stalls have also been held at research institutions, conferences, and botanical collections, including the Australian National University, University of Melbourne, Biosystematics, Ecological Society of Australia, and Australian PlantBank.
+Team members have twice been recognised with the Ecological Society of Australia's **New Developers of Open Source Software in Ecology** award, sponsored by the ARDC: [Fonti Kar](https://ardc.edu.au/article/shaping-research-software-an-interview-with-fonti-kar/) in 2022 for the [austraits](https://traitecoevo.github.io/austraits/) R package, and [Elizabeth Wenk](https://ardc.edu.au/article/inside-austraits-how-dr-elizabeth-wenks-software-is-transforming-ecological-research/) in 2025 for the [APCalign](https://github.com/traitecoevo/APCalign) R package.
 
-## Reuse Pathways
+To coordinate a national approach to trait data, the team convened the **AusTraits Floras Workshop** at the Botanic Gardens of Sydney (December 2024), bringing together delegates from all major Australian herbaria to align on delivering harmonised trait data through flora portals. Workshops and stalls have also been held at research institutions and collections including the Australian National University, the University of Melbourne, and the Australian PlantBank.
 
-AusTraits impact is visible not only through downloads and citations, but also through reuse in infrastructure:
+## Reuse in tools and infrastructure
+
+AusTraits impact is visible not only through downloads and citations, but also through the tools, workflows, and platforms that build on it.
 
 <div class="work-grid">
   <article class="plain-card">
     <h3>Research</h3>
-    <p>Researchers use AusTraits to analyse trait variation, functional diversity, plant strategies, and ecological responses across the Australian flora.</p>
+    <p>Researchers use AusTraits to analyse trait variation, functional diversity, plant strategies, and ecological responses across the Australian flora. Joshua Lee (Western Sydney University) won the Ecological Society of Australia's <a href="https://www.ecolsoc.org.au/news/awards/2023-fundamental-ecology-award-winner-announced/">Fundamental Ecology Award (2023)</a> for work using AusTraits to predict field-collected traits for conservation monitoring.</p>
   </article>
   <article class="plain-card">
-    <h3>Conservation</h3>
-    <p>Trait data can support environmental assessment, threat susceptibility analysis, and prioritisation for conservation planning.</p>
-  </article>
-  <article class="plain-card">
-    <h3>Infrastructure</h3>
-    <p>AusTraits data are distributed through biodiversity platforms, including Atlas of Living Australia taxon pages.</p>
+    <h3>Biodiversity platforms</h3>
+    <p>AusTraits data are surfaced through the <a href="https://bie.ala.org.au/species/https%3A//id.biodiversity.org.au/node/apni/2899127#ausTraits">Atlas of Living Australia</a>, so trait data appear alongside taxonomic and distribution information on species profiles.</p>
   </article>
   <article class="plain-card">
     <h3>Reusable workflows</h3>
-    <p>The traits.build workflow helps other communities create harmonised trait databases with similar provenance and metadata standards.</p>
+    <p>The <a href="https://traitecoevo.github.io/traits.build/">traits.build</a> data model and R package, generalised from AusTraits, lets other communities build harmonised trait databases with the same provenance and metadata standards.</p>
+  </article>
+  <article class="plain-card">
+    <h3>Government reuse</h3>
+    <p>The same infrastructure is being reused to build a threatened-species trait database for the Australian Government, recreating how information on threatened-species traits is stored and accessed nationally.</p>
   </article>
 </div>
