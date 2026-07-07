@@ -20,6 +20,8 @@ website:
         menu:
           - href: team/team-partners.qmd
             text: Team
+          - href: history.qmd
+            text: History
           - href: impact.qmd
             text: Impact
     right:

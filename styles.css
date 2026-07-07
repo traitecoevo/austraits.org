@@ -779,6 +779,115 @@ main.content {
   color: var(--at-green-dark);
 }
 
+/* History timeline */
+.history-lede {
+  font-size: 1.04rem;
+}
+
+.phase-summary {
+  margin: 0.35rem 0 0;
+  max-width: 760px;
+  color: var(--at-muted);
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+.timeline {
+  position: relative;
+  margin: 1.5rem 0 0;
+  padding: 0 0 0 1.75rem;
+  list-style: none;
+}
+
+.timeline::before {
+  position: absolute;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  left: 6px;
+  width: 2px;
+  content: "";
+  background: linear-gradient(180deg, var(--at-green), var(--at-blue), var(--at-gold));
+}
+
+.timeline-item {
+  position: relative;
+  padding: 0 0 1.5rem;
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.timeline-item::before {
+  position: absolute;
+  top: 0.35rem;
+  left: -1.75rem;
+  width: 14px;
+  height: 14px;
+  content: "";
+  border: 2px solid var(--at-green);
+  border-radius: 50%;
+  background: var(--at-white);
+  box-shadow: 0 0 0 3px rgba(47, 125, 85, 0.1);
+}
+
+.timeline-year {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--at-green-dark);
+}
+
+.timeline-item h3 {
+  margin: 0.15rem 0 0.35rem;
+  font-size: 1.05rem;
+  color: var(--at-ink);
+}
+
+.timeline-item p {
+  margin: 0;
+  color: var(--at-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.timeline-item p + p {
+  margin-top: 0.5rem;
+}
+
+.timeline-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.6rem;
+}
+
+.timeline-tag {
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  background: var(--at-mint);
+  color: var(--at-green-dark);
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.timeline-tag.tag-funding {
+  background: rgba(217, 164, 65, 0.16);
+  color: #9a6f16;
+}
+
+.timeline-tag.tag-tool {
+  background: rgba(42, 127, 158, 0.13);
+  color: #1f6480;
+}
+
+.timeline-tag.tag-award {
+  background: rgba(47, 125, 85, 0.14);
+  color: var(--at-green-dark);
+}
+
 .partners-footer {
   margin-top: 3rem;
   padding: 2rem 1.25rem;
@@ -833,8 +942,10 @@ main.content {
 .funding-strip {
   max-width: 760px;
   margin: 2rem auto 0;
-  padding-top: 1.75rem;
-  border-top: 1px solid var(--at-line);
+  padding: 1.75rem 2rem;
+  border: 1px solid rgba(47, 125, 85, 0.13);
+  border-radius: var(--at-radius);
+  background: rgba(255, 255, 255, 0.75);
   text-align: center;
 }
 
@@ -859,11 +970,6 @@ main.content {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 68px;
-  padding: 1rem 1.6rem;
-  border: 1px solid rgba(47, 125, 85, 0.13);
-  border-radius: var(--at-radius);
-  background: rgba(255, 255, 255, 0.75);
 }
 
 .funding-logo-ardc {

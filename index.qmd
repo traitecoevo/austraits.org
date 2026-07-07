@@ -17,9 +17,9 @@ execute:
       <h1 id="hero-title">Explore AusTraits</h1>
       <p class="hero-subtitle">Trait data for Australia's flora, harmonised and ready for ecological research, biodiversity infrastructure, and conservation decision-making.</p>
       <div class="hero-actions" aria-label="Primary actions">
-        <a class="btn-primary" href="https://doi.org/10.5281/zenodo.3568417" target="_blank" rel="noopener"><i class="bi bi-cloud-arrow-down"></i> Download data</a>
-        <a class="btn-secondary" href="https://traitecoevo.github.io/austraits/" target="_blank" rel="noopener"><i class="bi bi-code-slash"></i> Use in R</a>
+        <a class="btn-primary" href="#access"><i class="bi bi-cloud-arrow-down"></i> Access data</a>
         <a class="button text-button" href="https://w3id.org/APD" target="_blank" rel="noopener">AusTraits Plant Dictionary</a>
+        <a class="button text-button" href="https://traitecoevo.github.io/APCalign/" target="_blank" rel="noopener">APCalign</a>
       </div>
     </div>
     <div class="hero-brand" aria-label="AusTraits">
@@ -62,7 +62,7 @@ execute:
 <section class="page-band intro-band">
   <div class="platform-shell intro-grid">
     <div>
-      <p class="eyebrow on-light">Curated science infrastructure</p>
+      <p class="eyebrow on-light">Infrastructure</p>
       <h2>Built to make trait data reusable</h2>
     </div>
     <div class="intro-copy">
@@ -75,7 +75,7 @@ execute:
 <section id="workflow" class="page-band workflow-band">
   <div class="platform-shell">
     <div class="section-header">
-      <p class="eyebrow on-light">How the platform works</p>
+      <p class="eyebrow on-light">Workflow</p>
       <h2>From scattered observations to reliable infrastructure</h2>
       <p class="section-intro">AusTraits keeps the workflow visible: original sources are preserved, trait concepts are standardised, and releases are archived so analyses can be repeated later.</p>
     </div>
@@ -102,7 +102,7 @@ execute:
 <section id="access" class="page-band">
   <div class="platform-shell">
     <div class="section-header">
-      <p class="eyebrow on-light">Explore the data</p>
+      <p class="eyebrow on-light">Access</p>
       <h2>Access data via diverse pathways</h2>
       <p class="section-intro">Choose the route that matches how you want to use the resource: download a full release, work programmatically, follow a tutorial, or connect through linked biodiversity platforms.</p>
     </div>
@@ -141,7 +141,7 @@ execute:
 <section id="structure" class="page-band structure-band">
   <div class="platform-shell feature-grid">
     <div class="feature-copy">
-      <p class="eyebrow on-light">Traceable by design</p>
+      <p class="eyebrow on-light">Traceable</p>
       <h2>Every record keeps its context</h2>
       <p class="section-intro">AusTraits is a relational, metadata-rich resource. Trait values, taxonomic concepts, methods, sources, and contextual information are kept explicit so users can trace and evaluate the data they use.</p>
     </div>
@@ -197,7 +197,7 @@ execute:
 <section id="data-products" class="page-band products-band">
   <div class="platform-shell feature-grid reverse-feature">
     <div class="feature-copy">
-      <p class="eyebrow on-light">Growing coverage</p>
+      <p class="eyebrow on-light">Coverage</p>
       <h2>Expanding coverage of the Australian flora</h2>
       <p>AusTraits includes thousands of trait values extracted from taxonomic descriptions <a href="https://doi.org/10.1016/j.ecoinf.2023.102312" target="_blank" rel="noopener">(Coleman et al. 2023)</a>.</p>
       <p>We have gap-filled near-complete trait tables for core traits such as life history, plant growth form, and woodiness <a href="https://doi.org/10.1071/BT23111" target="_blank" rel="noopener">(Wenk et al. 2024)</a>.</p>
