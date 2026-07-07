@@ -29,7 +29,7 @@ The AusTraits project received **[investment](https://doi.org/10.47486/DP720)** 
   
   <div class="team-member">
     <img src="team/Sauquet/avatar.jpg" class="team-photo">
-    <h5>Dr. Hérve Sauquet</h5>
+    <h5>Dr. Hervé Sauquet</h5>
     <p>Joint Project Lead</p>
   </div>
   
@@ -256,4 +256,30 @@ The AusTraits project received **[investment](https://doi.org/10.47486/DP720)** 
 </div>
 ```
 
-**The creation of the AusTraits database was only possible because of the [researchers](https://doi.org/10.5281/zenodo.3568417) who contributed data to this endeavour.**  
+**The creation of the AusTraits database was only possible because of the [researchers](https://doi.org/10.5281/zenodo.3568417) who contributed data to this endeavour.**
+
+## Contact
+
+We would love to hear from you about AusTraits data, tools, collaborations, and reuse.
+
+```{=html}
+<div class="contact-grid">
+  <article class="contact-card">
+    <span class="card-icon"><i class="bi bi-database-add"></i></span>
+    <h3>Contribute data</h3>
+    <p>Discuss new datasets, legacy sources, metadata, or expert review.</p>
+  </article>
+  <article class="contact-card">
+    <span class="card-icon"><i class="bi bi-question-circle"></i></span>
+    <h3>Ask a question</h3>
+    <p>Get help with access, citation, data structure, or use in analysis workflows.</p>
+  </article>
+  <article class="contact-card">
+    <span class="card-icon"><i class="bi bi-chat-left-text"></i></span>
+    <h3>Share feedback</h3>
+    <p>Tell us what is useful, confusing, missing, or worth improving.</p>
+  </article>
+</div>
+```
+
+Email the team at [austraits.database@gmail.com](mailto:austraits.database@gmail.com).

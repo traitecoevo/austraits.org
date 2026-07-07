@@ -70,6 +70,7 @@ Citation counts change over time. For current citation information, see the [Goo
 The AusTraits team has presented the project at ecological, biodiversity informatics, vocabulary, and systematics meetings, including:
 
 - Biosystematics
+- Australasian Systematic Botany Society (ASBS)
 - ARDC Vocabulary Symposium
 - Atlas of Living Australia and GBIF symposiums
 - International Association of Vegetation Scientists

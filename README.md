@@ -35,9 +35,8 @@ The most important files and folders are:
 
 - `index.qmd`: the home page.
 - `impact.qmd`: the impact page. This page runs R code to show download and citation information.
-- `contributors.qmd`: the data contributors page.
-- `contact.qmd`: the contact page.
-- `team/team-partners.qmd`: the main team and partners page.
+- `contribute.qmd`: the contribute / data contributors page.
+- `team/team-partners.qmd`: the main team and partners page (also hosts the Contact section).
 - `team/team/*/_index.md`: individual team member profile files.
 - `team/team/*/avatar.jpg`: profile photos for team members.
 - `images/`: logos, diagrams, and other website images.

@@ -27,4 +27,4 @@ AusTraits continues to integrate newly collected and legacy datasets, with futur
 
 **This project would not be possible without contributions from researchers across Australia and beyond. We are thankful for every contribution, no matter how large or small.**
 
-To contribute data or discuss a possible collaboration, [contact the AusTraits team](contact.qmd). See [Zenodo](https://doi.org/10.5281/zenodo.3568417) for a full list of researchers who have contributed data and expertise to AusTraits.
+To contribute data or discuss a possible collaboration, [contact the AusTraits team](team/team-partners.qmd#contact). See [Zenodo](https://doi.org/10.5281/zenodo.3568417) for a full list of researchers who have contributed data and expertise to AusTraits.

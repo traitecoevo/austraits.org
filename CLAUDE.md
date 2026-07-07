@@ -18,7 +18,7 @@ The only R dependency for building is `jsonlite` (used by `impact.qmd`).
 
 ## Architecture
 
-- **Pages**: top-level `.qmd` files (`index.qmd`, `impact.qmd`, `contributors.qmd`, `contact.qmd`) plus `team/team-partners.qmd`. `_quarto.yml` defines global settings and the navbar — a new page only appears in the menu if added under `website: navbar:`.
+- **Pages**: top-level `.qmd` files (`index.qmd`, `impact.qmd`, `contribute.qmd`) plus `team/team-partners.qmd` (which also hosts the Contact section). `_quarto.yml` defines global settings and the navbar — a new page only appears in the menu if added under `website: navbar:`.
 - **Team profiles**: each person is a folder `team/team/<PersonName>/` with `_index.md` (name, role, links, text) and `avatar.jpg`.
 - **Styling**: `styles.css` (site-wide, theme is `simplex`) and `team/styles.css` (team pages). `_footer.html` is injected via `include-after-body`.
 - **Extensions**: `_extensions/sellorm/social-embeds/` provides shortcodes for embedded social media and videos.
