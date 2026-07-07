@@ -22,36 +22,8 @@ execute:
         <a class="btn-secondary" href="contribute.html"><i class="bi bi-database-add"></i> Contribute data</a>
       </div>
     </div>
-    <div class="hero-preview" aria-label="AusTraits data preview">
-      <div class="preview-topline">
-        <span>AusTraits release</span>
-        <strong>v7.0.0</strong>
-      </div>
-      <div class="preview-tabs" aria-label="Preview data views">
-        <span class="is-active">Traits</span>
-        <span>Taxa</span>
-        <span>Sources</span>
-      </div>
-      <div class="preview-map">
-        <div class="map-caption">
-          <strong>Linked trait records</strong>
-          <span>taxonomy, methods, context, sources</span>
-        </div>
-        <span class="map-point point-one"></span>
-        <span class="map-point point-two"></span>
-        <span class="map-point point-three"></span>
-        <span class="map-point point-four"></span>
-      </div>
-      <div class="preview-table" aria-label="Trait record example">
-        <div><span>Taxon</span><strong>Eucalyptus pilularis</strong></div>
-        <div><span>Trait</span><strong>leaf area</strong></div>
-        <div><span>Value</span><strong>harmonised</strong></div>
-        <div><span>Source</span><strong>linked metadata</strong></div>
-      </div>
-      <div class="preview-status">
-        <span class="status-dot" aria-hidden="true"></span>
-        <span>Versioned DOI with archived releases</span>
-      </div>
+    <div class="hero-brand" aria-label="AusTraits">
+      <img src="images/austraitslogo.jpg" alt="AusTraits logo">
     </div>
   </div>
 </section>
@@ -64,11 +36,11 @@ execute:
         <span class="trust-label">plant traits</span>
       </div>
       <div class="trust-item">
-        <span class="trust-value">34,000+</span>
+        <span class="trust-value">30,000+</span>
         <span class="trust-label">plant taxa</span>
       </div>
       <div class="trust-item">
-        <span class="trust-value">300+</span>
+        <span class="trust-value">400+</span>
         <span class="trust-label">data sources</span>
       </div>
       <div class="trust-item">
@@ -164,6 +136,13 @@ execute:
         <h3>ALA integration</h3>
         <p>Access taxon-level trait summaries through Atlas of Living Australia pages.</p>
       </a>
+      <!-- TODO: add a panel for the data portal once the URL is confirmed
+      <a class="resource-card" href="DATA_PORTAL_URL" target="_blank" rel="noopener">
+        <span class="card-icon"><i class="bi bi-window-stack"></i></span>
+        <h3>Data portal</h3>
+        <p>Browse, filter, and query AusTraits data interactively in the browser.</p>
+      </a>
+      -->
     </div>
   </div>
 </section>
@@ -201,6 +180,7 @@ execute:
           <div class="card-actions">
             <a href="https://github.com/traitecoevo/traits.build" target="_blank" rel="noopener">GitHub</a>
             <a href="https://traitecoevo.github.io/traits.build-book/" target="_blank" rel="noopener">Book</a>
+            <a href="https://doi.org/10.1016/j.ecoinf.2024.102773" target="_blank" rel="noopener">Paper</a>
           </div>
         </div>
       </article>
