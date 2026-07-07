@@ -68,6 +68,7 @@ execute:
     <div class="intro-copy">
       <p>AusTraits synthesises plant trait data from field campaigns, published literature, taxonomic monographs, and individual taxon descriptions. The database integrates contributions from functional plant biology, plant physiology, plant taxonomy, conservation biology, and related disciplines.</p>
       <p>Entries are linked to detailed metadata, harmonised against trait definitions, and checked for consistency.</p>
+      <p>The resource has grown over nearly a decade of collaboration and sustained investment &mdash; see the <a href="history.html">project history</a>.</p>
     </div>
   </div>
 </section>

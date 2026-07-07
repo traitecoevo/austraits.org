@@ -36,6 +36,7 @@ The most important files and folders are:
 - `index.qmd`: the home page.
 - `impact.qmd`: the impact page. This page runs R code to show download and citation information.
 - `contribute.qmd`: the contribute / data contributors page.
+- `history.qmd`: the project history page — a phased, reverse-chronological timeline of how AusTraits developed.
 - `team/team-partners.qmd`: the main team and partners page (also hosts the Contact section). Team members are listed directly in this file.
 - `team/team/*/avatar.jpg`: profile photos for team members.
 - `images/`: logos, diagrams, and other website images.
