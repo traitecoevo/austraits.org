@@ -36,8 +36,7 @@ The most important files and folders are:
 - `index.qmd`: the home page.
 - `impact.qmd`: the impact page. This page runs R code to show download and citation information.
 - `contribute.qmd`: the contribute / data contributors page.
-- `team/team-partners.qmd`: the main team and partners page (also hosts the Contact section).
-- `team/team/*/_index.md`: individual team member profile files.
+- `team/team-partners.qmd`: the main team and partners page (also hosts the Contact section). Team members are listed directly in this file.
 - `team/team/*/avatar.jpg`: profile photos for team members.
 - `images/`: logos, diagrams, and other website images.
 - `_quarto.yml`: the main website settings, including the navigation menu.
@@ -56,10 +55,7 @@ Most website content lives in `.qmd` files. Edit these files to change text, hea
 
 The navigation menu is controlled in `_quarto.yml`. If you add a new page and want it to appear in the top menu, add it under `website: navbar:`.
 
-Team profiles live in separate folders under `team/team/`. Each profile usually has:
-
-- `_index.md` for the person's name, role, links, and text
-- `avatar.jpg` for their photo
+Team members are listed directly in `team/team-partners.qmd` as a simple HTML grid: each person is a `team-member` block with their name, role or affiliation, and photo. The photos live in separate folders under `team/team/`, one folder per person containing an `avatar.jpg`.
 
 ## Deployment
 
@@ -123,7 +119,17 @@ Put image files in the `images/` folder. In a `.qmd` file, link to them like thi
 
 ### Update Team Members
 
-Edit the relevant file under `team/team/PersonName/_index.md`.
+Edit the team grid in `team/team-partners.qmd`. Each person looks like this:
+
+```html
+<div class="team-member">
+  <img src="team/PersonName/avatar.jpg" class="team-photo">
+  <h5>Dr. Person Name</h5>
+  <p>Role or Affiliation</p>
+</div>
+```
+
+To add someone, copy one of these blocks into the relevant section (Core Team or Advisory Board) and add their photo as `team/team/PersonName/avatar.jpg`. To remove someone, delete their block (and their folder if the photo is no longer needed).
 
 To update a profile photo, replace `team/team/PersonName/avatar.jpg` with a new image using the same filename.
 
