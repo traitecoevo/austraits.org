@@ -25,16 +25,16 @@ Backed by the ARDC Planet Research Data Commons, the project set out to cover Au
     <div class="timeline-tags"><span class="timeline-tag">Working group</span></div>
   </li>
   <li class="timeline-item">
+    <span class="timeline-year">2026</span>
+    <h3>Pollination traits working group</h3>
+    <p>A dedicated meeting and working group convened to extend AusTraits into pollination traits, broadening the resource toward plant&ndash;animal interactions.</p>
+    <div class="timeline-tags"><span class="timeline-tag">Working group</span></div>
+  </li>
+  <li class="timeline-item">
     <span class="timeline-year">2025</span>
     <h3>Complete coverage for national vegetation mapping</h3>
     <p>A new collaboration with the Australian Government's Department of Climate Change, Energy, the Environment and Water (DCCEEW) set out to reach near-complete coverage of plant height and leaf size &mdash; traits needed to build national vegetation information systems.</p>
     <div class="timeline-tags"><span class="timeline-tag">Partnership</span></div>
-  </li>
-  <li class="timeline-item">
-    <span class="timeline-year">2025</span>
-    <h3>Pollination traits working group</h3>
-    <p>A dedicated meeting and working group convened to extend AusTraits into pollination traits, broadening the resource toward plant&ndash;animal interactions.</p>
-    <div class="timeline-tags"><span class="timeline-tag">Working group</span></div>
   </li>
   <li class="timeline-item">
     <span class="timeline-year">2025</span>
