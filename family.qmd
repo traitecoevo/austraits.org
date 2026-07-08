@@ -1,0 +1,126 @@
+---
+title: "The AusTraits family"
+---
+
+AusTraits is not a single product but a **family** of connected open-source tools, datasets, and
+vocabularies. Each piece does one job well and hands off to the next: a controlled vocabulary defines
+the traits, a taxonomy tool standardises the names, a workflow engine harmonises contributed data into
+a single database, and an R package plus web tools let anyone access it. This page shows how the pieces
+fit together and where to go for each.
+
+## How the pieces connect
+
+```{mermaid}
+flowchart TD
+  APD["<b>APD</b><br/>trait vocabulary<br/>(definitions, units, allowed values)"]
+  APC["<b>APCalign</b><br/>taxonomy alignment<br/>(APC / APNI)"]
+  RAW["contributed<br/>source datasets"]
+  TB["<b>traits.build</b><br/>workflow engine<br/>+ data model"]
+  BUILD["<b>austraits.build</b><br/>the AusTraits<br/>dataset compilation"]
+  ZEN[("Zenodo<br/>austraits-X.Y.Z")]
+  PKG["<b>austraits</b><br/>R access &amp; wrangling"]
+  WEB["Data portal &amp; API<br/>code-free access"]
+  REUSE["reused beyond AusTraits<br/>(other trait databases<br/>&amp; taxonomy projects)"]
+
+  APD --> BUILD
+  APC --> BUILD
+  RAW --> BUILD
+  TB -. engine .-> BUILD
+  BUILD --> ZEN
+  ZEN --> PKG
+  ZEN --> WEB
+  APC -. reused by .-> REUSE
+  TB -. reused by .-> REUSE
+
+  classDef core fill:#e8f4ec,stroke:#4a8a68,color:#1d3b2a;
+  classDef data fill:#eef2f7,stroke:#7089a8,color:#243044;
+  classDef reuse fill:#fbf6ea,stroke:#c9a340,color:#5b4a12,stroke-dasharray:4 3;
+  class APD,APC,TB,BUILD,PKG core;
+  class RAW,ZEN,WEB data;
+  class REUSE reuse;
+```
+
+A key subtlety: the **data flow** above is not the same as the R-package install graph. In the build,
+`traits.build` is the engine that assembles `austraits.build`; but as R packages, `traits.build`
+actually depends on a few helpers from `austraits`. The authoritative, up-to-date map of both graphs
+lives in [`austraits-meta`](https://github.com/traitecoevo/austraits-meta).
+
+## The core pipeline
+
+```{=html}
+<div class="card-grid">
+  <article class="plain-card">
+    <h3>APD — AusTraits Plant Dictionary</h3>
+    <p>The trait <strong>vocabulary</strong>: definitions, allowed categorical values, units, and links to other trait databases. Everything downstream conforms to it.</p>
+    <p><a href="https://w3id.org/APD" target="_blank" rel="noopener">w3id.org/APD</a> · <a href="https://github.com/traitecoevo/APD" target="_blank" rel="noopener">source</a></p>
+  </article>
+  <article class="plain-card">
+    <h3>APCalign — taxonomy alignment</h3>
+    <p>Aligns and updates plant names against the Australian Plant Census / APNI, and reports native vs introduced status. Used to standardise taxonomy before data is compiled — and reusable as a standalone taxonomy tool in any other project.</p>
+    <p><a href="https://traitecoevo.github.io/APCalign/" target="_blank" rel="noopener">Package site</a></p>
+  </article>
+  <article class="plain-card">
+    <h3>traits.build — the workflow engine</h3>
+    <p>A general-purpose data model and R workflow for harmonising trait data into a documented, relational structure. AusTraits is built with it — and so can any other trait database.</p>
+    <p><a href="https://traitecoevo.github.io/traits.build/" target="_blank" rel="noopener">Package site</a> · <a href="https://traitecoevo.github.io/traits.build-book/" target="_blank" rel="noopener">User manual</a></p>
+  </article>
+  <article class="plain-card">
+    <h3>austraits.build — the dataset compilation</h3>
+    <p>Wires the vocabulary (APD), taxonomy (APCalign), and the engine (traits.build) together over hundreds of contributed source datasets to produce the released AusTraits database.</p>
+    <p><a href="https://github.com/traitecoevo/austraits.build" target="_blank" rel="noopener">Repository</a> · <a href="https://doi.org/10.5281/zenodo.3568417" target="_blank" rel="noopener">Zenodo releases</a></p>
+  </article>
+  <article class="plain-card">
+    <h3>austraits — access &amp; wrangling</h3>
+    <p>The R package for loading, filtering, joining, reshaping, and plotting AusTraits (and any traits.build database) once it has been compiled and released.</p>
+    <p><a href="https://traitecoevo.github.io/austraits/" target="_blank" rel="noopener">Package site</a></p>
+  </article>
+</div>
+```
+
+## Tools &amp; interfaces
+
+```{=html}
+<div class="card-grid">
+  <article class="plain-card">
+    <h3>AusTraits data portal</h3>
+    <p>A code-free, point-and-click interface to browse, filter, and download AusTraits data in the browser — no R required.</p>
+    <p><a href="https://app.austraits.org/austraits/" target="_blank" rel="noopener">Open the portal</a></p>
+  </article>
+  <article class="plain-card">
+    <h3>AusTraits API</h3>
+    <p>An HTTP API layer over the AusTraits access functions, for programmatic access from any language.</p>
+    <p><a href="https://github.com/traitecoevo/austraits-api" target="_blank" rel="noopener">Repository</a></p>
+  </article>
+  <article class="plain-card">
+    <h3>APCalign app</h3>
+    <p>A browser app for aligning and updating plant name lists against the APC — the APCalign workflow, without writing code.</p>
+    <p><a href="https://app.austraits.org/APCalign-app/" target="_blank" rel="noopener">Open the app</a></p>
+  </article>
+</div>
+```
+
+## Documentation &amp; governance
+
+```{=html}
+<div class="card-grid">
+  <article class="plain-card">
+    <h3>traits.build book</h3>
+    <p>The user manual for the data standard, the R package, and the workflow — including tutorials for adding data and using outputs.</p>
+    <p><a href="https://traitecoevo.github.io/traits.build-book/" target="_blank" rel="noopener">Read the book</a></p>
+  </article>
+  <article class="plain-card">
+    <h3>austraits-meta</h3>
+    <p>The family's cross-package knowledge and governance hub: the dependency map, source-of-truth rules, the shared issue board, and release playbooks.</p>
+    <p><a href="https://github.com/traitecoevo/austraits-meta" target="_blank" rel="noopener">Governance hub</a></p>
+  </article>
+</div>
+```
+
+## How to cite
+
+If you use AusTraits or its tools, please cite the relevant paper:
+
+- **AusTraits dataset** — Falster *et al.* (2021) *Scientific Data* 8:254. [10.1038/s41597-021-01006-6](https://doi.org/10.1038/s41597-021-01006-6)
+- **traits.build** — Wenk *et al.* (2024) *Ecological Informatics* 83:102773. [10.1016/j.ecoinf.2024.102773](https://doi.org/10.1016/j.ecoinf.2024.102773)
+- **AusTraits Plant Dictionary (APD)** — Wenk *et al.* (2024) *Scientific Data* 11:537. [10.1038/s41597-024-03368-z](https://doi.org/10.1038/s41597-024-03368-z)
+- **APCalign** — Wenk *et al.* (2024) *Australian Journal of Botany* 72:BT24014. [10.1071/BT24014](https://doi.org/10.1071/BT24014)

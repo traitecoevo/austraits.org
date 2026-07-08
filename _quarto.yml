@@ -14,12 +14,16 @@ website:
         text: Platform
       - href: index.html#access
         text: Access
+      - href: portal.qmd
+        text: Data portal
       - href: index.html#software
         text: Tools
       - text: About
         menu:
           - href: team/team-partners.qmd
             text: Team
+          - href: family.qmd
+            text: The family
           - href: history.qmd
             text: History
           - href: impact.qmd
