@@ -1,0 +1,227 @@
+---
+title: History
+---
+
+<p class="history-lede">AusTraits grew from a small compilation of Australian plant traits into recognised national research infrastructure. This page traces that development in reverse chronological order &mdash; the phases of the project, the funding that enabled each step, and the tools, papers, and recognition along the way.</p>
+
+## 2024&ndash;present · National integration and wider access
+
+::: {.phase-summary}
+Backed by the ARDC Planet Research Data Commons, the project set out to cover Australia's complete flora and opened new pathways for people to access the data directly.
+:::
+
+```{=html}
+<ol class="timeline">
+  <li class="timeline-item">
+    <span class="timeline-year">2026</span>
+    <h3>A web-based data portal</h3>
+    <p>Development of the <a href="https://github.com/traitecoevo/austraits.portal">AusTraits data portal</a> opens up browser-based access to the database, lowering the barrier for users who don't work in R.</p>
+    <div class="timeline-tags"><span class="timeline-tag tag-tool">Tool</span></div>
+  </li>
+  <li class="timeline-item">
+    <span class="timeline-year">2026</span>
+    <h3>A species-averages layer</h3>
+    <p>A dedicated working group began developing a species-averages layer &mdash; consensus trait values per species &mdash; to make AusTraits easier to join with other species-level datasets.</p>
+    <div class="timeline-tags"><span class="timeline-tag">Working group</span></div>
+  </li>
+  <li class="timeline-item">
+    <span class="timeline-year">2026</span>
+    <h3>Pollination traits working group</h3>
+    <p>A dedicated meeting and working group convened to extend AusTraits into pollination traits, broadening the resource toward plant&ndash;animal interactions.</p>
+    <div class="timeline-tags"><span class="timeline-tag">Working group</span></div>
+  </li>
+  <li class="timeline-item">
+    <span class="timeline-year">2025</span>
+    <h3>Complete coverage for national vegetation mapping</h3>
+    <p>A new collaboration with the Australian Government's Department of Climate Change, Energy, the Environment and Water (DCCEEW) set out to reach near-complete coverage of plant height and leaf size &mdash; traits needed to build national vegetation information systems.</p>
+    <div class="timeline-tags"><span class="timeline-tag">Partnership</span></div>
+  </li>
+  <li class="timeline-item">
+    <span class="timeline-year">2025</span>
+    <h3>A second national software award</h3>
+    <p><a href="https://ardc.edu.au/article/inside-austraits-how-dr-elizabeth-wenks-software-is-transforming-ecological-research/">Elizabeth Wenk</a> received the Ecological Society of Australia's <strong>New Developers of Open Source Software in Ecology</strong> award, sponsored by the ARDC, for the <a href="https://github.com/traitecoevo/APCalign">APCalign</a> R package &mdash; the second time an AusTraits team member has won this award.</p>
+    <div class="timeline-tags"><span class="timeline-tag tag-award">Award</span></div>
+  </li>
+  <li class="timeline-item">
+    <span class="timeline-year">2024</span>
+    <h3>AusTraits Floras Workshop</h3>
+    <p>The team convened the AusTraits Floras Workshop at the Botanic Gardens of Sydney (December 2024), bringing together delegates from all major Australian herbaria to align on delivering harmonised trait data through national flora portals.</p>
+    <div class="timeline-tags"><span class="timeline-tag">Workshop</span></div>
+  </li>
+  <li class="timeline-item">
+    <span class="timeline-year">2024</span>
+    <h3>ARDC Planet Research Data Commons</h3>
+    <p>A new grant under the ARDC's Planet Research Data Commons &mdash; <em>&ldquo;AusTraits: a national database on the traits of Australia's complete flora&rdquo;</em> (~$300,000) &mdash; funded the push toward continental coverage of the entire ~30,000-species flora.</p>
+    <div class="timeline-tags"><span class="timeline-tag tag-funding">Funding · ARDC</span></div>
+  </li>
+</ol>
+```
+
+## 2023&ndash;2024 · Standards and a reusable engine
+
+::: {.phase-summary}
+The tools built for AusTraits were generalised into a reusable framework, paired with a formal trait vocabulary and taxonomic alignment, and documented in a suite of method papers &mdash; as the ARDC increasingly framed AusTraits as a national data asset.
+:::
+
+```{=html}
+<ol class="timeline">
+  <li class="timeline-item">
+    <span class="timeline-year">2024</span>
+    <h3>The methods behind the resource, published</h3>
+    <p>Three papers documented the engine and standards underpinning AusTraits: the <a href="https://doi.org/10.1016/j.ecoinf.2024.102773"><code>traits.build</code> data model and workflow</a> (<em>Ecological Informatics</em>), the <a href="https://doi.org/10.1071/BT24014">APCalign taxonomic-alignment package</a> (<em>Australian Journal of Botany</em>), and the <a href="https://doi.org/10.1038/s41597-024-03368-z">AusTraits Plant Dictionary</a> (<em>Scientific Data</em>).</p>
+    <div class="timeline-tags"><span class="timeline-tag">Papers</span></div>
+  </li>
+  <li class="timeline-item">
+    <span class="timeline-year">2023</span>
+    <h3>A reusable framework, dictionary, and taxonomy tool</h3>
+    <p>The team released <a href="https://traitecoevo.github.io/traits.build/"><code>traits.build</code></a> &mdash; the data model and pipeline generalised from AusTraits so other communities can build harmonised databases &mdash; alongside the <a href="https://w3id.org/APD">AusTraits Plant Dictionary</a> (a formal, openly published vocabulary of trait concepts) and <a href="https://github.com/traitecoevo/APCalign">APCalign</a> for aligning names to the Australian Plant Census.</p>
+    <div class="timeline-tags"><span class="timeline-tag tag-tool">Tools</span></div>
+  </li>
+  <li class="timeline-item">
+    <span class="timeline-year">2023</span>
+    <h3>Recognised as national infrastructure</h3>
+    <p>The ARDC's 2023 Impact Booklet profiled AusTraits' role in Australia's Black Summer bushfire recovery, with CEO Rosie Hicks describing it as an <em>&ldquo;internationally recognised gold-standard database&rdquo;</em> and a curated national data asset. An <a href="https://ardc.edu.au/article/global-knowledge-inequality-threatens-ecosystems-across-the-global-south/">ARDC media release</a> (June 2023) featured AusTraits-linked research on global knowledge inequality in ecology.</p>
+    <div class="timeline-tags"><span class="timeline-tag">Recognition</span></div>
+  </li>
+  <li class="timeline-item">
+    <span class="timeline-year">2023</span>
+    <h3>Mining the floras</h3>
+    <p>A published <a href="https://doi.org/10.1016/j.ecoinf.2023.102312">workflow for extracting traits from textual taxonomic descriptions</a> (<em>Ecological Informatics</em>) let the team scrape state and national eFloras, adding trait data at continental scale.</p>
+    <div class="timeline-tags"><span class="timeline-tag">Paper</span></div>
+  </li>
+  <li class="timeline-item">
+    <span class="timeline-year">2023</span>
+    <h3>ARDC Community Connect</h3>
+    <p>An ARDC Community Connect grant (~$50,000) supported continued curation and community engagement around the resource, including the <a href="https://traitecoevo.github.io/traits.build-book/">traits.build book</a> documenting the data model and workflow.</p>
+    <div class="timeline-tags"><span class="timeline-tag tag-funding">Funding · ARDC</span></div>
+  </li>
+</ol>
+```
+
+## 2021&ndash;2023 · The resource paper and first tools
+
+::: {.phase-summary}
+AusTraits was formally published and widely cited, proved its value in the national bushfire response, and gained its first dedicated software.
+:::
+
+```{=html}
+<ol class="timeline">
+  <li class="timeline-item">
+    <span class="timeline-year">2022</span>
+    <h3>First national software award</h3>
+    <p><a href="https://ardc.edu.au/article/shaping-research-software-an-interview-with-fonti-kar/">Fonti Kar</a> received the Ecological Society of Australia's <strong>New Developers of Open Source Software in Ecology</strong> award, sponsored by the ARDC, for the <a href="https://traitecoevo.github.io/austraits/">austraits</a> R package.</p>
+    <div class="timeline-tags"><span class="timeline-tag tag-award">Award</span></div>
+  </li>
+  <li class="timeline-item">
+    <span class="timeline-year">2022</span>
+    <h3>The austraits R package</h3>
+    <p>The <a href="https://traitecoevo.github.io/austraits/">austraits</a> package gave researchers a consistent way to access, filter, summarise, and visualise the database directly in R.</p>
+    <div class="timeline-tags"><span class="timeline-tag tag-tool">Tool</span></div>
+  </li>
+  <li class="timeline-item">
+    <span class="timeline-year">2021</span>
+    <h3>The AusTraits resource paper</h3>
+    <p>The data descriptor <a href="https://doi.org/10.1038/s41597-021-01006-6"><em>&ldquo;AusTraits, a curated plant trait database for the Australian flora&rdquo;</em></a> was published in <em>Scientific Data</em> with hundreds of contributing authors, and remains the primary citation for the resource.</p>
+    <div class="timeline-tags"><span class="timeline-tag">Paper</span></div>
+  </li>
+  <li class="timeline-item">
+    <span class="timeline-year">2021</span>
+    <h3>Informing bushfire recovery</h3>
+    <p>Harmonised fire-response data from AusTraits underpinned the national response to the 2019&ndash;20 Black Summer bushfires, helping the Threatened Species Scientific Committee prioritise plant species for recovery (<a href="https://doi.org/10.1111/ddi.13265">Gallagher et al. 2021</a>).</p>
+    <div class="timeline-tags"><span class="timeline-tag">Impact</span></div>
+  </li>
+</ol>
+```
+
+## 2019&ndash;2020 · Becoming national infrastructure
+
+::: {.phase-summary}
+Investment from the Australian Research Data Commons transformed AusTraits from a research-group compilation into funded national infrastructure &mdash; while a new partnership with the Botanic Gardens of Sydney broadened its traits and audience beyond ecology.
+:::
+
+```{=html}
+<ol class="timeline">
+  <li class="timeline-item">
+    <span class="timeline-year">2020</span>
+    <h3>ARDC Data Partnerships</h3>
+    <p>A major ARDC Data Partnerships grant (DP720, ~$525,000, <a href="https://doi.org/10.47486/DP720">10.47486/DP720</a>) brought together more than 30 contributors and funded a substantial expansion of the database and its curation.</p>
+    <div class="timeline-tags"><span class="timeline-tag tag-funding">Funding · ARDC</span></div>
+  </li>
+  <li class="timeline-item">
+    <span class="timeline-year">2019&ndash;20</span>
+    <h3>Partnering with the Botanic Gardens of Sydney</h3>
+    <p>A new partnership with <strong>Hervé Sauquet</strong> and the Botanic Gardens of Sydney broadened AusTraits beyond ecology &mdash; expanding the range of traits it captured (including morphological and reproductive characters) and widening its audience across systematics, taxonomy, and botanical collections.</p>
+    <div class="timeline-tags"><span class="timeline-tag">Partnership</span></div>
+  </li>
+  <li class="timeline-item">
+    <span class="timeline-year">2020</span>
+    <h3>A vision for open trait science</h3>
+    <p>The team co-led <a href="https://doi.org/10.1038/s41559-020-1109-6">&ldquo;Open science principles for accelerating trait-based science across the tree of life&rdquo;</a> (<em>Nature Ecology &amp; Evolution</em>), articulating the open-data philosophy behind AusTraits and the Open Traits Network.</p>
+    <div class="timeline-tags"><span class="timeline-tag">Paper</span></div>
+  </li>
+  <li class="timeline-item">
+    <span class="timeline-year">2019</span>
+    <h3>First ARDC investment</h3>
+    <p>An ARDC Transformative Data Collections investment (TD044, ~$50,000, <a href="https://doi.org/10.47486/TD044">10.47486/TD044</a>) &mdash; <em>&ldquo;AusTraits: a curated plant trait database for the Australian flora&rdquo;</em> &mdash; marked the first dedicated infrastructure funding and the start of an ongoing ARDC partnership.</p>
+    <div class="timeline-tags"><span class="timeline-tag tag-funding">Funding · ARDC</span></div>
+  </li>
+  <li class="timeline-item">
+    <span class="timeline-year">2019</span>
+    <h3>Delivering evolving data</h3>
+    <p>The <a href="https://github.com/ropenscilabs/datastorr">datastorr</a> workflow was developed to deliver successive versions of the growing database directly into R &mdash; an early piece of the reproducible release cycle later formalised in Zenodo DOIs.</p>
+    <div class="timeline-tags"><span class="timeline-tag tag-tool">Tool</span></div>
+  </li>
+</ol>
+```
+
+## 2017&ndash;2019 · A project manager and a pipeline
+
+::: {.phase-summary}
+With Daniel Falster's ARC Future Fellowship providing capacity, Elizabeth Wenk joined to lead the project day to day, and she and Falster began building the data-assembly pipeline that would later become <code>traits.build</code> and APCalign.
+:::
+
+```{=html}
+<ol class="timeline">
+  <li class="timeline-item">
+    <span class="timeline-year">2017&ndash;19</span>
+    <h3>Building the AusTraits pipeline</h3>
+    <p>Daniel Falster and Elizabeth Wenk began developing the data-assembly pipeline &mdash; reconciling taxonomy, variable names, units, and provenance across hundreds of sources &mdash; that would later be generalised into the <a href="https://traitecoevo.github.io/traits.build/"><code>traits.build</code></a> workflow and the <a href="https://github.com/traitecoevo/APCalign">APCalign</a> taxonomy tool.</p>
+    <div class="timeline-tags"><span class="timeline-tag tag-tool">Tools</span></div>
+  </li>
+  <li class="timeline-item">
+    <span class="timeline-year">2017</span>
+    <h3>Elizabeth Wenk joins as project manager</h3>
+    <p><strong>Elizabeth (Lizzy) Wenk</strong> became the project's lead manager, coordinating data curation, harmonisation, and contributor relationships &mdash; a role at the centre of AusTraits ever since.</p>
+    <div class="timeline-tags"><span class="timeline-tag">Team</span></div>
+  </li>
+  <li class="timeline-item">
+    <span class="timeline-year">2017</span>
+    <h3>Future Fellowship capacity</h3>
+    <p>Daniel Falster's ARC Future Fellowship (FT160100113, <em>&ldquo;Niche 2.0&rdquo;</em>, awarded 2016 and active from 2017) provided the research capacity to develop the workflow and tools that would become AusTraits.</p>
+    <div class="timeline-tags"><span class="timeline-tag tag-funding">Funding · ARC</span></div>
+  </li>
+  <li class="timeline-item">
+    <span class="timeline-year">2017</span>
+    <h3>Building the case for shared trait data</h3>
+    <p>A National Climate Change Adaptation Research Facility round table on collaborative trait research and data (convened by Rachael Gallagher and Daniel Falster) helped build the community and rationale for a national, harmonised trait resource.</p>
+    <div class="timeline-tags"><span class="timeline-tag">Community</span></div>
+  </li>
+</ol>
+```
+
+## 2015&ndash;2016 · Origins at Macquarie University
+
+::: {.phase-summary}
+AusTraits began as a research initiative at Macquarie University, supported by ARC fellowships to its founders and by a shared conviction that Australian plant trait data should be open, harmonised, and reusable.
+:::
+
+```{=html}
+<ol class="timeline">
+  <li class="timeline-item">
+    <span class="timeline-year">2015&ndash;16</span>
+    <h3>AusTraits initiated</h3>
+    <p>AusTraits was initiated by <strong>Rachel Gallagher</strong> and <strong>Ian Wright</strong> at Macquarie University &mdash; the first steps toward compiling and harmonising trait data for the Australian flora. The early work was supported by ARC fellowship grants to Gallagher (DE170100208) and Wright (FT100100910), alongside Macquarie University.</p>
+    <div class="timeline-tags"><span class="timeline-tag tag-funding">Funding · Macquarie · ARC</span></div>
+  </li>
+</ol>
+```

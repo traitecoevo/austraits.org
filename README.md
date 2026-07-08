@@ -12,9 +12,9 @@ To preview the website on your computer:
 1. Install the [Quarto](https://quarto.org/docs/download/) software
 2. Clone this repository to your local computer
 3. Open `austraits.org.Rproj` in RStudio
-4. Install the R packages needed for the impact page:
+4. Install the R package needed for the impact page:
    ```r
-   install.packages(c("dplyr", "lubridate", "jsonlite", "kableExtra", "scholar"))
+   install.packages("jsonlite")
    ```
 5. Click on any `.qmd` file and click **Render**
 
@@ -35,14 +35,13 @@ The most important files and folders are:
 
 - `index.qmd`: the home page.
 - `impact.qmd`: the impact page. This page runs R code to show download and citation information.
-- `contributors.qmd`: the data contributors page.
-- `contact.qmd`: the contact page.
-- `team/team-partners.qmd`: the main team and partners page.
-- `team/team/*/_index.md`: individual team member profile files.
+- `contribute.qmd`: the contribute / data contributors page.
+- `history.qmd`: the project history page — a phased, reverse-chronological timeline of how AusTraits developed.
+- `team/team-partners.qmd`: the main team and partners page (also hosts the Contact section). Team members are listed directly in this file.
 - `team/team/*/avatar.jpg`: profile photos for team members.
 - `images/`: logos, diagrams, and other website images.
 - `_quarto.yml`: the main website settings, including the navigation menu.
-- `index.css`: custom styling for the main site.
+- `styles.css`: shared visual styling for the site.
 - `team/styles.css`: custom styling for the team pages.
 - `_footer.html`: shared footer content.
 - `_extensions/sellorm/social-embeds/`: shortcodes for embedded social media and videos.
@@ -57,10 +56,7 @@ Most website content lives in `.qmd` files. Edit these files to change text, hea
 
 The navigation menu is controlled in `_quarto.yml`. If you add a new page and want it to appear in the top menu, add it under `website: navbar:`.
 
-Team profiles live in separate folders under `team/team/`. Each profile usually has:
-
-- `_index.md` for the person's name, role, links, and text
-- `avatar.jpg` for their photo
+Team members are listed directly in `team/team-partners.qmd` as a simple HTML grid: each person is a `team-member` block with their name, role or affiliation, and photo. The photos live in separate folders under `team/team/`, one folder per person containing an `avatar.jpg`.
 
 ## Deployment
 
@@ -78,6 +74,19 @@ When changes are pushed to the `master` branch, GitHub Actions runs `.github/wor
 The workflow can also be run manually from the GitHub Actions tab using **workflow_dispatch**.
 
 Netlify authentication is handled by the `NETLIFY_AUTH_TOKEN` secret in GitHub. You should not need to edit this unless deployment credentials change.
+
+### Deployment Setup
+
+Production deploys and pull request previews are intentionally handled separately:
+
+- GitHub Actions publishes the production site to Netlify after changes land on `master`.
+- Netlify builds pull request previews through its connected GitHub repository integration.
+
+Do not add a `pull_request` trigger to `.github/workflows/quarto-publish.yaml`. That workflow uses the production Netlify credentials and publishes to the live `austraits.org` site.
+
+Netlify should have Deploy Previews enabled in the site dashboard. Pull requests should receive preview URLs such as `deploy-preview-123--austraits.netlify.app`, not replace the production domain.
+
+The `netlify.toml` file tells Netlify to publish `_site` and use the Quarto Netlify plugin. Its build ignore rule limits Netlify builds to deploy-preview contexts, so production publishing stays with GitHub Actions.
 
 ## Common Maintenance Tasks
 
@@ -111,7 +120,17 @@ Put image files in the `images/` folder. In a `.qmd` file, link to them like thi
 
 ### Update Team Members
 
-Edit the relevant file under `team/team/PersonName/_index.md`.
+Edit the team grid in `team/team-partners.qmd`. Each person looks like this:
+
+```html
+<div class="team-member">
+  <img src="team/PersonName/avatar.jpg" class="team-photo">
+  <h5>Dr. Person Name</h5>
+  <p>Role or Affiliation</p>
+</div>
+```
+
+To add someone, copy one of these blocks into the relevant section (Core Team or Advisory Board) and add their photo as `team/team/PersonName/avatar.jpg`. To remove someone, delete their block (and their folder if the photo is no longer needed).
 
 To update a profile photo, replace `team/team/PersonName/avatar.jpg` with a new image using the same filename.
 
@@ -119,11 +138,12 @@ To update a profile photo, replace `team/team/PersonName/avatar.jpg` with a new 
 
 The impact page uses:
 
-- `3568417.json` for cached Zenodo data
-- the `scholar` R package for Google Scholar information
+- `data/zenodo/3568417.json` for cached Zenodo data
 - `_freeze/impact/execute-results/html.json` for cached Quarto execution results
 
-Because the page depends on external services, it may occasionally fail if those services are down or change their behaviour. If the impact page needs a fresh update, run:
+The page is designed to render reliably from cached data. The `Refresh Zenodo Cache` GitHub Actions workflow can be run manually and is also scheduled monthly. When Zenodo metadata changes, it opens or updates a pull request with a refreshed `data/zenodo/3568417.json` and regenerated impact-page freeze output.
+
+To refresh locally instead, update `data/zenodo/3568417.json`, then run:
 
 ```sh
 quarto render impact.qmd
@@ -131,24 +151,17 @@ quarto render impact.qmd
 
 Then check the rendered page at `_site/impact.html`.
 
-### Social Media Embeds
-
-Tweets and other embeds are handled by files in `_extensions/sellorm/social-embeds/`.
-
-Old tweets may disappear or become unavailable through X/Twitter. The Twitter shortcode is set up to fall back to a normal link if the embed cannot be loaded.
-
 ## Troubleshooting
 
 If rendering fails because an R package is missing, install the package named in the error message. The usual packages needed are:
 
 ```r
-install.packages(c("dplyr", "lubridate", "jsonlite", "kableExtra", "scholar"))
+install.packages("jsonlite")
 ```
 
 If the site renders locally but deployment fails, check the GitHub Actions log for the failing step. The most likely causes are:
 
 - an R package failed to install
-- an external service used by `impact.qmd` was unavailable
 - Netlify credentials need attention
 
 If in doubt, make a small change, run `quarto render`, and check the local preview before pushing.

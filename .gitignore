@@ -16,3 +16,4 @@ _site/
 **/*.quarto_ipynb
 renv/
 renv.lock
+.playwright-cli/

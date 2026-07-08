@@ -1,0 +1,30 @@
+---
+title: Contribute Data
+---
+
+AusTraits continues to integrate newly collected and legacy datasets, with future Zenodo releases planned. Contributions of any size can improve the resource for Australian plant science, conservation, and biodiversity infrastructure.
+
+```{=html}
+<div class="card-grid">
+  <article class="plain-card">
+    <h3>Trait datasets</h3>
+    <p>Share field, laboratory, literature-derived, or compiled trait data with accompanying metadata.</p>
+  </article>
+  <article class="plain-card">
+    <h3>Legacy sources</h3>
+    <p>Contribute transcriptions from reference books, classic works, taxonomic monographs, or archived datasets.</p>
+  </article>
+  <article class="plain-card">
+    <h3>Expert review</h3>
+    <p>Help improve trait definitions, allowable values, taxonomic alignment, and interpretation of specialised datasets.</p>
+  </article>
+  <article class="plain-card">
+    <h3>Community reuse</h3>
+    <p>Tell us how you use AusTraits so we can improve access pathways, documentation, and derived products.</p>
+  </article>
+</div>
+```
+
+**This project would not be possible without contributions from researchers across Australia and beyond. We are thankful for every contribution, no matter how large or small.**
+
+To contribute data or discuss a possible collaboration, [contact the AusTraits team](mailto:austraits.database@gmail.com). See [Zenodo](https://doi.org/10.5281/zenodo.3568417) for a full list of researchers who have contributed data and expertise to AusTraits.
