@@ -18,6 +18,8 @@ website:
         text: Tools
       - text: About
         menu:
+          - href: family.qmd
+            text: The family
           - href: team/team-partners.qmd
             text: Team
           - href: history.qmd
