@@ -14,6 +14,8 @@ website:
         text: Platform
       - href: index.html#access
         text: Access
+      - href: portal.qmd
+        text: Data portal
       - href: index.html#software
         text: Tools
       - text: About

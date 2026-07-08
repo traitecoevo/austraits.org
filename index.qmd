@@ -128,13 +128,11 @@ execute:
         <h3>ALA integration</h3>
         <p>Access taxon-level trait summaries through Atlas of Living Australia pages.</p>
       </a>
-      <!-- TODO: add a panel for the data portal once the URL is confirmed
-      <a class="resource-card" href="DATA_PORTAL_URL" target="_blank" rel="noopener">
+      <a class="resource-card" href="portal.html">
         <span class="card-icon"><i class="bi bi-window-stack"></i></span>
         <h3>Data portal</h3>
-        <p>Browse, filter, and query AusTraits data interactively in the browser.</p>
+        <p>Browse, filter, and download AusTraits data interactively in the browser — no code required.</p>
       </a>
-      -->
     </div>
   </div>
 </section>
