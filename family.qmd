@@ -20,6 +20,7 @@ flowchart TD
   ZEN[("Zenodo<br/>austraits-X.Y.Z")]
   PKG["<b>austraits</b><br/>R access &amp; wrangling"]
   WEB["Data portal &amp; API<br/>code-free access"]
+  REUSE["reused beyond AusTraits<br/>(other trait databases<br/>&amp; taxonomy projects)"]
 
   APD --> BUILD
   APC --> BUILD
@@ -28,11 +29,15 @@ flowchart TD
   BUILD --> ZEN
   ZEN --> PKG
   ZEN --> WEB
+  APC -. reused by .-> REUSE
+  TB -. reused by .-> REUSE
 
   classDef core fill:#e8f4ec,stroke:#4a8a68,color:#1d3b2a;
   classDef data fill:#eef2f7,stroke:#7089a8,color:#243044;
+  classDef reuse fill:#fbf6ea,stroke:#c9a340,color:#5b4a12,stroke-dasharray:4 3;
   class APD,APC,TB,BUILD,PKG core;
   class RAW,ZEN,WEB data;
+  class REUSE reuse;
 ```
 
 A key subtlety: the **data flow** above is not the same as the R-package install graph. In the build,
@@ -51,7 +56,7 @@ lives in [`austraits-meta`](https://github.com/traitecoevo/austraits-meta).
   </article>
   <article class="plain-card">
     <h3>APCalign — taxonomy alignment</h3>
-    <p>Aligns and updates plant names against the Australian Plant Census / APNI, and reports native vs introduced status. Used to standardise taxonomy before data is compiled.</p>
+    <p>Aligns and updates plant names against the Australian Plant Census / APNI, and reports native vs introduced status. Used to standardise taxonomy before data is compiled — and reusable as a standalone taxonomy tool in any other project.</p>
     <p><a href="https://traitecoevo.github.io/APCalign/" target="_blank" rel="noopener">Package site</a></p>
   </article>
   <article class="plain-card">

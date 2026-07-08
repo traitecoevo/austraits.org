@@ -20,10 +20,10 @@ website:
         text: Tools
       - text: About
         menu:
-          - href: family.qmd
-            text: The family
           - href: team/team-partners.qmd
             text: Team
+          - href: family.qmd
+            text: The family
           - href: history.qmd
             text: History
           - href: impact.qmd

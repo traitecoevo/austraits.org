@@ -14,6 +14,14 @@
   --at-white: #ffffff;
   --at-shadow: 0 10px 26px rgba(30, 45, 38, 0.08);
   --at-radius: 8px;
+
+  /* Quarto derives the mermaid edge colour from the simplex theme, which
+     resolves to white — invisible arrows/labels on our white pages. Pin it
+     to a legible neutral so flowchart edges and edge labels show. The label
+     foreground otherwise inherits the simplex primary (red), which reads as an
+     error on a flow diagram — pin it to the same neutral. */
+  --mermaid-edge-color: #64726b;
+  --mermaid-label-fg-color: #4a544e;
 }
 
 body {
@@ -654,7 +662,8 @@ main.content {
 }
 
 .plain-card a {
-  font-weight: 600;
+  font-size: 0.82rem;
+  font-weight: 500;
 }
 
 .data-product-panel {
