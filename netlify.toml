@@ -1,5 +1,7 @@
 [build]
 publish = "_site"
+# Netlify builds PR previews; production publishing is handled by GitHub Actions.
+ignore = "test \"$CONTEXT\" != \"deploy-preview\""
 
 [[plugins]]
 package = "@quarto/netlify-plugin-quarto"

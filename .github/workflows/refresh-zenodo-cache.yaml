@@ -1,0 +1,98 @@
+on:
+  workflow_dispatch:
+  schedule:
+    # Refresh cached Zenodo metadata monthly.
+    - cron: "17 2 1 * *"
+
+name: Refresh Zenodo Cache
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  refresh-cache:
+    runs-on: ubuntu-latest
+    env:
+      CACHE_FILE: data/zenodo/3568417.json
+      ZENODO_RECORD_URL: https://zenodo.org/api/records/3568417
+      UPDATE_BRANCH: automation/refresh-zenodo-cache
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Refresh cached Zenodo metadata
+        id: refresh
+        run: |
+          set -euo pipefail
+
+          curl \
+            --fail \
+            --location \
+            --silent \
+            --show-error \
+            --user-agent "austraits.org cache refresh (https://github.com/traitecoevo/austraits.org)" \
+            "$ZENODO_RECORD_URL" |
+            jq . > "$CACHE_FILE.tmp"
+
+          jq empty "$CACHE_FILE.tmp"
+          mv "$CACHE_FILE.tmp" "$CACHE_FILE"
+
+          if git diff --quiet -- "$CACHE_FILE"; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Set up Quarto
+        if: steps.refresh.outputs.changed == 'true'
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Set up R
+        if: steps.refresh.outputs.changed == 'true'
+        uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - name: Install R packages
+        if: steps.refresh.outputs.changed == 'true'
+        shell: Rscript {0}
+        run: |
+          install.packages("jsonlite")
+
+      - name: Re-render impact page cache
+        if: steps.refresh.outputs.changed == 'true'
+        run: |
+          quarto render impact.qmd --execute
+
+      - name: Commit cache update
+        if: steps.refresh.outputs.changed == 'true'
+        run: |
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git switch --force-create "$UPDATE_BRANCH"
+          git add "$CACHE_FILE" _freeze/impact/execute-results/html.json
+          git commit -m "Refresh Zenodo metadata cache"
+          git push --force-with-lease origin "$UPDATE_BRANCH"
+
+      - name: Open or update pull request
+        if: steps.refresh.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          if gh pr view "$UPDATE_BRANCH" --json number --jq .number >/dev/null 2>&1; then
+            echo "Pull request already exists for $UPDATE_BRANCH"
+          else
+            gh pr create \
+              --base "${{ github.event.repository.default_branch }}" \
+              --head "$UPDATE_BRANCH" \
+              --title "Refresh Zenodo metadata cache" \
+              --body "Updates \`data/zenodo/3568417.json\` from the Zenodo concept record used by the impact page."
+          fi
