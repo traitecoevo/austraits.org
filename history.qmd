@@ -20,15 +20,21 @@ Backed by the ARDC Planet Research Data Commons, the project set out to cover Au
   </li>
   <li class="timeline-item">
     <span class="timeline-year">2026</span>
+    <h3>Pollination traits working group</h3>
+    <p>A dedicated meeting and working group convened to extend AusTraits into pollination traits, broadening the resource toward plant&ndash;animal interactions.</p>
+    <div class="timeline-tags"><span class="timeline-tag">Working group</span></div>
+  </li>
+  <li class="timeline-item">
+    <span class="timeline-year">2025</span>
     <h3>A species-averages layer</h3>
     <p>A dedicated working group began developing a species-averages layer &mdash; consensus trait values per species &mdash; to make AusTraits easier to join with other species-level datasets.</p>
     <div class="timeline-tags"><span class="timeline-tag">Working group</span></div>
   </li>
   <li class="timeline-item">
-    <span class="timeline-year">2026</span>
-    <h3>Pollination traits working group</h3>
-    <p>A dedicated meeting and working group convened to extend AusTraits into pollination traits, broadening the resource toward plant&ndash;animal interactions.</p>
-    <div class="timeline-tags"><span class="timeline-tag">Working group</span></div>
+    <span class="timeline-year">2025</span>
+    <h3>Fire traits workshop</h3>
+    <p>An online workshop convened to scope the most important fire-response traits and identify candidate datasets, guiding how AusTraits could better support fire ecology research.</p>
+    <div class="timeline-tags"><span class="timeline-tag">Workshop</span></div>
   </li>
   <li class="timeline-item">
     <span class="timeline-year">2025</span>
