@@ -122,6 +122,20 @@ By harmonising trait data at a continental scale, AusTraits lets researchers ask
 
 For many more examples, browse the [full list of works citing the AusTraits resource paper](https://scholar.google.com/scholar?cites=13955903476754965983&as_sdt=2005&sciodt=0,5&hl=en) on Google Scholar.
 
+## In applied practice
+
+Beyond research, AusTraits is increasingly used by government agencies and conservation organisations in their day-to-day work &mdash; often reaching for the simpler traits, in standardised tabular form, to support on-ground decisions.
+
+<figure class="impact-quote">
+  <blockquote>"Thank you for producing and maintaining the AusTraits dataset. I recently compiled a list of weed species on Biodiversity Stewardship Areas as part of my work understanding how management actions relate to gains."</blockquote>
+  <figcaption>&mdash; <strong>Stephanie Hernandez</strong>, NSW Department of Climate Change, Energy, the Environment and Water (2024)</figcaption>
+</figure>
+
+<figure class="impact-quote">
+  <blockquote>"AusTraits has already saved us a lot of time and added value to our ecological assessments, so we really appreciate the work your team is doing."</blockquote>
+  <figcaption>&mdash; <strong>Anu Singh</strong>, Bush Heritage Australia (2025)</figcaption>
+</figure>
+
 ## Community engagement
 
 The AusTraits team has presented the project at ecological, biodiversity informatics, vocabulary, and systematics meetings, including:
