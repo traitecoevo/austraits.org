@@ -9,6 +9,9 @@ built with [Quarto](https://quarto.org/).
   `index.qmd` (home), `impact.qmd` (download/citation stats — runs R), `contributors.qmd`,
   `contact.qmd`, and `team/team-partners.qmd`. Individual team profiles live under
   `team/team/*/_index.md` with a sibling `avatar.jpg`.
+- **Embedded Shiny apps:** `portal.qmd` and `apcalign.qmd` are thin wrappers that `<iframe>` the
+  apps deployed at `app.austraits.org` (`austraits.portal` and `APCalign-app` respectively). They
+  hold no app code — to change what a visitor sees inside the frame, change and redeploy that app.
 - **Config & styling:** `_quarto.yml` holds site settings and the navbar; `styles.css` (plus
   `team/styles.css`) for styling; `_footer.html` for the shared footer; `_extensions/` for Quarto
   shortcodes (e.g. social embeds).

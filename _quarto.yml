@@ -16,6 +16,8 @@ website:
         text: Access
       - href: portal.qmd
         text: Data portal
+      - href: apcalign.qmd
+        text: Name aligner
       - href: index.html#software
         text: Tools
       - text: About
