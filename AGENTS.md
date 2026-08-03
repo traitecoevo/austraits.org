@@ -16,7 +16,8 @@ built with [Quarto](https://quarto.org/).
   `_freeze/` caches Quarto code execution — keep it unless deliberately refreshing.
 - **Build/preview:** install Quarto, then `quarto render` (builds into `_site/`) and
   `quarto preview` (local preview). No `renv`; if an R package is missing, `install.packages(...)`
-  it (`impact.qmd` needs `jsonlite`).
+  it (`impact.qmd` needs `jsonlite`, plus `knitr` and `rmarkdown` to execute rather than replay
+  `_freeze/`).
 
 Deployment: GitHub Actions (`.github/workflows/quarto-publish.yaml`) renders and publishes to
 Netlify on pushes to **`master`** (the default branch); PR previews come from Netlify's own GitHub

@@ -60,7 +60,9 @@ jobs:
         if: steps.refresh.outputs.changed == 'true'
         shell: Rscript {0}
         run: |
-          install.packages("jsonlite")
+          # knitr and rmarkdown back the knitr engine that impact.qmd declares;
+          # --execute below bypasses the freeze cache, so R actually runs here.
+          install.packages(c("jsonlite", "knitr", "rmarkdown"))
 
       - name: Re-render impact page cache
         if: steps.refresh.outputs.changed == 'true'
