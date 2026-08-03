@@ -23,7 +23,7 @@ jobs:
       - name: Install R packages
         shell: Rscript {0}
         run: |
-          install.packages("jsonlite")
+          install.packages(c("jsonlite", "knitr", "rmarkdown"))
 
       - name: Render and Publish 
         uses: quarto-dev/quarto-actions/publish@v2

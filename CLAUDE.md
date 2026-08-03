@@ -14,7 +14,8 @@ quarto preview             # local preview with live reload
 quarto render impact.qmd   # render a single page
 ```
 
-The only R dependency for building is `jsonlite` (used by `impact.qmd`).
+A build that replays `_freeze/` needs no R packages at all. Executing `impact.qmd` (a fresh
+checkout, or `--execute`) needs `jsonlite` plus `knitr` and `rmarkdown` for the knitr engine.
 
 ## Architecture
 
