@@ -177,7 +177,7 @@ execute:
         <img src="images/APCalign_hex.png" alt="APCalign package logo">
         <div>
           <h3>APCalign</h3>
-          <p>An R package and Shiny app for aligning Australian vascular plant names...
+          <p>An R package and <a href="apcalign.html">Shiny app</a> for aligning Australian vascular plant names...
             <a href="https://github.com/traitecoevo/APCalign" target="_blank" rel="noopener">more</a></p>
         </div>
       </article>

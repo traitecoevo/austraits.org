@@ -1,0 +1,36 @@
+---
+title: "APCalign name aligner"
+format:
+  html:
+    page-layout: full
+    toc: false
+---
+
+The APCalign app aligns and updates Australian plant taxon names to the currently accepted standards
+of the [Australian Plant Census](https://biodiversity.org.au/nsl/services/search/taxonomy) (APC) —
+paste in a list of names or upload a CSV, no R or programming required. It is embedded below, or you
+can
+
+<p>
+<a class="btn-primary" href="https://app.austraits.org/APCalign-app/" target="_blank" rel="noopener"><i class="bi bi-box-arrow-up-right"></i> Open the name aligner in a new tab</a>
+</p>
+
+```{=html}
+<div style="position: relative; width: 100%; height: 80vh; min-height: 600px; border: 1px solid #ddd; border-radius: 6px; overflow: hidden; margin-top: 1rem;">
+  <iframe
+    src="https://app.austraits.org/APCalign-app/"
+    title="APCalign name aligner"
+    loading="lazy"
+    allowfullscreen
+    style="width: 100%; height: 100%; border: none;">
+  </iframe>
+</div>
+```
+
+::: {.callout-note appearance="simple"}
+The app is hosted on AWS at [app.austraits.org/APCalign-app](https://app.austraits.org/APCalign-app/).
+It can take a moment to start while it loads the current APC and APNI taxonomic data. For
+programmatic access to the same name matching, use the
+[`APCalign`](https://traitecoevo.github.io/APCalign/) R package. Source code for the app lives in
+[`traitecoevo/APCalign-app`](https://github.com/traitecoevo/APCalign-app).
+:::
