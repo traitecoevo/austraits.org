@@ -2213,14 +2213,14 @@
   ],
   "status": "published",
   "stats": {
-    "downloads": 12535,
-    "unique_downloads": 10923,
-    "views": 17641,
-    "unique_views": 16083,
-    "version_downloads": 1697,
-    "version_unique_downloads": 1585,
-    "version_unique_views": 1785,
-    "version_views": 1948
+    "downloads": 14994,
+    "unique_downloads": 13263,
+    "views": 19744,
+    "unique_views": 18096,
+    "version_downloads": 2519,
+    "version_unique_downloads": 2343,
+    "version_unique_views": 2502,
+    "version_views": 2737
   },
   "state": "done",
   "submitted": true
