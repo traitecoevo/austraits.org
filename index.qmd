@@ -118,7 +118,7 @@ execute:
         <h3>R interface</h3>
         <p>Download, join, filter, explore, and visualise AusTraits data in analysis workflows.</p>
       </a>
-      <a class="resource-card" href="https://traitecoevo.github.io/traits.build-book/AusTraits_tutorial.html" target="_blank" rel="noopener">
+      <a class="resource-card" href="https://traitecoevo.github.io/traits.build-book/content/AusTraits_tutorial.html" target="_blank" rel="noopener">
         <span class="card-icon"><i class="bi bi-journal-text"></i></span>
         <h3>Tutorials</h3>
         <p>Follow worked examples for exploring and analysing data using project tooling.</p>
