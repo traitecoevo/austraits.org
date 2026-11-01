@@ -2137,8 +2137,6 @@
     "self_iiif_sequence": "https://zenodo.org/api/iiif/record:15718081/sequence/default",
     "files": "https://zenodo.org/api/records/15718081/files",
     "media_files": "https://zenodo.org/api/records/15718081/media-files",
-    "archive": "https://zenodo.org/api/records/15718081/files-archive",
-    "archive_media": "https://zenodo.org/api/records/15718081/media-files-archive",
     "latest": "https://zenodo.org/api/records/15718081/versions/latest",
     "latest_html": "https://zenodo.org/records/15718081/latest",
     "versions": "https://zenodo.org/api/records/15718081/versions",
@@ -2213,14 +2211,14 @@
   ],
   "status": "published",
   "stats": {
-    "downloads": 14994,
-    "unique_downloads": 13263,
-    "views": 19744,
-    "unique_views": 18096,
-    "version_downloads": 2519,
-    "version_unique_downloads": 2343,
-    "version_unique_views": 2502,
-    "version_views": 2737
+    "downloads": 16257,
+    "unique_downloads": 14387,
+    "views": 20954,
+    "unique_views": 19242,
+    "version_downloads": 3113,
+    "version_unique_downloads": 2858,
+    "version_unique_views": 3043,
+    "version_views": 3322
   },
   "state": "done",
   "submitted": true
