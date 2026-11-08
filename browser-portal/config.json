@@ -1,0 +1,9 @@
+{
+ "dataBase": "https://data.austraitsdata.org/data/7.0.0",
+ "engineBase": "https://data.austraitsdata.org/site/engine-1.32.0",
+ "extensionRepo": "https://data.austraitsdata.org/site/ext",
+ "telemetry": {
+  "url": "https://mcttwtomgjlfzkvrnxhm.supabase.co",
+  "key": "sb_publishable_DTlPbndts072OTnd11opAg_hbHKPymR"
+ }
+}

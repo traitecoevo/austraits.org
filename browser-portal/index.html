@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AusTraits Data Portal</title>
+<link rel="icon" href="assets/austraits_hex.png" type="image/png">
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+<link rel="stylesheet" href="css/portal.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-gh" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></symbol>
+<symbol id="i-orcid" viewBox="0 0 256 256"><circle cx="128" cy="128" r="128" fill="#A6CE39"/><g fill="#fff"><path d="M86.3 186.2H70.9V79.1h15.4v107.1z"/><path d="M108.9 79.1h41.6c39.6 0 57 28.3 57 53.6 0 27.5-21.5 53.6-56.8 53.6h-41.8V79.1zm15.4 93.3h24.5c34.9 0 42.9-26.5 42.9-39.7 0-21.5-13.7-39.7-43.7-39.7h-23.7v79.4z"/><circle cx="78.6" cy="55.8" r="9.4"/></g></symbol>
+</defs></svg>
+<header class="brand">
+  <a class="brand-link" href="./"><img src="assets/austraits_hex.png" alt="" height="30"><span>AusTraits Data Portal</span></a>
+  <button id="menu-btn" class="menu-btn" aria-expanded="false" aria-controls="sidebar">Filters</button>
+</header>
+
+<div class="layout">
+  <aside id="sidebar" class="sidebar" aria-label="Filters">
+    <form id="filters" autocomplete="off">
+      <h2 class="side-h">Dataset</h2>
+      <div class="radios" id="f-dataset"></div>
+
+      <h2 class="side-h">Taxonomy</h2>
+      <div class="field"><span class="lab">Filter by which taxon rank</span><div class="radios" id="f-rank"></div></div>
+      <div class="field" id="w-family"><span class="lab">Family</span><div id="f-family"></div></div>
+      <div class="field" id="w-genus" hidden><span class="lab">Genus</span><div id="f-genus"></div></div>
+      <div class="field" id="w-taxon_name" hidden><span class="lab">Taxon name</span><div id="f-taxon_name"></div></div>
+
+      <h2 class="side-h">Trait</h2>
+      <div class="field"><span class="lab">Trait name(s)</span><div id="f-trait"></div></div>
+      <div class="field"><span class="lab">Additional trait filters</span><div class="radios" id="f-traitmode"></div></div>
+      <div id="w-features" hidden>
+        <div class="field"><span class="lab">Trait grouping</span><div id="f-grouping"></div></div>
+        <div class="field"><span class="lab">Structure measured</span><div id="f-structure"></div></div>
+        <div class="field"><span class="lab">Keywords</span><div id="f-keywords"></div></div>
+      </div>
+
+      <div id="w-location">
+        <h2 class="side-h">Location filters</h2>
+        <div class="radios" id="f-location"></div>
+        <div class="field" id="w-apc" hidden><span class="lab">State/territory</span><div id="f-apc"></div></div>
+        <div id="w-bbox" hidden>
+          <p class="hint">Filter to bounding box (optional)</p>
+          <div class="grid2">
+            <label>Min latitude<input type="number" step="any" min="-60" max="45" id="min_latitude"></label>
+            <label>Max latitude<input type="number" step="any" min="-60" max="45" id="max_latitude"></label>
+            <label>Min longitude<input type="number" step="any" min="-80" max="169" id="min_longitude"></label>
+            <label>Max longitude<input type="number" step="any" min="-80" max="169" id="max_longitude"></label>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="side-h">Custom filters</h2>
+      <div id="f-custom"></div>
+
+      <button type="submit" class="btn primary wide apply">Apply Filters</button>
+      <button type="button" class="btn ghost wide" id="reset">Reset filters</button>
+      <div id="dl-box" class="dl-box">
+        <div id="dl-warn" class="dl-warn" hidden></div>
+        <button type="button" class="btn primary wide" id="download" disabled>⬇ Download Data</button>
+        <p id="dl-note" class="dl-note" role="status" hidden></p>
+      </div>
+    </form>
+  </aside>
+  <button id="side-toggle" class="side-toggle" type="button" aria-label="Hide filters" aria-expanded="true" aria-controls="sidebar"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  <div id="splitter" class="splitter" role="separator" aria-orientation="vertical" aria-label="Resize filters" tabindex="0"></div>
+  <div class="content">
+<nav class="tabs" role="tablist">
+  <button role="tab" id="tab-data" aria-selected="true" aria-controls="panel-data" class="tab active">Data Preview</button>
+  <button role="tab" id="tab-info" aria-selected="false" aria-controls="panel-info" class="tab">App Information</button>
+  <button role="tab" id="tab-taxon" aria-selected="false" aria-controls="panel-taxon" class="tab">Taxon View</button>
+  <button role="tab" id="tab-trait" aria-selected="false" aria-controls="panel-trait" class="tab">Trait View</button>
+  <button role="tab" id="tab-cite" aria-selected="false" aria-controls="panel-cite" class="tab">Citations</button>
+</nav>
+
+  <main class="main">
+    <section id="panel-data" role="tabpanel" aria-labelledby="tab-data">
+      <div class="card">
+        <div class="bar">
+          <div id="summary" class="summary" aria-live="polite">&nbsp;</div>
+          <div class="bar-right">
+            <label class="inline">Rows per page
+              <select id="pagesize"><option>10</option><option>25</option><option>50</option><option selected>100</option></select>
+            </label>
+            <button type="button" class="btn ghost small" id="share" title="Copy a link to this view">Copy link</button>
+          </div>
+        </div>
+        <div id="status" class="status" role="status"><span class="spinner sm" aria-hidden="true"></span><span id="status-text">Starting the database engine. The first visit downloads about 6 MB; later visits are much faster.</span></div>
+        <div class="table-wrap" id="table-wrap" tabindex="0">
+          <table id="grid"><thead></thead><tbody></tbody></table>
+        </div>
+        <div class="pager">
+          <button class="btn ghost small" id="first">« First</button>
+          <button class="btn ghost small" id="prev">‹ Previous</button>
+          <span id="pageinfo" class="pageinfo"></span>
+          <button class="btn ghost small" id="next">Next ›</button>
+          <button class="btn ghost small" id="last">Last »</button>
+        </div>
+      </div>
+    </section>
+    <section id="panel-taxon" role="tabpanel" aria-labelledby="tab-taxon" hidden>
+      <div class="card">
+        <h3 class="card-h">AusTraits taxon profile</h3>
+        <div id="taxon-status" class="status" role="status" hidden><span class="spinner sm" aria-hidden="true"></span><span id="taxon-status-text">Loading the taxon profile…</span></div>
+        <div id="taxon-body"></div>
+      </div>
+    </section>
+    <section id="panel-trait" role="tabpanel" aria-labelledby="tab-trait" hidden>
+      <div class="card">
+        <h3 class="card-h">AusTraits trait profile</h3>
+        <div id="trait-status" class="status" role="status" hidden><span class="spinner sm" aria-hidden="true"></span><span id="trait-status-text">Loading the trait profile…</span></div>
+        <div id="trait-body">
+          <div id="tv-banner"></div>
+          <div id="tv-profile"></div>
+          <div id="tv-plotcard" class="tv-sub" hidden><h4>Observed values</h4><div id="tv-plottext" class="prose"></div><div id="tv-plot"></div></div>
+          <div id="tv-geocard" class="tv-sub" hidden><h4>Geographical distribution of trait data</h4><div id="tv-geotext" class="prose"></div><div id="tv-map"></div></div>
+        </div>
+      </div>
+    </section>
+    <section id="panel-cite" role="tabpanel" aria-labelledby="tab-cite" hidden>
+      <div class="card prose">
+        <h3 class="card-h">Referencing your filtered data</h3>
+        <div id="cite-status" class="status" role="status" hidden><span class="spinner sm" aria-hidden="true"></span><span id="cite-status-text">Collecting the references…</span></div>
+        <div id="cite-body"></div>
+      </div>
+    </section>
+    <section id="panel-info" role="tabpanel" aria-labelledby="tab-info" hidden>
+      <div class="card prose" id="info">
+        <h3 class="card-h">About and Information</h3>
+        <h2>Attribution</h2>
+        <p>The AusTraits Database Portal was designed by <strong>Pushkal Garg</strong> <a class="ico gh" href="https://github.com/Pushkalgithub" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub profile"><svg width="16" height="16" aria-hidden="true"><use href="#i-gh"/></svg></a> <a class="ico orcid" href="https://orcid.org/0009-0002-0179-2946" target="_blank" rel="noopener" title="ORCID" aria-label="ORCID profile"><svg width="16" height="16" aria-hidden="true"><use href="#i-orcid"/></svg></a>, <strong>Fonti Kar</strong> <a class="ico gh" href="https://github.com/fontikar" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub profile"><svg width="16" height="16" aria-hidden="true"><use href="#i-gh"/></svg></a> <a class="ico orcid" href="https://orcid.org/0000-0002-2760-3974" target="_blank" rel="noopener" title="ORCID" aria-label="ORCID profile"><svg width="16" height="16" aria-hidden="true"><use href="#i-orcid"/></svg></a>, <strong>Daniel Falster</strong> <a class="ico gh" href="https://github.com/dfalster" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub profile"><svg width="16" height="16" aria-hidden="true"><use href="#i-gh"/></svg></a> <a class="ico orcid" href="https://orcid.org/0000-0002-9814-092X" target="_blank" rel="noopener" title="ORCID" aria-label="ORCID profile"><svg width="16" height="16" aria-hidden="true"><use href="#i-orcid"/></svg></a>, <strong>Elizabeth Wenk</strong> <a class="ico gh" href="https://github.com/ehwenk" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub profile"><svg width="16" height="16" aria-hidden="true"><use href="#i-gh"/></svg></a> <a class="ico orcid" href="https://orcid.org/0000-0001-5640-5910" target="_blank" rel="noopener" title="ORCID" aria-label="ORCID profile"><svg width="16" height="16" aria-hidden="true"><use href="#i-orcid"/></svg></a>, and <strong>Ray Miles</strong> <a class="ico gh" href="https://github.com/raymiles" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub profile"><svg width="16" height="16" aria-hidden="true"><use href="#i-gh"/></svg></a>.</p>
+        <p>Development of this portal was supported by a UNSW Research Infrastructure Grant. AusTraits is a co-investment partnership with the Australian Research Data Commons (ARDC) through the Planet Research Data Commons. The ARDC is enabled by the Australian Government's National Collaborative Research Infrastructure Strategy (NCRIS).</p>
+        <div class="logos">
+          <a class="logo-link" href="https://www.austraits.org" target="_blank" rel="noopener"><img src="assets/austraits_hex.png" height="70" alt="AusTraits"></a>
+          <a class="logo-link" href="https://www.unsw.edu.au" target="_blank" rel="noopener"><img loading="lazy" referrerpolicy="no-referrer" src="https://austraits.org/images/UNSW.png" height="70" alt="UNSW"></a>
+          <a class="logo-link" href="https://www.westernsydney.edu.au/" target="_blank" rel="noopener"><img loading="lazy" referrerpolicy="no-referrer" src="https://upload.wikimedia.org/wikipedia/en/f/f0/Western_Sydney_University_Crest.png" height="70" alt="Western Sydney University"></a>
+          <a class="logo-link" href="https://www.botanicgardens.org.au" target="_blank" rel="noopener"><img loading="lazy" referrerpolicy="no-referrer" src="https://nesplandscapes.edu.au/wp-content/uploads/2021/07/RBGS-Royal-Botanic-Gardens-Sydney.png" height="70" alt="Royal Botanic Garden Sydney"></a>
+          <a class="logo-link" href="https://ardc.edu.au" target="_blank" rel="noopener"><img loading="lazy" referrerpolicy="no-referrer" src="https://austraits.org/images/ARDC.png" height="70" alt="ARDC"></a>
+          <a class="logo-link" href="https://www.education.gov.au/ncris" target="_blank" rel="noopener"><img loading="lazy" referrerpolicy="no-referrer" src="https://bioplatforms.com/wp-content/uploads/2024/03/afb87787085b2b5c5a7814a28971e5aa-1.png" height="70" alt="NCRIS"></a>
+        </div>
+        <hr>
+        <h2>Background</h2>
+        <p>The AusTraits Database Portal offers a web-based interface to filter, view and download subsets of the AusTraits Database. The full database can also be downloaded from <a href="https://doi.org/10.5281/zenodo.3568417" target="_blank" rel="noopener noreferrer">Zenodo</a> as an .rds or .json file.</p>
+        <p>The Zenodo repository lists all <a href="https://doi.org/10.5281/zenodo.3568417" target="_blank" rel="noopener noreferrer">researchers</a> who have contributed their data to AusTraits. We thank them for being part of this project.</p>
+        <p>Additional AusTraits Project outputs to wrangle and interpret the data include:</p>
+        <ul>
+          <li><a href="https://github.com/traitecoevo/austraits" target="_blank" rel="noopener noreferrer">austraits</a> - an R package to explore and wrangle the AusTraits Database</li>
+          <li><a href="https://github.com/traitecoevo/APD" target="_blank" rel="noopener noreferrer">AusTraits Plant Dictionary</a> – formal definitions of all traits included in the database</li>
+        </ul>
+        <p>Please visit our <a href="https://www.austraits.org" target="_blank" rel="noopener noreferrer">website</a> for more project information.</p>
+        <p>The AusTraits database is facilitating research on Australia's diverse flora, including functional traits research, the preservation of Australia's unique plants, predicting species' responses to climate change, and understanding ecosystem dynamics at a continental scale.</p>
+        <hr>
+        <h2>How to Use</h2>
+        <div class="callout"><strong>Quick start:</strong> Select a dataset type → set your taxonomy → pick a trait (optional) → explore.</div>
+        <p><strong>Dataset type —</strong> Raw data or Species averages? Raw data has the individual observations submitted by contributors while Species averages presents species-level summary statistics (mean, min, max, median for numeric traits and value summaries for categorical traits). Pick based on the question you're asking.</p>
+        <p><strong>Taxonomy —</strong> Choose a taxonomic filter - Select All taxa or Family, Genus, or Taxon name (species and infraspecies), then select from the dropdown that appears. All taxa is selected as the default starting point.</p>
+        <p><strong>Traits —</strong> Search or browse the trait dropdown – noting you can select multiple traits at a time. Switch to <strong>Trait features</strong> if you want to search by trait groupings, measured structures, or keywords. Enabling trait features filters also refines the trait selection in the dropdown menu, for easier searching. Note, Trait features is only enabled if a trait name is not yet selected.</p>
+        <p><strong>Location —</strong> Data can be filtered by taxon distribution (per the APC) or by observation coordinates. You can opt to display all georeferenced data or specify a bounding box, filtering to data collected within a specific region of Australia. The <strong>APC taxon distribution</strong> (state/territory) filter works for both raw data and species average data outputs, while the <strong>Georeferenced records</strong> option is only enabled when Raw data are displayed.</p>
+        <p><strong>Custom filters —</strong> Add up to three additional column filters to fine-tune the data displayed. An additional filter slot appears once you've filled in a column name and values for the first filter. Columns with a controlled vocabulary (e.g. <strong>life_stage</strong>) have a drop-down menu of allowed options, while other columns (e.g. <strong>context property</strong>) accept any text. Please use <strong>|</strong> between two free-text filter queries to multi-select.</p>
+        <p><strong>Data Preview —</strong> Your filtered results, viewable 10, 25, 50, or 100 rows at a time. Columns are sortable.</p>
+        <hr>
+        <h2>Portal Usage</h2>
+        <div id="usage-off" class="muted">Usage counts appear here once the portal is connected to its usage database.</div>
+        <div id="usage" hidden>
+          <div class="metrics">
+            <div class="metric m1"><div class="metric-n" id="m-sessions">–</div><div class="metric-l">Total Sessions</div></div>
+            <div class="metric m2"><div class="metric-n" id="m-searches">–</div><div class="metric-l">Searches</div></div>
+            <div class="metric m3"><div class="metric-n" id="m-downloads">–</div><div class="metric-l">Downloads</div></div>
+          </div>
+          <p class="muted small">Metrics reflect cumulative portal activity and refresh when you open this tab.</p>
+          <div class="usage-h"><h3>Monthly Breakdown</h3><div><button type="button" class="btn ghost" id="u-csv">Download CSV</button> <button type="button" class="btn ghost" id="u-json">Download JSON</button></div></div>
+          <table class="tx-table" id="u-table"><thead><tr><th>Month</th><th>Logins</th><th>Searches</th><th>Downloads</th></tr></thead><tbody></tbody></table>
+        </div>
+        <h2>Usage Guidelines</h2>
+        <p><strong>Citing AusTraits —</strong> The <strong>Citations</strong> tab indicates the proper attribution for your selected AusTraits data.</p>
+        <p><strong>Feedback —</strong> Something off? A suggestion bubbling up? We're always keen to hear from people using the portal. Get in touch through the <a href="https://www.austraits.org" target="_blank" rel="noopener noreferrer">AusTraits website</a>.</p>
+      </div>
+    </section>
+  </main>
+<footer class="foot"><span>Powered by <a href="https://www.unsw.edu.au/science" target="_blank" rel="noopener noreferrer">UNSW Faculty of Science</a></span><span aria-hidden="true">·</span><span>Created by AusTraits Team</span></footer>
+  </div>
+</div>
+<div id="tip" class="tip" hidden></div>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
