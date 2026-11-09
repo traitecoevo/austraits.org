@@ -1,4 +1,4 @@
-// AusTraits Data Portal: browser-only. DuckDB-WASM reads Parquet over HTTP range requests; SQL comes from toSql.mjs (tested against 368 golden cases).
+// AusTraits Data Portal: browser-only. DuckDB-WASM reads Parquet over HTTP range requests; SQL comes from toSql.mjs (tested against 375 golden cases).
 import * as T from "./toSql.mjs";
 import { markdownToHtml, citationText } from "./cite.js";
 import * as TV from "./traitview.js";
@@ -7,6 +7,8 @@ import { buildZip, saveBlob } from "./download.js";
 import { initTelemetry, track, monthly, counterCsv, counterJson } from "./telemetry.js";
 
 const $ = (s, r = document) => r.querySelector(s);
+// run something when the browser has nothing better to do (falls back to a short timer)
+const idle = (f) => { try { "requestIdleCallback" in window ? requestIdleCallback(f, { timeout: 4000 }) : setTimeout(f, 2000); } catch { setTimeout(f, 2000); } };
 const abs = (p) => new URL(p, location.href).href.replace(/\/$/, "");
 const nf = new Intl.NumberFormat("en-AU");
 const pretty = (c) => c.replace(/\s*\(deg\)/, "").replace(/_/g, " ").replace(/^./, (x) => x.toUpperCase());
@@ -60,10 +62,10 @@ function radios(root, name, opts, onChange) {
     i.type = "radio"; i.name = name; i.value = v; l.append(i, document.createTextNode(label)); root.append(l);
     i.addEventListener("change", () => onChange(v)); return i;
   });
-  return { set(v) { inputs.forEach((i) => (i.checked = i.value === v)); }, show(v, on) { inputs.find((i) => i.value === v).parentElement.hidden = !on; } };
+  return { set(v) { inputs.forEach((i) => (i.checked = i.value === v)); }, show(v, on) { inputs.find((i) => i.value === v).parentElement.hidden = !on; }, enable(v, on) { const i = inputs.find((x) => x.value === v); i.disabled = !on; i.parentElement.classList.toggle("disabled", !on); } };
 }
 
-function multiSelect(root, { options = [], placeholder = "Type to search…", onChange = () => {}, single = false } = {}) {
+function multiSelect(root, { options = [], placeholder = "Type to search…", onChange = () => {} } = {}) {
   let opts = options, lower = opts.map((o) => o.toLowerCase()), sel = [], hits = [], act = -1;
   root.innerHTML = ""; root.classList.add("ms");
   const box = document.createElement("div"), input = document.createElement("input"), list = document.createElement("ul");
@@ -98,7 +100,7 @@ function multiSelect(root, { options = [], placeholder = "Type to search…", on
     if (more) { const li = document.createElement("li"); li.className = "more"; li.textContent = `${nf.format(more)} more. Keep typing to narrow the list.`; list.append(li); }
     list.hidden = false;
   }
-  function pick(v) { sel = single ? [v] : [...sel, v]; input.value = ""; drawChips(); emit(); single ? (list.hidden = true) : draw(); }
+  function pick(v) { sel = [...sel, v]; input.value = ""; drawChips(); emit(); draw(); }
   function move(d) { if (!hits.length) return; act = (act + d + hits.length) % hits.length; [...list.children].forEach((li, i) => li.setAttribute("aria-selected", i === act)); list.children[act]?.scrollIntoView({ block: "nearest" }); }
   input.addEventListener("input", draw); input.addEventListener("focus", draw);
   input.addEventListener("blur", () => setTimeout(() => (list.hidden = true), 100));
@@ -149,13 +151,14 @@ async function getJson(url) {
 async function main() {
   const cfg = await getJson("config.json");
   A.cfg = cfg; A.base = abs(cfg.dataBase);
-  initTelemetry(cfg.telemetry); track("login");
+  initTelemetry(cfg.telemetry); idle(() => track("login"));
   const get = (n) => getJson(A.base + "/" + n);
   // everything that does not need the engine starts now, in parallel with the engine
   prefetchExtension(cfg);
   const engine = startEngine(cfg);
   engine.catch(() => {}); // reported below
-  const [portal, spec, dd] = await Promise.all([get("portal.json"), get("filter_spec.json"), get("dropdowns.json")]);
+  const quiet = (p) => p.catch(() => null);
+  const [portal, spec, dd, dv] = await Promise.all([get("portal.json"), get("filter_spec.json"), get("dropdowns.json"), quiet(get("default_view.json"))]);
   A.portal = portal; A.spec = spec; A.dd = dd;
   document.title = portal.name;
   // the filters and the page are usable while the engine is still starting
@@ -164,18 +167,25 @@ async function main() {
   A.S = fromUrl ? cleanState(fromUrl, defaults(portal)) : defaults(portal);
   syncUI();
   setApply(false);
-  boot("Starting the database engine. The first visit downloads about 6 MB; later visits are much faster.");
+  // the first page of the default view is stored as a small file, so it can be shown while the engine starts
+  if (!fromUrl && dv && dv.data_version === portal.data_version && Array.isArray(dv.rows) && Number.isFinite(dv.total)) {
+    A.applied = JSON.parse(JSON.stringify(A.S)); A.total = dv.total; A.page = 0; A.pre = true;
+    render(dv.rows, cols());
+  }
+  setStatus("Starting the database engine. The first visit downloads about 6 MB; later visits are much faster.");
   await engine;
   boot("Opening the data…");
   for (const s of T.viewSql(A.base)) await run(s);
   A.feats = await run(`SELECT trait, coalesce(structure_measured,'') AS structure_measured, coalesce(trait_group,'') AS trait_group, coalesce(keywords,'') AS keywords FROM read_parquet('${A.base}/trait_features.parquet')`);
   A.taxaCols = (await run("SELECT column_name FROM (DESCRIBE SELECT * FROM taxa)")).map((r) => r.column_name).filter((c) => !["taxon_name", "family", "genus"].includes(c));
   A.engineReady = true; setApply(true);
-  await apply(true);
+  if (A.pre) { A.pre = false; writeHash(); updateDownloadUI(); setStatus(""); } // the stored first page is already on screen
+  else await apply(true);
+  idle(() => ensureTaxonNames()); // get the taxon names ready in the background
 }
 const setApply = (on) => document.querySelectorAll("#filters button[type=submit]").forEach((b) => (b.disabled = !on));
 // warm the browser cache with the Parquet reader while the engine downloads
-function prefetchExtension(cfg) { try { fetch(abs(cfg.extensionRepo) + "/v1.4.3/wasm_eh/parquet.duckdb_extension.wasm").catch(() => {}); } catch {} }
+function prefetchExtension(cfg) { try { fetch(abs(cfg.extensionRepo) + "/" + (cfg.extensionVersion || "v1.4.3") + "/wasm_eh/parquet.duckdb_extension.wasm").catch(() => {}); } catch {} }
 
 function buildUI() {
   const { dd, portal } = A, W = (A.w = {});
@@ -184,8 +194,8 @@ function buildUI() {
   W.rank = radios($("#f-rank"), "rank", [["all", "All taxa"], ["family", "Family"], ["genus", "Genus"], ["taxon_name", "Taxon name"]], (v) => { S().rank = v; syncUI(); });
   W.family = multiSelect($("#f-family"), { options: dd.all_family, placeholder: "Choose families…", onChange: (v) => (S().family = v) });
   W.genus = multiSelect($("#f-genus"), { options: dd.all_genus, placeholder: "Choose genera…", onChange: (v) => (S().genus = v) });
-  W.taxon_name = multiSelect($("#f-taxon_name"), { options: dd.all_taxon_names, placeholder: "Search 33,000 taxa…", onChange: (v) => (S().taxon_name = v) });
-  W.trait = multiSelect($("#f-trait"), { options: dd.all_traits, placeholder: "Choose traits…", onChange: (v) => (S().trait_name = v) });
+  W.taxon_name = multiSelect($("#f-taxon_name"), { options: dd.all_taxon_names || [], placeholder: `Search ${(dd.taxon_name_count || (dd.all_taxon_names || []).length).toLocaleString("en-AU")} taxa…`, onChange: (v) => (S().taxon_name = v) });
+  W.trait = multiSelect($("#f-trait"), { options: dd.all_traits, placeholder: "Choose traits…", onChange: (v) => { S().trait_name = v; W.traitmode.enable("features", v.length === 0 || S().traitmode === "features"); } });
   W.traitmode = radios($("#f-traitmode"), "traitmode", [["name", "None"], ["features", "Trait features"]], (v) => { S().traitmode = v; syncUI(); });
   W.grouping = multiSelect($("#f-grouping"), { options: dd.all_trait_groupings, placeholder: "Choose groupings…", onChange: (v) => (S().trait_grouping = v) });
   W.structure = multiSelect($("#f-structure"), { options: dd.all_structure_measured, placeholder: "Choose structures…", onChange: (v) => (S().structure_measured = v) });
@@ -234,7 +244,7 @@ function customRows() {
     box.append(lab, sel, val); root.append(box);
     if (!c.column) return;
     if (spec.controlled_vocabulary_columns.includes(c.column)) {
-      const ms = multiSelect(val, { placeholder: "Choose values…", onChange: (v) => { const had = c.value.length; c.value = v; if ((had === 0) !== (v.length === 0)) { const keep = document.activeElement; customRows(); } } });
+      const ms = multiSelect(val, { placeholder: "Choose values…", onChange: (v) => { const had = c.value.length; c.value = v; if ((had === 0) !== (v.length === 0)) customRows(); } });
       ms.set(c.value); vocab(c.column).then((o) => ms.setOptions(o));
     } else {
       const t = document.createElement("input"); t.type = "text"; t.placeholder = "Text to find (use | for “or”)"; t.value = c.value[0] || "";
@@ -258,15 +268,23 @@ async function vocab(col) {
   A.vocab.set(key, rows); return rows;
 }
 
+// The long list of taxon names is a separate file, read only when it is needed
+async function ensureTaxonNames() {
+  if (A.dd.all_taxon_names) return;
+  if (!A.taxonNamesP) A.taxonNamesP = getJson(A.base + "/taxon_names.json").then((names) => { A.dd.all_taxon_names = names; A.w.taxon_name.setOptions(names); }).catch((e) => { A.taxonNamesP = null; console.error(e); });
+  return A.taxonNamesP;
+}
 function syncUI() {
   const S = A.S, W = A.w;
   W.dataset.set(S.dataset); W.rank.set(S.rank); W.family.set(S.family); W.genus.set(S.genus); W.taxon_name.set(S.taxon_name);
   W.trait.set(S.trait_name); W.traitmode.set(S.traitmode); W.grouping.set(S.trait_grouping); W.structure.set(S.structure_measured); W.keywords.set(S.keywords);
   W.location.set(S.location); W.apc.set(S.apc);
+  W.traitmode.enable("features", S.trait_name.length === 0 || S.traitmode === "features"); // Trait features can only be switched on while no trait name is selected
   if (S.dataset === "species" && S.location === "georeferenced") S.location = "";
   W.location.show("georeferenced", S.dataset === "raw"); W.location.set(S.location);
   for (const k of ["min_latitude", "max_latitude", "min_longitude", "max_longitude"]) $("#" + k).value = S[k];
   for (const r of ["family", "genus", "taxon_name"]) $("#w-" + r).hidden = S.rank !== r;
+  if (S.rank === "taxon_name") ensureTaxonNames();
   $("#w-features").hidden = S.traitmode !== "features";
   $("#w-apc").hidden = S.location !== "apc"; $("#w-bbox").hidden = S.location !== "georeferenced";
   customRows();
@@ -319,7 +337,7 @@ function updateDownloadUI() {
   const cap = A.portal?.download_cap_rows ?? 300000, warnAt = A.portal?.download_warn_rows ?? 100000, nf = new Intl.NumberFormat("en-AU");
   A.dlConfirm = false; btn.classList.remove("warning"); warn.hidden = true; note.hidden = true; note.textContent = "";
   btn.textContent = "⬇ Download Data";
-  if (!A.applied || !n) { btn.disabled = true; return; }
+  if (!A.applied || !n || !A.engineReady) { btn.disabled = true; return; }
   if (n > cap) { btn.disabled = true; note.hidden = false; note.textContent = `Too many rows to download here (${nf.format(n)}; the limit is ${nf.format(cap)}). Narrow the filters, for example pick a trait or a family.`; return; }
   btn.disabled = false;
   if (n >= warnAt) { warn.hidden = false; warn.textContent = `⚠ Large download: ${nf.format(n)} rows`; btn.classList.add("warning"); btn.textContent = `Confirm & Download (${nf.format(n)} rows)`; }
@@ -373,6 +391,7 @@ async function loadTaxon() {
   } catch (e) { if (tok === A.taxonTok) { st.hidden = true; fail(e); } }
 }
 // Trait View: only worked out when the tab is open, and only again when the applied filters change
+function loadCss(href) { if (document.querySelector(`link[href="${href}"]`)) return; const l = document.createElement("link"); l.rel = "stylesheet"; l.href = href; document.head.append(l); }
 function loadScript(src) { return new Promise((ok, no) => { const s = document.createElement("script"); s.src = src; s.onload = ok; s.onerror = () => no(new Error("Could not load " + src)); document.head.append(s); }); }
 async function loadTrait() {
   if (!A.applied || !A.engineReady) return;
@@ -410,7 +429,7 @@ async function loadTrait() {
       const pts = (await run(T.selectSql(stt, A.spec, A.feats, A.taxaCols, `TRY_CAST("latitude (deg)" AS DOUBLE) AS lat, TRY_CAST("longitude (deg)" AS DOUBLE) AS lon, dataset_id, taxon_name`))).filter((r) => r.lat != null && r.lon != null && r.lat >= -90 && r.lat <= 90 && r.lon >= -180 && r.lon <= 180).map((r) => ({ lat: r.lat, lon: r.lon, label: r.dataset_id + " | " + r.taxon_name }));
       if (tok !== A.traitTok) return;
       $("#tv-geotext").innerHTML = `<p>Of the <strong>${Number(cov.n).toLocaleString("en-AU")}</strong> records for this trait, <strong>${pts.length.toLocaleString("en-AU")}</strong> have latitude and longitude coordinates.</p><p>The map below shows the geographical distribution of trait data for this trait. The data are shown as points on the map.</p>`;
-      if (!window.L) await loadScript("vendor/leaflet/leaflet.js");
+      if (!window.L) { loadCss("vendor/leaflet/leaflet.css"); await loadScript("vendor/leaflet/leaflet.js"); }
       TV.drawMap($("#tv-map"), pts);
     }
     A.traitKey = key;
@@ -450,6 +469,7 @@ async function loadPage(tok = A.token) {
 }
 
 function render(rows, c) {
+  A.lastRows = rows;
   const head = $("#grid thead"), body = $("#grid tbody");
   head.innerHTML = ""; body.innerHTML = "";
   const tr = document.createElement("tr");
@@ -459,7 +479,7 @@ function render(rows, c) {
     th.setAttribute("aria-sort", on ? (A.sort.desc ? "descending" : "ascending") : "none");
     const ar = document.createElement("span"); ar.className = "arrow"; ar.setAttribute("aria-hidden", "true"); ar.dataset.dir = on ? (A.sort.desc ? "desc" : "asc") : "";
     ar.innerHTML = '<i class="up"></i><i class="dn"></i>'; th.append(col, ar);
-    const sortBy = () => { A.sort = on && A.sort.desc ? null : { column: col, desc: on }; A.page = 0; loadPage(); };
+    const sortBy = () => { if (!A.engineReady) return; A.sort = on && A.sort.desc ? null : { column: col, desc: on }; A.page = 0; loadPage(); };
     th.addEventListener("click", sortBy); th.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); sortBy(); } });
     tr.append(th);
   }

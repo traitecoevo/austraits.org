@@ -5,8 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AusTraits Data Portal</title>
 <link rel="icon" href="assets/austraits_hex.png" type="image/png">
-<link rel="stylesheet" href="vendor/leaflet/leaflet.css">
 <link rel="stylesheet" href="css/portal.css">
+<link rel="preload" href="config.json" as="fetch" crossorigin>
+<link rel="modulepreload" href="js/app.js">
+<link rel="modulepreload" href="js/toSql.mjs">
+<link rel="modulepreload" href="js/cite.js">
+<link rel="modulepreload" href="js/traitview.js">
+<link rel="modulepreload" href="js/taxonview.js">
+<link rel="modulepreload" href="js/download.js">
+<link rel="modulepreload" href="js/telemetry.js">
+<link rel="modulepreload" href="vendor/fflate.min.mjs">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
@@ -23,6 +31,8 @@
     <form id="filters" autocomplete="off">
       <h2 class="side-h">Dataset</h2>
       <div class="radios" id="f-dataset"></div>
+
+      <button type="submit" class="btn primary wide apply-top">Apply Filters</button>
 
       <h2 class="side-h">Taxonomy</h2>
       <div class="field"><span class="lab">Filter by which taxon rank</span><div class="radios" id="f-rank"></div></div>
