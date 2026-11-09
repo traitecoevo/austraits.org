@@ -19,11 +19,14 @@
 #' @param apc_version Date of the APC release the synonyms come from. Defaults
 #'   to the `apc_version` attribute stored in `synonyms.rds`.
 #' @param templates Folder with `filter_spec.json` and `portal.json`.
+#' @param site The portal folder; its `js/toSql.mjs` and `js/app.js` build `default_view.json`
+#'   (see [build_default_view()]).
 #' @return `out`, invisibly.
 build_browser_data <- function(src, out, version,
                                zenodo = file.path(dirname(src), "austraits.json"),
                                apc_version = NULL,
-                               templates = file.path("browser-portal-src", "templates")) {
+                               templates = file.path("browser-portal-src", "templates"),
+                               site = "browser-portal") {
   check_browser_inputs(src, zenodo, templates)
   zen <- read_zenodo_meta(zenodo)
   if (!identical(zen$version, version)) {
@@ -46,6 +49,8 @@ build_browser_data <- function(src, out, version,
   message("Writing the description files…")
   write_contract_files(con, src, out, version, zen, templates)
   file.copy(file.path(src, "sources.bib"), file.path(out, "sources.bib"), overwrite = TRUE)
+  message("Writing the stored first page…")
+  build_default_view(out, tosql = file.path(site, "js", "toSql.mjs"), app_js = file.path(site, "js", "app.js"))
   write_manifest(con, out, version)
   message("Checking the result…")
   verify_browser_data(src, out)

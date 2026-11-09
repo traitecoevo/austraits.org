@@ -17,3 +17,9 @@ _site/
 renv/
 renv.lock
 .playwright-cli/
+
+# browser portal tooling: npm packages, local data releases and Browse pages built by the release scripts
+browser-portal-src/node_modules/
+data/
+site-pages/
+browser-portal-src/data/

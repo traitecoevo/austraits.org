@@ -19,28 +19,22 @@ A data portal that runs only in the visitor's browser. There is no server. It is
 - `js/toSql.mjs` is **compiled output**. Do not edit it by hand. Its source is
   `../browser-portal-src/src/toSql.ts` in this repository.
 
+## Publishing a new data release
+
+Everything is in R; no Python or Node is needed. Follow `browser-portal-src/tools/README.md`: five commands build the data folder (with `default_view.json`, the first page the portal shows while its engine starts), check the browser's filters against the Shiny portal's on the new data, build the Browse pages, and test the portal in a real browser. Then upload the data folder to `data/<new version>/` in the R2 bucket and `site-pages/` to the bucket root, change `dataBase` in `config.json`, commit the regenerated `golden_cases.json` with it, and purge the Cloudflare cache.
+
 ## Changing the filter or query logic
+
+The filter logic is written in TypeScript (`browser-portal-src/src/toSql.ts`) and compiled to `js/toSql.mjs`, so changing it needs Node:
 
 ```sh
 cd browser-portal-src
 npm install
-# put the data release in ./data/7.0.0 (download it from the data bucket)
-npm test          # runs the 375 golden cases (222 raw, 153 species averages) against DuckDB
+npm test          # the golden cases in DuckDB-WASM; DATA_DIR=<data folder> (default ./data/7.0.0)
 npm run build     # rewrites ../browser-portal/js/toSql.mjs
 ```
 
-The golden cases are in `browser-portal-src/golden/golden_cases.json`. Each one is a filter plus the row
-count and checksum that the original (Shiny) logic gave on the same data. They were made by
-`browser-portal-src/golden/run_golden.py` (with `sql_builder.py`); edit the file paths at the top of those
-two scripts before running them. Commit the rebuilt
-`js/toSql.mjs` together with the `toSql.ts` change.
-
-## Publishing a new data release
-
-1. Build the data folder `data/<new version>/` and the Browse pages with the two R commands in `browser-portal-src/tools/README.md`. The build checks its own output and stops on any problem.
-2. Upload the data folder to `data/<new version>/` in the R2 bucket, upload `site-pages/` to the bucket root (`pages/`, `sitemap.xml`, `robots.txt`), and change `dataBase` in `config.json`.
-3. Make the stored first page of the default view (the portal shows it while the engine starts): `node browser-portal-src/tools/make_default_view.cjs https://www.austraits.org/browser-portal/ default_view.json` and upload `default_view.json` to the same data folder. (It needs `npm install playwright` once. If the file is missing or from another data version, the portal simply skips it and still works.)
-4. Run the tests above against the new data, and purge the Cloudflare cache.
+Commit the rebuilt `js/toSql.mjs` together with the `toSql.ts` change, then run `tools/run_golden.R` and `tools/test_portal.R` as well. The golden cases in `browser-portal-src/golden/golden_cases.json` are filter states plus the row count and checksum that the Shiny portal's own filter code gives on the current data release; `tools/make_golden_cases.R` recomputes them.
 
 ## Things to know
 

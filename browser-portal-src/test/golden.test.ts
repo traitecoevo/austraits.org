@@ -1,5 +1,7 @@
 // Runs every golden case through toSql inside DuckDB-WASM (the same engine family the browser uses)
-// and compares the row count and a checksum of the matching rows with the values the independent oracle produced.
+// and compares the row count and a checksum of the matching rows with the expected values, which
+// tools/make_golden_cases.R computes with the Shiny portal's own filter code (austraits.portal).
+// tools/run_golden.R runs the same cases in R without Node.
 import { describe, it, expect, beforeAll } from "vitest";
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
@@ -21,7 +23,7 @@ const only = process.env.ONLY; // "raw" or "species" to run half the cases
 let conn: any;
 let features: TraitFeature[] = [];
 
-// Columns that identify a row, per dataset. They must match what the reference script used (golden/run_golden.py).
+// Columns that identify a row, per dataset. They must match golden_id_columns in R/golden.R.
 const ID: Record<string, string[]> = {
   raw: ["trait_name", "taxon_name", "dataset_id", "observation_id", "value"],
   species: ["trait_name", "taxon_name", "dataset_id", "value_type", "value_mean"],
