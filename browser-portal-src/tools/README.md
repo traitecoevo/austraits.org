@@ -21,7 +21,7 @@ The input is the folder that the austraits.portal package writes for its Shiny a
 
 The build checks that every file and column the portal needs is present, and stops with a list of what is missing. That usually means the inputs were made with an older austraits.portal.
 
-> **Known problem (November 2026):** `prepare_data_for_portal()` reads `inst/extdata/austraits/trait_groups_for_portal.csv`, which was deleted from austraits.portal in PR #123, so it fails on a fresh checkout. Until that is fixed, restore the file with `git show dc8a965^:inst/extdata/austraits/trait_groups_for_portal.csv > inst/extdata/austraits/trait_groups_for_portal.csv`.
+> **Known problem (November 2026, traitecoevo/austraits.portal#143):** `prepare_data_for_portal()` reads `inst/extdata/austraits/trait_groups_for_portal.csv`, which was deleted from austraits.portal in PR #123, so it fails on a fresh checkout. Until that is fixed, restore the file with `git show dc8a965^:inst/extdata/austraits/trait_groups_for_portal.csv > inst/extdata/austraits/trait_groups_for_portal.csv`.
 
 ## 2. Build the data folder
 
