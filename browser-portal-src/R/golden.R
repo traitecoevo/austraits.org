@@ -34,19 +34,38 @@ golden_keyset <- function(con, from_sql, dataset) {
 #' @param cases Path to the golden cases file; its filter states are kept and its expected values replaced.
 #' @param out Where to write the updated cases (defaults to `cases`).
 #' @return The cases, invisibly.
-make_golden_cases <- function(src, portal_repo, cases = file.path("browser-portal-src", "golden", "golden_cases.json"), out = cases) {
+make_golden_cases <- function(src, portal_repo, cases = file.path("browser-portal-src", "golden", "golden_cases.json"), out = cases,
+                              workers = min(8L, default_workers())) {
   list_cases <- read_json_file(cases)
-  ref <- shiny_reference(src, portal_repo)
-  on.exit(DBI::dbDisconnect(ref$con, shutdown = TRUE), add = TRUE)
-  for (i in seq_along(list_cases)) {
-    st <- list_cases[[i]]$state
-    sql <- ref$query_sql(st)
-    list_cases[[i]]$expected <- golden_keyset(ref$con, sql, st$dataset)
-    if (i %% 25 == 0) message(sprintf("  %d/%d cases", i, length(list_cases)))
+  states <- lapply(list_cases, function(x) x$state)
+  # each worker loads austraits.portal and opens its own connection, then works through its share of cases
+  job <- function(idx, states, src, portal_repo) {
+    ref <- shiny_reference(src, portal_repo)
+    on.exit(DBI::dbDisconnect(ref$con, shutdown = TRUE), add = TRUE)
+    lapply(idx, function(i) golden_keyset(ref$con, ref$query_sql(states[[i]]), states[[i]]$dataset))
   }
+  environment(job) <- topenv()
+  res <- run_on_workers(length(states), workers, job, states = states, src = normalizePath(src), portal_repo = normalizePath(portal_repo))
+  for (i in seq_along(list_cases)) list_cases[[i]]$expected <- res[[i]]
   write_json_file(list_cases, out, pretty = TRUE)
   message(sprintf("Wrote %d golden cases to %s", length(list_cases), out))
   invisible(list_cases)
+}
+
+# Run job(idx, ...) over items 1..n dealt to `workers` fresh R processes (or in this process when
+# workers is 1), and return one result per item, in order
+run_on_workers <- function(n, workers, job, ...) {
+  groups <- deal(n, workers)
+  res <- if (length(groups) <= 1) {
+    list(job(seq_len(n), ...))
+  } else {
+    cl <- start_workers(length(groups))
+    on.exit(parallel::stopCluster(cl), add = TRUE)
+    parallel::clusterApply(cl, groups, job, ...)
+  }
+  out <- vector("list", n)
+  for (g in seq_along(groups)) out[groups[[g]]] <- res[[g]]
+  out
 }
 
 # The Shiny portal's filter code, pointed at the release inputs. Returns the connection and a function
@@ -117,23 +136,28 @@ golden_state_to_shiny_input <- function(st) {
 #' @param dataset Run only "raw" or "species" cases; NULL runs all.
 #' @return A data frame with one row per case and a `pass` column; stops if any case fails.
 run_golden_cases <- function(data, cases = file.path("browser-portal-src", "golden", "golden_cases.json"),
-                             tosql = file.path("browser-portal", "js", "toSql.mjs"), dataset = NULL) {
-  ctx <- load_browser_sql(tosql)
-  con <- browser_connection(ctx, data)
-  on.exit(DBI::dbDisconnect(con, shutdown = TRUE), add = TRUE)
-  spec <- read_json_file(file.path(data, "filter_spec.json"))
-  feats <- browser_features(con, data)
+                             tosql = file.path("browser-portal", "js", "toSql.mjs"), dataset = NULL,
+                             workers = min(8L, default_workers())) {
   list_cases <- read_json_file(cases)
   if (!is.null(dataset)) list_cases <- Filter(function(x) identical(x$state$dataset, dataset), list_cases)
-  res <- lapply(seq_along(list_cases), function(i) {
-    cs <- list_cases[[i]]
-    where <- browser_helper(ctx, "whereFor", cs$state, spec, feats)
-    got <- golden_keyset(con, paste0("SELECT * FROM ", cs$state$dataset, where), cs$state$dataset)
-    if (i %% 50 == 0) message(sprintf("  %d/%d cases", i, length(list_cases)))
-    data.frame(name = cs$name, expected_rows = cs$expected$rows, rows = got$rows,
-               pass = identical(got$rows, as.integer(cs$expected$rows)) && identical(got$md5, cs$expected$md5))
-  })
-  res <- do.call(rbind, res)
+  # each worker loads the browser's toSql.mjs into its own V8 engine and opens its own connection
+  job <- function(idx, list_cases, data, tosql) {
+    ctx <- load_browser_sql(tosql)
+    con <- browser_connection(ctx, data)
+    on.exit(DBI::dbDisconnect(con, shutdown = TRUE), add = TRUE)
+    spec <- read_json_file(file.path(data, "filter_spec.json"))
+    feats <- browser_features(con, data)
+    lapply(idx, function(i) {
+      cs <- list_cases[[i]]
+      where <- browser_helper(ctx, "whereFor", cs$state, spec, feats)
+      got <- golden_keyset(con, paste0("SELECT * FROM ", cs$state$dataset, where), cs$state$dataset)
+      data.frame(name = cs$name, expected_rows = cs$expected$rows, rows = got$rows,
+                 pass = identical(got$rows, as.integer(cs$expected$rows)) && identical(got$md5, cs$expected$md5))
+    })
+  }
+  environment(job) <- topenv()
+  res <- do.call(rbind, run_on_workers(length(list_cases), workers, job, list_cases = list_cases,
+                                       data = normalizePath(data), tosql = normalizePath(tosql)))
   bad <- res[!res$pass, ]
   if (nrow(bad)) {
     stop(sprintf("%d of %d golden cases failed:\n  %s", nrow(bad), nrow(res),

@@ -12,9 +12,11 @@
 # Needs the R packages DBI, duckdb, jsonlite, digest and V8.
 here <- dirname(normalizePath(sub("^--file=", "", grep("^--file=", commandArgs(FALSE), value = TRUE))))
 for (f in list.files(file.path(here, "..", "R"), pattern = "[.]R$", full.names = TRUE)) source(f)
-opt <- parse_cli(commandArgs(TRUE), required = c("src", "out", "version"))
-build_browser_data(src = opt$src, out = opt$out, version = opt$version,
-                   zenodo = opt$zenodo %||% file.path(dirname(normalizePath(opt$src)), "austraits.json"),
+options(browser_portal.r_dir = normalizePath(file.path(here, "..", "R")))
+options(warnPartialMatchDollar = TRUE)
+opt <- parse_cli(commandArgs(TRUE), required = c("src", "out", "version"), optional = c("zenodo", "apc-version"))
+build_browser_data(src = opt[["src"]], out = opt[["out"]], version = opt[["version"]],
+                   zenodo = opt[["zenodo"]] %||% file.path(dirname(normalizePath(opt[["src"]])), "austraits.json"),
                    apc_version = opt[["apc-version"]],
                    templates = file.path(here, "..", "templates"),
                    site = file.path(here, "..", "..", "browser-portal"))

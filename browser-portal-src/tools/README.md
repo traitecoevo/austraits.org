@@ -1,8 +1,19 @@
 # Building and testing a data release for the browser portal
 
-Five R commands turn one AusTraits release into everything the browser portal reads, and test it: the data folder (Parquet and JSON files, including the stored first page), a check that the browser's filters return the same rows as the Shiny portal's, the static Browse pages, and a run of the portal itself in a real browser. Run them from the repository root. On 7.0.0 the whole sequence takes about five minutes.
+Five R steps turn one AusTraits release into everything the browser portal reads, and test it: the data folder (Parquet and JSON files, including the stored first page), a check that the browser's filters return the same rows as the Shiny portal's, the static Browse pages, and a run of the portal itself in a real browser. Run the commands from the repository root.
 
 You need R with the packages `DBI`, `duckdb`, `jsonlite`, `digest`, `V8`, `pkgload`, `dbplyr`, `chromote`, `httpuv` and `callr`, Google Chrome, and a checkout of [austraits.portal](https://github.com/traitecoevo/austraits.portal) with the packages it imports. No Python or Node is needed.
+
+## All in one command
+
+After preparing the inputs (step 1 below):
+
+```sh
+Rscript browser-portal-src/tools/release.R --src SRC --out data/7.1.0 --version 7.1.0 \
+  --portal-repo ../austraits.portal --pages-out site-pages
+```
+
+This runs steps 2–5 with as much overlap as their inputs allow: the golden cases (which need only the inputs) are computed while the data folder is built, then the golden check, the Browse pages and the browser test run at the same time. Each step uses several worker processes. On 7.0.0 on an 18-core laptop it takes about 100 seconds (the same steps one after another take about 285). It stops with the log of any step that failed, and the output is identical to running the steps one by one. Add `--no-browser-test true` to skip the browser test (for example on a machine without Chrome). The sections below describe each step and its own command, for running or rerunning one step alone.
 
 ## 1. Prepare the inputs (in austraits.portal)
 
@@ -56,8 +67,8 @@ Upload the data folder to `data/<version>/` in the R2 bucket and `site-pages/` t
 
 | Path | What it holds |
 |---|---|
-| `browser-portal-src/R/` | The functions: `build_browser_data()`, `verify_browser_data()`, `build_default_view()`, `make_golden_cases()`, `run_golden_cases()`, `build_static_pages()`, `test_portal_in_browser()` and helpers |
-| `browser-portal-src/tools/*.R` | The five command-line entry points above |
+| `browser-portal-src/R/` | The functions: `build_browser_data()`, `verify_browser_data()`, `build_default_view()`, `make_golden_cases()`, `run_golden_cases()`, `build_static_pages()`, `test_portal_in_browser()`, `release_browser_data()` and helpers |
+| `browser-portal-src/tools/*.R` | The command-line entry points above: `release.R` for everything, and one per step |
 | `browser-portal-src/templates/filter_spec.json` | How each filter becomes SQL. Edit it by hand when the filters change; the build copies it unchanged |
 | `browser-portal-src/templates/portal.json` | Names, labels, links, theme, default filters and download limits. The build fills in `data_version` and the Zenodo DOI |
 | `browser-portal-src/golden/golden_cases.json` | The golden cases: filter states plus the rows the Shiny portal returns for them on the current data release |
@@ -68,4 +79,5 @@ Upload the data folder to `data/<version>/` in the R2 bucket and `site-pages/` t
 - **The Shiny portal is the reference.** The golden cases' expected results come from austraits.portal's own filter functions, not from a re-implementation; the earlier Python reference agreed with them on all 375 row counts and on every checksum where the inputs were the same.
 - **Moving into austraits.portal.** The functions in `browser-portal-src/R/` are written as package code (no `library()` calls, every external function namespaced, roxygen headers) so they can move into the austraits.portal package unchanged. Keep them that way when editing.
 - **Fixes over the Python version:** the genus filter list no longer contains `(Dockrillia` (the bracket is stripped as in the data, issue austraits.portal#113); the build stops on missing inputs or columns; the checks stop the build instead of only printing; `portal.json` and `manifest.json` no longer carry placeholder fields.
-- **Still to do:** one GitHub Action that runs steps 2–6 for a given version; and starting the build from the published AusTraits release instead of a prepared folder.
+- **Parallel.** `release.R` overlaps independent steps; the taxon pages are written by forked workers (one process on Windows) and the golden cases by fresh worker processes, which open their own DuckDB and V8. The remaining time is mostly writing 33,000 small files and building their HTML in R.
+- **Still to do:** one GitHub Action that runs `release.R` and the upload for a given version; and starting the build from the published AusTraits release instead of a prepared folder.

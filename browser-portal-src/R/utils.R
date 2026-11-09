@@ -55,7 +55,7 @@ as_text_columns <- function(df) {
 sort_c <- function(x) if (length(x)) x[order(x, method = "radix")] else character()
 
 # Read `--name value` (or `--name=value`) pairs from the command line into a named list
-parse_cli <- function(args, required = character()) {
+parse_cli <- function(args, required = character(), optional = character()) {
   out <- list()
   i <- 1
   while (i <= length(args)) {
@@ -72,5 +72,45 @@ parse_cli <- function(args, required = character()) {
   }
   gone <- setdiff(required, names(out))
   if (length(gone)) stop("Missing option(s): ", paste0("--", gone, collapse = ", "), call. = FALSE)
+  unknown <- setdiff(names(out), c(required, optional))
+  if (length(unknown)) stop("Unknown option(s): ", paste0("--", unknown, collapse = ", "), call. = FALSE)
   out
 }
+
+# ---------- running work in parallel ----------
+
+# Worker processes to use: all cores but two, at least one
+default_workers <- function() max(1L, parallel::detectCores(logical = TRUE) - 2L)
+
+# vapply(x, f, "") spread over forked worker processes, keeping the order of x. Forked workers share
+# everything already loaded, so `f` must not use a database connection or a V8 context made before the
+# fork. Windows cannot fork, so it runs in one process there.
+fork_map_chr <- function(x, f, workers = default_workers()) {
+  if (workers <= 1 || .Platform$OS.type == "windows" || length(x) < 2) return(vapply(x, f, ""))
+  # one contiguous chunk per worker: each fork copies the whole process, so fork as few times as possible
+  chunks <- split(x, cut(seq_along(x), min(length(x), workers), labels = FALSE))
+  res <- parallel::mclapply(chunks, function(ix) vapply(ix, f, ""), mc.cores = workers, mc.preschedule = TRUE)
+  bad <- vapply(res, function(r) inherits(r, "try-error") || is.null(r), TRUE)
+  if (any(bad)) stop("A worker failed: ", paste(unique(vapply(res[bad], function(r) if (is.null(r)) "no result" else as.character(r), "")), collapse = "; "), call. = FALSE)
+  unlist(res, use.names = FALSE)
+}
+
+# A cluster of fresh R processes, each with this tooling's functions loaded. Use it for work that opens
+# its own DuckDB connections, V8 contexts or loaded packages, which cannot be shared across a fork.
+# The command-line scripts set option browser_portal.r_dir to the folder of these R files; inside a
+# package, the workers load the package instead.
+start_workers <- function(n) {
+  cl <- parallel::makePSOCKcluster(n)
+  setup <- function(r_dir) {
+    if (is.null(r_dir)) library("austraits.portal", character.only = TRUE)
+    else for (f in list.files(r_dir, pattern = "[.]R$", full.names = TRUE)) source(f)
+    options(browser_portal.r_dir = r_dir)
+    NULL
+  }
+  environment(setup) <- globalenv()
+  parallel::clusterCall(cl, setup, getOption("browser_portal.r_dir"))
+  cl
+}
+
+# Indices 1..n dealt round-robin into k groups, so slow and fast items mix
+deal <- function(n, k) split(seq_len(n), (seq_len(n) - 1L) %% min(k, n))

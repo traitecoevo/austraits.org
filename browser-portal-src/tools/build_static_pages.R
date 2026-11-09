@@ -12,6 +12,8 @@
 #   --limit   build only this many taxon pages, for a quick test
 here <- dirname(normalizePath(sub("^--file=", "", grep("^--file=", commandArgs(FALSE), value = TRUE))))
 for (f in list.files(file.path(here, "..", "R"), pattern = "[.]R$", full.names = TRUE)) source(f)
-opt <- parse_cli(commandArgs(TRUE), required = c("data", "out"))
-build_static_pages(data = opt$data, out = opt$out, base = opt$base %||% "",
-                   portal = opt$portal %||% "/portal/index.html", limit = as.integer(opt$limit %||% 0))
+options(browser_portal.r_dir = normalizePath(file.path(here, "..", "R")))
+options(warnPartialMatchDollar = TRUE)
+opt <- parse_cli(commandArgs(TRUE), required = c("data", "out"), optional = c("base", "portal", "limit"))
+build_static_pages(data = opt[["data"]], out = opt[["out"]], base = opt[["base"]] %||% "",
+                   portal = opt[["portal"]] %||% "/portal/index.html", limit = as.integer(opt[["limit"]] %||% 0))

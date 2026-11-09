@@ -12,8 +12,10 @@
 #'   canonical links and the sitemap. Leave empty to skip both.
 #' @param portal Address of the portal page.
 #' @param limit Build only this many taxon pages (for tests); 0 builds all.
+#' @param workers Processes that write taxon pages at once (forked; one on Windows).
 #' @return `out`, invisibly.
-build_static_pages <- function(data, out, base = "", portal = "/portal/index.html", limit = 0) {
+build_static_pages <- function(data, out, base = "", portal = "/portal/index.html", limit = 0,
+                               workers = default_workers()) {
   P <- file.path(out, "pages")
   con <- DBI::dbConnect(duckdb::duckdb())
   on.exit(DBI::dbDisconnect(con, shutdown = TRUE), add = TRUE)
@@ -141,8 +143,8 @@ build_static_pages <- function(data, out, base = "", portal = "/portal/index.htm
     paste0(vapply(sort_c(unique(g$group)), function(k) paste0("<details><summary>", esc(k), "</summary><ul>", paste0(line[g$group == k], collapse = ""), "</ul></details>"), ""), collapse = "")
   }
 
-  fam_of <- character(length(names_all))
-  for (i in seq_along(names_all)) {
+  # one page per taxon, written by forked workers that share the tables loaded above
+  write_taxon <- function(i) {
     t <- names_all[i]
     info <- look(taxa, t)[1, ]
     ds <- look(dsets, t)
@@ -173,9 +175,10 @@ build_static_pages <- function(data, out, base = "", portal = "/portal/index.htm
 </article>')
     desc <- paste0(t, " (", na_to(info$family, "None"), "): AusTraits plant trait data. ", fmt_int(nt), " traits, ", fmt_comma(nrec), " records from ", nrow(ds), " datasets.")
     write_page_file(paste0("taxon/", tslug[i], ".html"), page(t, desc, paste0("/pages/taxon/", tslug[i], ".html"), body, "taxon"))
-    fam_of[i] <- if (is.na(info$family) || !nzchar(info$family)) "(no family)" else info$family
-    if (i %% 5000 == 0) message(sprintf("  taxon pages %d", i))
+    if (is.na(info$family) || !nzchar(info$family)) "(no family)" else info$family
   }
+  fam_of <- fork_map_chr(seq_along(names_all), write_taxon, workers)
+  message(sprintf("Wrote %d taxon pages", length(names_all)))
   fam <- split(names_all, fam_of)
 
   # ---------- trait pages ----------
