@@ -18,7 +18,7 @@ export function track(type, details) {
   if (!enabled() || cfg.sendOff) return;
   try {
     const body = { type, timestamp: new Date().toISOString().replace(/\.\d+Z$/, "Z"), session_id: session };
-    if (details && Object.keys(details).length) body.details = details;
+    body.details = { ...(details || {}), portal: "browser" }; // tells this portal apart from the Shiny portal in the shared table
     fetch(base() + "telemetry_events", { method: "POST", keepalive: true, headers: { ...hdr(), "Content-Type": "application/json", Prefer: "return=minimal" }, body: JSON.stringify(body) }).catch(() => {});
   } catch {}
 }

@@ -161,7 +161,7 @@ async function main() {
   // the filters and the page are usable while the engine is still starting
   buildUI();
   const fromUrl = readHash();
-  A.S = fromUrl ? { ...defaults(portal), ...fromUrl } : defaults(portal);
+  A.S = fromUrl ? cleanState(fromUrl, defaults(portal)) : defaults(portal);
   syncUI();
   setApply(false);
   boot("Starting the database engine. The first visit downloads about 6 MB; later visits are much faster.");
@@ -195,9 +195,9 @@ function buildUI() {
   for (const k of ["min_latitude", "max_latitude", "min_longitude", "max_longitude"]) $("#" + k).addEventListener("input", (e) => (S()[k] = e.target.value));
 
   $("#filters").addEventListener("submit", (e) => { e.preventDefault(); apply(); $("#sidebar").classList.remove("open"); $("#menu-btn").setAttribute("aria-expanded", "false"); });
-  $("#reset").addEventListener("click", () => { A.S = defaults(A.portal); syncUI(); apply(); });
+  $("#reset").addEventListener("click", () => { A.S = defaults(A.portal); syncUI(); if (A.engineReady) apply(); });
   $("#menu-btn").addEventListener("click", () => { const o = $("#sidebar").classList.toggle("open"); $("#menu-btn").setAttribute("aria-expanded", o); });
-  $("#pagesize").addEventListener("change", (e) => { A.size = Number(e.target.value); A.page = 0; loadPage(); });
+  $("#pagesize").addEventListener("change", (e) => { A.size = Number(e.target.value); A.page = 0; if (A.engineReady && A.applied) loadPage(); });
   $("#first").addEventListener("click", () => goto(0)); $("#prev").addEventListener("click", () => goto(A.page - 1));
   $("#next").addEventListener("click", () => goto(A.page + 1)); $("#last").addEventListener("click", () => goto(lastPage()));
   $("#share").addEventListener("click", async () => { try { await navigator.clipboard.writeText(location.href); $("#share").textContent = "Copied"; setTimeout(() => ($("#share").textContent = "Copy link"), 1500); } catch { prompt("Copy this link", location.href); } });
@@ -274,7 +274,7 @@ function syncUI() {
 
 function cols() { return A.applied.dataset === "species" ? SPECIES_COLS : RAW_COLS; }
 const lastPage = () => Math.max(0, Math.ceil(A.total / A.size) - 1);
-function goto(p) { A.page = Math.min(Math.max(0, p), lastPage()); loadPage(); }
+function goto(p) { if (!A.engineReady || !A.applied) return; A.page = Math.min(Math.max(0, p), lastPage()); loadPage(); }
 function setStatus(msg, err) { const s = $("#status"), t = $("#status-text"); s.hidden = !msg; t.textContent = msg || ""; s.classList.toggle("err", !!err); }
 
 const TABS = ["data", "info", "taxon", "trait", "cite"];
@@ -306,7 +306,8 @@ async function loadUsage() {
     const nf = new Intl.NumberFormat("en-AU"), sum = (k) => rows.reduce((s, r) => s + r[k], 0);
     $("#usage-off").hidden = true; $("#usage").hidden = false;
     $("#m-sessions").textContent = nf.format(sum("logins")); $("#m-searches").textContent = nf.format(sum("searches")); $("#m-downloads").textContent = nf.format(sum("downloads"));
-    $("#u-table tbody").innerHTML = rows.map((r) => `<tr><td>${r.month}</td><td>${nf.format(r.logins)}</td><td>${nf.format(r.searches)}</td><td>${nf.format(r.downloads)}</td></tr>`).join("");
+    const tb = $("#u-table tbody"); tb.textContent = "";
+    for (const r of rows) { const tr = document.createElement("tr"); for (const v of [r.month, nf.format(r.logins), nf.format(r.searches), nf.format(r.downloads)]) { const td = document.createElement("td"); td.textContent = String(v); tr.append(td); } tb.append(tr); }
     const day = new Date().toISOString().slice(0, 10);
     $("#u-csv").onclick = () => dlText(counterCsv(rows), `austraits_counter_metrics_${day}.csv`, "text/csv");
     $("#u-json").onclick = () => dlText(counterJson(rows), `austraits_counter_metrics_${day}.json`, "application/json");
@@ -435,9 +436,9 @@ async function apply(first) {
 }
 
 async function loadPage(tok = A.token) {
-  const st = toFilterState(A.applied), c = cols();
   $("#table-wrap").classList.add("busy");
   try {
+    const st = toFilterState(A.applied), c = cols();
     const q = A.applied.dataset === "species" ? [...c, "unit"] : c;
     const sort = A.sort ? { column: A.sort.column, desc: A.sort.desc, numeric: NUMERIC_SORT.has(A.sort.column) } : undefined;
     const P = T.pageSql(st, A.spec, A.feats, A.taxaCols, A.size, A.page * A.size, sort, q);
@@ -486,6 +487,22 @@ function fail(e) { console.error(e); setStatus("Something went wrong while readi
 // ---------- link sharing ----------
 function writeHash() { try { history.replaceState(null, "", "#s=" + encodeURIComponent(JSON.stringify(A.applied))); } catch {} }
 function readHash() { try { const m = location.hash.match(/^#s=(.+)$/); return m ? JSON.parse(decodeURIComponent(m[1])) : null; } catch { return null; } }
+// A shared link is only a suggestion: keep the values that have the right type and are on the allowed list, drop the rest
+function cleanState(raw, base) {
+  const out = { ...base };
+  if (!raw || typeof raw !== "object" || Array.isArray(raw)) return out;
+  const oneOf = (v, list) => (typeof v === "string" && list.includes(v) ? v : null);
+  const list = (v) => (Array.isArray(v) && v.length <= 5000 && v.every((x) => typeof x === "string") ? v : null);
+  const pick = (k, v) => { if (v !== null && v !== undefined) out[k] = v; };
+  pick("dataset", oneOf(raw.dataset, ["raw", "species"]));
+  pick("rank", oneOf(raw.rank, ["all", "family", "genus", "taxon_name"]));
+  pick("traitmode", oneOf(raw.traitmode, ["name", "features"]));
+  pick("location", oneOf(raw.location, ["", "georeferenced", "apc"]));
+  for (const k of ["family", "genus", "taxon_name", "trait_name", "trait_grouping", "structure_measured", "keywords", "apc"]) pick(k, list(raw[k]));
+  for (const k of ["min_latitude", "max_latitude", "min_longitude", "max_longitude"]) pick(k, raw[k] === "" || (["string", "number"].includes(typeof raw[k]) && Number.isFinite(Number(raw[k]))) ? String(raw[k]) : null);
+  if (Array.isArray(raw.custom)) out.custom = raw.custom.slice(0, 20).filter((c) => c && typeof c.column === "string" && list(c.value)).map((c) => ({ column: c.column, value: c.value }));
+  return out;
+}
 
 function initSplitter() {
   const sp = $("#splitter"), root = document.documentElement, KEY = "austraits.sideW", DEF = 340;

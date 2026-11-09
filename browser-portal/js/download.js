@@ -26,8 +26,10 @@ export async function buildZip({ db, run, dataSql, keysSql, base, meta, onStep }
     const inList = keys.map(q1).join(",");
     await run(`COPY (SELECT * FROM read_parquet(${q1(base.replace(/\/$/, "") + "/sources.parquet")}) WHERE source_primary_key IN (${inList}) ORDER BY source_primary_key) TO 'sources.csv' (HEADER, DELIMITER ',')`);
     files["sources.csv"] = await db.copyFileToBuffer("sources.csv"); await db.dropFile("sources.csv");
-    const bibRes = await fetch(base.replace(/\/$/, "") + "/sources.bib");
-    files["sources.bib"] = strToU8(bibRes.ok ? subsetBib(await bibRes.text(), keys) : "");
+    let bibRes = null;
+    try { bibRes = await fetch(base.replace(/\/$/, "") + "/sources.bib"); } catch {}
+    if (!bibRes || !bibRes.ok) throw new Error("The reference file sources.bib could not be loaded (" + (bibRes ? "server answered " + bibRes.status : "network error") + "), so the zip was not made. Please try again later.");
+    files["sources.bib"] = strToU8(subsetBib(await bibRes.text(), keys));
     const refs = (await run(`SELECT source_primary_citation AS c FROM sources WHERE source_primary_key IN (${inList}) ORDER BY source_primary_key`)).map((r) => r.c).filter(Boolean);
     files["usage.html"] = strToU8(`<!doctype html><html><head><meta charset="utf-8"><title>AusTraits usage and citations</title></head><body>${markdownToHtml(citationText(meta, keys, refs))}</body></html>`);
   }
