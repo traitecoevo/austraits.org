@@ -37,8 +37,15 @@ two scripts before running them. Commit the rebuilt
 
 ## Publishing a new data release
 
-Upload the new Parquet files, JSON files and `sources.bib` to `data/<new version>/` in the R2 bucket, change
-`dataBase` in `config.json`, and run the tests above against the new data.
+1. Put the new Parquet files, JSON files and `sources.bib` in `data/<new version>/` (folder on your computer).
+2. Split the taxon names out of `dropdowns.json`, so the page starts faster:
+   `python3 browser-portal-src/tools/split_dropdowns.py data/<new version>`
+3. Upload the folder to `data/<new version>/` in the R2 bucket and change `dataBase` in `config.json`.
+4. Make the stored first page of the default view (the portal shows it while the engine starts):
+   `node browser-portal-src/tools/make_default_view.cjs https://www.austraits.org/browser-portal/ default_view.json`
+   and upload `default_view.json` to the same data folder. (It needs `npm install playwright` once. If the file is
+   missing or from another data version, the portal simply skips it and still works.)
+5. Run the tests above against the new data.
 
 ## Things to know
 
