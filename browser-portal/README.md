@@ -37,19 +37,13 @@ two scripts before running them. Commit the rebuilt
 
 ## Publishing a new data release
 
-1. Make the data folder `data/<new version>/` (folder on your computer) with the scripts in
-   `browser-portal-src/tools/data-prep/` (see the README there for the order and the arguments). Add `sources.bib` as well.
-2. Split the taxon names out of `dropdowns.json`, so the page starts faster:
-   `python3 browser-portal-src/tools/split_dropdowns.py data/<new version>`
-3. Upload the folder to `data/<new version>/` in the R2 bucket and change `dataBase` in `config.json`.
-4. Make the stored first page of the default view (the portal shows it while the engine starts):
-   `node browser-portal-src/tools/make_default_view.cjs https://www.austraits.org/browser-portal/ default_view.json`
-   and upload `default_view.json` to the same data folder. (It needs `npm install playwright` once. If the file is
-   missing or from another data version, the portal simply skips it and still works.)
-5. Run the tests above against the new data.
+1. Build the data folder `data/<new version>/` and the Browse pages with the two R commands in `browser-portal-src/tools/README.md`. The build checks its own output and stops on any problem.
+2. Upload the data folder to `data/<new version>/` in the R2 bucket, upload `site-pages/` to the bucket root (`pages/`, `sitemap.xml`, `robots.txt`), and change `dataBase` in `config.json`.
+3. Make the stored first page of the default view (the portal shows it while the engine starts): `node browser-portal-src/tools/make_default_view.cjs https://www.austraits.org/browser-portal/ default_view.json` and upload `default_view.json` to the same data folder. (It needs `npm install playwright` once. If the file is missing or from another data version, the portal simply skips it and still works.)
+4. Run the tests above against the new data, and purge the Cloudflare cache.
 
 ## Things to know
 
 - `_quarto.yml` lists `browser-portal/` under `project: resources:`. Without that line Quarto does not copy the folder.
 - The static taxon, trait and family pages (for search engines) are on `data.austraitsdata.org/pages/` and
-  link to this portal. They are built with `browser-portal-src/tools/build_static_pages.py`.
+  link to this portal. They are built with `browser-portal-src/tools/build_static_pages.R`.
