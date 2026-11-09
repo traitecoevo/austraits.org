@@ -198,3 +198,6 @@ body.side-collapsed .tabs{padding-left:2.6rem}
 .metric-n{font-size:1.8em;font-weight:700}.metric-l{font-size:.82em;color:#64726b;margin-top:4px}
 .m1{background:#f2f6f3}.m1 .metric-n{color:#235c43}.m2{background:#f3f7f8}.m2 .metric-n{color:#2a7f9e}.m3{background:rgba(217,164,65,.14)}.m3 .metric-n{color:#9a6f16}
 .usage-h{display:flex;justify-content:space-between;align-items:center;margin:1rem 0 .5rem}.usage-h h3{margin:0}.small{font-size:.8em}
+
+.radios label.disabled{opacity:.5;cursor:not-allowed}
+.btn.apply-top{margin:.2rem 0 .4rem}

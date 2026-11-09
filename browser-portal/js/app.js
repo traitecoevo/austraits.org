@@ -1,4 +1,4 @@
-// AusTraits Data Portal: browser-only. DuckDB-WASM reads Parquet over HTTP range requests; SQL comes from toSql.mjs (tested against 368 golden cases).
+// AusTraits Data Portal: browser-only. DuckDB-WASM reads Parquet over HTTP range requests; SQL comes from toSql.mjs (tested against 375 golden cases).
 import * as T from "./toSql.mjs";
 import { markdownToHtml, citationText } from "./cite.js";
 import * as TV from "./traitview.js";
@@ -60,10 +60,10 @@ function radios(root, name, opts, onChange) {
     i.type = "radio"; i.name = name; i.value = v; l.append(i, document.createTextNode(label)); root.append(l);
     i.addEventListener("change", () => onChange(v)); return i;
   });
-  return { set(v) { inputs.forEach((i) => (i.checked = i.value === v)); }, show(v, on) { inputs.find((i) => i.value === v).parentElement.hidden = !on; } };
+  return { set(v) { inputs.forEach((i) => (i.checked = i.value === v)); }, show(v, on) { inputs.find((i) => i.value === v).parentElement.hidden = !on; }, enable(v, on) { const i = inputs.find((x) => x.value === v); i.disabled = !on; i.parentElement.classList.toggle("disabled", !on); } };
 }
 
-function multiSelect(root, { options = [], placeholder = "Type to search…", onChange = () => {}, single = false } = {}) {
+function multiSelect(root, { options = [], placeholder = "Type to search…", onChange = () => {} } = {}) {
   let opts = options, lower = opts.map((o) => o.toLowerCase()), sel = [], hits = [], act = -1;
   root.innerHTML = ""; root.classList.add("ms");
   const box = document.createElement("div"), input = document.createElement("input"), list = document.createElement("ul");
@@ -98,7 +98,7 @@ function multiSelect(root, { options = [], placeholder = "Type to search…", on
     if (more) { const li = document.createElement("li"); li.className = "more"; li.textContent = `${nf.format(more)} more. Keep typing to narrow the list.`; list.append(li); }
     list.hidden = false;
   }
-  function pick(v) { sel = single ? [v] : [...sel, v]; input.value = ""; drawChips(); emit(); single ? (list.hidden = true) : draw(); }
+  function pick(v) { sel = [...sel, v]; input.value = ""; drawChips(); emit(); draw(); }
   function move(d) { if (!hits.length) return; act = (act + d + hits.length) % hits.length; [...list.children].forEach((li, i) => li.setAttribute("aria-selected", i === act)); list.children[act]?.scrollIntoView({ block: "nearest" }); }
   input.addEventListener("input", draw); input.addEventListener("focus", draw);
   input.addEventListener("blur", () => setTimeout(() => (list.hidden = true), 100));
@@ -175,7 +175,7 @@ async function main() {
 }
 const setApply = (on) => document.querySelectorAll("#filters button[type=submit]").forEach((b) => (b.disabled = !on));
 // warm the browser cache with the Parquet reader while the engine downloads
-function prefetchExtension(cfg) { try { fetch(abs(cfg.extensionRepo) + "/v1.4.3/wasm_eh/parquet.duckdb_extension.wasm").catch(() => {}); } catch {} }
+function prefetchExtension(cfg) { try { fetch(abs(cfg.extensionRepo) + "/" + (cfg.extensionVersion || "v1.4.3") + "/wasm_eh/parquet.duckdb_extension.wasm").catch(() => {}); } catch {} }
 
 function buildUI() {
   const { dd, portal } = A, W = (A.w = {});
@@ -184,8 +184,8 @@ function buildUI() {
   W.rank = radios($("#f-rank"), "rank", [["all", "All taxa"], ["family", "Family"], ["genus", "Genus"], ["taxon_name", "Taxon name"]], (v) => { S().rank = v; syncUI(); });
   W.family = multiSelect($("#f-family"), { options: dd.all_family, placeholder: "Choose families…", onChange: (v) => (S().family = v) });
   W.genus = multiSelect($("#f-genus"), { options: dd.all_genus, placeholder: "Choose genera…", onChange: (v) => (S().genus = v) });
-  W.taxon_name = multiSelect($("#f-taxon_name"), { options: dd.all_taxon_names, placeholder: "Search 33,000 taxa…", onChange: (v) => (S().taxon_name = v) });
-  W.trait = multiSelect($("#f-trait"), { options: dd.all_traits, placeholder: "Choose traits…", onChange: (v) => (S().trait_name = v) });
+  W.taxon_name = multiSelect($("#f-taxon_name"), { options: dd.all_taxon_names, placeholder: `Search ${dd.all_taxon_names.length.toLocaleString("en-AU")} taxa…`, onChange: (v) => (S().taxon_name = v) });
+  W.trait = multiSelect($("#f-trait"), { options: dd.all_traits, placeholder: "Choose traits…", onChange: (v) => { S().trait_name = v; W.traitmode.enable("features", v.length === 0 || S().traitmode === "features"); } });
   W.traitmode = radios($("#f-traitmode"), "traitmode", [["name", "None"], ["features", "Trait features"]], (v) => { S().traitmode = v; syncUI(); });
   W.grouping = multiSelect($("#f-grouping"), { options: dd.all_trait_groupings, placeholder: "Choose groupings…", onChange: (v) => (S().trait_grouping = v) });
   W.structure = multiSelect($("#f-structure"), { options: dd.all_structure_measured, placeholder: "Choose structures…", onChange: (v) => (S().structure_measured = v) });
@@ -234,7 +234,7 @@ function customRows() {
     box.append(lab, sel, val); root.append(box);
     if (!c.column) return;
     if (spec.controlled_vocabulary_columns.includes(c.column)) {
-      const ms = multiSelect(val, { placeholder: "Choose values…", onChange: (v) => { const had = c.value.length; c.value = v; if ((had === 0) !== (v.length === 0)) { const keep = document.activeElement; customRows(); } } });
+      const ms = multiSelect(val, { placeholder: "Choose values…", onChange: (v) => { const had = c.value.length; c.value = v; if ((had === 0) !== (v.length === 0)) customRows(); } });
       ms.set(c.value); vocab(c.column).then((o) => ms.setOptions(o));
     } else {
       const t = document.createElement("input"); t.type = "text"; t.placeholder = "Text to find (use | for “or”)"; t.value = c.value[0] || "";
@@ -263,6 +263,7 @@ function syncUI() {
   W.dataset.set(S.dataset); W.rank.set(S.rank); W.family.set(S.family); W.genus.set(S.genus); W.taxon_name.set(S.taxon_name);
   W.trait.set(S.trait_name); W.traitmode.set(S.traitmode); W.grouping.set(S.trait_grouping); W.structure.set(S.structure_measured); W.keywords.set(S.keywords);
   W.location.set(S.location); W.apc.set(S.apc);
+  W.traitmode.enable("features", S.trait_name.length === 0 || S.traitmode === "features"); // Trait features can only be switched on while no trait name is selected
   if (S.dataset === "species" && S.location === "georeferenced") S.location = "";
   W.location.show("georeferenced", S.dataset === "raw"); W.location.set(S.location);
   for (const k of ["min_latitude", "max_latitude", "min_longitude", "max_longitude"]) $("#" + k).value = S[k];

@@ -21,7 +21,7 @@ const only = process.env.ONLY; // "raw" or "species" to run half the cases
 let conn: any;
 let features: TraitFeature[] = [];
 
-// Columns that identify a row, per dataset. They must match what the oracle used (golden/run_golden.py).
+// Columns that identify a row, per dataset. They must match what the reference script used (golden/run_golden.py).
 const ID: Record<string, string[]> = {
   raw: ["trait_name", "taxon_name", "dataset_id", "observation_id", "value"],
   species: ["trait_name", "taxon_name", "dataset_id", "value_type", "value_mean"],
