@@ -1,0 +1,20 @@
+{
+  "name": "austraits-portal-browser",
+  "private": true,
+  "type": "module",
+  "version": "0.0.0",
+  "scripts": {
+    "build": "esbuild src/toSql.ts --bundle --format=esm --outfile=../browser-portal/js/toSql.mjs",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@duckdb/duckdb-wasm": "1.32.0"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.6",
+    "esbuild": "0.28.2",
+    "typescript": "7.0.2",
+    "vitest": "5.0.5"
+  }
+}

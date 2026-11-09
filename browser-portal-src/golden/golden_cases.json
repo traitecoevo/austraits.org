@@ -1,0 +1,5538 @@
+[
+{
+"name": "raw: no filters",
+"state": {
+"dataset": "raw"
+},
+"expected": {
+"rows": 1798215,
+"md5": "c2b5f3e85ea8cabc9d6799ac49447c30"
+}
+},
+{
+"name": "raw: family Typhaceae",
+"state": {
+"dataset": "raw",
+"taxon_type": "family",
+"family": [
+"Typhaceae"
+]
+},
+"expected": {
+"rows": 402,
+"md5": "687357a05e45fb1a3037e9e915eb470d"
+}
+},
+{
+"name": "raw: family Pedaliaceae",
+"state": {
+"dataset": "raw",
+"taxon_type": "family",
+"family": [
+"Pedaliaceae"
+]
+},
+"expected": {
+"rows": 218,
+"md5": "4bf6bfae115e6e16faad2a9b37780453"
+}
+},
+{
+"name": "raw: family Scrophulariaceae",
+"state": {
+"dataset": "raw",
+"taxon_type": "family",
+"family": [
+"Scrophulariaceae"
+]
+},
+"expected": {
+"rows": 17750,
+"md5": "fd8b43c77e3e6a91e7b94cf36976702e"
+}
+},
+{
+"name": "raw: family Asteraceae",
+"state": {
+"dataset": "raw",
+"taxon_type": "family",
+"family": [
+"Asteraceae"
+]
+},
+"expected": {
+"rows": 98679,
+"md5": "2b84b2480a3bf7e4fbab9b83dc729b51"
+}
+},
+{
+"name": "raw: family Pentaphylacaceae",
+"state": {
+"dataset": "raw",
+"taxon_type": "family",
+"family": [
+"Pentaphylacaceae"
+]
+},
+"expected": {
+"rows": 174,
+"md5": "e068458036d330370a0e1ae7aff95d39"
+}
+},
+{
+"name": "raw: family Rhamnaceae",
+"state": {
+"dataset": "raw",
+"taxon_type": "family",
+"family": [
+"Rhamnaceae"
+]
+},
+"expected": {
+"rows": 17462,
+"md5": "df8471a8825a0c10ab1aae9fbc2af121"
+}
+},
+{
+"name": "raw: family Dipteridaceae",
+"state": {
+"dataset": "raw",
+"taxon_type": "family",
+"family": [
+"Dipteridaceae"
+]
+},
+"expected": {
+"rows": 13,
+"md5": "98e5c0df80f58ea0e380147ef667dce5"
+}
+},
+{
+"name": "raw: family Paracryphiaceae",
+"state": {
+"dataset": "raw",
+"taxon_type": "family",
+"family": [
+"Paracryphiaceae"
+]
+},
+"expected": {
+"rows": 425,
+"md5": "8b8dcd111d4ce95c53a74da20e4e3d4d"
+}
+},
+{
+"name": "raw: family Ceratophyllaceae",
+"state": {
+"dataset": "raw",
+"taxon_type": "family",
+"family": [
+"Ceratophyllaceae"
+]
+},
+"expected": {
+"rows": 179,
+"md5": "4d72f07d013d4fc69049475494ea1af5"
+}
+},
+{
+"name": "raw: family Costaceae",
+"state": {
+"dataset": "raw",
+"taxon_type": "family",
+"family": [
+"Costaceae"
+]
+},
+"expected": {
+"rows": 114,
+"md5": "e071baaffcb81ea3263a53d69dbf9f65"
+}
+},
+{
+"name": "raw: family Ripogonaceae",
+"state": {
+"dataset": "raw",
+"taxon_type": "family",
+"family": [
+"Ripogonaceae"
+]
+},
+"expected": {
+"rows": 660,
+"md5": "885374ff54ef44409463c7380aa2f39d"
+}
+},
+{
+"name": "raw: family Araucariaceae",
+"state": {
+"dataset": "raw",
+"taxon_type": "family",
+"family": [
+"Araucariaceae"
+]
+},
+"expected": {
+"rows": 2543,
+"md5": "1a96faf50f2b12ac397fcd977d27fbaf"
+}
+},
+{
+"name": "raw: family Fabaceae",
+"state": {
+"dataset": "raw",
+"taxon_type": "family",
+"family": [
+"Fabaceae"
+]
+},
+"expected": {
+"rows": 221701,
+"md5": "9dccf89ae0d993f8db810797575cfea9"
+}
+},
+{
+"name": "raw: family Myrtaceae",
+"state": {
+"dataset": "raw",
+"taxon_type": "family",
+"family": [
+"Myrtaceae"
+]
+},
+"expected": {
+"rows": 250026,
+"md5": "089cb9c5ee7cf7b11aebd9d942390736"
+}
+},
+{
+"name": "raw: two families",
+"state": {
+"dataset": "raw",
+"taxon_type": "family",
+"family": [
+"Fabaceae",
+"Poaceae"
+]
+},
+"expected": {
+"rows": 323948,
+"md5": "ec111c57261ca43aba745c4af78212d0"
+}
+},
+{
+"name": "raw: genus Chamelaucium",
+"state": {
+"dataset": "raw",
+"taxon_type": "genus",
+"genus": [
+"Chamelaucium"
+]
+},
+"expected": {
+"rows": 687,
+"md5": "d57b8790628e331f0054971c17d6f427"
+}
+},
+{
+"name": "raw: genus Arabidella",
+"state": {
+"dataset": "raw",
+"taxon_type": "genus",
+"genus": [
+"Arabidella"
+]
+},
+"expected": {
+"rows": 570,
+"md5": "6ca9e94bd25a38b945ab89caffef8e13"
+}
+},
+{
+"name": "raw: genus Templetonia",
+"state": {
+"dataset": "raw",
+"taxon_type": "genus",
+"genus": [
+"Templetonia"
+]
+},
+"expected": {
+"rows": 909,
+"md5": "1404e392f3bbf5073bcc587376dcdccd"
+}
+},
+{
+"name": "raw: genus Pteridrys",
+"state": {
+"dataset": "raw",
+"taxon_type": "genus",
+"genus": [
+"Pteridrys"
+]
+},
+"expected": {
+"rows": 17,
+"md5": "98dd9bc5b23d6da59646c936fd31b38b"
+}
+},
+{
+"name": "raw: genus Antigonon",
+"state": {
+"dataset": "raw",
+"taxon_type": "genus",
+"genus": [
+"Antigonon"
+]
+},
+"expected": {
+"rows": 21,
+"md5": "17206ea348639b7d99f245d2c22badda"
+}
+},
+{
+"name": "raw: genus Cotula",
+"state": {
+"dataset": "raw",
+"taxon_type": "genus",
+"genus": [
+"Cotula"
+]
+},
+"expected": {
+"rows": 719,
+"md5": "bfc0bcebea348b0f7dc5fab491c1e6d5"
+}
+},
+{
+"name": "raw: genus Correa",
+"state": {
+"dataset": "raw",
+"taxon_type": "genus",
+"genus": [
+"Correa"
+]
+},
+"expected": {
+"rows": 3001,
+"md5": "39c9cd88875abf08e1b0a655fad1706c"
+}
+},
+{
+"name": "raw: genus Quassia",
+"state": {
+"dataset": "raw",
+"taxon_type": "genus",
+"genus": [
+"Quassia"
+]
+},
+"expected": {
+"rows": 14,
+"md5": "5636b06f9d8635259926f6a121b30d36"
+}
+},
+{
+"name": "raw: genus Enydra",
+"state": {
+"dataset": "raw",
+"taxon_type": "genus",
+"genus": [
+"Enydra"
+]
+},
+"expected": {
+"rows": 74,
+"md5": "34d2ed44364e540806704301edf2ed4f"
+}
+},
+{
+"name": "raw: genus Ribes",
+"state": {
+"dataset": "raw",
+"taxon_type": "genus",
+"genus": [
+"Ribes"
+]
+},
+"expected": {
+"rows": 44,
+"md5": "4dd8426fd0bdb6d06512182ab27d9ecb"
+}
+},
+{
+"name": "raw: genus Hemiandra",
+"state": {
+"dataset": "raw",
+"taxon_type": "genus",
+"genus": [
+"Hemiandra"
+]
+},
+"expected": {
+"rows": 409,
+"md5": "0a607f860b7a2ed9e7b4dda6d66f81e4"
+}
+},
+{
+"name": "raw: genus Lagarosiphon",
+"state": {
+"dataset": "raw",
+"taxon_type": "genus",
+"genus": [
+"Lagarosiphon"
+]
+},
+"expected": {
+"rows": 40,
+"md5": "0d4fbdd0432f96f4f48ae54e3483c0c9"
+}
+},
+{
+"name": "raw: genus with bracket fix",
+"state": {
+"dataset": "raw",
+"taxon_type": "genus",
+"genus": [
+"Dockrillia"
+]
+},
+"expected": {
+"rows": 715,
+"md5": "a5a658fc2cf7f1778d1a0a7544d8864e"
+}
+},
+{
+"name": "raw: taxon Triodia pungens",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Triodia pungens"
+]
+},
+"expected": {
+"rows": 70,
+"md5": "d4082e25138db78994bb6b9ab6e6ee53"
+}
+},
+{
+"name": "raw: taxon Aggreflorum speciosum",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Aggreflorum speciosum"
+]
+},
+"expected": {
+"rows": 8,
+"md5": "ccfd8a8a5cc58254a18af714facd0af0"
+}
+},
+{
+"name": "raw: taxon Boronia algida",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Boronia algida"
+]
+},
+"expected": {
+"rows": 120,
+"md5": "f5a1f8030ef4dcfe47490f6d0bce1e1b"
+}
+},
+{
+"name": "raw: taxon Heliconia psittacorum",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Heliconia psittacorum"
+]
+},
+"expected": {
+"rows": 3,
+"md5": "c99143b02829006881e58e717dbc10d1"
+}
+},
+{
+"name": "raw: taxon Ailanthus altissima",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Ailanthus altissima"
+]
+},
+"expected": {
+"rows": 132,
+"md5": "199398b8a96964317bd74bf3ab4bc73b"
+}
+},
+{
+"name": "raw: taxon Anigozanthos manglesii subsp. quadrans",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Anigozanthos manglesii subsp. quadrans"
+]
+},
+"expected": {
+"rows": 39,
+"md5": "9d8e394b913388d41e780d372c820078"
+}
+},
+{
+"name": "raw: taxon Enteropogon minutus",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Enteropogon minutus"
+]
+},
+"expected": {
+"rows": 54,
+"md5": "06afff2eed8956efc8fee4fc1a029939"
+}
+},
+{
+"name": "raw: taxon Melhania ovata",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Melhania ovata"
+]
+},
+"expected": {
+"rows": 7,
+"md5": "65927124b19300612ef6d37477737a76"
+}
+},
+{
+"name": "raw: taxon Lindernia calliandra",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Lindernia calliandra"
+]
+},
+"expected": {
+"rows": 14,
+"md5": "1049360986216c5fce30c073ebc490fb"
+}
+},
+{
+"name": "raw: taxon Eucalyptus pilularis",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Eucalyptus pilularis"
+]
+},
+"expected": {
+"rows": 564,
+"md5": "7af5de08d224e8f424cb36923dea20c2"
+}
+},
+{
+"name": "raw: taxon Gymnoschoenus sphaerocephalus",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Gymnoschoenus sphaerocephalus"
+]
+},
+"expected": {
+"rows": 88,
+"md5": "e52ae523a248a227b6bf850062676874"
+}
+},
+{
+"name": "raw: taxon Hakea oldfieldii",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Hakea oldfieldii"
+]
+},
+"expected": {
+"rows": 72,
+"md5": "5ebb423eb4aa49deb9baa4ce624335a4"
+}
+},
+{
+"name": "raw: taxon Schizaea dichotoma",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Schizaea dichotoma"
+]
+},
+"expected": {
+"rows": 70,
+"md5": "62845d124d153076ec77f7570b822bb6"
+}
+},
+{
+"name": "raw: taxon Capnophyllum africanum",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Capnophyllum africanum"
+]
+},
+"expected": {
+"rows": 21,
+"md5": "51cf7b29c641977a00a01369e16975ba"
+}
+},
+{
+"name": "raw: taxon Hemigenia virescens",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Hemigenia virescens"
+]
+},
+"expected": {
+"rows": 5,
+"md5": "a004ce2b918793dd0ede97a91e2da9b8"
+}
+},
+{
+"name": "raw: special-character taxon Indigofera fractiflexa subsp. augustensis",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Indigofera fractiflexa subsp. augustensis"
+]
+},
+"expected": {
+"rows": 3,
+"md5": "5d119978908ad29d8ad6562446530065"
+}
+},
+{
+"name": "raw: special-character taxon Lissanthe sp. Diggers Camp (J.M.Powell 4557)",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Lissanthe sp. Diggers Camp (J.M.Powell 4557)"
+]
+},
+"expected": {
+"rows": 4,
+"md5": "f9097f190e481643784b78b6ef57d164"
+}
+},
+{
+"name": "raw: special-character taxon Eucalyptus astringens subsp. astringens",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Eucalyptus astringens subsp. astringens"
+]
+},
+"expected": {
+"rows": 83,
+"md5": "3cd858f366494a75f7fdc6a8e66e0bc0"
+}
+},
+{
+"name": "raw: special-character taxon Acaena sp. [Acaena echinata/agnipila/ovina; Williams_2005]",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Acaena sp. [Acaena echinata/agnipila/ovina; Williams_2005]"
+]
+},
+"expected": {
+"rows": 5,
+"md5": "bf995d9e4b2271d6cf1f643c3e3ad327"
+}
+},
+{
+"name": "raw: special-character taxon Peplidium sp. Recurved limb (W.R.Barker 7246)",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Peplidium sp. Recurved limb (W.R.Barker 7246)"
+]
+},
+"expected": {
+"rows": 5,
+"md5": "8ee44bc1bd804ae18e1f21224b336aaa"
+}
+},
+{
+"name": "raw: special-character taxon Haloragis acutangula f. semiangulata",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Haloragis acutangula f. semiangulata"
+]
+},
+"expected": {
+"rows": 18,
+"md5": "2ef59e6e9e155a1dd558cfdcbf26266d"
+}
+},
+{
+"name": "raw: special-character taxon Pterocaulon serrulatum var. serrulatum",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Pterocaulon serrulatum var. serrulatum"
+]
+},
+"expected": {
+"rows": 20,
+"md5": "3d34848cae5971558fd438565a4cda9a"
+}
+},
+{
+"name": "raw: special-character taxon Helicteres sp. Douglas Springs (I.D.Cowie 9235)",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Helicteres sp. Douglas Springs (I.D.Cowie 9235)"
+]
+},
+"expected": {
+"rows": 12,
+"md5": "94f10f9c7154f74b3c0657093a1d03d1"
+}
+},
+{
+"name": "raw: special-character taxon Jagera sp. [Jagera indet; Ilic_2000]",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Jagera sp. [Jagera indet; Ilic_2000]"
+]
+},
+"expected": {
+"rows": 1,
+"md5": "8b381c252f5bd34cbf815e0fb2a5d7d9"
+}
+},
+{
+"name": "raw: special-character taxon Acacia macdonnellensis subsp. teretifolia",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Acacia macdonnellensis subsp. teretifolia"
+]
+},
+"expected": {
+"rows": 24,
+"md5": "890a6ef40ec0b332a3b69f1c4246eb79"
+}
+},
+{
+"name": "raw: special-character taxon Tephrosia brachyodon var. retinervis",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Tephrosia brachyodon var. retinervis"
+]
+},
+"expected": {
+"rows": 6,
+"md5": "f819f7fe19106f1f48d7e832ba0a1fd8"
+}
+},
+{
+"name": "raw: special-character taxon Hackelia sp. [White_2020]",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Hackelia sp. [White_2020]"
+]
+},
+"expected": {
+"rows": 16,
+"md5": "3c91f43352ee8cc01bcffb49868f2696"
+}
+},
+{
+"name": "raw: special-character taxon Rostellularia adscendens var. clementii",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Rostellularia adscendens var. clementii"
+]
+},
+"expected": {
+"rows": 13,
+"md5": "303660ece644935c23f6db83f7f4451a"
+}
+},
+{
+"name": "raw: special-character taxon Machaerina sp. [Barrett_2009, Forest Mosaic]",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Machaerina sp. [Barrett_2009, Forest Mosaic]"
+]
+},
+"expected": {
+"rows": 1,
+"md5": "8db04b68a0d4513841a50f42bd23d5f3"
+}
+},
+{
+"name": "raw: special-character taxon Chiloglottis sp. Wielangta (M.Wapstra 934)",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Chiloglottis sp. Wielangta (M.Wapstra 934)"
+]
+},
+"expected": {
+"rows": 3,
+"md5": "5c9aef79d06d75fac1fcfac2b6ca5e5e"
+}
+},
+{
+"name": "raw: special-character taxon Comesperma sp. [Pate_1998]",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Comesperma sp. [Pate_1998]"
+]
+},
+"expected": {
+"rows": 8,
+"md5": "9ade1ee415366c2f4792f5a82f622d7f"
+}
+},
+{
+"name": "raw: special-character taxon Helenium amarum var. amarum",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Helenium amarum var. amarum"
+]
+},
+"expected": {
+"rows": 3,
+"md5": "e594b80d787297fadfb001707c4a9400"
+}
+},
+{
+"name": "raw: special-character taxon Dodonaea sp. [Barrett_2009, Nuytsland]",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Dodonaea sp. [Barrett_2009, Nuytsland]"
+]
+},
+"expected": {
+"rows": 1,
+"md5": "c611e47466dabc9bdd4ff2fd99850562"
+}
+},
+{
+"name": "raw: special-character taxon Isopogon sp. Newdegate (D.B.Foreman 771)",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Isopogon sp. Newdegate (D.B.Foreman 771)"
+]
+},
+"expected": {
+"rows": 10,
+"md5": "f3174979b8b06960fab21565bed00fb6"
+}
+},
+{
+"name": "raw: special-character taxon Philydrella pygmaea subsp. minima",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Philydrella pygmaea subsp. minima"
+]
+},
+"expected": {
+"rows": 25,
+"md5": "1a4b4f2bd03f92cc9eb110d09c972878"
+}
+},
+{
+"name": "raw: special-character taxon Hypericum perforatum subsp. veronense",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Hypericum perforatum subsp. veronense"
+]
+},
+"expected": {
+"rows": 19,
+"md5": "2a12ac4aa308c735f98beb07631abeab"
+}
+},
+{
+"name": "raw: special-character taxon Telopea sp. [White_2020]",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Telopea sp. [White_2020]"
+]
+},
+"expected": {
+"rows": 14,
+"md5": "d9981a3e6e474f2750145b0a7cdd5c85"
+}
+},
+{
+"name": "raw: special-character taxon Zostera muelleri subsp. muelleri",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Zostera muelleri subsp. muelleri"
+]
+},
+"expected": {
+"rows": 53,
+"md5": "2ce84b505e8679366e8c5176fe4c42aa"
+}
+},
+{
+"name": "raw: special-character taxon Banksia prolata subsp. prolata",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Banksia prolata subsp. prolata"
+]
+},
+"expected": {
+"rows": 25,
+"md5": "d26ccfa48a8b59994827bf90feccaa83"
+}
+},
+{
+"name": "raw: special-character taxon Grevillea parviflora subsp. parviflora",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Grevillea parviflora subsp. parviflora"
+]
+},
+"expected": {
+"rows": 52,
+"md5": "75296d3b5a12361d8fd00e4ffd696051"
+}
+},
+{
+"name": "raw: three special taxa",
+"state": {
+"dataset": "raw",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"(Dockrillia pugioniformis x Dockrillia striolata) x Dockrillia pugioniformis",
+"Abelmoschus manihot subsp. manihot",
+"Abelmoschus manihot subsp. tetraphyllus"
+]
+},
+"expected": {
+"rows": 24,
+"md5": "4ba532ca0e4734b3b717ce062d293976"
+}
+},
+{
+"name": "raw: trait plant_growth_form",
+"state": {
+"dataset": "raw",
+"trait_name": [
+"plant_growth_form"
+]
+},
+"expected": {
+"rows": 112992,
+"md5": "213b4739eac81f57bbd375a88870f2ff"
+}
+},
+{
+"name": "raw: trait life_history",
+"state": {
+"dataset": "raw",
+"trait_name": [
+"life_history"
+]
+},
+"expected": {
+"rows": 86663,
+"md5": "0d9b985c237a2f322e4e470892d0ec04"
+}
+},
+{
+"name": "raw: trait leaf_length",
+"state": {
+"dataset": "raw",
+"trait_name": [
+"leaf_length"
+]
+},
+"expected": {
+"rows": 82565,
+"md5": "c441bb98eb461066cd02ab9820455b24"
+}
+},
+{
+"name": "raw: trait woodiness_detailed",
+"state": {
+"dataset": "raw",
+"trait_name": [
+"woodiness_detailed"
+]
+},
+"expected": {
+"rows": 78376,
+"md5": "a9103d1649e3673291765677817acd7d"
+}
+},
+{
+"name": "raw: trait leaf_width",
+"state": {
+"dataset": "raw",
+"trait_name": [
+"leaf_width"
+]
+},
+"expected": {
+"rows": 74333,
+"md5": "141c9c4e8c6fc8378126e33b7b846671"
+}
+},
+{
+"name": "raw: trait plant_height",
+"state": {
+"dataset": "raw",
+"trait_name": [
+"plant_height"
+]
+},
+"expected": {
+"rows": 69716,
+"md5": "0ba0e44fcedddc6f0b2b2f6a1f20c40f"
+}
+},
+{
+"name": "raw: trait bark_delta13C",
+"state": {
+"dataset": "raw",
+"trait_name": [
+"bark_delta13C"
+]
+},
+"expected": {
+"rows": 159,
+"md5": "164afa5deb56179f8eeeb0b67fcdc1ea"
+}
+},
+{
+"name": "raw: trait stem_saturated_water_content_per_dry_mass",
+"state": {
+"dataset": "raw",
+"trait_name": [
+"stem_saturated_water_content_per_dry_mass"
+]
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "raw: trait stem_mass_to_shoot_mass_ratio",
+"state": {
+"dataset": "raw",
+"trait_name": [
+"stem_mass_to_shoot_mass_ratio"
+]
+},
+"expected": {
+"rows": 558,
+"md5": "b837cf18f604925053fdcdacac31f149"
+}
+},
+{
+"name": "raw: trait flower_perianth_differentiation",
+"state": {
+"dataset": "raw",
+"trait_name": [
+"flower_perianth_differentiation"
+]
+},
+"expected": {
+"rows": 1376,
+"md5": "fb02d67255945fd297f56948ea7139d6"
+}
+},
+{
+"name": "raw: trait leaf_area",
+"state": {
+"dataset": "raw",
+"trait_name": [
+"leaf_area"
+]
+},
+"expected": {
+"rows": 25589,
+"md5": "bbd6dc31c849aa93ab1c5fd8b880ac21"
+}
+},
+{
+"name": "raw: trait modulus_of_rupture",
+"state": {
+"dataset": "raw",
+"trait_name": [
+"modulus_of_rupture"
+]
+},
+"expected": {
+"rows": 482,
+"md5": "59f68a1478bb39fcba5cbde767eb854e"
+}
+},
+{
+"name": "raw: trait leaf_Mn_per_dry_mass",
+"state": {
+"dataset": "raw",
+"trait_name": [
+"leaf_Mn_per_dry_mass"
+]
+},
+"expected": {
+"rows": 1765,
+"md5": "16e72ae7928e67e8610e429b3727523c"
+}
+},
+{
+"name": "raw: trait seed_length",
+"state": {
+"dataset": "raw",
+"trait_name": [
+"seed_length"
+]
+},
+"expected": {
+"rows": 29285,
+"md5": "a20bcdafaabad1d70717649d63232a11"
+}
+},
+{
+"name": "raw: trait leaf_ice_nucleation_temperature",
+"state": {
+"dataset": "raw",
+"trait_name": [
+"leaf_ice_nucleation_temperature"
+]
+},
+"expected": {
+"rows": 301,
+"md5": "61a7c6e254521b5502bef0f2258290a1"
+}
+},
+{
+"name": "raw: trait root_water_potential_12percent_lost_conductivity",
+"state": {
+"dataset": "raw",
+"trait_name": [
+"root_water_potential_12percent_lost_conductivity"
+]
+},
+"expected": {
+"rows": 3,
+"md5": "fb9c0fd4985d3110f2156eef3bdc29e8"
+}
+},
+{
+"name": "raw: trait stem_count",
+"state": {
+"dataset": "raw",
+"trait_name": [
+"stem_count"
+]
+},
+"expected": {
+"rows": 140,
+"md5": "b80b67098edfd70d0ff5f21a909ff71d"
+}
+},
+{
+"name": "raw: trait stem_mass_fraction",
+"state": {
+"dataset": "raw",
+"trait_name": [
+"stem_mass_fraction"
+]
+},
+"expected": {
+"rows": 1287,
+"md5": "b90b9dd5a307791b80f333cd26c334a3"
+}
+},
+{
+"name": "raw: trait leaf_palisade_mesophyll_P_per_fresh_mass",
+"state": {
+"dataset": "raw",
+"trait_name": [
+"leaf_palisade_mesophyll_P_per_fresh_mass"
+]
+},
+"expected": {
+"rows": 20,
+"md5": "b0b80f158599034a647a55a993a2f4d8"
+}
+},
+{
+"name": "raw: trait seed_dry_mass_reserve",
+"state": {
+"dataset": "raw",
+"trait_name": [
+"seed_dry_mass_reserve"
+]
+},
+"expected": {
+"rows": 104,
+"md5": "8bf933ca04f77cf2e1bb1bef5fc18cc5"
+}
+},
+{
+"name": "raw: two traits",
+"state": {
+"dataset": "raw",
+"trait_name": [
+"leaf_area",
+"plant_height"
+]
+},
+"expected": {
+"rows": 95305,
+"md5": "121f1ae279a68a458017a7868b9b86de"
+}
+},
+{
+"name": "raw: trait group bark morphology",
+"state": {
+"dataset": "raw",
+"trait_grouping": [
+"bark morphology"
+]
+},
+"expected": {
+"rows": 5976,
+"md5": "9c52d148676edc00d8db38def21c73bb"
+}
+},
+{
+"name": "raw: trait group fire response",
+"state": {
+"dataset": "raw",
+"trait_grouping": [
+"fire response"
+]
+},
+"expected": {
+"rows": 58480,
+"md5": "56977499cd184428aefc48c874c73c0b"
+}
+},
+{
+"name": "raw: trait group flower morphology",
+"state": {
+"dataset": "raw",
+"trait_grouping": [
+"flower morphology"
+]
+},
+"expected": {
+"rows": 74368,
+"md5": "3a1b536e05699aa062f322cf310269ff"
+}
+},
+{
+"name": "raw: trait group fruit morphology",
+"state": {
+"dataset": "raw",
+"trait_grouping": [
+"fruit morphology"
+]
+},
+"expected": {
+"rows": 214558,
+"md5": "acc0b09e2543a4c7d57b1bc8b8fb7f6f"
+}
+},
+{
+"name": "raw: trait group leaf morphology",
+"state": {
+"dataset": "raw",
+"trait_grouping": [
+"leaf morphology"
+]
+},
+"expected": {
+"rows": 465048,
+"md5": "61d77fdae953e51334fac5b6c9543ed7"
+}
+},
+{
+"name": "raw: trait group life history",
+"state": {
+"dataset": "raw",
+"trait_grouping": [
+"life history"
+]
+},
+"expected": {
+"rows": 616243,
+"md5": "61451526adec63ed8d150dbdcb1fa09d"
+}
+},
+{
+"name": "raw: trait group nutrient and stable isotope",
+"state": {
+"dataset": "raw",
+"trait_grouping": [
+"nutrient and stable isotope"
+]
+},
+"expected": {
+"rows": 76923,
+"md5": "be45a89c1fea324822b8f550b9a0987f"
+}
+},
+{
+"name": "raw: trait group physiology",
+"state": {
+"dataset": "raw",
+"trait_grouping": [
+"physiology"
+]
+},
+"expected": {
+"rows": 49798,
+"md5": "400615a1a6a78797132378a33e3f7bdb"
+}
+},
+{
+"name": "raw: trait group root morphology",
+"state": {
+"dataset": "raw",
+"trait_grouping": [
+"root morphology"
+]
+},
+"expected": {
+"rows": 6654,
+"md5": "f2f22d6cbd3b6066a8283fb6a2479f4b"
+}
+},
+{
+"name": "raw: trait group seed morphology",
+"state": {
+"dataset": "raw",
+"trait_grouping": [
+"seed morphology"
+]
+},
+"expected": {
+"rows": 118620,
+"md5": "da27890b13b04ac8dfcb50d9b9e26c59"
+}
+},
+{
+"name": "raw: trait group stem morphology",
+"state": {
+"dataset": "raw",
+"trait_grouping": [
+"stem morphology"
+]
+},
+"expected": {
+"rows": 24803,
+"md5": "bd7e00628d740bfda258bbcc58d174bf"
+}
+},
+{
+"name": "raw: trait group whole plant morphology",
+"state": {
+"dataset": "raw",
+"trait_grouping": [
+"whole plant morphology"
+]
+},
+"expected": {
+"rows": 84776,
+"md5": "32407ed2cb99dc11eb95ff9192ca13bc"
+}
+},
+{
+"name": "raw: structure bark",
+"state": {
+"dataset": "raw",
+"structure_measured": [
+"bark"
+]
+},
+"expected": {
+"rows": 17996,
+"md5": "59ba667a2db6a656ea2bac5593cfccf0"
+}
+},
+{
+"name": "raw: structure bud",
+"state": {
+"dataset": "raw",
+"structure_measured": [
+"bud"
+]
+},
+"expected": {
+"rows": 65462,
+"md5": "cf98cd0f9aee234074d746ca9d921069"
+}
+},
+{
+"name": "raw: structure flower",
+"state": {
+"dataset": "raw",
+"structure_measured": [
+"flower"
+]
+},
+"expected": {
+"rows": 124021,
+"md5": "06ff4f2fa82145496449f2fe84f2a71b"
+}
+},
+{
+"name": "raw: structure fruit",
+"state": {
+"dataset": "raw",
+"structure_measured": [
+"fruit"
+]
+},
+"expected": {
+"rows": 268888,
+"md5": "f314dc6c6b76e8f1b66c8be778a463d7"
+}
+},
+{
+"name": "raw: structure inflorescence",
+"state": {
+"dataset": "raw",
+"structure_measured": [
+"inflorescence"
+]
+},
+"expected": {
+"rows": 1612,
+"md5": "c1bbf8df84b38031468d517de8ab160c"
+}
+},
+{
+"name": "raw: structure leaf",
+"state": {
+"dataset": "raw",
+"structure_measured": [
+"leaf"
+]
+},
+"expected": {
+"rows": 774382,
+"md5": "9d2a992e542a0363bf31dc26661c2b34"
+}
+},
+{
+"name": "raw: keyword potassium atom",
+"state": {
+"dataset": "raw",
+"keywords": [
+"potassium atom"
+]
+},
+"expected": {
+"rows": 3183,
+"md5": "cc68a35cda012f5fb253d7832b6ec6c0"
+}
+},
+{
+"name": "raw: keyword leaf lamina tooth",
+"state": {
+"dataset": "raw",
+"keywords": [
+"leaf lamina tooth"
+]
+},
+"expected": {
+"rows": 18310,
+"md5": "7a33d4d58a5ba69fbeb337f6ef2117d1"
+}
+},
+{
+"name": "raw: keyword epidermal cell",
+"state": {
+"dataset": "raw",
+"keywords": [
+"epidermal cell"
+]
+},
+"expected": {
+"rows": 250,
+"md5": "c3f2a21afe9d258ea33c9eb1c7b54cf1"
+}
+},
+{
+"name": "raw: keyword connective",
+"state": {
+"dataset": "raw",
+"keywords": [
+"connective"
+]
+},
+"expected": {
+"rows": 2281,
+"md5": "fa2fe9d1fed9a7a66c743d5db661182e"
+}
+},
+{
+"name": "raw: keyword macronutrient",
+"state": {
+"dataset": "raw",
+"keywords": [
+"macronutrient"
+]
+},
+"expected": {
+"rows": 33251,
+"md5": "add4e1263b32a2e4776083ec2126d300"
+}
+},
+{
+"name": "raw: keyword parenchyma cell",
+"state": {
+"dataset": "raw",
+"keywords": [
+"parenchyma cell"
+]
+},
+"expected": {
+"rows": 24,
+"md5": "3325aad238ebbc23aaa6f3fe30da464f"
+}
+},
+{
+"name": "raw: keyword primary root",
+"state": {
+"dataset": "raw",
+"keywords": [
+"primary root"
+]
+},
+"expected": {
+"rows": 1254,
+"md5": "543b63007591dfb0fc9503561cbff514"
+}
+},
+{
+"name": "raw: keyword d15N",
+"state": {
+"dataset": "raw",
+"keywords": [
+"d15N"
+]
+},
+"expected": {
+"rows": 3641,
+"md5": "09d5a63b4a5377df924754dc57dc22b3"
+}
+},
+{
+"name": "raw: group + structure",
+"state": {
+"dataset": "raw",
+"trait_grouping": [
+"bark morphology"
+],
+"structure_measured": [
+"bark"
+]
+},
+"expected": {
+"rows": 5976,
+"md5": "9c52d148676edc00d8db38def21c73bb"
+}
+},
+{
+"name": "raw: group + trait name outside group",
+"state": {
+"dataset": "raw",
+"trait_grouping": [
+"bark morphology"
+],
+"trait_name": [
+"leaf_area"
+]
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "raw: family + trait",
+"state": {
+"dataset": "raw",
+"taxon_type": "family",
+"family": [
+"Myrtaceae"
+],
+"trait_name": [
+"leaf_area"
+]
+},
+"expected": {
+"rows": 8637,
+"md5": "ec6e32464728cdadb80d96b4aa6ee793"
+}
+},
+{
+"name": "raw: genus + group",
+"state": {
+"dataset": "raw",
+"taxon_type": "genus",
+"genus": [
+"Acacia"
+],
+"trait_grouping": [
+"fire response"
+]
+},
+"expected": {
+"rows": 3091,
+"md5": "f50f5f6847412bdcf51a53ce369b114b"
+}
+},
+{
+"name": "raw: basis_of_record captive_cultivated",
+"state": {
+"dataset": "raw",
+"basis_of_record": [
+"captive_cultivated"
+]
+},
+"expected": {
+"rows": 11232,
+"md5": "831c588ade65e77164d087c35f404701"
+}
+},
+{
+"name": "raw: basis_of_record field",
+"state": {
+"dataset": "raw",
+"basis_of_record": [
+"field"
+]
+},
+"expected": {
+"rows": 400185,
+"md5": "aa728181c84403e246e433263aa9dfdb"
+}
+},
+{
+"name": "raw: basis_of_record field captive_cultivated",
+"state": {
+"dataset": "raw",
+"basis_of_record": [
+"field captive_cultivated"
+]
+},
+"expected": {
+"rows": 3,
+"md5": "9fa336a431d681799530585a99b99b8b"
+}
+},
+{
+"name": "raw: basis_of_record field field_experiment",
+"state": {
+"dataset": "raw",
+"basis_of_record": [
+"field field_experiment"
+]
+},
+"expected": {
+"rows": 456,
+"md5": "956b6627e8d69bb3142f464ad73ec610"
+}
+},
+{
+"name": "raw: basis_of_record field lab",
+"state": {
+"dataset": "raw",
+"basis_of_record": [
+"field lab"
+]
+},
+"expected": {
+"rows": 1011,
+"md5": "56f64fa51026d7f1a961792b6d37a63c"
+}
+},
+{
+"name": "raw: life_stage adult",
+"state": {
+"dataset": "raw",
+"life_stage": [
+"adult"
+]
+},
+"expected": {
+"rows": 1697879,
+"md5": "9dc716cb2a4aa7255693118b329aae24"
+}
+},
+{
+"name": "raw: life_stage adult juvenile",
+"state": {
+"dataset": "raw",
+"life_stage": [
+"adult juvenile"
+]
+},
+"expected": {
+"rows": 244,
+"md5": "17fd8d3f513710580398490fed78adf3"
+}
+},
+{
+"name": "raw: life_stage adult, seedling",
+"state": {
+"dataset": "raw",
+"life_stage": [
+"adult, seedling"
+]
+},
+"expected": {
+"rows": 1076,
+"md5": "a2d4a94530e5727634d3dc6d94fabd32"
+}
+},
+{
+"name": "raw: life_stage adults",
+"state": {
+"dataset": "raw",
+"life_stage": [
+"adults"
+]
+},
+"expected": {
+"rows": 278,
+"md5": "e649eb7df0706bc825359bc3a715f352"
+}
+},
+{
+"name": "raw: life_stage juvenile",
+"state": {
+"dataset": "raw",
+"life_stage": [
+"juvenile"
+]
+},
+"expected": {
+"rows": 3043,
+"md5": "bc5f612572d18940d36aac679f968229"
+}
+},
+{
+"name": "raw: apc ACT",
+"state": {
+"dataset": "raw",
+"location": "apc",
+"apc_taxon_distribution": [
+"ACT"
+]
+},
+"expected": {
+"rows": 249856,
+"md5": "00b65f780ab53f51155da5aac4531a66"
+}
+},
+{
+"name": "raw: apc ChI",
+"state": {
+"dataset": "raw",
+"location": "apc",
+"apc_taxon_distribution": [
+"ChI"
+]
+},
+"expected": {
+"rows": 23825,
+"md5": "d2bfbf461d9217d394e96660c5661a22"
+}
+},
+{
+"name": "raw: apc HI",
+"state": {
+"dataset": "raw",
+"location": "apc",
+"apc_taxon_distribution": [
+"HI"
+]
+},
+"expected": {
+"rows": 48239,
+"md5": "a926f4105e33dbb4a782d3e9b84a3125"
+}
+},
+{
+"name": "raw: apc MI",
+"state": {
+"dataset": "raw",
+"location": "apc",
+"apc_taxon_distribution": [
+"MI"
+]
+},
+"expected": {
+"rows": 1672,
+"md5": "e85dc6b80b4faa7bb081fffe22a4bcf3"
+}
+},
+{
+"name": "raw: apc NSW",
+"state": {
+"dataset": "raw",
+"location": "apc",
+"apc_taxon_distribution": [
+"NSW"
+]
+},
+"expected": {
+"rows": 910084,
+"md5": "e85e24a902e4ac46dd9796fafa2ce874"
+}
+},
+{
+"name": "raw: apc SA",
+"state": {
+"dataset": "raw",
+"location": "apc",
+"apc_taxon_distribution": [
+"SA"
+]
+},
+"expected": {
+"rows": 525152,
+"md5": "c93062054a3d7e5fdd40d712c0eeb417"
+}
+},
+{
+"name": "raw: apc WA",
+"state": {
+"dataset": "raw",
+"location": "apc",
+"apc_taxon_distribution": [
+"WA"
+]
+},
+"expected": {
+"rows": 800136,
+"md5": "7f741bacd51b71a93ebc837fb7840efd"
+}
+},
+{
+"name": "raw: apc two states",
+"state": {
+"dataset": "raw",
+"location": "apc",
+"apc_taxon_distribution": [
+"ACT",
+"AR"
+]
+},
+"expected": {
+"rows": 252257,
+"md5": "18ac6a986b6fdd9c2b0f8d6dfef9da5f"
+}
+},
+{
+"name": "raw: apc + family",
+"state": {
+"dataset": "raw",
+"location": "apc",
+"apc_taxon_distribution": [
+"ACT"
+],
+"taxon_type": "family",
+"family": [
+"Fabaceae"
+]
+},
+"expected": {
+"rows": 25970,
+"md5": "37cc2d14f49aab898b3582e33bc031c2"
+}
+},
+{
+"name": "species: no filters",
+"state": {
+"dataset": "species"
+},
+"expected": {
+"rows": 631887,
+"md5": "559e1f1d85603fdbdb6fc21fa5f58ff8"
+}
+},
+{
+"name": "species: family Geraniaceae",
+"state": {
+"dataset": "species",
+"taxon_type": "family",
+"family": [
+"Geraniaceae"
+]
+},
+"expected": {
+"rows": 1572,
+"md5": "f23bfde48d35c499950db6f4776827e5"
+}
+},
+{
+"name": "species: family Pontederiaceae",
+"state": {
+"dataset": "species",
+"taxon_type": "family",
+"family": [
+"Pontederiaceae"
+]
+},
+"expected": {
+"rows": 153,
+"md5": "42bd15e1d77e7ca5fa671bef967fbf24"
+}
+},
+{
+"name": "species: family Asteliaceae",
+"state": {
+"dataset": "species",
+"taxon_type": "family",
+"family": [
+"Asteliaceae"
+]
+},
+"expected": {
+"rows": 291,
+"md5": "94fc5f1a2789b304b545a6e153feae8f"
+}
+},
+{
+"name": "species: family Pittosporaceae",
+"state": {
+"dataset": "species",
+"taxon_type": "family",
+"family": [
+"Pittosporaceae"
+]
+},
+"expected": {
+"rows": 3114,
+"md5": "4526a6042309ca337e0cc7cf4d4aaf6b"
+}
+},
+{
+"name": "species: family Restionaceae",
+"state": {
+"dataset": "species",
+"taxon_type": "family",
+"family": [
+"Restionaceae"
+]
+},
+"expected": {
+"rows": 3482,
+"md5": "57ba9d479db9d86bdebc33207a5e5410"
+}
+},
+{
+"name": "species: family Meliaceae",
+"state": {
+"dataset": "species",
+"taxon_type": "family",
+"family": [
+"Meliaceae"
+]
+},
+"expected": {
+"rows": 1640,
+"md5": "84d08bf30861cacfde18e1aab24cb8a3"
+}
+},
+{
+"name": "species: family Nelumbonaceae",
+"state": {
+"dataset": "species",
+"taxon_type": "family",
+"family": [
+"Nelumbonaceae"
+]
+},
+"expected": {
+"rows": 26,
+"md5": "33cdab0a712de8ecf00a1d645472d6a6"
+}
+},
+{
+"name": "species: family Surianaceae",
+"state": {
+"dataset": "species",
+"taxon_type": "family",
+"family": [
+"Surianaceae"
+]
+},
+"expected": {
+"rows": 147,
+"md5": "3a8741d81790b2604a0806f39574be46"
+}
+},
+{
+"name": "species: family Salicaceae",
+"state": {
+"dataset": "species",
+"taxon_type": "family",
+"family": [
+"Salicaceae"
+]
+},
+"expected": {
+"rows": 1033,
+"md5": "011d3a0c86a10a6990951ab1a88e975c"
+}
+},
+{
+"name": "species: family Balanopaceae",
+"state": {
+"dataset": "species",
+"taxon_type": "family",
+"family": [
+"Balanopaceae"
+]
+},
+"expected": {
+"rows": 31,
+"md5": "1dae3724b19e2669c56f77d7d7f91123"
+}
+},
+{
+"name": "species: family Lythraceae",
+"state": {
+"dataset": "species",
+"taxon_type": "family",
+"family": [
+"Lythraceae"
+]
+},
+"expected": {
+"rows": 751,
+"md5": "c1074e24f4b8201f14f8ddfebf03e00f"
+}
+},
+{
+"name": "species: family Moringaceae",
+"state": {
+"dataset": "species",
+"taxon_type": "family",
+"family": [
+"Moringaceae"
+]
+},
+"expected": {
+"rows": 19,
+"md5": "ccacb2808a6953ca2a73b2b20aae083a"
+}
+},
+{
+"name": "species: family Fabaceae",
+"state": {
+"dataset": "species",
+"taxon_type": "family",
+"family": [
+"Fabaceae"
+]
+},
+"expected": {
+"rows": 75957,
+"md5": "da298241b56d40f49d4efbf7885c3b41"
+}
+},
+{
+"name": "species: family Myrtaceae",
+"state": {
+"dataset": "species",
+"taxon_type": "family",
+"family": [
+"Myrtaceae"
+]
+},
+"expected": {
+"rows": 66923,
+"md5": "23adeec5d586e47018297effa58c781a"
+}
+},
+{
+"name": "species: two families",
+"state": {
+"dataset": "species",
+"taxon_type": "family",
+"family": [
+"Fabaceae",
+"Poaceae"
+]
+},
+"expected": {
+"rows": 113642,
+"md5": "06b66ff137206ff7e4ea3adfd2477d12"
+}
+},
+{
+"name": "species: genus Agastachys",
+"state": {
+"dataset": "species",
+"taxon_type": "genus",
+"genus": [
+"Agastachys"
+]
+},
+"expected": {
+"rows": 31,
+"md5": "8d9e165f19de1eff2fb669bb28e446df"
+}
+},
+{
+"name": "species: genus Gazania",
+"state": {
+"dataset": "species",
+"taxon_type": "genus",
+"genus": [
+"Gazania"
+]
+},
+"expected": {
+"rows": 47,
+"md5": "f8d0633a0b94853186da0b4115572b92"
+}
+},
+{
+"name": "species: genus Mitrella",
+"state": {
+"dataset": "species",
+"taxon_type": "genus",
+"genus": [
+"Mitrella"
+]
+},
+"expected": {
+"rows": 26,
+"md5": "c7237137cadbbd3ea13fe7cb09ec2013"
+}
+},
+{
+"name": "species: genus Scabiosa",
+"state": {
+"dataset": "species",
+"taxon_type": "genus",
+"genus": [
+"Scabiosa"
+]
+},
+"expected": {
+"rows": 3,
+"md5": "be2a454f4c2f3ee21f40d9a11a62c884"
+}
+},
+{
+"name": "species: genus Cotyledon",
+"state": {
+"dataset": "species",
+"taxon_type": "genus",
+"genus": [
+"Cotyledon"
+]
+},
+"expected": {
+"rows": 18,
+"md5": "90c4f2ae628eb1525eb9157a67349901"
+}
+},
+{
+"name": "species: genus Rhodamnia",
+"state": {
+"dataset": "species",
+"taxon_type": "genus",
+"genus": [
+"Rhodamnia"
+]
+},
+"expected": {
+"rows": 473,
+"md5": "788e5d0c7d84e4d8c3823fb2c12eca15"
+}
+},
+{
+"name": "species: genus Drypetes",
+"state": {
+"dataset": "species",
+"taxon_type": "genus",
+"genus": [
+"Drypetes"
+]
+},
+"expected": {
+"rows": 100,
+"md5": "77ed8296433b0c3be9fc6301f243a525"
+}
+},
+{
+"name": "species: genus Polyosma",
+"state": {
+"dataset": "species",
+"taxon_type": "genus",
+"genus": [
+"Polyosma"
+]
+},
+"expected": {
+"rows": 181,
+"md5": "377b82c9d944a3635f0038462a7d7707"
+}
+},
+{
+"name": "species: genus Australina",
+"state": {
+"dataset": "species",
+"taxon_type": "genus",
+"genus": [
+"Australina"
+]
+},
+"expected": {
+"rows": 110,
+"md5": "9c1f3ed36d83e48a54261b8eda1c0c3d"
+}
+},
+{
+"name": "species: genus Babingtonia",
+"state": {
+"dataset": "species",
+"taxon_type": "genus",
+"genus": [
+"Babingtonia"
+]
+},
+"expected": {
+"rows": 159,
+"md5": "5e00593fda0751faa962445a4fc42e37"
+}
+},
+{
+"name": "species: genus Nauclea",
+"state": {
+"dataset": "species",
+"taxon_type": "genus",
+"genus": [
+"Nauclea"
+]
+},
+"expected": {
+"rows": 34,
+"md5": "bfa4ddf94b2017f25eb4cf3b1cdc7c46"
+}
+},
+{
+"name": "species: genus Anthelepis",
+"state": {
+"dataset": "species",
+"taxon_type": "genus",
+"genus": [
+"Anthelepis"
+]
+},
+"expected": {
+"rows": 69,
+"md5": "1490e163d5d5db50663c90714d6852ef"
+}
+},
+{
+"name": "species: genus with bracket fix",
+"state": {
+"dataset": "species",
+"taxon_type": "genus",
+"genus": [
+"Dockrillia"
+]
+},
+"expected": {
+"rows": 348,
+"md5": "3b1aa035aafae041bb1febbed05a0565"
+}
+},
+{
+"name": "species: taxon Sporobolus virginicus",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Sporobolus virginicus"
+]
+},
+"expected": {
+"rows": 47,
+"md5": "3ed996f1d5dcccd92dff473c0ab4802b"
+}
+},
+{
+"name": "species: taxon Eremochloa ciliaris",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Eremochloa ciliaris"
+]
+},
+"expected": {
+"rows": 12,
+"md5": "3f63bcbd130913a95edae2a6fc167100"
+}
+},
+{
+"name": "species: taxon Rhodamnia sp. (Upper Massy Creek)",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Rhodamnia sp. (Upper Massy Creek)"
+]
+},
+"expected": {
+"rows": 9,
+"md5": "ab060c04ac52099ad4de19b971695806"
+}
+},
+{
+"name": "species: taxon Atriplex muelleri",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Atriplex muelleri"
+]
+},
+"expected": {
+"rows": 29,
+"md5": "b22a26e241b51101816e1fa8a3a24bbc"
+}
+},
+{
+"name": "species: taxon Salix babylonica",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Salix babylonica"
+]
+},
+"expected": {
+"rows": 20,
+"md5": "b49f6018107c41a5d88cc31f74e64029"
+}
+},
+{
+"name": "species: taxon Plectorrhiza erecta",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Plectorrhiza erecta"
+]
+},
+"expected": {
+"rows": 15,
+"md5": "53cd0d56f40554624844bf66c1955eb8"
+}
+},
+{
+"name": "species: taxon Ilex aquifolium",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Ilex aquifolium"
+]
+},
+"expected": {
+"rows": 25,
+"md5": "79d446cae02c5276b26d3887d1922527"
+}
+},
+{
+"name": "species: taxon Cleistochloa subjuncea",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Cleistochloa subjuncea"
+]
+},
+"expected": {
+"rows": 23,
+"md5": "e17083854dbd0f166392bd9c3798e720"
+}
+},
+{
+"name": "species: taxon Genoplesium sp. [Genoplesium nigricans/rufum; White_2020]",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Genoplesium sp. [Genoplesium nigricans/rufum; White_2020]"
+]
+},
+"expected": {
+"rows": 13,
+"md5": "184d69fc54c15a8455b3f2d8377c0059"
+}
+},
+{
+"name": "species: taxon Scyphiphora hydrophylacea",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Scyphiphora hydrophylacea"
+]
+},
+"expected": {
+"rows": 28,
+"md5": "d4e6be53ff72edc03edff83c13dda407"
+}
+},
+{
+"name": "species: taxon Carex leporina",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Carex leporina"
+]
+},
+"expected": {
+"rows": 13,
+"md5": "f2ccf0252e32af5d792513687e744d5c"
+}
+},
+{
+"name": "species: taxon Persoonia amaliae",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Persoonia amaliae"
+]
+},
+"expected": {
+"rows": 20,
+"md5": "fccebeac74ffdb43dddacfa3d015e22b"
+}
+},
+{
+"name": "species: taxon Sicyos undara",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Sicyos undara"
+]
+},
+"expected": {
+"rows": 7,
+"md5": "262cf052b664f29cef3de2c07bd39b53"
+}
+},
+{
+"name": "species: taxon Erica glandulosa",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Erica glandulosa"
+]
+},
+"expected": {
+"rows": 14,
+"md5": "67358206e3e72e4e5659b6b6de2765ca"
+}
+},
+{
+"name": "species: taxon Alectryon reticulatus",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Alectryon reticulatus"
+]
+},
+"expected": {
+"rows": 28,
+"md5": "2fb850a39f8de5078b119e29be927636"
+}
+},
+{
+"name": "species: special-character taxon Quassia sp. nov.",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Quassia sp. nov."
+]
+},
+"expected": {
+"rows": 1,
+"md5": "e4f9a6c0adc00f913255083d622f96d3"
+}
+},
+{
+"name": "species: special-character taxon Tricoryne sp. Wongan Hills (B.H.Smith 794)",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Tricoryne sp. Wongan Hills (B.H.Smith 794)"
+]
+},
+"expected": {
+"rows": 8,
+"md5": "553ab246f77ad6bade792af81032f70c"
+}
+},
+{
+"name": "species: special-character taxon Haloragis odontocarpa f. odontocarpa",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Haloragis odontocarpa f. odontocarpa"
+]
+},
+"expected": {
+"rows": 13,
+"md5": "525050126777bc27c0589b34663251ed"
+}
+},
+{
+"name": "species: special-character taxon Hakea teretifolia subsp. hirsuta",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Hakea teretifolia subsp. hirsuta"
+]
+},
+"expected": {
+"rows": 42,
+"md5": "bb59ff16443d052088d523169b9c226c"
+}
+},
+{
+"name": "species: special-character taxon Ficus virens var. virens",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Ficus virens var. virens"
+]
+},
+"expected": {
+"rows": 25,
+"md5": "8438d3a3b2c450a0997014e1e18bc8fe"
+}
+},
+{
+"name": "species: special-character taxon Alstonia constricta f. Narrow-leaved pubescent form",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Alstonia constricta f. Narrow-leaved pubescent form"
+]
+},
+"expected": {
+"rows": 3,
+"md5": "19134f8d44c0abc2bdf336d317e852d1"
+}
+},
+{
+"name": "species: special-character taxon Acacia insolita subsp. recurva",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Acacia insolita subsp. recurva"
+]
+},
+"expected": {
+"rows": 18,
+"md5": "a35541c376f118edc40585a5be70db2e"
+}
+},
+{
+"name": "species: special-character taxon Wahlenbergia littoricola subsp. vernicosa",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Wahlenbergia littoricola subsp. vernicosa"
+]
+},
+"expected": {
+"rows": 3,
+"md5": "e74036c41ef4892b2d6d59d3f545908b"
+}
+},
+{
+"name": "species: special-character taxon Vicia sativa subsp. nigra",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Vicia sativa subsp. nigra"
+]
+},
+"expected": {
+"rows": 22,
+"md5": "b89db224513aaa6c7eaa30ca153856be"
+}
+},
+{
+"name": "species: special-character taxon Aristida calycina var. filifolia",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Aristida calycina var. filifolia"
+]
+},
+"expected": {
+"rows": 12,
+"md5": "d651a97656fa804c57f735c6c41f2e38"
+}
+},
+{
+"name": "species: special-character taxon Calandrinia sp. [Pate_1998]",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Calandrinia sp. [Pate_1998]"
+]
+},
+"expected": {
+"rows": 5,
+"md5": "c4f3432e88c3ecfce90e8b2dd94802be"
+}
+},
+{
+"name": "species: special-character taxon Eremophila fraseri subsp. parva",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Eremophila fraseri subsp. parva"
+]
+},
+"expected": {
+"rows": 5,
+"md5": "d8e90bbe285db64e52eccda6d089de41"
+}
+},
+{
+"name": "species: special-character taxon Olearia sp. [Olearia sp. aff. elliptica; White_2020]",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Olearia sp. [Olearia sp. aff. elliptica; White_2020]"
+]
+},
+"expected": {
+"rows": 12,
+"md5": "f4c17010b848b4cbefff646e245f143b"
+}
+},
+{
+"name": "species: special-character taxon Platylobium sp. [White_2020]",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Platylobium sp. [White_2020]"
+]
+},
+"expected": {
+"rows": 12,
+"md5": "1e4a7378f783c8ec4306c9603e40ad3c"
+}
+},
+{
+"name": "species: special-character taxon Alyogyne pinoniana var. pinoniana",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Alyogyne pinoniana var. pinoniana"
+]
+},
+"expected": {
+"rows": 4,
+"md5": "b1d58b3ce18ea9f6f4caddd2d8c0e1d3"
+}
+},
+{
+"name": "species: special-character taxon Hibbertia auriculiflora subsp. minor",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Hibbertia auriculiflora subsp. minor"
+]
+},
+"expected": {
+"rows": 3,
+"md5": "1b0bb783e6586fdec3bee63ad06fcfbd"
+}
+},
+{
+"name": "species: special-character taxon Paspalidium sp. [White_2020]",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Paspalidium sp. [White_2020]"
+]
+},
+"expected": {
+"rows": 12,
+"md5": "fbcdf393f7f41766e281dd27b0780dd2"
+}
+},
+{
+"name": "species: special-character taxon Thelymitra sp. [Thelymitra nuda/pauciflora; White_2020]",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Thelymitra sp. [Thelymitra nuda/pauciflora; White_2020]"
+]
+},
+"expected": {
+"rows": 13,
+"md5": "b470ae59713e8e775620c440651baec8"
+}
+},
+{
+"name": "species: special-character taxon Senecio vagus subsp. eglandulosus",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Senecio vagus subsp. eglandulosus"
+]
+},
+"expected": {
+"rows": 22,
+"md5": "019d994d4fd44fa3f0d47097e59cfa5f"
+}
+},
+{
+"name": "species: special-character taxon Prostanthera semiteres subsp. semiteres",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Prostanthera semiteres subsp. semiteres"
+]
+},
+"expected": {
+"rows": 11,
+"md5": "ce14c75622e9b27088c1cde9615d85e4"
+}
+},
+{
+"name": "species: special-character taxon Glochidion ferdinandi var. ferdinandi",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Glochidion ferdinandi var. ferdinandi"
+]
+},
+"expected": {
+"rows": 29,
+"md5": "750a3276611e92ec972ff372d410cc00"
+}
+},
+{
+"name": "species: special-character taxon Euphorbia thelephora var. thelephora",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Euphorbia thelephora var. thelephora"
+]
+},
+"expected": {
+"rows": 3,
+"md5": "804edba17bfe2ab14310298db7ccfc27"
+}
+},
+{
+"name": "species: special-character taxon Erechtites valerianifolius f. valerianifolius",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Erechtites valerianifolius f. valerianifolius"
+]
+},
+"expected": {
+"rows": 12,
+"md5": "c556442148703e8d74baf50bf0b61942"
+}
+},
+{
+"name": "species: special-character taxon Isotoma sp. [White_2020]",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Isotoma sp. [White_2020]"
+]
+},
+"expected": {
+"rows": 13,
+"md5": "b4da65b914da5eff408c51556ff116df"
+}
+},
+{
+"name": "species: special-character taxon Hakea epiglottis subsp. milliganii",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"Hakea epiglottis subsp. milliganii"
+]
+},
+"expected": {
+"rows": 9,
+"md5": "90ac4da26f59d383c7a0bfd4996a3a91"
+}
+},
+{
+"name": "species: three special taxa",
+"state": {
+"dataset": "species",
+"taxon_type": "taxon_name",
+"taxon_name": [
+"(Dockrillia pugioniformis x Dockrillia striolata) x Dockrillia pugioniformis",
+"Abelmoschus manihot subsp. manihot",
+"Abelmoschus manihot subsp. tetraphyllus"
+]
+},
+"expected": {
+"rows": 20,
+"md5": "a761a09de490dde3f52e803097d30066"
+}
+},
+{
+"name": "species: trait plant_growth_form",
+"state": {
+"dataset": "species",
+"trait_name": [
+"plant_growth_form"
+]
+},
+"expected": {
+"rows": 31557,
+"md5": "fd80a3758a1250d709c852d9ea1bf2ce"
+}
+},
+{
+"name": "species: trait life_history",
+"state": {
+"dataset": "species",
+"trait_name": [
+"life_history"
+]
+},
+"expected": {
+"rows": 30341,
+"md5": "222e8f542f2696e567f9b49895d70ac9"
+}
+},
+{
+"name": "species: trait leaf_length",
+"state": {
+"dataset": "species",
+"trait_name": [
+"leaf_length"
+]
+},
+"expected": {
+"rows": 21156,
+"md5": "4234bb1c1663afe11b11b9e0a9a26e88"
+}
+},
+{
+"name": "species: trait woodiness_detailed",
+"state": {
+"dataset": "species",
+"trait_name": [
+"woodiness_detailed"
+]
+},
+"expected": {
+"rows": 30563,
+"md5": "96845b85b5968597d9dffad5bf2fbb50"
+}
+},
+{
+"name": "species: trait leaf_width",
+"state": {
+"dataset": "species",
+"trait_name": [
+"leaf_width"
+]
+},
+"expected": {
+"rows": 19910,
+"md5": "96d6fd1e2fde36ffc1541714ea08e3a4"
+}
+},
+{
+"name": "species: trait plant_height",
+"state": {
+"dataset": "species",
+"trait_name": [
+"plant_height"
+]
+},
+"expected": {
+"rows": 22535,
+"md5": "a273687d13b04c3f038929bccbdaf8ae"
+}
+},
+{
+"name": "species: trait leaf_P_per_dry_mass",
+"state": {
+"dataset": "species",
+"trait_name": [
+"leaf_P_per_dry_mass"
+]
+},
+"expected": {
+"rows": 1187,
+"md5": "497c51d95d6e0d7a00690e68dbad9e8f"
+}
+},
+{
+"name": "species: trait plant_tolerance_salt",
+"state": {
+"dataset": "species",
+"trait_name": [
+"plant_tolerance_salt"
+]
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "species: trait leaf_inclination_angle",
+"state": {
+"dataset": "species",
+"trait_name": [
+"leaf_inclination_angle"
+]
+},
+"expected": {
+"rows": 183,
+"md5": "39c6b0eb319aab71c8e9cdbd4135e0c9"
+}
+},
+{
+"name": "species: trait cell_cross-sectional_area",
+"state": {
+"dataset": "species",
+"trait_name": [
+"cell_cross-sectional_area"
+]
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "species: trait wood_dead_N_per_dry_mass",
+"state": {
+"dataset": "species",
+"trait_name": [
+"wood_dead_N_per_dry_mass"
+]
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "species: trait water_potential_predawn",
+"state": {
+"dataset": "species",
+"trait_name": [
+"water_potential_predawn"
+]
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "species: trait foliage_time",
+"state": {
+"dataset": "species",
+"trait_name": [
+"foliage_time"
+]
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "species: trait stem_mass_fraction",
+"state": {
+"dataset": "species",
+"trait_name": [
+"stem_mass_fraction"
+]
+},
+"expected": {
+"rows": 62,
+"md5": "138e57ac10c89c3b6cf86ead0dee881d"
+}
+},
+{
+"name": "species: trait leaf_reflectance_near_infrared",
+"state": {
+"dataset": "species",
+"trait_name": [
+"leaf_reflectance_near_infrared"
+]
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "species: trait xylem_to_leaf_area_ratio",
+"state": {
+"dataset": "species",
+"trait_name": [
+"xylem_to_leaf_area_ratio"
+]
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "species: trait root_water_potential_12percent_lost_conductivity",
+"state": {
+"dataset": "species",
+"trait_name": [
+"root_water_potential_12percent_lost_conductivity"
+]
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "species: trait leaf_K_per_area",
+"state": {
+"dataset": "species",
+"trait_name": [
+"leaf_K_per_area"
+]
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "species: trait osmotic_potential",
+"state": {
+"dataset": "species",
+"trait_name": [
+"osmotic_potential"
+]
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "species: trait leaf_total_non-structural_carbohydrates_per_area",
+"state": {
+"dataset": "species",
+"trait_name": [
+"leaf_total_non-structural_carbohydrates_per_area"
+]
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "species: two traits",
+"state": {
+"dataset": "species",
+"trait_name": [
+"leaf_area",
+"plant_height"
+]
+},
+"expected": {
+"rows": 27487,
+"md5": "76a353613f148e27366bccf60abc5329"
+}
+},
+{
+"name": "species: trait group bark morphology",
+"state": {
+"dataset": "species",
+"trait_grouping": [
+"bark morphology"
+]
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "species: trait group fire response",
+"state": {
+"dataset": "species",
+"trait_grouping": [
+"fire response"
+]
+},
+"expected": {
+"rows": 20708,
+"md5": "86b002e797b6016ae8e53887bcf5e8b5"
+}
+},
+{
+"name": "species: trait group flower morphology",
+"state": {
+"dataset": "species",
+"trait_grouping": [
+"flower morphology"
+]
+},
+"expected": {
+"rows": 28369,
+"md5": "6f6efce5d0c79fea236689a2bc46bf24"
+}
+},
+{
+"name": "species: trait group fruit morphology",
+"state": {
+"dataset": "species",
+"trait_grouping": [
+"fruit morphology"
+]
+},
+"expected": {
+"rows": 101159,
+"md5": "2ee133872a0341090e9b7882bc286dbf"
+}
+},
+{
+"name": "species: trait group leaf morphology",
+"state": {
+"dataset": "species",
+"trait_grouping": [
+"leaf morphology"
+]
+},
+"expected": {
+"rows": 170083,
+"md5": "a9ab39d8ad443561a7a110881e272efc"
+}
+},
+{
+"name": "species: trait group life history",
+"state": {
+"dataset": "species",
+"trait_grouping": [
+"life history"
+]
+},
+"expected": {
+"rows": 238638,
+"md5": "d2d748184cad7b348f6709d940ba2f3f"
+}
+},
+{
+"name": "species: trait group nutrient and stable isotope",
+"state": {
+"dataset": "species",
+"trait_grouping": [
+"nutrient and stable isotope"
+]
+},
+"expected": {
+"rows": 5119,
+"md5": "889798e3e117e5b4f902fc0d0e5afd5d"
+}
+},
+{
+"name": "species: trait group physiology",
+"state": {
+"dataset": "species",
+"trait_grouping": [
+"physiology"
+]
+},
+"expected": {
+"rows": 391,
+"md5": "10a36900c1f25d730e5258fce0f350c6"
+}
+},
+{
+"name": "species: trait group root morphology",
+"state": {
+"dataset": "species",
+"trait_grouping": [
+"root morphology"
+]
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "species: trait group seed morphology",
+"state": {
+"dataset": "species",
+"trait_grouping": [
+"seed morphology"
+]
+},
+"expected": {
+"rows": 33618,
+"md5": "bcc888c6e1a0124130a0a5d52e80a168"
+}
+},
+{
+"name": "species: trait group stem morphology",
+"state": {
+"dataset": "species",
+"trait_grouping": [
+"stem morphology"
+]
+},
+"expected": {
+"rows": 3413,
+"md5": "4b19d9cb6c4a1e82175030ef841d991d"
+}
+},
+{
+"name": "species: trait group whole plant morphology",
+"state": {
+"dataset": "species",
+"trait_grouping": [
+"whole plant morphology"
+]
+},
+"expected": {
+"rows": 30389,
+"md5": "2c15b6348303c33003ffda782e869187"
+}
+},
+{
+"name": "species: structure bark",
+"state": {
+"dataset": "species",
+"structure_measured": [
+"bark"
+]
+},
+"expected": {
+"rows": 7854,
+"md5": "97d3524b61d8e48af7a9253652d67543"
+}
+},
+{
+"name": "species: structure bud",
+"state": {
+"dataset": "species",
+"structure_measured": [
+"bud"
+]
+},
+"expected": {
+"rows": 25412,
+"md5": "6118b888c0d091fb7f485135a362af42"
+}
+},
+{
+"name": "species: structure flower",
+"state": {
+"dataset": "species",
+"structure_measured": [
+"flower"
+]
+},
+"expected": {
+"rows": 59112,
+"md5": "426ef78cb63342e3d19e192f8157d3a3"
+}
+},
+{
+"name": "species: structure fruit",
+"state": {
+"dataset": "species",
+"structure_measured": [
+"fruit"
+]
+},
+"expected": {
+"rows": 125826,
+"md5": "cfb74914f5d3135a9686075a43054a8a"
+}
+},
+{
+"name": "species: structure inflorescence",
+"state": {
+"dataset": "species",
+"structure_measured": [
+"inflorescence"
+]
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "species: structure leaf",
+"state": {
+"dataset": "species",
+"structure_measured": [
+"leaf"
+]
+},
+"expected": {
+"rows": 247616,
+"md5": "ead7c33cff2e0dbef10ac69e033ad535"
+}
+},
+{
+"name": "species: keyword seed dispersal",
+"state": {
+"dataset": "species",
+"keywords": [
+"seed dispersal"
+]
+},
+"expected": {
+"rows": 19174,
+"md5": "22f29bad5c2c61b5d1727437572c5fc8"
+}
+},
+{
+"name": "species: keyword death",
+"state": {
+"dataset": "species",
+"keywords": [
+"death"
+]
+},
+"expected": {
+"rows": 30353,
+"md5": "c95bfafb69782ee30b30cce5eb41cabd"
+}
+},
+{
+"name": "species: keyword shoot axis woodiness",
+"state": {
+"dataset": "species",
+"keywords": [
+"shoot axis woodiness"
+]
+},
+"expected": {
+"rows": 30563,
+"md5": "96845b85b5968597d9dffad5bf2fbb50"
+}
+},
+{
+"name": "species: keyword pollination",
+"state": {
+"dataset": "species",
+"keywords": [
+"pollination"
+]
+},
+"expected": {
+"rows": 10097,
+"md5": "fedcf2fb0191a81ea6e9480ca9187fcb"
+}
+},
+{
+"name": "species: keyword experimental condition",
+"state": {
+"dataset": "species",
+"keywords": [
+"experimental condition"
+]
+},
+"expected": {
+"rows": 4197,
+"md5": "5b25df5c6230c6e8f71fc1827ea2747a"
+}
+},
+{
+"name": "species: keyword selenium atom",
+"state": {
+"dataset": "species",
+"keywords": [
+"selenium atom"
+]
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "species: keyword fracture",
+"state": {
+"dataset": "species",
+"keywords": [
+"fracture"
+]
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "species: keyword secondary leaf vein",
+"state": {
+"dataset": "species",
+"keywords": [
+"secondary leaf vein"
+]
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "species: group + structure",
+"state": {
+"dataset": "species",
+"trait_grouping": [
+"bark morphology"
+],
+"structure_measured": [
+"bark"
+]
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "species: group + trait name outside group",
+"state": {
+"dataset": "species",
+"trait_grouping": [
+"bark morphology"
+],
+"trait_name": [
+"leaf_area"
+]
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "species: family + trait",
+"state": {
+"dataset": "species",
+"taxon_type": "family",
+"family": [
+"Myrtaceae"
+],
+"trait_name": [
+"leaf_area"
+]
+},
+"expected": {
+"rows": 771,
+"md5": "fa34a52c164b925e052f65e4fc46c60e"
+}
+},
+{
+"name": "species: genus + group",
+"state": {
+"dataset": "species",
+"taxon_type": "genus",
+"genus": [
+"Acacia"
+],
+"trait_grouping": [
+"fire response"
+]
+},
+"expected": {
+"rows": 975,
+"md5": "a0eeee51b775ee56b7844ce9f46f763f"
+}
+},
+{
+"name": "species: basis_of_record captive_cultivated",
+"state": {
+"dataset": "species",
+"basis_of_record": [
+"captive_cultivated"
+]
+},
+"expected": {
+"rows": 631887,
+"md5": "559e1f1d85603fdbdb6fc21fa5f58ff8"
+}
+},
+{
+"name": "species: basis_of_record field",
+"state": {
+"dataset": "species",
+"basis_of_record": [
+"field"
+]
+},
+"expected": {
+"rows": 631887,
+"md5": "559e1f1d85603fdbdb6fc21fa5f58ff8"
+}
+},
+{
+"name": "species: basis_of_record field captive_cultivated",
+"state": {
+"dataset": "species",
+"basis_of_record": [
+"field captive_cultivated"
+]
+},
+"expected": {
+"rows": 631887,
+"md5": "559e1f1d85603fdbdb6fc21fa5f58ff8"
+}
+},
+{
+"name": "species: basis_of_record field field_experiment",
+"state": {
+"dataset": "species",
+"basis_of_record": [
+"field field_experiment"
+]
+},
+"expected": {
+"rows": 631887,
+"md5": "559e1f1d85603fdbdb6fc21fa5f58ff8"
+}
+},
+{
+"name": "species: basis_of_record field lab",
+"state": {
+"dataset": "species",
+"basis_of_record": [
+"field lab"
+]
+},
+"expected": {
+"rows": 631887,
+"md5": "559e1f1d85603fdbdb6fc21fa5f58ff8"
+}
+},
+{
+"name": "species: life_stage adult",
+"state": {
+"dataset": "species",
+"life_stage": [
+"adult"
+]
+},
+"expected": {
+"rows": 631887,
+"md5": "559e1f1d85603fdbdb6fc21fa5f58ff8"
+}
+},
+{
+"name": "species: life_stage adult juvenile",
+"state": {
+"dataset": "species",
+"life_stage": [
+"adult juvenile"
+]
+},
+"expected": {
+"rows": 631887,
+"md5": "559e1f1d85603fdbdb6fc21fa5f58ff8"
+}
+},
+{
+"name": "species: life_stage adult, seedling",
+"state": {
+"dataset": "species",
+"life_stage": [
+"adult, seedling"
+]
+},
+"expected": {
+"rows": 631887,
+"md5": "559e1f1d85603fdbdb6fc21fa5f58ff8"
+}
+},
+{
+"name": "species: life_stage adults",
+"state": {
+"dataset": "species",
+"life_stage": [
+"adults"
+]
+},
+"expected": {
+"rows": 631887,
+"md5": "559e1f1d85603fdbdb6fc21fa5f58ff8"
+}
+},
+{
+"name": "species: life_stage juvenile",
+"state": {
+"dataset": "species",
+"life_stage": [
+"juvenile"
+]
+},
+"expected": {
+"rows": 631887,
+"md5": "559e1f1d85603fdbdb6fc21fa5f58ff8"
+}
+},
+{
+"name": "species: apc ACT",
+"state": {
+"dataset": "species",
+"location": "apc",
+"apc_taxon_distribution": [
+"ACT"
+]
+},
+"expected": {
+"rows": 58594,
+"md5": "144c3093578aaaf859f8fac61494b325"
+}
+},
+{
+"name": "species: apc ChI",
+"state": {
+"dataset": "species",
+"location": "apc",
+"apc_taxon_distribution": [
+"ChI"
+]
+},
+"expected": {
+"rows": 8181,
+"md5": "a2aa238a97f39e762cd1a60adf45ea5a"
+}
+},
+{
+"name": "species: apc HI",
+"state": {
+"dataset": "species",
+"location": "apc",
+"apc_taxon_distribution": [
+"HI"
+]
+},
+"expected": {
+"rows": 12770,
+"md5": "cf08e1693cda42da50e9d666f16166f4"
+}
+},
+{
+"name": "species: apc MI",
+"state": {
+"dataset": "species",
+"location": "apc",
+"apc_taxon_distribution": [
+"MI"
+]
+},
+"expected": {
+"rows": 721,
+"md5": "83acc640e403c21cb0b46ca371933f7d"
+}
+},
+{
+"name": "species: apc NSW",
+"state": {
+"dataset": "species",
+"location": "apc",
+"apc_taxon_distribution": [
+"NSW"
+]
+},
+"expected": {
+"rows": 251856,
+"md5": "895a12c1a261ac71ce48093efc70651f"
+}
+},
+{
+"name": "species: apc SA",
+"state": {
+"dataset": "species",
+"location": "apc",
+"apc_taxon_distribution": [
+"SA"
+]
+},
+"expected": {
+"rows": 146050,
+"md5": "2c0bbcd9ca4eb9ccfaf6c34acc8b97a2"
+}
+},
+{
+"name": "species: apc WA",
+"state": {
+"dataset": "species",
+"location": "apc",
+"apc_taxon_distribution": [
+"WA"
+]
+},
+"expected": {
+"rows": 285473,
+"md5": "343d6c72e9e3d60cf6098d616f312114"
+}
+},
+{
+"name": "species: apc two states",
+"state": {
+"dataset": "species",
+"location": "apc",
+"apc_taxon_distribution": [
+"ACT",
+"AR"
+]
+},
+"expected": {
+"rows": 59302,
+"md5": "a0c6bb5999a648300a5e3828e91dc21b"
+}
+},
+{
+"name": "species: apc + family",
+"state": {
+"dataset": "species",
+"location": "apc",
+"apc_taxon_distribution": [
+"ACT"
+],
+"taxon_type": "family",
+"family": [
+"Fabaceae"
+]
+},
+"expected": {
+"rows": 5328,
+"md5": "24008aa35598d57934dedac7694c050f"
+}
+},
+{
+"name": "raw: custom dataset_id ABRS_1981",
+"state": {
+"custom": [
+{
+"column": "dataset_id",
+"value": [
+"ABRS_1981"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 9026,
+"md5": "9a28512ee8fa262b650e6a7de1be7c8e"
+}
+},
+{
+"name": "species: custom dataset_id ABRS_1981",
+"state": {
+"dataset": "species",
+"custom": [
+{
+"column": "dataset_id",
+"value": [
+"ABRS_1981"
+]
+}
+]
+},
+"expected": {
+"rows": 8574,
+"md5": "80b32a8c4cfe3466dee28d25d70e8240"
+}
+},
+{
+"name": "raw: custom dataset_id ABRS_2022",
+"state": {
+"custom": [
+{
+"column": "dataset_id",
+"value": [
+"ABRS_2022"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 47510,
+"md5": "15cbbb028eb209ba06d390ef6f0eadc2"
+}
+},
+{
+"name": "species: custom dataset_id ABRS_2022",
+"state": {
+"dataset": "species",
+"custom": [
+{
+"column": "dataset_id",
+"value": [
+"ABRS_2022"
+]
+}
+]
+},
+"expected": {
+"rows": 46626,
+"md5": "035202d05061583c9c0cb119b0b3db4e"
+}
+},
+{
+"name": "raw: custom dataset_id ABRS_2023",
+"state": {
+"custom": [
+{
+"column": "dataset_id",
+"value": [
+"ABRS_2023"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 183548,
+"md5": "d9c98fbdca189b2eedbaf6c42ddbccbb"
+}
+},
+{
+"name": "species: custom dataset_id ABRS_2023",
+"state": {
+"dataset": "species",
+"custom": [
+{
+"column": "dataset_id",
+"value": [
+"ABRS_2023"
+]
+}
+]
+},
+"expected": {
+"rows": 131708,
+"md5": "42992f19cdb4938871c61429a9683a89"
+}
+},
+{
+"name": "raw: custom dataset_id Ahrens_2019",
+"state": {
+"custom": [
+{
+"column": "dataset_id",
+"value": [
+"Ahrens_2019"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 3630,
+"md5": "0163074ada23dd3b668843cd0f8769de"
+}
+},
+{
+"name": "species: custom dataset_id Ahrens_2019",
+"state": {
+"dataset": "species",
+"custom": [
+{
+"column": "dataset_id",
+"value": [
+"Ahrens_2019"
+]
+}
+]
+},
+"expected": {
+"rows": 5,
+"md5": "bfae9851c4ae2751d1edf36820c1203c"
+}
+},
+{
+"name": "raw: custom dataset_id ANBG_2019",
+"state": {
+"custom": [
+{
+"column": "dataset_id",
+"value": [
+"ANBG_2019"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 7943,
+"md5": "3cf85b9baab89e51c1f7824cb4a85cab"
+}
+},
+{
+"name": "species: custom dataset_id ANBG_2019",
+"state": {
+"dataset": "species",
+"custom": [
+{
+"column": "dataset_id",
+"value": [
+"ANBG_2019"
+]
+}
+]
+},
+"expected": {
+"rows": 4611,
+"md5": "bb88d11346aa79d8ce61902e161c33a3"
+}
+},
+{
+"name": "raw: custom dataset_id Andrew_2022",
+"state": {
+"custom": [
+{
+"column": "dataset_id",
+"value": [
+"Andrew_2022"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 135,
+"md5": "cfc816d42f7334d8733e0f42ac19351c"
+}
+},
+{
+"name": "species: custom dataset_id Andrew_2022",
+"state": {
+"dataset": "species",
+"custom": [
+{
+"column": "dataset_id",
+"value": [
+"Andrew_2022"
+]
+}
+]
+},
+"expected": {
+"rows": 60,
+"md5": "c949953b74af297e9b20005c68cd8059"
+}
+},
+{
+"name": "raw: custom dataset_id Bryant_2021",
+"state": {
+"custom": [
+{
+"column": "dataset_id",
+"value": [
+"Bryant_2021"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 630,
+"md5": "c566aaea4f6626f4a90b89ae48039c57"
+}
+},
+{
+"name": "species: custom dataset_id Bryant_2021",
+"state": {
+"dataset": "species",
+"custom": [
+{
+"column": "dataset_id",
+"value": [
+"Bryant_2021"
+]
+}
+]
+},
+"expected": {
+"rows": 2,
+"md5": "86fa328e3832da8c01442f68ba7be3ce"
+}
+},
+{
+"name": "raw: georeferenced, no bounds",
+"state": {
+"location": "georeferenced",
+"dataset": "raw"
+},
+"expected": {
+"rows": 381023,
+"md5": "a8de2200d2d64906720f0d07f32ff3a6"
+}
+},
+{
+"name": "raw: georeferenced NSW box",
+"state": {
+"location": "georeferenced",
+"min_latitude": -37.5,
+"max_latitude": -28.0,
+"min_longitude": 141.0,
+"max_longitude": 154.0,
+"dataset": "raw"
+},
+"expected": {
+"rows": 170601,
+"md5": "3d5eabeb61a37e1374ac5d30bdc858c5"
+}
+},
+{
+"name": "raw: georeferenced tiny box",
+"state": {
+"location": "georeferenced",
+"min_latitude": -33.9,
+"max_latitude": -33.8,
+"min_longitude": 151.0,
+"max_longitude": 151.3,
+"dataset": "raw"
+},
+"expected": {
+"rows": 921,
+"md5": "382e17ebf3451ebe2a6cb1af1d2eb805"
+}
+},
+{
+"name": "raw: georeferenced empty box",
+"state": {
+"location": "georeferenced",
+"min_latitude": 10.0,
+"max_latitude": 11.0,
+"min_longitude": 10.0,
+"max_longitude": 11.0,
+"dataset": "raw"
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "raw: georeferenced + family",
+"state": {
+"location": "georeferenced",
+"taxon_type": "family",
+"family": [
+"Myrtaceae"
+],
+"min_latitude": -40.0,
+"max_longitude": 150.0,
+"dataset": "raw"
+},
+"expected": {
+"rows": 69018,
+"md5": "5b80ffe63b8a79d166099f41929f241a"
+}
+},
+{
+"name": "species: georeferenced is ignored",
+"state": {
+"dataset": "species",
+"location": "georeferenced",
+"min_latitude": -40.0
+},
+"expected": {
+"rows": 631887,
+"md5": "559e1f1d85603fdbdb6fc21fa5f58ff8"
+}
+},
+{
+"name": "raw: custom entity_type=species",
+"state": {
+"dataset": "raw",
+"custom": [
+{
+"column": "entity_type",
+"value": [
+"species"
+]
+}
+]
+},
+"expected": {
+"rows": 1355931,
+"md5": "ab657a965d61de20b5cb18be81d7c283"
+}
+},
+{
+"name": "raw: custom entity_type=individual",
+"state": {
+"dataset": "raw",
+"custom": [
+{
+"column": "entity_type",
+"value": [
+"individual"
+]
+}
+]
+},
+"expected": {
+"rows": 322631,
+"md5": "deabd8eaf2968e22966d0d09a4592910"
+}
+},
+{
+"name": "raw: custom value_type=mode",
+"state": {
+"dataset": "raw",
+"custom": [
+{
+"column": "value_type",
+"value": [
+"mode"
+]
+}
+]
+},
+"expected": {
+"rows": 1018686,
+"md5": "7ebf7fcb3089c5b82efcad972f1d536f"
+}
+},
+{
+"name": "raw: custom value_type=raw",
+"state": {
+"dataset": "raw",
+"custom": [
+{
+"column": "value_type",
+"value": [
+"raw"
+]
+}
+]
+},
+"expected": {
+"rows": 242058,
+"md5": "5d7f89d0eae82150df7e5a67ce628b0d"
+}
+},
+{
+"name": "species: custom value_type=value_range",
+"state": {
+"dataset": "species",
+"custom": [
+{
+"column": "value_type",
+"value": [
+"value_range"
+]
+}
+]
+},
+"expected": {
+"rows": 485676,
+"md5": "ec8059345d0b4f291d34357b2b853136"
+}
+},
+{
+"name": "raw: custom basis_of_value=expert_score",
+"state": {
+"dataset": "raw",
+"custom": [
+{
+"column": "basis_of_value",
+"value": [
+"expert_score"
+]
+}
+]
+},
+"expected": {
+"rows": 1045650,
+"md5": "003c751e468e6606260b0b63d4f3b856"
+}
+},
+{
+"name": "raw: custom basis_of_value=measurement",
+"state": {
+"dataset": "raw",
+"custom": [
+{
+"column": "basis_of_value",
+"value": [
+"measurement"
+]
+}
+]
+},
+"expected": {
+"rows": 752505,
+"md5": "86fb1f6d4f55c382eb372cebe7b43e3f"
+}
+},
+{
+"name": "raw: custom taxon_rank=species",
+"state": {
+"dataset": "raw",
+"custom": [
+{
+"column": "taxon_rank",
+"value": [
+"species"
+]
+}
+]
+},
+"expected": {
+"rows": 1623054,
+"md5": "d22447c50ef0a1bf51e31a27fa9d3e41"
+}
+},
+{
+"name": "raw: custom taxon_rank=subspecies",
+"state": {
+"dataset": "raw",
+"custom": [
+{
+"column": "taxon_rank",
+"value": [
+"subspecies"
+]
+}
+]
+},
+"expected": {
+"rows": 106800,
+"md5": "adc9598ead77b5f55349b97a43564894"
+}
+},
+{
+"name": "species: custom taxon_rank=species",
+"state": {
+"dataset": "species",
+"custom": [
+{
+"column": "taxon_rank",
+"value": [
+"species"
+]
+}
+]
+},
+"expected": {
+"rows": 552538,
+"md5": "681007f850f61104a11fb284d209fed0"
+}
+},
+{
+"name": "species: custom taxon_rank=subspecies",
+"state": {
+"dataset": "species",
+"custom": [
+{
+"column": "taxon_rank",
+"value": [
+"subspecies"
+]
+}
+]
+},
+"expected": {
+"rows": 45226,
+"md5": "343b5e154f828804ca01d246cbc8531d"
+}
+},
+{
+"name": "raw: custom establishment_means=native",
+"state": {
+"dataset": "raw",
+"custom": [
+{
+"column": "establishment_means",
+"value": [
+"native"
+]
+}
+]
+},
+"expected": {
+"rows": 1530272,
+"md5": "5fa6530b07baf263bbd2418fe2256551"
+}
+},
+{
+"name": "raw: custom establishment_means=naturalised",
+"state": {
+"dataset": "raw",
+"custom": [
+{
+"column": "establishment_means",
+"value": [
+"naturalised"
+]
+}
+]
+},
+"expected": {
+"rows": 136735,
+"md5": "d31c870d552e114ad2f45ea7c4feaa14"
+}
+},
+{
+"name": "species: custom establishment_means=native",
+"state": {
+"dataset": "species",
+"custom": [
+{
+"column": "establishment_means",
+"value": [
+"native"
+]
+}
+]
+},
+"expected": {
+"rows": 539892,
+"md5": "ce3761d3160fa3df40b02b80d5617a1c"
+}
+},
+{
+"name": "species: custom establishment_means=naturalised",
+"state": {
+"dataset": "species",
+"custom": [
+{
+"column": "establishment_means",
+"value": [
+"naturalised"
+]
+}
+]
+},
+"expected": {
+"rows": 53321,
+"md5": "0f71bb100a70f26e2113237b7ad57da4"
+}
+},
+{
+"name": "raw: custom original_name=Banksia brownii",
+"state": {
+"custom": [
+{
+"column": "original_name",
+"value": [
+"Banksia brownii"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 119,
+"md5": "584b9ea7c01c4369718fdd56c391e4b8"
+}
+},
+{
+"name": "raw: custom original_name=Ripogonum album",
+"state": {
+"custom": [
+{
+"column": "original_name",
+"value": [
+"Ripogonum album"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 223,
+"md5": "041a32ee0ab6d329ccf5e90b00fb8676"
+}
+},
+{
+"name": "raw: custom original_name=Viola banksii",
+"state": {
+"custom": [
+{
+"column": "original_name",
+"value": [
+"Viola banksii"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 75,
+"md5": "c927292a5dbbf5589e010dcccc0fb3b7"
+}
+},
+{
+"name": "raw: custom original_name=Eucalyptus laeliae",
+"state": {
+"custom": [
+{
+"column": "original_name",
+"value": [
+"Eucalyptus laeliae"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 74,
+"md5": "ccfaeb22cab07f8c0fda3c5e39ebc486"
+}
+},
+{
+"name": "raw: custom original_name=Syzygium resa",
+"state": {
+"custom": [
+{
+"column": "original_name",
+"value": [
+"Syzygium resa"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 21,
+"md5": "42ffc5b98aab2142d76b89dcaa6fde28"
+}
+},
+{
+"name": "raw: custom original_name=Capparis lasiantha",
+"state": {
+"custom": [
+{
+"column": "original_name",
+"value": [
+"Capparis lasiantha"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 165,
+"md5": "2582abefe74205c16eb2ec4588ff78bc"
+}
+},
+{
+"name": "raw: custom original_name=Banksia stenoprion",
+"state": {
+"custom": [
+{
+"column": "original_name",
+"value": [
+"Banksia stenoprion"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 39,
+"md5": "13b6cec2cebd2894639b6635036a0f5b"
+}
+},
+{
+"name": "raw: custom original_name=Correa baeuerlenii",
+"state": {
+"custom": [
+{
+"column": "original_name",
+"value": [
+"Correa baeuerlenii"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 48,
+"md5": "c1227af098b3285b5ccd7d9c53ed2db8"
+}
+},
+{
+"name": "raw: custom original_name (special) Adenanthos cygnorum subsp. chamaephyton",
+"state": {
+"custom": [
+{
+"column": "original_name",
+"value": [
+"Adenanthos cygnorum subsp. chamaephyton"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 18,
+"md5": "b648060f2991daf69d08db7435fc36be"
+}
+},
+{
+"name": "raw: custom original_name (special) Adenanthos cygnorum subsp. cygnorum",
+"state": {
+"custom": [
+{
+"column": "original_name",
+"value": [
+"Adenanthos cygnorum subsp. cygnorum"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 37,
+"md5": "74a8125c4ac49dcdf2dd893100d44ca5"
+}
+},
+{
+"name": "raw: custom original_name (special) Adenanthos glabrescens subsp. exasperatus",
+"state": {
+"custom": [
+{
+"column": "original_name",
+"value": [
+"Adenanthos glabrescens subsp. exasperatus"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 24,
+"md5": "f0ced992724c021def208d7a30206f13"
+}
+},
+{
+"name": "raw: custom original_name (special) Adenanthos glabrescens subsp. glabrescens",
+"state": {
+"custom": [
+{
+"column": "original_name",
+"value": [
+"Adenanthos glabrescens subsp. glabrescens"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 34,
+"md5": "29de180decba77292230a1bfdc45be55"
+}
+},
+{
+"name": "raw: custom original_name (special) Adenanthos pungens subsp. effusus",
+"state": {
+"custom": [
+{
+"column": "original_name",
+"value": [
+"Adenanthos pungens subsp. effusus"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 28,
+"md5": "9d5ae4119c3725af9fdccc651690d2f4"
+}
+},
+{
+"name": "raw: custom original_name (special) Adenanthos pungens subsp. pungens",
+"state": {
+"custom": [
+{
+"column": "original_name",
+"value": [
+"Adenanthos pungens subsp. pungens"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 24,
+"md5": "f06ad07df9422591d982cf7342e570a2"
+}
+},
+{
+"name": "raw: custom original_name (special) Adenanthos sericeus subsp. sericeus",
+"state": {
+"custom": [
+{
+"column": "original_name",
+"value": [
+"Adenanthos sericeus subsp. sericeus"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 17,
+"md5": "a8ca5b9a10179a1dbda641097bc31602"
+}
+},
+{
+"name": "raw: custom original_name (special) Adenanthos sericeus subsp. sphalma",
+"state": {
+"custom": [
+{
+"column": "original_name",
+"value": [
+"Adenanthos sericeus subsp. sphalma"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 17,
+"md5": "19da7143e63e598c7ab48e2a89aa13ec"
+}
+},
+{
+"name": "raw: free text measurement_remarks 'Sydney'",
+"state": {
+"custom": [
+{
+"column": "measurement_remarks",
+"value": [
+"Sydney"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "raw: free text location_name 'Sydney'",
+"state": {
+"custom": [
+{
+"column": "location_name",
+"value": [
+"Sydney"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 15325,
+"md5": "47f8766d5c20e5f9b6434a85c9d2b133"
+}
+},
+{
+"name": "raw: free text measurement_remarks 'sydney|melbourne'",
+"state": {
+"custom": [
+{
+"column": "measurement_remarks",
+"value": [
+"sydney|melbourne"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "raw: free text location_name 'sydney|melbourne'",
+"state": {
+"custom": [
+{
+"column": "location_name",
+"value": [
+"sydney|melbourne"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 19352,
+"md5": "3b72f3e4a448c03ea41e49130cfc57ab"
+}
+},
+{
+"name": "raw: free text measurement_remarks '%'",
+"state": {
+"custom": [
+{
+"column": "measurement_remarks",
+"value": [
+"%"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 162,
+"md5": "89b65eef1a96ff77289ee13e7fdb1ad8"
+}
+},
+{
+"name": "raw: free text location_name '%'",
+"state": {
+"custom": [
+{
+"column": "location_name",
+"value": [
+"%"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 234,
+"md5": "9b4416cc149f2615368f157fe361031d"
+}
+},
+{
+"name": "raw: free text measurement_remarks '_'",
+"state": {
+"custom": [
+{
+"column": "measurement_remarks",
+"value": [
+"_"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 19960,
+"md5": "bcfb655498ff55b186b4e4cd52457f01"
+}
+},
+{
+"name": "raw: free text location_name '_'",
+"state": {
+"custom": [
+{
+"column": "location_name",
+"value": [
+"_"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 62269,
+"md5": "b286888aa20391cdff370584471ec31d"
+}
+},
+{
+"name": "raw: free text measurement_remarks '('",
+"state": {
+"custom": [
+{
+"column": "measurement_remarks",
+"value": [
+"("
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 59445,
+"md5": "67bf3fc176a0e60f16303d6f48061f9b"
+}
+},
+{
+"name": "raw: free text location_name '('",
+"state": {
+"custom": [
+{
+"column": "location_name",
+"value": [
+"("
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 7638,
+"md5": "05d08d30100c025987fb515a33b20f19"
+}
+},
+{
+"name": "raw: free text measurement_remarks '[abc]'",
+"state": {
+"custom": [
+{
+"column": "measurement_remarks",
+"value": [
+"[abc]"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "raw: free text location_name '[abc]'",
+"state": {
+"custom": [
+{
+"column": "location_name",
+"value": [
+"[abc]"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "raw: free text measurement_remarks 'a.b'",
+"state": {
+"custom": [
+{
+"column": "measurement_remarks",
+"value": [
+"a.b"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 1946,
+"md5": "409b2c6069164d7180e9a0c4c34d1a7a"
+}
+},
+{
+"name": "raw: free text location_name 'a.b'",
+"state": {
+"custom": [
+{
+"column": "location_name",
+"value": [
+"a.b"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "raw: free text measurement_remarks '50% shade'",
+"state": {
+"custom": [
+{
+"column": "measurement_remarks",
+"value": [
+"50% shade"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "raw: free text location_name '50% shade'",
+"state": {
+"custom": [
+{
+"column": "location_name",
+"value": [
+"50% shade"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "raw: free text measurement_remarks 'x|'",
+"state": {
+"custom": [
+{
+"column": "measurement_remarks",
+"value": [
+"x|"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 8761,
+"md5": "cae9f8f8b3b9e314f9bd9bc58b529304"
+}
+},
+{
+"name": "raw: free text location_name 'x|'",
+"state": {
+"custom": [
+{
+"column": "location_name",
+"value": [
+"x|"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 7116,
+"md5": "765368f4a2559461014331c40e5a3fe0"
+}
+},
+{
+"name": "raw: free text measurement_remarks '|'",
+"state": {
+"custom": [
+{
+"column": "measurement_remarks",
+"value": [
+"|"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 1798215,
+"md5": "c2b5f3e85ea8cabc9d6799ac49447c30"
+}
+},
+{
+"name": "raw: free text location_name '|'",
+"state": {
+"custom": [
+{
+"column": "location_name",
+"value": [
+"|"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 1798215,
+"md5": "c2b5f3e85ea8cabc9d6799ac49447c30"
+}
+},
+{
+"name": "raw: free text measurement_remarks '  '",
+"state": {
+"custom": [
+{
+"column": "measurement_remarks",
+"value": [
+"  "
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 1798215,
+"md5": "c2b5f3e85ea8cabc9d6799ac49447c30"
+}
+},
+{
+"name": "raw: free text location_name '  '",
+"state": {
+"custom": [
+{
+"column": "location_name",
+"value": [
+"  "
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 1798215,
+"md5": "c2b5f3e85ea8cabc9d6799ac49447c30"
+}
+},
+{
+"name": "raw: free text measurement_remarks 'plot*'",
+"state": {
+"custom": [
+{
+"column": "measurement_remarks",
+"value": [
+"plot*"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "raw: free text location_name 'plot*'",
+"state": {
+"custom": [
+{
+"column": "location_name",
+"value": [
+"plot*"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "raw: free text measurement_remarks '$5'",
+"state": {
+"custom": [
+{
+"column": "measurement_remarks",
+"value": [
+"$5"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "raw: free text location_name '$5'",
+"state": {
+"custom": [
+{
+"column": "location_name",
+"value": [
+"$5"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "raw: free text measurement_remarks '^leaf'",
+"state": {
+"custom": [
+{
+"column": "measurement_remarks",
+"value": [
+"^leaf"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "raw: free text location_name '^leaf'",
+"state": {
+"custom": [
+{
+"column": "location_name",
+"value": [
+"^leaf"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "raw: free text measurement_remarks '\\'",
+"state": {
+"custom": [
+{
+"column": "measurement_remarks",
+"value": [
+"\\"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "raw: free text location_name '\\'",
+"state": {
+"custom": [
+{
+"column": "location_name",
+"value": [
+"\\"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "raw: free text measurement_remarks 'O'Brien'",
+"state": {
+"custom": [
+{
+"column": "measurement_remarks",
+"value": [
+"O'Brien"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "raw: free text location_name 'O'Brien'",
+"state": {
+"custom": [
+{
+"column": "location_name",
+"value": [
+"O'Brien"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "raw: free text measurement_remarks 'unlikelystring12345'",
+"state": {
+"custom": [
+{
+"column": "measurement_remarks",
+"value": [
+"unlikelystring12345"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "raw: free text location_name 'unlikelystring12345'",
+"state": {
+"custom": [
+{
+"column": "location_name",
+"value": [
+"unlikelystring12345"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "raw: free text source_primary_citation 'Falster'",
+"state": {
+"custom": [
+{
+"column": "source_primary_citation",
+"value": [
+"Falster"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 1611,
+"md5": "1cf1a7f41184f910df082526c744133a"
+}
+},
+{
+"name": "raw: free text source_primary_citation 'ecology'",
+"state": {
+"custom": [
+{
+"column": "source_primary_citation",
+"value": [
+"ecology"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 206461,
+"md5": "54dae1d5acf3d85468ab6326be733d52"
+}
+},
+{
+"name": "raw: free text source_primary_citation '2012|2015'",
+"state": {
+"custom": [
+{
+"column": "source_primary_citation",
+"value": [
+"2012|2015"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 74429,
+"md5": "c545f8a9795155de081b48f6e0ebbf16"
+}
+},
+{
+"name": "raw: free text source_primary_citation '('",
+"state": {
+"custom": [
+{
+"column": "source_primary_citation",
+"value": [
+"("
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 1318436,
+"md5": "1df55791f7d8b304030670ac6bde1a90"
+}
+},
+{
+"name": "raw: free text source_primary_citation '[abc]'",
+"state": {
+"custom": [
+{
+"column": "source_primary_citation",
+"value": [
+"[abc]"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "raw: free text source_primary_citation 'unlikelystring12345'",
+"state": {
+"custom": [
+{
+"column": "source_primary_citation",
+"value": [
+"unlikelystring12345"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "raw: citation text with trait filter",
+"state": {
+"trait_name": [
+"leaf_area"
+],
+"custom": [
+{
+"column": "source_primary_citation",
+"value": [
+"Falster"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 124,
+"md5": "f06590a7ec7c39e063251bca06972284"
+}
+},
+{
+"name": "raw: three custom filters",
+"state": {
+"taxon_type": "family",
+"family": [
+"Fabaceae"
+],
+"custom": [
+{
+"column": "value_type",
+"value": [
+"raw_value"
+]
+},
+{
+"column": "life_stage",
+"value": [
+"adult"
+]
+},
+{
+"column": "location_name",
+"value": [
+"NSW"
+]
+}
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "raw: no matching trait group + name -> zero rows",
+"state": {
+"trait_grouping": [
+"bark morphology"
+],
+"trait_name": [
+"no_such_trait"
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+},
+{
+"name": "raw: unknown family -> zero rows",
+"state": {
+"taxon_type": "family",
+"family": [
+"NotAFamily"
+],
+"dataset": "raw"
+},
+"expected": {
+"rows": 0,
+"md5": "d41d8cd98f00b204e9800998ecf8427e"
+}
+}
+]

@@ -3,6 +3,8 @@ project:
   render:
     - "*.qmd"
     - "team/*.qmd"
+  resources:
+    - browser-portal/
 
 website:
   title: "AusTraits"
