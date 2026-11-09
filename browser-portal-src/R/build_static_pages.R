@@ -390,7 +390,7 @@ search_box_html <- r"---(<div class="search"><label for="q">Search taxa, traits 
   }
   function mark(i) { var items = box.children; if (!items.length) return; sel = (i + items.length) % items.length; Array.prototype.forEach.call(items, function (li, k) { li.classList.toggle("on", k === sel); }); items[sel].scrollIntoView({ block: "nearest" }); }
   q.addEventListener("focus", load);
-  q.addEventListener("input", function () { load().then(draw); draw(); });
+  q.addEventListener("input", function () { load().then(function () { if (idx) draw(); }); draw(); });
   q.addEventListener("keydown", function (e) {
     if (e.key === "ArrowDown") { e.preventDefault(); mark(sel + 1); }
     else if (e.key === "ArrowUp") { e.preventDefault(); mark(sel - 1); }
