@@ -241,8 +241,59 @@ for f, ts in fam.items():
           f'<article class="prose"><h1>{esc(f)}</h1><p>{len(ts):,} taxa with trait data.</p><ul class="cols">{lis}</ul></article>', "family"))
 fl_li = "".join(f'<li><a href="/pages/family/{fslug[f]}.html">{esc(f)}</a> <span class="n">{len(fam[f]):,}</span></li>' for f in sorted(fam))
 tr_li = "".join(f'<li><a href="/pages/trait/{tr_slug[t]}.html">{esc(t)}</a></li>' for t in sorted(trait_cov))
+# search index: names only; a slug is added only where it is not just the lower-cased name (see slugify in the page script)
+def _entry(n, slugs):
+    return n if slugs[n] == slugify(n) else [n, slugs[n]]
+write("search-index.json", json.dumps({"t": [_entry(n, tslug) for n in sorted(names)], "f": [_entry(n, fslug) for n in sorted(fam)], "r": [_entry(n, tr_slug) for n in sorted(trait_cov)]}, ensure_ascii=False, separators=(",", ":")))
+SEARCH_BOX = """<div class="search"><label for="q">Search taxa, traits and families</label><input id="q" type="search" autocomplete="off" placeholder="For example Acacia melanoxylon, leaf area, Fabaceae" aria-controls="results"><ul id="results" class="results" role="listbox" hidden></ul><p id="qnote" class="n" aria-live="polite"></p></div>
+<script>
+(function () {
+  var q = document.getElementById("q"), box = document.getElementById("results"), note = document.getElementById("qnote"), idx = null, loading = null, sel = -1, shown = [];
+  var KINDS = [["f", "family", "family"], ["r", "trait", "trait"], ["t", "taxon", "taxon"]];
+  function slug(n) { return n.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "x"; }
+  function load() {
+    if (!loading) loading = fetch("/pages/search-index.json").then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (j) { idx = j; }).catch(function () { loading = null; note.textContent = "The search list could not be loaded. Please try again, or use the lists below."; });
+    return loading;
+  }
+  function find(text) {
+    var out = [];
+    KINDS.forEach(function (k, ki) {
+      (idx[k[0]] || []).forEach(function (e) {
+        var name = typeof e === "string" ? e : e[0], low = name.toLowerCase().replace(/_/g, " "), at = low.indexOf(text);
+        if (at < 0) return;
+        var score = low === text ? -1 : at === 0 ? 0 : /[ (-]/.test(low.charAt(at - 1)) ? 1 : 2;
+        out.push({ score: score, ki: ki, name: name, url: "/pages/" + k[1] + "/" + (typeof e === "string" ? slug(name) : e[1]) + ".html", label: k[2] });
+      });
+    });
+    out.sort(function (a, b) { return a.score - b.score || a.ki - b.ki || (a.name < b.name ? -1 : a.name > b.name ? 1 : 0); });
+    return out;
+  }
+  function draw() {
+    box.textContent = ""; sel = -1; shown = [];
+    var text = q.value.trim().toLowerCase().replace(/[_ ]+/g, " ");
+    if (text.length < 2) { box.hidden = true; note.textContent = ""; return; }
+    if (!idx) { note.textContent = "Loading the search list…"; return; }
+    var all = find(text); shown = all.slice(0, 20);
+    shown.forEach(function (r) {
+      var li = document.createElement("li"), a = document.createElement("a"), b = document.createElement("span");
+      li.setAttribute("role", "option"); a.href = r.url; a.textContent = r.name; b.className = "tag"; b.textContent = r.label; li.append(a, b); box.append(li);
+    });
+    box.hidden = !shown.length;
+    note.textContent = all.length ? (all.length > shown.length ? "Showing the first " + shown.length + " of " + all.length.toLocaleString("en-AU") + " matches. Type more letters to narrow the list." : all.length + (all.length === 1 ? " match" : " matches")) : "No matches.";
+  }
+  function mark(i) { var items = box.children; if (!items.length) return; sel = (i + items.length) % items.length; Array.prototype.forEach.call(items, function (li, k) { li.classList.toggle("on", k === sel); }); items[sel].scrollIntoView({ block: "nearest" }); }
+  q.addEventListener("focus", load);
+  q.addEventListener("input", function () { load().then(draw); draw(); });
+  q.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowDown") { e.preventDefault(); mark(sel + 1); }
+    else if (e.key === "ArrowUp") { e.preventDefault(); mark(sel - 1); }
+    else if (e.key === "Enter" && shown.length) { e.preventDefault(); location.href = shown[sel < 0 ? 0 : sel].url; }
+    else if (e.key === "Escape") { q.value = ""; draw(); }
+  });
+})();
+</script>"""
 write("index.html", page("Browse taxa and traits", f"Browse {len(names):,} plant taxa and {len(trait_cov):,} traits in the AusTraits database.", "/pages/index.html",
-      f'<article class="prose"><h1>Browse AusTraits</h1><p>{len(names):,} taxa and {len(trait_cov):,} traits. To filter, view and download data, use the <a href="{esc(a.portal)}">data portal</a>.</p>'
+      f'<article class="prose"><h1>Browse AusTraits</h1><p>{len(names):,} taxa and {len(trait_cov):,} traits. To filter, view and download data, use the <a href="{esc(a.portal)}">data portal</a>.</p>{SEARCH_BOX}'
       f'<h2>Families</h2><ul class="cols">{fl_li}</ul><h2>Traits</h2><ul class="cols">{tr_li}</ul></article>', "index"))
 
 # ---------- style, sitemap, robots ----------
@@ -255,6 +306,8 @@ h1{{font-size:1.7rem;margin:.6rem 0}}h2{{font-size:1.25rem;margin-top:1.6rem}}.b
 details{{margin:.3rem 0;border:1px solid var(--line);border-radius:8px;padding:.3rem .7rem}}summary{{cursor:pointer;font-weight:600}}
 .tablewrap{{overflow-x:auto}}table{{border-collapse:collapse;font-size:.9rem;width:100%}}th,td{{border-bottom:1px solid var(--line);padding:.35rem .5rem;text-align:left;vertical-align:top}}
 .cols{{columns:16rem;list-style:none;padding:0}}.cols li{{break-inside:avoid;padding:.1rem 0}}.n{{color:var(--muted);font-size:.85rem}}
+.search{{margin:1rem 0}}.search label{{display:block;font-weight:600;margin-bottom:.3rem}}.search input{{width:100%;padding:.6rem .8rem;font:inherit;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}}
+.results{{list-style:none;margin:.3rem 0 0;padding:0;border:1px solid var(--line);border-radius:8px;max-height:22rem;overflow:auto;background:var(--bg)}}.results li{{display:flex;justify-content:space-between;gap:1rem;padding:.35rem .7rem;border-bottom:1px solid var(--line)}}.results li:last-child{{border-bottom:0}}.results li.on,.results li:hover{{background:var(--cream)}}.results a{{flex:1}}.tag{{color:var(--muted);font-size:.8rem}}
 footer{{max-width:60rem;margin:2rem auto;padding:1rem;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line)}}
 """
 write("pages.css", css)

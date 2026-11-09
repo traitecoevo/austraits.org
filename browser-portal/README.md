@@ -37,7 +37,8 @@ two scripts before running them. Commit the rebuilt
 
 ## Publishing a new data release
 
-1. Put the new Parquet files, JSON files and `sources.bib` in `data/<new version>/` (folder on your computer).
+1. Make the data folder `data/<new version>/` (folder on your computer) with the scripts in
+   `browser-portal-src/tools/data-prep/` (see the README there for the order and the arguments). Add `sources.bib` as well.
 2. Split the taxon names out of `dropdowns.json`, so the page starts faster:
    `python3 browser-portal-src/tools/split_dropdowns.py data/<new version>`
 3. Upload the folder to `data/<new version>/` in the R2 bucket and change `dataBase` in `config.json`.
