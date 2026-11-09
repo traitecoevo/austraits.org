@@ -140,6 +140,7 @@ run_golden_cases <- function(data, cases = file.path("browser-portal-src", "gold
                              workers = min(8L, default_workers())) {
   list_cases <- read_json_file(cases)
   if (!is.null(dataset)) list_cases <- Filter(function(x) identical(x$state$dataset, dataset), list_cases)
+  if (!length(list_cases)) stop("No golden cases to run", if (!is.null(dataset)) sprintf(" for dataset '%s'", dataset), ".", call. = FALSE)
   # each worker loads the browser's toSql.mjs into its own V8 engine and opens its own connection
   job <- function(idx, list_cases, data, tosql) {
     ctx <- load_browser_sql(tosql)

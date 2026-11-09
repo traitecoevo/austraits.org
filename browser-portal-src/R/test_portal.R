@@ -114,13 +114,19 @@ test_portal_in_browser <- function(data, cases = file.path("browser-portal-src",
   invisible(res)
 }
 
-# Golden cases a visitor can reach through the filter panel, as the portal's interface state (A.S).
-# basis_of_record and life_stage have no panel of their own (they are custom filters), so those cases are skipped.
+# Golden cases as the portal's interface state (A.S). A visitor sets basis_of_record and life_stage through
+# the custom filters, so raw-data cases on them become custom filters; species averages have neither column,
+# so those cases are skipped. A few cases of each kind keep the run short; run_golden_cases() covers all.
 browser_test_cases <- function(cases, per_kind = 3) {
   out <- list()
   for (cs in cases) {
     st <- cs$state
-    if (length(st$basis_of_record) || length(st$life_stage)) next
+    if (length(st$basis_of_record) || length(st$life_stage)) {
+      if (!identical(st$dataset, "raw")) next
+      for (k in c("basis_of_record", "life_stage")) {
+        if (length(st[[k]])) st$custom <- c(st$custom, list(list(column = k, value = st[[k]])))
+      }
+    }
     ui <- list(dataset = st$dataset, rank = st$taxon_type %||% "all")
     for (k in c("family", "genus", "taxon_name", "trait_name", "trait_grouping", "structure_measured", "keywords")) if (length(st[[k]])) ui[[k]] <- st[[k]]
     if (length(st$trait_grouping) || length(st$structure_measured) || length(st$keywords)) ui$traitmode <- "features"
@@ -175,6 +181,9 @@ serve_portal <- function(site, data, version, port = 8765) {
       a <- as.numeric(sub("^bytes=(\\d+)-.*$", "\\1", rng))
       z <- sub("^bytes=\\d+-", "", rng)
       z <- if (nzchar(z)) min(as.numeric(z), size - 1) else size - 1
+      if (a >= size || z < a) {
+        return(list(status = 416L, headers = c(h, list("Content-Range" = sprintf("bytes */%.0f", size))), body = ""))
+      }
       con <- file(file, "rb"); on.exit(close(con))
       seek(con, a)
       body <- readBin(con, "raw", n = z - a + 1)

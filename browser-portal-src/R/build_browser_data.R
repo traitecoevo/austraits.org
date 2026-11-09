@@ -75,7 +75,9 @@ required_columns <- list(
 
 #' Stop with a clear message if an input file or a required column is missing
 check_browser_inputs <- function(src, zenodo, templates) {
-  files <- c("austraits-data.parquet", "austraits-species-averages.parquet", "trait_groups.rds",
+  # austraits-display.parquet is not used in the build, but the golden cases need it (it is what the
+  # Shiny portal filters), so a release with no display file fails here rather than half-way through
+  files <- c("austraits-data.parquet", "austraits-display.parquet", "austraits-species-averages.parquet", "trait_groups.rds",
              "dropdown_cache.rds", "sources.rds", "synonyms.rds", "flora_links.rds",
              "definitions.rds", "sources.bib")
   missing <- c(file.path(src, files), zenodo, file.path(templates, c("filter_spec.json", "portal.json")))

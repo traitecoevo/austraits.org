@@ -18,7 +18,7 @@ build_static_pages <- function(data, out, base = "", portal = "/portal/index.htm
                                workers = default_workers()) {
   P <- file.path(out, "pages")
   con <- DBI::dbConnect(duckdb::duckdb())
-  on.exit(DBI::dbDisconnect(con, shutdown = TRUE), add = TRUE)
+  on.exit(if (DBI::dbIsValid(con)) DBI::dbDisconnect(con, shutdown = TRUE), add = TRUE)
   pq <- function(n) sprintf("read_parquet(%s)", sql_str(file.path(data, paste0(n, ".parquet"))))
   q <- function(sql) db_get(con, sql)
 
@@ -177,6 +177,8 @@ build_static_pages <- function(data, out, base = "", portal = "/portal/index.htm
     write_page_file(paste0("taxon/", tslug[i], ".html"), page(t, desc, paste0("/pages/taxon/", tslug[i], ".html"), body, "taxon"))
     if (is.na(info$family) || !nzchar(info$family)) "(no family)" else info$family
   }
+  # every table is loaded by now; close the database before forking, so no worker inherits its state
+  DBI::dbDisconnect(con, shutdown = TRUE)
   fam_of <- fork_map_chr(seq_along(names_all), write_taxon, workers)
   message(sprintf("Wrote %d taxon pages", length(names_all)))
   fam <- split(names_all, fam_of)
