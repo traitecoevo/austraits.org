@@ -20,7 +20,7 @@ Rscript browser-portal-src/tools/build_release.R \
   --out data/7.1.0 --version 7.1.0
 ```
 
-This takes under a minute. It writes the Parquet tables and JSON files, copies `sources.bib`, writes `manifest.json` (size, row count and sha256 of every file, plus the DuckDB version used), and then runs 18 checks against the input. If any check fails it stops with the list, so do not upload a folder from a run that stopped.
+This takes under a minute. It writes the Parquet tables and JSON files, copies `sources.bib`, writes `manifest.json` (size, row count and sha256 of every file, plus the DuckDB version used), and then runs 23 checks against the input. If any check fails it stops with the list, so do not upload a folder from a run that stopped.
 
 Options: `--zenodo` points at the Zenodo record if it is not next to `--src` (its version must match `--version`), and `--apc-version` overrides the APC date, which is otherwise read from `synonyms.rds`.
 

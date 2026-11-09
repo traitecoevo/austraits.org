@@ -25,12 +25,19 @@ verify_browser_data <- function(src, out) {
                       paste0("r.", sql_id(raw_cols), collapse = ", "), paste0("t.", sql_id(tax_cols), collapse = ", ")))
   oc <- sql_ids(orig_cols)
   rc <- sql_ids(raw_cols)
-  sp_in <- setdiff(db_columns(con, "species_averages"), "seq")
-  sp_in <- intersect(sp_in, db_columns(con, "s"))
+  # the species file keeps every input column except the dropped ones and the per-taxon ones
+  # (genus and family stay); compare on that full expected set so a lost column cannot pass unseen
+  s_cols <- db_columns(con, "s")
+  sp_expected <- setdiff(s_cols, c(dropped_columns, setdiff(intersect(taxon_columns, s_cols), c("genus", "family"))))
+  sp_built <- setdiff(db_columns(con, "species_averages"), "seq")
+  sp_in <- intersect(sp_expected, sp_built)
 
   dd <- jsonlite::read_json(file.path(out, "dropdowns.json"), simplifyVector = TRUE)
   genus_in_data <- db_get(con, "SELECT DISTINCT genus FROM taxa")$genus
   family_in_data <- db_get(con, "SELECT DISTINCT family FROM taxa")$family
+  taxa_names <- db_get(con, "SELECT taxon_name FROM taxa")$taxon_name
+  taxon_list <- jsonlite::read_json(file.path(out, "taxon_names.json"), simplifyVector = TRUE)
+  if (!is.character(taxon_list)) taxon_list <- character()
 
   checks <- c(
     "raw rows: input minus rebuilt" = n(sprintf("SELECT count(*) FROM (SELECT %1$s FROM d EXCEPT ALL SELECT %1$s FROM rebuilt)", oc)),
@@ -49,8 +56,13 @@ verify_browser_data <- function(src, out) {
     "seq: duplicates in species_averages" = n("SELECT count(*) - count(DISTINCT seq) FROM species_averages"),
     "seq: raw_by_trait not numbered 1..N" = n("SELECT (min(seq) <> 1 OR max(seq) <> count(*))::INTEGER FROM raw_by_trait"),
     "taxon_lookup: names pointing to an unknown taxon" = n("SELECT count(*) FROM taxon_lookup WHERE taxon_name NOT IN (SELECT taxon_name FROM taxa)"),
-    "dropdowns: genera with no data" = length(setdiff(dd$all_genus, genus_in_data)),
-    "dropdowns: families with no data" = length(setdiff(dd$all_family, family_in_data))
+    "species columns: expected but missing from the built file" = length(setdiff(sp_expected, sp_built)),
+    "species columns: in the built file but not expected" = length(setdiff(sp_built, sp_expected)),
+    "dropdowns: genera with no data" = length(setdiff(dd[["all_genus"]], genus_in_data)),
+    "dropdowns: families with no data" = length(setdiff(dd[["all_family"]], family_in_data)),
+    "taxon_names.json: names not in taxa.parquet" = length(setdiff(taxon_list, taxa_names)),
+    "taxon_names.json: taxa missing from the list" = length(setdiff(taxa_names, taxon_list)),
+    "taxon_names.json: count differs from dropdowns.json" = abs(length(taxon_list) - (dd[["taxon_name_count"]] %||% -1))
   )
   result <- data.frame(check = names(checks), count = unname(checks))
   failed <- result[result$count != 0, ]

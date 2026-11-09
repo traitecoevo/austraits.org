@@ -78,6 +78,8 @@ check_browser_inputs <- function(src, zenodo, templates) {
   if (length(missing)) stop("Missing input files:\n  ", paste(missing, collapse = "\n  "), call. = FALSE)
   con <- DBI::dbConnect(duckdb::duckdb())
   on.exit(DBI::dbDisconnect(con, shutdown = TRUE), add = TRUE)
+  # every taxon column is copied into taxa.parquet, so all of them are required too
+  required_columns$data <- union(required_columns$data, taxon_columns)
   have <- list(
     data = db_columns(con, sql_str(file.path(src, "austraits-data.parquet"))),
     species = db_columns(con, sql_str(file.path(src, "austraits-species-averages.parquet"))),
@@ -201,10 +203,13 @@ build_lookup_tables <- function(con, src, out, synonyms, apc_version) {
 
   # filter choices; the long taxon list goes to its own file, read only when needed
   dd <- readRDS(file.path(src, "dropdown_cache.rds"))
-  dd$all_genus <- sort_c(unique(sub("^[(]", "", dd$all_genus)))  # as the Shiny loader does (issue #113)
-  names_list <- dd$all_taxon_names
-  dd$all_taxon_names <- NULL
-  dd$taxon_name_count <- length(names_list)
+  names_list <- dd[["all_taxon_names"]]
+  if (!is.character(names_list) || !length(names_list)) {
+    stop("dropdown_cache.rds has no all_taxon_names list.", call. = FALSE)
+  }
+  dd[["all_genus"]] <- sort_c(unique(sub("^[(]", "", dd[["all_genus"]])))  # as the Shiny loader does (issue #113)
+  dd[["all_taxon_names"]] <- NULL
+  dd[["taxon_name_count"]] <- length(names_list)
   jsonlite::write_json(dd, file.path(out, "dropdowns.json"), auto_unbox = TRUE)
   jsonlite::write_json(names_list, file.path(out, "taxon_names.json"))
 }
