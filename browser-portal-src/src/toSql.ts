@@ -6,6 +6,8 @@ export interface CustomFilter { column: string; value: string[] }
 export interface FilterState {
   dataset: Dataset;
   taxon_type?: string; family?: string[]; genus?: string[]; taxon_name?: string[];
+  /** Family and genus of the chosen taxon names. They never change the result (a name has one family and one genus); they let the Parquet reader skip whole row groups. */
+  taxon_hint?: { family: string[]; genus: string[] };
   trait_name?: string[]; trait_grouping?: string[]; structure_measured?: string[]; keywords?: string[];
   basis_of_record?: string[]; life_stage?: string[];
   location?: string; apc_taxon_distribution?: string[];
@@ -47,6 +49,8 @@ export function buildWhere(state: FilterState, spec: FilterSpec, features: Trait
   if (tr !== null) w.push(tr.length ? "trait_name IN " + inList(tr) : "FALSE"); // no matching trait means no rows, not "no filter"
   const tt = state.taxon_type as "family" | "genus" | "taxon_name" | undefined;
   if (tt && ["family", "genus", "taxon_name"].includes(tt) && nonEmpty(state[tt])) w.push(`${tt} IN ` + inList(state[tt]!));
+  if (tt === "taxon_name" && nonEmpty(state.taxon_name) && state.taxon_hint && nonEmpty(state.taxon_hint.family) && nonEmpty(state.taxon_hint.genus))
+    w.push("family IN " + inList(state.taxon_hint.family), "genus IN " + inList(state.taxon_hint.genus));
   for (const k of ["basis_of_record", "life_stage"] as const) if (nonEmpty(state[k]) && ds === "raw") w.push(`${k} IN ` + inList(state[k]!));
   if (state.location === "georeferenced" && ds === "raw") {
     w.push('"latitude (deg)" IS NOT NULL AND "longitude (deg)" IS NOT NULL');

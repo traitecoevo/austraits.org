@@ -28,6 +28,8 @@ function buildWhere(state, spec, features) {
   if (tr !== null) w.push(tr.length ? "trait_name IN " + inList(tr) : "FALSE");
   const tt = state.taxon_type;
   if (tt && ["family", "genus", "taxon_name"].includes(tt) && nonEmpty(state[tt])) w.push(`${tt} IN ` + inList(state[tt]));
+  if (tt === "taxon_name" && nonEmpty(state.taxon_name) && state.taxon_hint && nonEmpty(state.taxon_hint.family) && nonEmpty(state.taxon_hint.genus))
+    w.push("family IN " + inList(state.taxon_hint.family), "genus IN " + inList(state.taxon_hint.genus));
   for (const k of ["basis_of_record", "life_stage"]) if (nonEmpty(state[k]) && ds === "raw") w.push(`${k} IN ` + inList(state[k]));
   if (state.location === "georeferenced" && ds === "raw") {
     w.push('"latitude (deg)" IS NOT NULL AND "longitude (deg)" IS NOT NULL');
