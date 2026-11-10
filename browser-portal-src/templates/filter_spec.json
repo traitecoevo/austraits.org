@@ -1,0 +1,136 @@
+{
+  "spec_version": 1,
+  "source": "austraits.portal R/fct_filter_application.R and R/fct_filter_parsing.R (master, Nov 2026)",
+  "datasets": {
+    "raw": "raw_by_trait",
+    "species": "species"
+  },
+  "empty_means_no_filter": true,
+  "filters": [
+    {
+      "id": "trait_features",
+      "applies_to": [
+        "raw",
+        "species"
+      ],
+      "inputs": [
+        "trait_grouping",
+        "structure_measured",
+        "keywords",
+        "trait_name"
+      ],
+      "rule": "Resolve to a list of trait names from trait_features, then trait_name IN (list). trait_grouping matches trait_group exactly; structure_measured and keywords match by substring (case-sensitive) against the field; all selected parts are intersected. No matching trait means zero rows, not no filter."
+    },
+    {
+      "id": "taxon",
+      "applies_to": [
+        "raw",
+        "species"
+      ],
+      "inputs": [
+        "taxon_type",
+        "family",
+        "genus",
+        "taxon_name"
+      ],
+      "rule": "Only the field named by taxon_type is used: family IN (...), genus IN (...) or taxon_name IN (...). Browser expands the choice to the full family, genus, taxon_name conjunction from taxa so row-group statistics prune on raw_by_taxon.",
+      "exact_match": true
+    },
+    {
+      "id": "basis_of_record",
+      "applies_to": [
+        "raw"
+      ],
+      "column": "basis_of_record",
+      "rule": "IN (...); the species table has no such column, so the input is ignored (and cleared in the interface) for species averages"
+    },
+    {
+      "id": "life_stage",
+      "applies_to": [
+        "raw"
+      ],
+      "column": "life_stage",
+      "rule": "IN (...); ignored for species averages, as above"
+    },
+    {
+      "id": "location_georeferenced",
+      "applies_to": [
+        "raw"
+      ],
+      "rule": "latitude IS NOT NULL AND longitude IS NOT NULL, then optional >= and <= bounds on latitude (deg) and longitude (deg); columns are numeric in the data files"
+    },
+    {
+      "id": "location_apc",
+      "applies_to": [
+        "raw",
+        "species"
+      ],
+      "column": "taxon_distribution",
+      "rule": "regexp_matches(taxon_distribution, pattern) where pattern is the escaped selected values joined with |"
+    },
+    {
+      "id": "custom",
+      "max": 3,
+      "applies_to": [
+        "raw",
+        "species"
+      ],
+      "controlled_vocabulary_columns": [
+        "dataset_id",
+        "entity_type",
+        "value_type",
+        "basis_of_value",
+        "basis_of_record",
+        "life_stage",
+        "original_name",
+        "taxon_rank",
+        "establishment_means"
+      ],
+      "free_text_columns": [
+        "collection_date",
+        "measurement_remarks",
+        "location_name",
+        "location_properties",
+        "treatment_context_properties",
+        "plot_context_properties",
+        "entity_context_properties",
+        "temporal_context_properties",
+        "method_context_properties",
+        "source_primary_citation",
+        "data_contributors"
+      ],
+      "species_columns": [
+        "dataset_id",
+        "value_type",
+        "value_count",
+        "taxon_rank",
+        "establishment_means"
+      ],
+      "rule_controlled": "column IN (...) except dataset_id on species, which is a whole-element match inside a '; '-joined list: regexp_matches(dataset_id, '(^|; )(a|b)(;|$)')",
+      "rule_free_text": "regexp_matches(lower(column), pattern); text is split on |, trimmed, lower-cased, escaped, and joined with |"
+    }
+  ],
+  "regex_escape_characters": "][{}()+*^$|\\\\?.",
+  "url_parameters": [
+    "taxon_type",
+    "family",
+    "genus",
+    "taxon_name",
+    "trait_name",
+    "location",
+    "apc_taxon_distribution",
+    "basis_of_record",
+    "life_stage",
+    "tab"
+  ],
+  "default_sort": {
+    "raw": "seq",
+    "species": "trait_name, taxon_name"
+  },
+  "page_sizes": [
+    10,
+    25,
+    50,
+    100
+  ]
+}

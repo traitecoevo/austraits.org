@@ -13,6 +13,8 @@ built with [Quarto](https://quarto.org/).
   from `data.austraitsdata.org`), published at `/browser-portal/` through `resources:` in `_quarto.yml`.
   `browser-portal/js/toSql.mjs` is compiled output: edit `browser-portal-src/src/toSql.ts`, then run
   `npm test` and `npm run build` there. See `browser-portal/README.md`. It is not linked from the navbar yet.
+  Data releases and the static Browse pages are built in **R** (`browser-portal-src/tools/README.md`); the
+  functions in `browser-portal-src/R/` are written as package code because they will move into austraits.portal.
 - **Embedded Shiny apps:** `portal.qmd` and `apcalign.qmd` are thin wrappers that `<iframe>` the
   apps deployed at `app.austraits.org` (`austraits.portal` and `APCalign-app` respectively). They
   hold no app code — to change what a visitor sees inside the frame, change and redeploy that app.

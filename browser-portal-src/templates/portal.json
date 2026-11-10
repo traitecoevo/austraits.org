@@ -1,0 +1,49 @@
+{
+  "portal_version": 1,
+  "name": "AusTraits Data Portal",
+  "short_name": "AusTraits",
+  "data_version": null,
+  "citation_default": "Data used in this study were obtained from the AusTraits Database (https://www.austraits.org).",
+  "tables_present": {
+    "species_averages": true
+  },
+  "labels": {
+    "raw": "Raw data",
+    "species": "Species averages",
+    "taxonomy": "Taxonomy",
+    "traits": "Traits",
+    "location": "Location",
+    "preview": "Data Preview",
+    "trait_view": "Trait View",
+    "taxon_view": "Taxon View",
+    "citations": "Citations"
+  },
+  "links": {
+    "site": "https://www.austraits.org",
+    "code": "https://github.com/traitecoevo/austraits.portal",
+    "zenodo": "https://doi.org/10.5281/zenodo.3568417",
+    "plant_dictionary": "https://github.com/traitecoevo/APD"
+  },
+  "theme": {
+    "--at-ink": "#2b332f",
+    "--at-muted": "#64726b",
+    "--at-green": "#2f7d55",
+    "--at-green-dark": "#235c43",
+    "--at-blue": "#2a7f9e",
+    "--at-gold": "#d9a441",
+    "--at-cream": "#f7f7f4",
+    "--at-mint": "#f2f6f3",
+    "--at-sky": "#f3f7f8",
+    "--at-line": "#e5e8e5",
+    "--at-white": "#ffffff",
+    "--at-shadow": "0 10px 26px rgba(30, 45, 38, 0.08)",
+    "--at-radius": "8px"
+  },
+  "defaults": {
+    "dataset": "species",
+    "taxon_type": "all",
+    "family": []
+  },
+  "download_cap_rows": 300000,
+  "download_warn_rows": 100000
+}
