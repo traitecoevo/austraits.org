@@ -129,6 +129,7 @@ const num = (x) => (x === "" || x === null || x === undefined || Number.isNaN(Nu
 function toFilterState(S) {
   const f = { dataset: S.dataset };
   if (S.rank !== "all") { f.taxon_type = S.rank; f[S.rank] = S[S.rank]; }
+  if (S.rank === "taxon_name" && A.hint && A.hint.key === S.taxon_name.join("\u0001")) f.taxon_hint = A.hint.v;
   f.trait_name = S.trait_name;
   if (S.traitmode === "features") { f.trait_grouping = S.trait_grouping; f.structure_measured = S.structure_measured; f.keywords = S.keywords; }
   if (S.location) f.location = S.location;
@@ -181,7 +182,17 @@ async function main() {
   A.engineReady = true; setApply(true);
   if (A.pre) { A.pre = false; writeHash(); updateDownloadUI(); setStatus(""); } // the stored first page is already on screen
   else await apply(true);
+  idle(() => keepLookups()); // two small tables are kept in memory, so later queries do not fetch them piece by piece
   idle(() => ensureTaxonNames()); // get the taxon names ready in the background
+}
+// taxa (1.3 MB) and dataset_citations are joined into almost every query. Read once into memory, they save about 8 round trips on the first query that needs them.
+async function keepLookups() {
+  try {
+    for (const [name, file, cols] of [["taxa", "taxa.parquet", "*"], ["dataset_citations", "dataset_citations.parquet", "dataset_id, source_primary_citation"]]) {
+      await run(`CREATE OR REPLACE TABLE ${name}_mem AS SELECT ${cols} FROM read_parquet('${A.base}/${file}')`);
+      await run(`CREATE OR REPLACE VIEW ${name} AS SELECT * FROM ${name}_mem`);
+    }
+  } catch (e) { console.warn("Could not keep the lookup tables in memory; the portal still works.", e); }
 }
 const setApply = (on) => document.querySelectorAll("#filters button[type=submit]").forEach((b) => (b.disabled = !on));
 // warm the browser cache with the Parquet reader while the engine downloads
@@ -445,6 +456,7 @@ async function apply(first) {
   writeHash();
   $("#table-wrap").classList.add("busy"); setStatus("Counting matching rows…");
   try {
+    await findHint(A.applied, tok);
     const st = toFilterState(A.applied);
     const sql = T.countSql(st, A.spec, A.feats, A.taxaCols);
     const t0 = performance.now(), r = await run(sql);
@@ -454,6 +466,19 @@ async function apply(first) {
   } catch (e) { fail(e); }
 }
 
+// Family and genus of the chosen taxon names. Adding them to the filter changes no result, but the raw file is sorted by family and genus, so the reader can skip most row groups.
+async function findHint(S, tok) {
+  if (S.rank !== "taxon_name" || !S.taxon_name.length || S.taxon_name.length > 200) { A.hint = null; return; }
+  const key = S.taxon_name.join("\u0001");
+  if (A.hint && A.hint.key === key) return;
+  try {
+    const list = S.taxon_name.map((n) => "'" + String(n).replace(/'/g, "''") + "'").join(",");
+    const rows = await run(`SELECT DISTINCT family, genus FROM taxa WHERE taxon_name IN (${list})`);
+    if (tok !== A.token) return;
+    const fam = [...new Set(rows.map((r) => r.family).filter((x) => x))], gen = [...new Set(rows.map((r) => r.genus).filter((x) => x))];
+    A.hint = fam.length && gen.length ? { key, v: { family: fam, genus: gen } } : null;
+  } catch { A.hint = null; }
+}
 async function loadPage(tok = A.token) {
   $("#table-wrap").classList.add("busy");
   try {
