@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>APCalign in the browser</title>
+<style>
+  :root { --bg:#fbfcf8; --fg:#1c2620; --mut:#5b6a60; --line:#d9e0d4; --acc:#1f7a45; --card:#fff; --warn:#b3261e; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#141a16; --fg:#e6ece7; --mut:#9fb0a4; --line:#2b3a31; --acc:#5cc58a; --card:#1b231e; --warn:#ff8a80; } }
+  * { box-sizing: border-box; }
+  body { font: 15px/1.5 system-ui, sans-serif; background: var(--bg); color: var(--fg); max-width: 1000px; margin: 0 auto; padding: 20px 16px 60px; }
+  h1 { font-size: 22px; margin: 0 0 4px; } h2 { font-size: 16px; margin: 0 0 8px; }
+  .sub { color: var(--mut); margin: 0 0 16px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 14px; margin: 14px 0; }
+  textarea { width: 100%; height: 150px; font: 13px ui-monospace, monospace; background: var(--bg); color: var(--fg); border: 1px solid var(--line); border-radius: 6px; padding: 8px; }
+  button, select { font: inherit; padding: 7px 14px; border-radius: 6px; border: 1px solid var(--line); background: var(--card); color: var(--fg); cursor: pointer; }
+  button.primary { background: var(--acc); color: #fff; border-color: var(--acc); font-weight: 600; }
+  button:disabled { opacity: .5; cursor: default; }
+  .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 10px; }
+  #status { color: var(--mut); } #status.bad { color: var(--warn); }
+  progress { width: 100%; height: 12px; } 
+  .tablewrap { overflow: auto; max-height: 460px; border: 1px solid var(--line); border-radius: 6px; }
+  table { border-collapse: collapse; width: 100%; font-size: 13px; }
+  th, td { text-align: left; padding: 5px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { position: sticky; top: 0; background: var(--card); }
+  .small { font-size: 13px; color: var(--mut); }
+  details textarea { height: 140px; }
+  .hide { display: none; }
+</style>
+</head>
+<body>
+<h1>APCalign in the browser</h1>
+<p class="sub">Match plant names to the Australian Plant Census. Everything runs on your own computer. Your names are not sent anywhere.</p>
+
+<div class="card">
+  <h2>1. Get ready</h2>
+  <div id="status">Starting …</div>
+  <progress id="loadbar" max="100" value="0"></progress>
+  <div class="small">The first start takes about 20 seconds. Later starts are faster.</div>
+</div>
+
+<div class="card">
+  <h2>2. Add your names</h2>
+  <textarea id="names" placeholder="Paste one plant name per line, for example:&#10;Acacia aneura&#10;Eucalypus regnans&#10;Dryandra formosa"></textarea>
+  <div class="row">
+    <input type="file" id="file" accept=".csv,.txt,.tsv,text/plain,text/csv">
+    <label class="hide" id="colwrap">Column with names: <select id="col"></select></label>
+    <label class="hide" id="hdrwrap"><input type="checkbox" id="hdr" checked> First row is a header</label>
+  </div>
+  <div class="small" id="count"></div>
+  <div class="row"><button id="example">Example names</button><button class="primary" id="run" disabled>Match names</button><span id="runmsg" class="small"></span></div>
+  <progress id="bar" class="hide" max="100" value="0"></progress>
+</div>
+
+<div class="card hide" id="results">
+  <h2>3. Results</h2>
+  <div class="row"><button class="primary" id="dl">Download all results (CSV)</button><span class="small" id="summary"></span></div>
+  <p class="small">Each different name appears once. The download has all columns. The table shows the main ones.</p>
+  <div class="tablewrap"><table id="tbl"></table></div>
+</div>
+
+<details class="card">
+  <summary>Speed test (for testing only)</summary>
+  <p class="small">Makes random names (one in five with a spelling mistake) and measures how long the matching takes in your browser.</p>
+  <div class="row"><button id="speed" disabled>Run speed test</button></div>
+  <textarea id="report" readonly></textarea>
+</details>
+
+<p class="small">Data: Australian Plant Census and Australian Plant Name Index, release <span id="rel">2026-07-30</span>. Matching code: <a href="https://github.com/traitecoevo/APCalign">APCalign</a> (MIT licence), run unchanged in R through <a href="https://docs.r-wasm.org/webr/latest/">webR</a>, with one speed change in the fuzzy step that gives the same answers.</p>
+
+<script type="module">
+const $ = (id) => document.getElementById(id);
+const CHUNK = 1500;
+// The census data file is not in this folder. Its address is in config.json.
+// For local testing, add ?data=<path or URL> to the page address to use another file.
+let DATA_URL = "";
+const PKGS = ["rlang", "cli", "tibble", "dplyr", "purrr", "stringi", "stringr", "stringdist", "crayon"];
+const KEYCOLS = ["original_name", "aligned_name", "accepted_name", "taxon_rank", "aligned_reason"];
+let webR, shelter, ready = false, csvText = "", lastCsv = "", fileRows = null;
+
+const setStatus = (m, bad) => { $("status").textContent = m; $("status").className = bad ? "bad" : ""; };
+const getBytes = async (url) => { const r = await fetch(url); if (!r.ok) throw new Error(`Could not load ${url} (${r.status})`); return new Uint8Array(await r.arrayBuffer()); };
+const Rrun = async (code) => { await shelter.captureR(code, { captureConditions: false }); };
+const Rnum = async (code) => { const r = await shelter.evalR(code); const a = await r.toArray(); return a[0]; };
+const tick = () => new Promise((r) => setTimeout(r, 0));
+
+// ---- input handling ----
+function parseCsv(text) {
+  const rows = []; let row = [], f = "", q = false;
+  const delim = (text.split("\n", 1)[0].match(/\t/g) || []).length > (text.split("\n", 1)[0].match(/,/g) || []).length ? "\t" : ",";
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (q) { if (c === '"') { if (text[i + 1] === '"') { f += '"'; i++; } else q = false; } else f += c; }
+    else if (c === '"') q = true;
+    else if (c === delim) { row.push(f); f = ""; }
+    else if (c === "\n") { row.push(f); rows.push(row); row = []; f = ""; }
+    else if (c !== "\r") f += c;
+  }
+  if (f !== "" || row.length) { row.push(f); rows.push(row); }
+  return rows;
+}
+function currentNames() {
+  let list;
+  if (fileRows) {
+    const idx = Number($("col").value) || 0, hdr = $("hdr").checked;
+    list = fileRows.slice(hdr ? 1 : 0).map((r) => r[idx] ?? "");
+  } else list = $("names").value.split(/\r?\n/);
+  const seen = new Set(), out = [];
+  for (let s of list) { s = (s || "").trim(); if (s && !seen.has(s)) { seen.add(s); out.push(s); } }
+  return out;
+}
+function refreshCount() {
+  const n = currentNames().length;
+  $("count").textContent = n ? `${n.toLocaleString()} different name${n === 1 ? "" : "s"} ready.` : "";
+  $("run").disabled = !(ready && n);
+}
+function fillColumns() {
+  const hdr = $("hdr").checked, first = fileRows[0] || [];
+  $("col").innerHTML = first.map((h, i) => `<option value="${i}">${hdr ? (h || "column " + (i + 1)) : "column " + (i + 1)}</option>`).join("");
+  const guess = hdr ? first.findIndex((h) => /name|taxon|species/i.test(h)) : -1;
+  if (guess >= 0) $("col").value = String(guess);
+}
+$("file").addEventListener("change", async (ev) => {
+  const f = ev.target.files[0]; if (!f) { fileRows = null; refreshCount(); return; }
+  const text = (await f.text()).replace(/^﻿/, "");
+  fileRows = parseCsv(text).filter((r) => r.some((x) => x.trim() !== ""));
+  const multi = (fileRows[0] || []).length > 1;
+  $("colwrap").classList.toggle("hide", !multi); $("hdrwrap").classList.toggle("hide", !multi);
+  $("hdr").checked = multi; fillColumns(); $("names").value = ""; refreshCount();
+});
+$("hdr").addEventListener("change", () => { fillColumns(); refreshCount(); });
+$("col").addEventListener("change", refreshCount);
+$("names").addEventListener("input", () => { fileRows = null; $("file").value = ""; $("colwrap").classList.add("hide"); $("hdrwrap").classList.add("hide"); refreshCount(); });
+
+$("example").addEventListener("click", () => {
+  $("names").value = ["Acacia aneura", "Eucalypus regnans", "Banksia serrata", "Dryandra formosa", "Asteraceae", "Hakea sericea var. sericea", "Zzzz nonexistent"].join("\n");
+  $("names").dispatchEvent(new Event("input"));
+});
+
+// ---- matching ----
+async function matchNames(names, onProgress) {
+  const enc = new TextEncoder().encode(names.join("\n"));
+  await webR.FS.writeFile("/home/web_user/in.txt", enc);
+  const n = await Rnum(`e$app_start("/home/web_user/in.txt")`);
+  const chunks = Math.ceil(n / CHUNK), t0 = performance.now();
+  for (let i = 1; i <= chunks; i++) {
+    await Rnum(`e$app_chunk(res, ${i}, ${CHUNK})`);
+    await shelter.purge();
+    onProgress(i / chunks, (performance.now() - t0) / 1000);
+    await tick();
+  }
+  await Rnum(`e$app_finish("/home/web_user/out.csv")`);
+  const bytes = await webR.FS.readFile("/home/web_user/out.csv");
+  return { text: new TextDecoder("utf-8").decode(bytes), n, secs: (performance.now() - t0) / 1000 };
+}
+function showTable(text, cap = 300) {
+  const rows = parseCsv(text).filter((r) => r.length > 1 || r[0]);
+  const head = rows[0], idx = KEYCOLS.map((k) => head.indexOf(k)).filter((i) => i >= 0);
+  const esc = (s) => String(s).replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+  let h = "<tr>" + idx.map((i) => `<th>${esc(head[i])}</th>`).join("") + "</tr>";
+  for (const r of rows.slice(1, cap + 1)) h += "<tr>" + idx.map((i) => `<td>${esc(r[i] ?? "")}</td>`).join("") + "</tr>";
+  $("tbl").innerHTML = h;
+  const total = rows.length - 1, ai = head.indexOf("aligned_name");
+  const matched = rows.slice(1).filter((r) => r[ai]).length;
+  $("summary").textContent = `${total.toLocaleString()} names: ${matched.toLocaleString()} matched, ${(total - matched).toLocaleString()} not matched.` + (total > cap ? ` Showing the first ${cap}.` : "");
+}
+$("run").addEventListener("click", async () => {
+  const names = currentNames(); if (!names.length) return;
+  $("run").disabled = true; $("results").classList.add("hide"); $("bar").classList.remove("hide"); $("bar").value = 0; $("runmsg").textContent = "Matching …";
+  try {
+    const r = await matchNames(names, (p, s) => { $("bar").value = p * 100; $("runmsg").textContent = `${Math.round(p * 100)}% done, ${s.toFixed(0)} s so far` + (p > 0.05 ? `, about ${Math.max(0, s / p - s).toFixed(0)} s left` : ""); });
+    lastCsv = r.text; showTable(r.text); $("results").classList.remove("hide");
+    $("runmsg").textContent = `Finished in ${r.secs.toFixed(1)} s.`;
+  } catch (e) { $("runmsg").textContent = "Error: " + (e && e.message ? e.message : e); }
+  $("bar").classList.add("hide"); refreshCount();
+});
+$("dl").addEventListener("click", () => {
+  const url = URL.createObjectURL(new Blob(["﻿" + lastCsv], { type: "text/csv;charset=utf-8" }));
+  const a = document.createElement("a"); a.href = url; a.download = "apcalign_results.csv"; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+});
+
+// ---- speed test ----
+$("speed").addEventListener("click", async () => {
+  $("speed").disabled = true; const out = [];
+  const say = (s) => { out.push(s); $("report").value = out.join("\n"); };
+  try {
+    say(`Browser: ${navigator.userAgent}`); say(`Cores: ${navigator.hardwareConcurrency}`);
+    for (const n of [100, 1000, 3000]) {
+      await Rrun(`set.seed(1); nm <- unique(res$APC$canonical_name[res$APC$taxon_rank %in% "species"]); nm <- nm[!is.na(nm)]
+        b <- sample(nm, ${n}, TRUE); k <- sample(${n}, round(${n} * 0.2))
+        b[k] <- vapply(b[k], function(x) { i <- sample(nchar(x), 1); substr(x, i, i) <- sample(letters, 1); x }, "")
+        writeLines(b, "/home/web_user/speed.txt")`);
+      const bytes = await webR.FS.readFile("/home/web_user/speed.txt");
+      const names = [...new Set(new TextDecoder().decode(bytes).split("\n").filter(Boolean))];
+      const r = await matchNames(names, () => {});
+      say(`${names.length} different names: ${r.secs.toFixed(1)} s (${(r.secs / names.length * 1000).toFixed(1)} ms per name)`);
+    }
+    say("Done.");
+  } catch (e) { say("ERROR: " + (e && e.message ? e.message : e)); }
+  $("speed").disabled = false;
+});
+
+// ---- start-up ----
+(async () => {
+  try {
+    const t0 = performance.now(), bar = $("loadbar");
+    const step = (p, m) => { bar.value = p; setStatus(m); };
+    step(2, "Loading R in the browser …");
+    const { WebR } = await import("https://webr.r-wasm.org/latest/webr.mjs");
+    webR = new WebR(); await webR.init(); shelter = await new webR.Shelter();
+    for (let i = 0; i < PKGS.length; i++) { step(8 + i * 6, `Installing R package ${PKGS[i]} …`); await webR.installPackages([PKGS[i]], { quiet: true }); }
+    const cfg = await (await fetch("config.json")).json();
+    if (cfg.release) $("rel").textContent = cfg.release;
+    DATA_URL = new URLSearchParams(location.search).get("data") || cfg.dataUrl;
+    step(65, "Loading the matching code …");
+    await webR.FS.mkdir("/home/web_user/R");
+    const mbytes = await getBytes("R/manifest.txt");
+    const files = new TextDecoder().decode(mbytes).split(/\r?\n/).filter(Boolean);
+    await webR.FS.writeFile("/home/web_user/R/manifest.txt", mbytes);
+    for (const f of [...files, "app.R"]) await webR.FS.writeFile(`/home/web_user/R/${f}`, await getBytes(`R/${f}`));
+    await webR.FS.writeFile("/home/web_user/resources.rds", await getBytes(DATA_URL));
+    await Rrun(`e <- new.env(); e[["%>%"]] <- dplyr::\`%>%\`
+      for (f in c(readLines("/home/web_user/R/manifest.txt"), "app.R")) sys.source(file.path("/home/web_user/R", f), envir = e, keep.source = FALSE)
+      options(expressions = 500000)`);
+    step(80, "Reading the plant census data …");
+    await Rrun(`res <- readRDS("/home/web_user/resources.rds")`);
+    bar.value = 100; ready = true; $("speed").disabled = false; refreshCount();
+    setStatus(`Ready (started in ${((performance.now() - t0) / 1000).toFixed(0)} s). Add your names below.`);
+  } catch (e) { setStatus("Could not start: " + (e && e.message ? e.message : e), true); }
+})();
+</script>
+</body>
+</html>
