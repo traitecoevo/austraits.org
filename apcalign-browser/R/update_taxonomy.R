@@ -2,6 +2,8 @@
 ## are built once and kept, instead of being rebuilt on every call.
 .memo <- new.env()
 app_memo <- function(resources, key, build) {
+  ## tables that tools/build_resources.R already stored in the data file are used directly
+  if (!is.null(resources$app_cache[[key]])) return(resources$app_cache[[key]])
   if (is.null(.memo$resources) || !identical(.memo$resources, resources)) {
     .memo$resources <- resources
     .memo$items <- list()

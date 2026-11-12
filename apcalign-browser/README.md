@@ -14,6 +14,8 @@ The Shiny app (`apcalign.qmd`, an iframe of `app.austraits.org/APCalign-app/`) i
   `data.austraitsdata.org` under `apcalign/<release>/`. `config.json` holds its address and the release date.
 - Like the Shiny app, the output has one row for every input row, in the same order. Names are matched in chunks
   of 1,500 so the page can show progress. Small chunks are slower because every call has a fixed cost.
+- Start-up: the census data and the R files download while R starts, and all R packages install in one call.
+  Submit can be pressed while R is still starting; the names are matched as soon as R is ready.
 - Typical speed in a browser: a few seconds for a short list, and well under a minute for several thousand names.
   Add `?speedtest` to the page address to show a speed-test panel that measures it on your computer.
 
@@ -27,13 +29,15 @@ The Shiny app (`apcalign.qmd`, an iframe of `app.austraits.org/APCalign-app/`) i
   - `R/fuzzy_match.R`: the first-letter lists are kept between names, and reference names whose length is too
     different to match are skipped.
   - `R/update_taxonomy.R`: tables that depend only on the census data are built once and kept.
+  - `R/update_taxonomy.R` also checks `resources$app_cache` first (tables stored in the data file by `tools/build_resources.R`).
   - `R/app.R`: new file (reads the names, runs one chunk, writes the CSV). It passes the same options as the Shiny app
     (`taxonomic_splits`, `full`, `identifier`); all 12 combinations were checked against the original code.
 
 ## Publishing a new APC release
 
-1. Run `tools/build_resources.R` (set `release` first). It writes `<release>/resources.rds`.
-2. Upload it to the R2 bucket at `apcalign/<release>/resources.rds`.
+1. Run `tools/build_resources.R` from the repo root (set `release` first). It writes `<release>/resources.rds`.
+   The script also drops columns that no R file names and stores the tables that would otherwise be built on the first call (`app_cache`). This makes the file smaller and the start faster.
+2. Upload it to the R2 bucket at `apcalign/<release>/resources.rds (if you replace a file at the same path, purge the Cloudflare cache for that URL, or the old file can be served for up to a day)`.
 3. Change `dataUrl` and `release` in `config.json`, commit, and merge.
 4. If APCalign itself changes, copy the new R files into `R/` and apply the three `SPEED` changes again.
    Compare 10 names with the same names in normal R before you publish.

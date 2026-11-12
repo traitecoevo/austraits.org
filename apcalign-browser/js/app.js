@@ -49,7 +49,7 @@ function updateInputUi() {
   const up = inputType() === "upload";
   $("pasteBox").classList.toggle("hide", up); $("uploadBox").classList.toggle("hide", !up);
   $("identWrap").classList.toggle("hide", !(up && $("ident").checked));
-  $("submit").disabled = !ready;
+  if (!pendingRun) $("submit").disabled = false;
 }
 document.querySelectorAll('input[name="inputType"]').forEach((r) => r.addEventListener("change", updateInputUi));
 $("ident").addEventListener("change", updateInputUi);
@@ -131,6 +131,11 @@ $("submit").addEventListener("click", async () => {
   $("error").classList.add("hide");
   if (!rows.length) { $("error").textContent = inputType() === "paste" ? "Please enter at least one taxon name." : "Please select a .csv file and the column that contains the taxon names."; $("error").classList.remove("hide"); return; }
   const splits = document.querySelector('input[name="taxonomic_splits"]:checked').value, full = $("full").checked;
+  if (!ready) {   // R is still starting: match as soon as it is ready
+    pendingRun = true; $("submit").disabled = true; $("instructions").classList.add("hide");
+    $("running").classList.remove("hide"); $("bar").value = 0; $("runMsg").textContent = "R is still starting. Your names will be matched as soon as it is ready.";
+    return;
+  }
   $("submit").disabled = true; $("download_table").disabled = true;
   $("instructions").classList.add("hide"); $("tablearea").classList.add("hide"); $("running").classList.remove("hide"); $("bar").value = 0;
   $("runMsg").textContent = `Matching ${rows.length.toLocaleString()} names …`;
@@ -142,7 +147,7 @@ $("submit").addEventListener("click", async () => {
   } catch (e) {
     $("error").textContent = "Something went wrong: " + (e && e.message ? e.message : e); $("error").classList.remove("hide"); $("instructions").classList.remove("hide");
   }
-  $("running").classList.add("hide"); $("submit").disabled = !ready;
+  $("running").classList.add("hide"); $("submit").disabled = false;
 });
 $("download_table").addEventListener("click", () => {
   const url = URL.createObjectURL(new Blob([lastCsv], { type: "text/csv;charset=utf-8" }));
@@ -172,35 +177,45 @@ $("speed").addEventListener("click", async () => {
 });
 
 // ---------- start-up ----------
+// Everything that can run at the same time does: the census data and the R files download while R starts.
+let pendingRun = false;
 (async () => {
   try {
     const t0 = performance.now(), bar = $("loadbar");
     const step = (p, m) => { bar.value = p; $("loadMsg").textContent = m; };
-    step(2, "Loading R in the browser …");
+    step(2, "Starting R in your browser …");
     const cfg = await (await fetch("config.json")).json();
     if (cfg.release) $("rel").textContent = cfg.release;
     DATA_URL = new URLSearchParams(location.search).get("data") || cfg.dataUrl;
+    const dataP = getBytes(DATA_URL), manifestP = getBytes("R/manifest.txt");
+    const filesP = manifestP.then((mb) => Promise.all([...new TextDecoder().decode(mb).split(/\r?\n/).filter(Boolean), "app.R"].map(async (f) => [f, await getBytes(`R/${f}`)])));
+    dataP.catch(() => {}); filesP.catch(() => {});   // errors are reported below, when the result is used
     const { WebR } = await import("https://webr.r-wasm.org/latest/webr.mjs");
     webR = new WebR(); await webR.init(); shelter = await new webR.Shelter();
-    for (let i = 0; i < PKGS.length; i++) { step(8 + i * 6, `Installing R package ${PKGS[i]} …`); await webR.installPackages([PKGS[i]], { quiet: true }); }
-    step(65, "Loading the matching code …");
+    step(15, "Installing the R packages …");
+    await webR.installPackages(PKGS, { quiet: true });
+    const missing = [];
+    for (const p of PKGS) if (!(await Rnum(`requireNamespace("${p}", quietly = TRUE)`))) missing.push(p);
+    if (missing.length) throw new Error("These R packages could not be installed: " + missing.join(", "));
+    step(60, "Loading the matching code …");
     await webR.FS.mkdir("/home/web_user/R");
-    const mbytes = await getBytes("R/manifest.txt");
-    const files = new TextDecoder().decode(mbytes).split(/\r?\n/).filter(Boolean);
-    await webR.FS.writeFile("/home/web_user/R/manifest.txt", mbytes);
-    for (const f of [...files, "app.R"]) await webR.FS.writeFile(`/home/web_user/R/${f}`, await getBytes(`R/${f}`));
-    step(72, "Downloading the plant census data …");
-    await webR.FS.writeFile("/home/web_user/resources.rds", await getBytes(DATA_URL));
+    await webR.FS.writeFile("/home/web_user/R/manifest.txt", await manifestP);
+    for (const [f, bytes] of await filesP) await webR.FS.writeFile(`/home/web_user/R/${f}`, bytes);
+    step(70, "Loading the plant census data …");
+    await webR.FS.writeFile("/home/web_user/resources.rds", await dataP);
     await Rrun(`e <- new.env(); e[["%>%"]] <- dplyr::\`%>%\`
       for (f in c(readLines("/home/web_user/R/manifest.txt"), "app.R")) sys.source(file.path("/home/web_user/R", f), envir = e, keep.source = FALSE)
       options(expressions = 500000)`);
-    step(85, "Reading the plant census data …");
+    step(80, "Reading the plant census data …");
     await Rrun(`res <- readRDS("/home/web_user/resources.rds")`);
     ready = true; $("speed").disabled = false; $("loading").classList.add("hide");
     $("submit").textContent = "Submit"; updateInputUi();
     console.log(`APCalign ready in ${((performance.now() - t0) / 1000).toFixed(1)} s`);
+    if (pendingRun) { pendingRun = false; $("submit").disabled = false; $("submit").click(); }
   } catch (e) {
     $("loadMsg").textContent = "Could not start: " + (e && e.message ? e.message : e); $("loadbar").classList.add("hide");
+    $("submit").textContent = "Submit"; $("submit").disabled = true;
+    pendingRun = false; $("running").classList.add("hide"); $("instructions").classList.remove("hide");
   }
 })();
 updateInputUi();
