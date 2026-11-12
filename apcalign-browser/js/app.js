@@ -203,9 +203,13 @@ let pendingRun = false;
     for (const [f, bytes] of await filesP) await webR.FS.writeFile(`/home/web_user/R/${f}`, bytes);
     step(70, "Loading the plant census data …");
     await webR.FS.writeFile("/home/web_user/resources.rds", await dataP);
-    await Rrun(`e <- new.env(); e[["%>%"]] <- dplyr::\`%>%\`
+    // The APCalign code uses the eager pipe (%!>%), not the lazy %>%. A lazy %>% chain runs as nested
+    // calls, so the 46-step chain in standardise_names() needs R depth ~418, and Safari's smaller stack
+    // overflows ("Maximum call stack size exceeded"). Eager: depth ~77, identical output.
+    // `expressions` stays modest so that any deep nesting is an R error, not a browser crash.
+    await Rrun(`e <- new.env(); e[["%>%"]] <- magrittr::\`%!>%\`
       for (f in c(readLines("/home/web_user/R/manifest.txt"), "app.R")) sys.source(file.path("/home/web_user/R", f), envir = e, keep.source = FALSE)
-      options(expressions = 500000)`);
+      options(expressions = 5000)`);
     step(80, "Reading the plant census data …");
     await Rrun(`res <- readRDS("/home/web_user/resources.rds")`);
     ready = true; $("speed").disabled = false; $("loading").classList.add("hide");
