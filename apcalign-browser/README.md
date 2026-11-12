@@ -1,7 +1,7 @@
 # APCalign in the browser
 
 A page that aligns plant names to the Australian Plant Census (APC) and runs only in the visitor's
-browser. There is no server. It will be served at `https://www.austraits.org/apcalign-browser/`.
+browser. There is no server. It looks and works like the Shiny APCalign-app (same sidebar options, Output, Get Started and FAQs tabs, sortable table, CSV download). It will be served at `https://www.austraits.org/apcalign-browser/`.
 The Shiny app (`apcalign.qmd`, an iframe of `app.austraits.org/APCalign-app/`) is not changed.
 
 ## How it works
@@ -12,14 +12,14 @@ The Shiny app (`apcalign.qmd`, an iframe of `app.austraits.org/APCalign-app/`) i
   changes below. `arrow`, `curl` and `httr` are not needed: they are only used to download the data.
 - The census data is one file, `resources.rds` (about 15 MB), in the Cloudflare R2 bucket on
   `data.austraitsdata.org` under `apcalign/<release>/`. `config.json` holds its address and the release date.
-- Names are matched in chunks of 1,500 so the page can show progress. Small chunks are slower because every
-  call has a fixed cost.
+- Like the Shiny app, the output has one row for every input row, in the same order. Names are matched in chunks
+  of 1,500 so the page can show progress. Small chunks are slower because every call has a fixed cost.
 - Typical speed in a browser: a few seconds for a short list, and well under a minute for several thousand names.
-  The "Speed test" section at the bottom of the page measures it on your computer.
+  Add `?speedtest` to the page address to show a speed-test panel that measures it on your computer.
 
 ## Where the code is
 
-- `index.html` is the whole page. `R/` holds the R files copied from the APCalign package
+- `index.html` (page), `css/apcalign.css` (look, follows the Shiny app's `apcalign-app.css`) and `js/app.js` (page logic) are plain files. `assets/` has the logo. `R/` holds the R files copied from the APCalign package
   (MIT licence, Daniel Falster) plus `R/app.R`, a small helper written for this page.
 - `R/manifest.txt` lists the APCalign files the page loads, in order.
 - Three files differ from APCalign. Search for `SPEED` to find the changes. They only make the code faster and
@@ -27,7 +27,8 @@ The Shiny app (`apcalign.qmd`, an iframe of `app.austraits.org/APCalign-app/`) i
   - `R/fuzzy_match.R`: the first-letter lists are kept between names, and reference names whose length is too
     different to match are skipped.
   - `R/update_taxonomy.R`: tables that depend only on the census data are built once and kept.
-  - `R/app.R`: new file (reads the names, runs one chunk, writes the CSV).
+  - `R/app.R`: new file (reads the names, runs one chunk, writes the CSV). It passes the same options as the Shiny app
+    (`taxonomic_splits`, `full`, `identifier`); all 12 combinations were checked against the original code.
 
 ## Publishing a new APC release
 
