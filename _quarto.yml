@@ -5,6 +5,7 @@ project:
     - "team/*.qmd"
   resources:
     - browser-portal/
+    - apcalign-browser/
 
 website:
   title: "AusTraits"

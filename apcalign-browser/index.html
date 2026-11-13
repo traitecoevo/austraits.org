@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>APCalign-app</title>
+<link rel="icon" type="image/png" href="assets/APCalign_hex.png">
+<link rel="stylesheet" href="css/apcalign.css">
+</head>
+<body>
+
+<header class="brand">
+  <img src="assets/APCalign_hex.png" alt="APCalign" height="30">
+  <span>APCalign-app</span>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <p>This app uses the Australian Plant Census to align and update plant taxon name strings</p>
+    <p>For more information, check out the <a href="https://traitecoevo.github.io/APCalign/" target="_blank" rel="noopener">APCalign R package website</a></p>
+
+    <h5>Taxon names</h5>
+    <fieldset>
+      <legend>How would you like to supply taxon names?</legend>
+      <label class="opt"><input type="radio" name="inputType" value="paste" checked> Enter manually (separated by commas)</label>
+      <label class="opt"><input type="radio" name="inputType" value="upload"> Upload a .csv</label>
+    </fieldset>
+
+    <div id="pasteBox">
+      <input type="text" id="names_input" value="Banksia serrata, Acacia longifolia, Not a species" aria-label="Taxon names separated by commas">
+    </div>
+
+    <div id="uploadBox" class="hide">
+      <label class="filebtn"><input type="file" id="file_input" accept=".csv"><span class="btn-file">Select file</span> <span id="fileName" class="muted">No file selected</span></label>
+      <label class="field">Choose column containing taxon names
+        <select id="sp_col"></select></label>
+      <label class="opt"><input type="checkbox" id="ident"> Include identifier?</label>
+      <label class="field hide" id="identWrap">Choose column containing additional identifier
+        <select id="col"></select></label>
+    </div>
+
+    <h5>Taxonomic splits</h5>
+    <fieldset>
+      <label class="opt"><input type="radio" name="taxonomic_splits" value="most_likely_species" checked> Most likely species</label>
+      <label class="opt"><input type="radio" name="taxonomic_splits" value="collapse_to_higher_taxon"> Collapse to higher taxon</label>
+      <label class="opt"><input type="radio" name="taxonomic_splits" value="return_all"> Display all</label>
+    </fieldset>
+
+    <h5>Table display</h5>
+    <label class="opt"><input type="checkbox" id="full"> Full output</label>
+
+    <button class="btn primary" id="submit">Submit</button>
+    <button class="btn outline" id="download_table" disabled>Download Table</button>
+  </aside>
+
+  <main class="main">
+    <nav class="tabs" role="tablist">
+      <button class="tab active" data-tab="output" role="tab">Output</button>
+      <button class="tab" data-tab="start" role="tab">Get Started</button>
+      <button class="tab" data-tab="faq" role="tab">FAQs</button>
+    </nav>
+
+    <section class="card" id="tab-output">
+      <div id="loading" class="loading">
+        <div><strong id="loadMsg">Starting …</strong></div>
+        <progress id="loadbar" max="100" value="0"></progress>
+        <div class="muted">The first start takes about 20 seconds. Everything runs in your browser. Your names are not sent anywhere.</div>
+      </div>
+
+      <div id="instructions" class="ready">
+        <div class="readyhead"><span class="info">i</span><h4>Ready to align plant names?</h4></div>
+        <p>To align your plant names, please:</p>
+        <ol>
+          <li>Enter taxon names in the sidebar (or upload a .csv)</li>
+          <li>Choose your taxonomic-split and table-display options</li>
+          <li>Click 'Submit'</li>
+        </ol>
+      </div>
+
+      <div id="running" class="hide">
+        <div id="runMsg" class="muted"></div>
+        <progress id="bar" max="100" value="0"></progress>
+      </div>
+
+      <div id="error" class="errorbox hide"></div>
+
+      <div id="tablearea" class="hide">
+        <div class="tblctl">
+          <label>Show <select id="pagesize"><option>10</option><option>25</option><option>50</option><option>100</option></select> entries</label>
+          <label>Search: <input type="search" id="search"></label>
+        </div>
+        <div class="tablewrap"><table id="tbl"></table></div>
+        <div class="tblfoot">
+          <div id="info"></div>
+          <div id="pager" class="pager"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card hide" id="tab-start">
+      <h3 class="cardhead">Get Started</h3>
+      <div class="prose">
+        <p><strong>APCalign-app </strong> is an interface to the R package <a href="https://traitecoevo.github.io/APCalign" target="_blank" rel="noopener">APCalign.</a> This app aligns and updates Australian plant taxon name strings.
+        using taxonomic information from the <a href="https://www.anbg.gov.au/cpbr/program/hc/hc-APC.html" target="_blank" rel="noopener">Australian Plant Census (APC)</a> and <a href="https://www.anbg.gov.au/apni/" target="_blank" rel="noopener">Australian Plant Name Index (APNI).</a></p>
+        <p>This version runs the APCalign code in your own browser, so your names are not sent to a server.</p>
+
+        <h4>Supplying your taxon names</h4>
+        <p>Taxon names can be typed  directly into the name input box, making sure the names are seperated by commas. This method is suited to alignments and updates for a small number of taxa</p>
+        <p>For larger alignments and updates, we recommend uploading a .csv and selecting the column which contains your taxon names</p>
+
+        <h4>Supplying additional identifiers</h4>
+        <p>In cases where there are multiple records for a genus or family alignment e.g. Eucalyptus sp., you can nominate an additional identifier from another column in your data that is linked to your taxon name e.g. collection site or collector name. This information is retained under `suggested_name` and clarifies that the records are not identical taxon concepts. The identifier feature is only available via the "Upload" method</p>
+
+        <h4>Handling of taxonomic splits</h4>
+        <p>Taxonomic splits refers to instances where a single taxon concept is subsequently split into multiple taxon concepts. For such taxa, when the aligned_name is the 'old' taxon concept name, it is impossible to know which of the currently accepted taxon concepts the name represents.</p>
+        <p>APCalign-app offers three alternative approaches to handle these instances:</p>
+        <ul>
+          <li><b>Most likely species</b> which gives you the <samp>accepted_name</samp> of the original <samp>taxon_concept</samp>; alternative names are documented in <samp>suggested_name</samp></li>
+          <li><b>Collapse to higher taxon</b> which declares that for split names, there is no way to be certain about which <samp>accepted_name</samp> is appropriate and therefore updates the <samp>aligned_name</samp> to the genus level; no <samp>accepted_name</samp> is returned, <samp>suggested_name</samp> documents the possible species-level names</li>
+          <li><b>Display all</b> which gives you all the currently accepted names that were split from the original <samp>taxon_concept</samp></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card hide" id="tab-faq">
+      <h3 class="cardhead">Frequently Asked Questions</h3>
+      <div class="prose">
+        <h4>1. What is the Australian Plant Census (APC) and Australian Plant Name Index (APNI)?</h4>
+        <p>The <a href="https://www.anbg.gov.au/cpbr/program/hc/hc-APC.html" target="_blank" rel="noopener">Australian Plant Census (APC)</a> is national database of accepted taxonomic names for Australian vascular plants. The APC includes information on synonyms, and misapplications of them, as well as established status (native/introduced) and distribution across states and territories.</p>
+        <p>APCalign-app will first use the APC to align your taxonomic names to ones that exist in the database.</p>
+        <p><a href="https://www.anbg.gov.au/apni/" target="_blank" rel="noopener">The Australian Plant Index (APNI)</a> is a database containing names of Australian plants and their use in scientific literature. It is primarily used by the botanical community for standardising synonyms. Importantly, APNI does not provide recommendation of taxonomy or nomenclature, this is where the APC comes in.</p>
+        <p>This app only uses APNI when an alignment cannot be found in the APC</p>
+
+        <h4>2. How does the app align my names to those in the APC/APNI?</h4>
+        <p>Generally, the app takes the following steps to align names: </p>
+        <ol>
+          <li>Clean the inputted names</li>
+          <li>Find best alignment with APC/APNI to your input names using 50 matching algorithims with exact and fuzzy matching</li>
+          <li>Determine the taxon_rank to which the name can be resolved, based on its syntax.</li>
+          <li>Determine the taxonomic_reference (APC/APNI) of each name-alignment</li>
+        </ol>
+        <p>Learn more about our <a href="https://traitecoevo.github.io/APCalign/articles/updating-taxon-names.html" target="_blank" rel="noopener">matching algorithim</a></p>
+
+        <h4>3. What if the taxon is not listed in the APC?</h4>
+        <p>The APC is a list of the accepted scientific names for the Australian vascular flora, both native and introduced naturalised taxa, and includes synonyms and misapplications for these names. The APC covers all published scientific plant names used in an Australian context in the taxonomic literature, but excludes taxa known only from cultivation in Australia. A taxon will not be listed in the APC if:</p>
+        <ol>
+          <li>It is a newly described species that has not yet been reviewed for inclusion in the APC</li>
+          <li>It is a cultivated non-native taxon that is not (yet) designated as naturalised within Australia</li>
+          <li>It is a name that has not been linked to a taxon concept accepted by the APC. The Australian Plant Names Index (APNI) includes names documented in the literature but not yet linked to an APC taxon concept</li>
+        </ol>
+
+        <h4>4. Where can I find the metadata for the columns in the output data</h4>
+        <p>The metadata for the output columns are summarised in the <a href="https://traitecoevo.github.io/APCalign/reference/create_taxonomic_update_lookup.html" target="_blank" rel="noopener">R package documention</a></p>
+
+        <h4>5. Where can I find further information about this app?</h4>
+        <p>APCalign-app is an interface to the R package APCalign. Learn more about other features at the <a href="https://traitecoevo.github.io/APCalign/" target="_blank" rel="noopener">package website</a></p>
+      </div>
+    </section>
+
+    <details id="speedpanel" class="card hide">
+      <summary>Speed test (for testing only)</summary>
+      <p class="muted">Makes random names (one in five with a spelling mistake) and measures the matching time in this browser.</p>
+      <button class="btn outline" id="speed" disabled>Run speed test</button>
+      <textarea id="report" readonly></textarea>
+    </details>
+
+    <footer class="foot">
+      <div>Powered by <a href="https://www.unsw.edu.au/science" target="_blank" rel="noopener">UNSW Faculty of Science</a></div>
+      <div>Created by Elizabeth Wenk, Daniel Falster, Will Cornwell and Fonti Kar
+        <a href="https://github.com/traitecoevo/APCalign-app" target="_blank" rel="noopener" aria-label="GitHub">GitHub</a></div>
+      <div class="muted">Data: Australian Plant Census and Australian Plant Name Index, release <span id="rel">2026-07-30</span>.</div>
+    </footer>
+  </main>
+</div>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
