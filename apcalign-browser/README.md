@@ -7,7 +7,7 @@ The Shiny app (`apcalign.qmd`, an iframe of `app.austraits.org/APCalign-app/`) i
 ## How it works
 
 - The page loads [webR](https://docs.r-wasm.org/webr/latest/) (R compiled to WebAssembly) from
-  `webr.r-wasm.org`, installs five R packages (rlang, cli, tibble, dplyr, stringdist; about 7 MB with their dependencies), and then runs the APCalign matching code from `R/` unchanged, except for the speed changes below. `nanoparquet`, `curl`, `httr` and `readr` are not needed: they are only used to download the data or write files. Since APCalign dropped `stringr`, `stringi` and `purrr` (APCalign #302) and `crayon` (#300), the page no longer installs them, which saves about 15 MB of download (stringi alone was 14 MB).
+  `webr.r-wasm.org`, installs five R packages (rlang, cli, tibble, dplyr, stringdist; about 7 MB with their dependencies), and then runs the APCalign matching code from `R/` unchanged, except for the speed changes below. `nanoparquet`, `curl`, `httr`, `jsonlite` and `readr` are not needed: they are only used to download the data or write files. Since APCalign dropped `stringr`, `stringi` and `purrr` (APCalign #302) and `crayon` (#300), the page no longer installs them, which saves about 15 MB of download (stringi alone was 14 MB).
 - The census data is one file, `resources.rds` (about 11 MB), in the Cloudflare R2 bucket on
   `data.austraitsdata.org` under `apcalign/<release>/`. `config.json` holds its address and the release date.
 - Like the Shiny app, the output has one row for every input row, in the same order. Names are matched in chunks
@@ -23,7 +23,7 @@ The Shiny app (`apcalign.qmd`, an iframe of `app.austraits.org/APCalign-app/`) i
   (MIT licence, Daniel Falster) plus `R/app.R`, a small helper written for this page.
 - `R/manifest.txt` lists the APCalign files the page loads, in order. `R/sysdata.rda` is copied from APCalign too: it holds the character tables (lower case, ASCII transliteration) that `R/strings.R` uses, and the page loads it before the R files.
 - Three files differ from APCalign. Search for `SPEED` to find the changes. They only make the code faster and
-  were tested to give identical answers (3,016 names, all three `taxonomic_splits` options):
+  were tested to give identical answers (most recently on 1,830 names with every combination of `taxonomic_splits`, `full` and identifier, and in a fuzz test of `fuzzy_match()`; see austraits.org #52):
   - `R/fuzzy_match.R`: the unique reference names for each first letter are kept between names (on top of APCalign's own `first_letters()` cache), and reference names whose length is too different to match are skipped.
   - `R/update_taxonomy.R`: tables that depend only on the census data are built once and kept.
   - `R/update_taxonomy.R` also checks `resources$app_cache` first (tables stored in the data file by `tools/build_resources.R`).
