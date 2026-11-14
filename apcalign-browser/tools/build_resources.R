@@ -1,7 +1,7 @@
 # Builds the census data file used by the APCalign browser page.
 #
 # Run this in R, from the root of the austraits.org repository, when a new APC release is out:
-#   install.packages("APCalign")   # or remotes::install_github("traitecoevo/APCalign")
+#   remotes::install_github("traitecoevo/APCalign")   # the APCalign version whose R files are in R/
 #   source("apcalign-browser/tools/build_resources.R")
 #
 # Then upload the new file to Cloudflare R2 at  apcalign/<release>/resources.rds
@@ -14,7 +14,7 @@
 #   2. It builds, once, the tables that APCalign would otherwise build from the whole census on the
 #      first call, and stores them in the file as `app_cache`.
 
-release <- "2026-07-30"   # change to the new release date
+release <- "2026-11-15"   # change to the new release date
 code_dir <- "apcalign-browser/R"
 
 res <- APCalign::load_taxonomic_resources(version = release)
@@ -32,6 +32,7 @@ for (n in names(res)) {
 
 # 2. build the tables that depend only on the census data
 e <- new.env(); e[["%>%"]] <- dplyr::`%>%`
+load(file.path(code_dir, "sysdata.rda"), envir = e)   # character tables used by strings.R
 for (f in files) sys.source(f, envir = e, keep.source = FALSE)
 for (sp in c("most_likely_species", "collapse_to_higher_taxon", "return_all")) {
   invisible(suppressMessages(e$create_taxonomic_update_lookup("Acacia aneura", resources = res, taxonomic_splits = sp)))
