@@ -5,7 +5,7 @@ title: "The AusTraits family"
 AusTraits is not a single product but a **family** of connected open-source tools, datasets, and
 vocabularies. Each piece does one job well and hands off to the next: a controlled vocabulary defines
 the traits, a taxonomy tool standardises the names, a workflow engine harmonises contributed data into
-a single database, and an R package plus web tools let anyone access it. This page shows how the pieces
+a single database, and R packages plus web tools let anyone access it. This page shows how the pieces
 fit together and where to go for each.
 
 ## How the pieces connect
@@ -18,7 +18,8 @@ flowchart TD
   TB["<b>traits.build</b><br/>workflow engine<br/>+ data model"]
   BUILD["<b>austraits.build</b><br/>the AusTraits<br/>dataset compilation"]
   ZEN[("Zenodo<br/>austraits-X.Y.Z")]
-  PKG["<b>austraits</b><br/>R access &amp; wrangling"]
+  USE["<b>traits.use</b><br/>R reader for any<br/>traits.build database"]
+  PKG["<b>austraits</b><br/>AusTraits in R<br/>(built on traits.use)"]
   WEB["Data portal &amp; API<br/>code-free access"]
   REUSE["reused beyond AusTraits<br/>(other trait databases<br/>&amp; taxonomy projects)"]
 
@@ -27,22 +28,24 @@ flowchart TD
   RAW --> BUILD
   TB -. engine .-> BUILD
   BUILD --> ZEN
-  ZEN --> PKG
-  ZEN --> WEB
+  ZEN --> USE
+  USE --> PKG
+  USE --> WEB
   APC -. reused by .-> REUSE
   TB -. reused by .-> REUSE
+  USE -. reused by .-> REUSE
 
   classDef core fill:#e8f4ec,stroke:#4a8a68,color:#1d3b2a;
   classDef data fill:#eef2f7,stroke:#7089a8,color:#243044;
   classDef reuse fill:#fbf6ea,stroke:#c9a340,color:#5b4a12,stroke-dasharray:4 3;
-  class APD,APC,TB,BUILD,PKG core;
+  class APD,APC,TB,BUILD,USE,PKG core;
   class RAW,ZEN,WEB data;
   class REUSE reuse;
 ```
 
 A key subtlety: the **data flow** above is not the same as the R-package install graph. In the build,
 `traits.build` is the engine that assembles `austraits.build`; but as R packages, `traits.build`
-actually depends on a few helpers from `austraits`. The authoritative, up-to-date map of both graphs
+depends on `traits.use`, the reader, for a few helpers and its trait plots. The authoritative, up-to-date map of both graphs
 lives in [`austraits-meta`](https://github.com/traitecoevo/austraits-meta).
 
 ## The core pipeline
@@ -70,8 +73,13 @@ lives in [`austraits-meta`](https://github.com/traitecoevo/austraits-meta).
     <p><a href="https://github.com/traitecoevo/austraits.build" target="_blank" rel="noopener">Repository</a> · <a href="https://doi.org/10.5281/zenodo.3568417" target="_blank" rel="noopener">Zenodo releases</a></p>
   </article>
   <article class="plain-card">
-    <h3>austraits — access &amp; wrangling</h3>
-    <p>The R package for loading, filtering, joining, reshaping, and plotting AusTraits (and any traits.build database) once it has been compiled and released.</p>
+    <h3>traits.use — access &amp; wrangling</h3>
+    <p>The R package for loading, filtering, joining, reshaping, and plotting any traits.build database, AusTraits included, once it has been compiled and released.</p>
+    <p><a href="https://traitecoevo.github.io/traits.use/" target="_blank" rel="noopener">Package site</a></p>
+  </article>
+  <article class="plain-card">
+    <h3>austraits — AusTraits in R</h3>
+    <p>The AusTraits layer over traits.use: loads any AusTraits release by version number, maps the data over Australia, and walks through it in the Getting Started tutorial. Every traits.use function is available from it too.</p>
     <p><a href="https://traitecoevo.github.io/austraits/" target="_blank" rel="noopener">Package site</a></p>
   </article>
 </div>
