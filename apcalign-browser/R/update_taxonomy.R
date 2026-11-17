@@ -58,7 +58,7 @@ app_memo <- function(resources, key, build) {
 #' taxa.
 #' @param output (optional) Name of the file where results are saved. The 
 #' default is NULL and no file is created. If specified, the output will be 
-#' saved in a CSV file with the given name.
+#' saved in a CSV file with the given name. Requires the 'readr' package.
 #' @param resources the taxonomic resources required to make the summary 
 #' statistics.  Loading this can be slow, so call load_taxonomic_resources 
 #' separately to greatly speed this function up and pass the resources in.
@@ -71,7 +71,7 @@ app_memo <- function(resources, key, build) {
 #' in the APC or APNI by the align_taxa function.
 #' - accepted_name: the APC-accepted plant name, when available.
 #' - suggested_name: the suggested plant name to use. Identical to the 
-#' accepted_name, when an accepted_name exists; otherwise the the suggested_name
+#' accepted_name, when an accepted_name exists; otherwise the suggested_name
 #'  is the aligned_name.
 #' - genus: the genus of the accepted (or suggested) name; only APC-accepted 
 #' genus names are filled in.
@@ -90,17 +90,22 @@ app_memo <- function(resources, key, build) {
 #' - subclass: the subclass of the accepted name.
 #' - taxon_distribution: the distribution of the accepted name; only filled in 
 #' if an APC accepted_name is available.
-#' - scientific_name_authorship: the authorship information for the accepted 
-#' (or synonymous) name; available for both APC and APNI names.
+#' - scientific_name: the scientific name, with authorship, of the accepted
+#'   (or synonymous) name; available for both APC and APNI names.
 #' - taxon_ID: the unique taxon concept identifier for the accepted_name; only 
 #' filled in if an APC accepted_name is available.
 #' - taxon_ID_genus: an identifier for the genus; only filled in if an 
 #' APC-accepted genus name is available.
 #' - scientific_name_ID: an identifier for the nomenclatural (not taxonomic) 
 #' details of a scientific name; available for both APC and APNI names.
+#' - canonical_name: a copy of suggested_name.
 #' - row_number: the row number of a specific original_name in the input.
 #' - number_of_collapsed_taxa: when taxonomic_splits == "collapse_to_higher_taxon", 
 #' the number of possible taxon names that have been collapsed.
+#' - chars_changed: for a fuzzy match, how many characters of the name were
+#'   changed to match the reference name; `0` for an exact match; `NA` when the
+#'   name was not aligned. Carried over from [align_taxa()], where it is
+#'   described in full.
 #'   
 #'
 #' @seealso load_taxonomic_resources
@@ -135,10 +140,13 @@ update_taxonomy <- function(aligned_data,
     message("Not finding taxonomic resources; check internet connection?")
     return(NULL)
   }
-  
-  aligned_data <- 
+
+  if (!is.null(output))
+    rlang::check_installed("readr", reason = "to write the `output` file.")
+
+  aligned_data <-
     aligned_data %>%
-    dplyr::select(original_name, aligned_name, taxon_rank, taxonomic_dataset, aligned_reason) %>%
+    dplyr::select(original_name, aligned_name, taxon_rank, taxonomic_dataset, aligned_reason, dplyr::any_of("chars_changed")) %>%
     dplyr::mutate(
       genus = extract_genus(aligned_name),
       row_number = dplyr::row_number()
@@ -204,29 +212,47 @@ update_taxonomy <- function(aligned_data,
         scientific_name_ID = character(0L),
         canonical_name = character(0L),
         row_number = numeric(0L),
-        number_of_collapsed_taxa = numeric(0L)
+        number_of_collapsed_taxa = numeric(0L),
+        chars_changed = integer(0L)
       )
 
   ## bind taxa_out back together.
   ## there are some tibbles that can be created when taxa_out is split that will not have been manipulated, namely those without alignments and that
   ## therefore are NA for either `taxonomic_dataset` or `taxon_rank`; the mutate steps below are primarily to ensure the final `suggested_name`
-  ## `taxon_rank`, `taxonomic_status`, `taxonomic_dataset`, `genus` are properly filled in for those rows of data
-  taxa_out <-
-    dplyr::bind_rows(taxa_out) %>%
-    dplyr::bind_rows(taxa_blank) %>%
-    dplyr::mutate(
-      suggested_name = ifelse(is.na(suggested_name), aligned_name, suggested_name),
-      update_reason = ifelse(taxonomic_status_aligned == "accepted", "aligned name accepted by APC", update_reason),
-      taxonomic_status = ifelse(is.na(taxonomic_status), "unknown", taxonomic_status),
-      taxonomic_dataset = ifelse(stringr::str_detect(taxonomic_dataset, "APC"), "APC", taxonomic_dataset),
-      ## `genus` was the first word of the `aligned_name` in the input table; now needs to be set to NA for unknown taxa
-      genus = ifelse(taxonomic_status == "unknown", NA_character_, genus),
-      taxon_rank = ifelse(taxonomic_status == "unknown", NA_character_, taxon_rank),
-      # the next line makes everything inconsistent. If we want low, should do on loading APC
-      taxon_rank = stringr::str_to_lower(taxon_rank),
-      canonical_name = suggested_name,
-      taxonomic_status_aligned = ifelse(is.na(taxonomic_status_aligned), NA_character_, taxonomic_status_aligned)
-    ) %>%
+  ## `taxon_rank`, `taxonomic_status`, `taxonomic_dataset`, `genus` are properly filled in for those rows of data.
+  ## With no names, the result is just the empty columns (`ifelse()` on no rows would make them logical).
+  if (nrow(aligned_data) == 0) {
+    taxa_out <- taxa_blank
+  } else {
+    taxa_out <-
+      dplyr::bind_rows(taxa_out) %>%
+      dplyr::bind_rows(taxa_blank) %>%
+      dplyr::mutate(
+        suggested_name = ifelse(is.na(suggested_name), aligned_name, suggested_name),
+        update_reason = ifelse(taxonomic_status_aligned == "accepted", "aligned name accepted by APC", update_reason),
+        taxonomic_status = ifelse(is.na(taxonomic_status), "unknown", taxonomic_status),
+        taxonomic_dataset = ifelse(re_detect(taxonomic_dataset, "APC"), "APC", taxonomic_dataset),
+        ## `genus` was the first word of the `aligned_name` in the input table; now needs to be set to NA for unknown taxa
+        genus = ifelse(taxonomic_status == "unknown", NA_character_, genus),
+        taxon_rank = ifelse(taxonomic_status == "unknown", NA_character_, taxon_rank),
+        # ranks from `aligned_data` may be in any case; those from the APC
+        # already are lower case (`standardise_taxon_rank()`)
+        taxon_rank = to_lower(taxon_rank),
+        canonical_name = suggested_name
+      )
+  }
+
+  # Give every column its documented type: an `ifelse()` whose result is all
+  # NA returns a logical column
+  for (col in intersect(names(taxa_blank), names(taxa_out))) {
+    taxa_out[[col]] <-
+      switch(class(taxa_blank[[col]]),
+             character = as.character(taxa_out[[col]]),
+             integer = as.integer(taxa_out[[col]]),
+             as.numeric(taxa_out[[col]]))
+  }
+
+  taxa_out <- taxa_out %>%
     dplyr::select(
       dplyr::any_of(c(
       "original_name",
@@ -248,9 +274,9 @@ update_taxonomy <- function(aligned_data,
       "taxon_ID_genus",
       "scientific_name_ID",
       "canonical_name",
-      "taxonomic_status_aligned",
       "row_number",
-      "number_of_collapsed_taxa"
+      "number_of_collapsed_taxa",
+      "chars_changed"
     )))      
   
   # Assemble output in the order of the input `aligned_names`
@@ -319,7 +345,7 @@ update_taxonomy_APC_genus <- function(data, resources) {
   dplyr::left_join(
     by = "genus",
     resources$genera_all %>%
-      dplyr::filter(stringr::str_detect(taxonomic_dataset, "APC")) %>%
+      dplyr::filter(re_detect(taxonomic_dataset, "APC")) %>%
       dplyr::arrange(canonical_name, taxonomic_status) %>%
       dplyr::distinct(canonical_name, .keep_all = TRUE) %>%
       dplyr::mutate(
@@ -344,7 +370,7 @@ update_taxonomy_APC_genus <- function(data, resources) {
       taxonomic_status = ifelse(is.na(accepted_name_usage_ID), as.character(my_order), paste("genus", taxonomic_status_genus)),
       taxon_ID_genus = resources$genera_all$taxon_ID[match(accepted_name_usage_ID, resources$genera_all$accepted_name_usage_ID)],
       # genus names in `aligned_name` that are not APC-accepted need to be updated to their current name in `suggested_name`
-      aligned_minus_genus = ifelse(is.na(genus_accepted), NA, stringr::str_replace(aligned_name, extract_genus(aligned_name), "")),
+      aligned_minus_genus = ifelse(is.na(genus_accepted), NA, re_replace(aligned_name, extract_genus(aligned_name), "")),
       # if there is an APC-accepted genus, replace whatever the initial genus was with the accepted genus, otherwise the suggested name is the aligned name
       suggested_name = ifelse(taxonomic_status == "genus accepted", paste0(genus_accepted, aligned_minus_genus), aligned_name),
       # indicate taxonomic_status of the genus name in `aligned_name` and why it needed to be updated for the `suggested_name`
@@ -388,7 +414,7 @@ update_taxonomy_APNI_genus <- function(data, resources) {
       accepted_name = NA_character_,
       suggested_name = aligned_name,
       taxonomic_status_genus = "genus unplaced by APC",
-      taxonomic_status = "genus unplaced by APC",
+      taxonomic_status = "genus unplaced by APC"
     )
 }
 
@@ -428,14 +454,14 @@ update_taxonomy_APC_family <- function(data, resources) {
     dplyr::mutate(
       accepted_name = NA_character_,
       # family names in `aligned_name` that are not APC-accepted need to be updated to their current name in `suggested_name`
-      aligned_minus_genus = stringr::str_replace(aligned_name, family, ""),
-      # if there is an APC-accepted genus, replace whatever the initial genus was with the accepted genus, otherwise the suggested name is the aligned name
-      suggested_name = ifelse(my_order == "accepted", aligned_name, paste0(family_accepted, aligned_minus_genus)),
+      aligned_minus_family = re_replace(aligned_name, family, ""),
+      # if the family is APC-accepted, the suggested name is the aligned name; otherwise replace the family with the accepted one
+      suggested_name = ifelse(my_order == "accepted", aligned_name, paste0(family_accepted, aligned_minus_family)),
       taxonomic_status = "family accepted",
       taxonomic_dataset = "APC",
       family = family_accepted
     ) %>%
-    dplyr::select(-accepted_name_usage_ID, -family_accepted, -my_order)
+    dplyr::select(-accepted_name_usage_ID, -family_accepted, -aligned_minus_family, -my_order)
 }
 
 # Function to update names of taxa whose aligned_names are
@@ -496,7 +522,7 @@ update_taxonomy_APC_species_and_infraspecific_taxa <- function(data, resources, 
       dplyr::ungroup() %>%
       dplyr::mutate(
         alternative_possible_names = ifelse(taxonomic_status_aligned != "accepted" & canonical_name %in% resources$APC_accepted$canonical_name, NA, alternative_possible_names),
-        alternative_possible_names = stringr::str_replace_all(alternative_possible_names, "\\ \\|\\ NA", ""),    
+        alternative_possible_names = re_replace_all(alternative_possible_names, "\\ \\|\\ NA", ""),    
         suggested_collapsed_name = paste0(accepted_name_2, " [alternative possible names: ", alternative_possible_names, "]")
       ) %>%
       dplyr::select(-alternative_accepted_name_tmp)
@@ -534,7 +560,7 @@ update_taxonomy_APC_species_and_infraspecific_taxa <- function(data, resources, 
     dplyr::ungroup() %>%
     dplyr::mutate(
       alternative_possible_names = ifelse(taxonomic_status_aligned != "accepted" & canonical_name %in% resources$APC_accepted$canonical_name, NA, alternative_possible_names),
-      alternative_possible_names = stringr::str_replace_all(alternative_possible_names, "\\ \\|\\ NA", ""),
+      alternative_possible_names = re_replace_all(alternative_possible_names, "\\ \\|\\ NA", ""),
       suggested_collapsed_name = paste(word(accepted_name_2, 1), "sp. [collapsed names:", alternative_possible_names, "]"),
       taxon_rank = ifelse(number_of_collapsed_taxa > 1 & species_and_infraspecific(taxon_rank), "genus", taxon_rank)
     ) %>%
@@ -596,9 +622,11 @@ update_taxonomy_APC_species_and_infraspecific_taxa <- function(data, resources, 
     ) %>%
     ## Third, we join in the information on taxonomic splits, from the `split_taxa_table` created above.
     ## The columns in this table varies based on the value of the variable `taxonomic_splits`
-    ## If `taxonomic_splits = "return_all"`, this step increases the number of rows in the table; for other parameter values the number of rows should stay the same
+    ## If `taxonomic_splits = "return_all"`, this step increases the number of rows in the table; for other parameter values the number of rows should stay the same.
+    ## A name repeated in the input then meets a split name's several rows: many-to-many, as intended.
     dplyr::left_join(
       by = "aligned_name",
+      relationship = "many-to-many",
       split_taxa_table %>%
         dplyr::rename(aligned_name = canonical_name) %>%
         dplyr::select(aligned_name, accepted_name_2, alternative_accepted_name, suggested_collapsed_name, number_of_collapsed_taxa)
@@ -672,11 +700,7 @@ update_taxonomy_APNI_species_and_infraspecific_taxa <- function(data, resources)
     dplyr::mutate(
       canonical_name = ifelse(is.na(scientific_name_ID), NA, aligned_name),
       accepted_name = NA_character_,
-      suggested_name = ifelse(
-        species_and_infraspecific(taxon_rank),
-        aligned_name,
-        suggested_name
-      ),
+      suggested_name = aligned_name,
       genus = word(suggested_name, 1)
     ) %>%
     # when possible the genus of APNI names is matched to an APC-accepted genus and the appropriate genus-level taxon_ID is added
@@ -708,7 +732,7 @@ update_taxonomy_APNI_species_and_infraspecific_taxa <- function(data, resources)
         genus, 
         resources$genera_all$canonical_name[match(accepted_name_usage_ID_genus, resources$genera_all$taxon_ID)]),
       taxon_ID_genus = resources$genera_all$taxon_ID[match(genus, resources$genera_all$canonical_name)],
-      taxonomic_dataset_genus = ifelse(stringr::str_detect(taxonomic_dataset_genus, "APC"), "APC", taxonomic_dataset_genus)
+      taxonomic_dataset_genus = ifelse(re_detect(taxonomic_dataset_genus, "APC"), "APC", taxonomic_dataset_genus)
     ) %>%
     dplyr::select(-accepted_name_usage_ID_genus)
   
