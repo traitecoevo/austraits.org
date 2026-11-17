@@ -170,7 +170,7 @@ execute:
         <img src="images/austraits_hex.png" alt="austraits R package logo">
         <div>
           <h3>austraits</h3>
-          <p>R interface for accessing, wrangling, combining, and visualising data.... <a href="https://traitecoevo.github.io/austraits/" target="_blank" rel="noopener">more</a></p>
+          <p>R interface for accessing, wrangling, combining, and visualising data, built on <a href="https://traitecoevo.github.io/traits.use/" target="_blank" rel="noopener">traits.use</a>.... <a href="https://traitecoevo.github.io/austraits/" target="_blank" rel="noopener">more</a></p>
         </div>
       </article>
       <article class="software-card">
