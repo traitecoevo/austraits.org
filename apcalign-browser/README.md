@@ -47,9 +47,8 @@ The Shiny app (`apcalign.qmd`, an iframe of `app.austraits.org/APCalign-app/`) i
 - `js/app.js` loads the R files with `%>%` set to magrittr's eager pipe `%!>%`. The normal `%>%` is lazy, so a long chain (`standardise_names()` has 46 steps) runs as deeply nested calls. Safari has a much smaller stack than Chrome, and the lazy version failed there with "Maximum call stack size exceeded". The eager pipe needs about a fifth of the depth and gives identical output (checked for all three `taxonomic_splits` options, with and without full output). Do not raise `options(expressions)` to work around a depth error: Safari then crashes instead of R reporting the error.
 
 - `_quarto.yml` lists `apcalign-browser/` under `project: resources:`. Without that line Quarto does not copy the folder.
-- The page loads webR from `https://webr.r-wasm.org/latest/`. It was tested with R 4.6.0 and dplyr 1.2.1,
-  purrr 1.2.2, stringr 1.6.0, stringi 1.8.9, stringdist 0.9.17, tibble 3.3.1, rlang 1.3.0 and cli 3.6.6.
-  If a later webR version breaks the page, pin the address in `index.html` to a fixed webR version.
+- The page loads a fixed webR release, set by `WEBR_VERSION` at the top of `js/app.js` (now `v0.6.1`, which runs R 4.6.0). Do not use `https://webr.r-wasm.org/latest/`: that is webR's development build (it loads its files from `/main/`), so it can change at any time, and browsers re-check it on every visit (`cache-control: no-cache`), where a release is cached for 7 days. It was tested with dplyr 1.2.1, purrr 1.2.2, stringr 1.6.0, stringi 1.8.9, stringdist 0.9.17, tibble 3.3.1, rlang 1.3.0 and cli 3.6.6.
+- The R packages still come from webR's package repository (`repo.r-wasm.org`), which is not versioned, so a package update can still change the page. To upgrade webR, change `WEBR_VERSION`, then check the example names and the `?speedtest` panel before merging.
 - The R2 bucket must allow requests from `https://www.austraits.org` (the portal already needs the same setting).
 - Test locally with `python -m http.server 8000` in this folder, then open
   `http://localhost:8000/?data=<address of resources.rds>`.

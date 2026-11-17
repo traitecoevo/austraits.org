@@ -2,6 +2,10 @@
 // R (APCalign matching code) runs in the browser through webR; see README.md.
 const $ = (id) => document.getElementById(id);
 const CHUNK = 1500;   // names per call: small chunks are slower because each call has a fixed cost
+// webR release the page runs on. Pinned: "latest" is webR's development build
+// (it loads from /main/), which can change, or break the page, at any time.
+// To upgrade, change this, then test the example names and ?speedtest.
+const WEBR_VERSION = "v0.6.1";
 const PKGS = ["rlang", "cli", "tibble", "dplyr", "purrr", "stringi", "stringr", "stringdist", "crayon"];
 let webR, shelter, ready = false, DATA_URL = "";
 let fileRows = null, lastCsv = "";
@@ -190,7 +194,7 @@ let pendingRun = false;
     const dataP = getBytes(DATA_URL), manifestP = getBytes("R/manifest.txt");
     const filesP = manifestP.then((mb) => Promise.all([...new TextDecoder().decode(mb).split(/\r?\n/).filter(Boolean), "app.R"].map(async (f) => [f, await getBytes(`R/${f}`)])));
     dataP.catch(() => {}); filesP.catch(() => {});   // errors are reported below, when the result is used
-    const { WebR } = await import("https://webr.r-wasm.org/latest/webr.mjs");
+    const { WebR } = await import(`https://webr.r-wasm.org/${WEBR_VERSION}/webr.mjs`);
     webR = new WebR(); await webR.init(); shelter = await new webR.Shelter();
     step(15, "Installing the R packages …");
     await webR.installPackages(PKGS, { quiet: true });
