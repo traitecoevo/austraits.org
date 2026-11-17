@@ -2,7 +2,11 @@
 // R (APCalign matching code) runs in the browser through webR; see README.md.
 const $ = (id) => document.getElementById(id);
 const CHUNK = 1500;   // names per call: small chunks are slower because each call has a fixed cost
-const PKGS = ["rlang", "cli", "tibble", "dplyr", "purrr", "stringi", "stringr", "stringdist", "crayon"];
+// webR release the page runs on. Pinned: "latest" is webR's development build
+// (it loads from /main/), which can change, or break the page, at any time.
+// To upgrade, change this, then test the example names and ?speedtest.
+const WEBR_VERSION = "v0.6.1";
+const PKGS = ["rlang", "cli", "tibble", "dplyr", "stringdist"];
 let webR, shelter, ready = false, DATA_URL = "";
 let fileRows = null, lastCsv = "";
 const tbl = { head: [], rows: [], view: [], sortCol: -1, sortDir: 1, page: 0, size: 10, q: "" };
@@ -188,9 +192,9 @@ let pendingRun = false;
     if (cfg.release) $("rel").textContent = cfg.release;
     DATA_URL = new URLSearchParams(location.search).get("data") || cfg.dataUrl;
     const dataP = getBytes(DATA_URL), manifestP = getBytes("R/manifest.txt");
-    const filesP = manifestP.then((mb) => Promise.all([...new TextDecoder().decode(mb).split(/\r?\n/).filter(Boolean), "app.R"].map(async (f) => [f, await getBytes(`R/${f}`)])));
+    const filesP = manifestP.then((mb) => Promise.all([...new TextDecoder().decode(mb).split(/\r?\n/).filter(Boolean), "app.R", "sysdata.rda"].map(async (f) => [f, await getBytes(`R/${f}`)])));
     dataP.catch(() => {}); filesP.catch(() => {});   // errors are reported below, when the result is used
-    const { WebR } = await import("https://webr.r-wasm.org/latest/webr.mjs");
+    const { WebR } = await import(`https://webr.r-wasm.org/${WEBR_VERSION}/webr.mjs`);
     webR = new WebR(); await webR.init(); shelter = await new webR.Shelter();
     step(15, "Installing the R packages …");
     await webR.installPackages(PKGS, { quiet: true });
@@ -207,7 +211,9 @@ let pendingRun = false;
     // calls, so the 46-step chain in standardise_names() needs R depth ~418, and Safari's smaller stack
     // overflows ("Maximum call stack size exceeded"). Eager: depth ~77, identical output.
     // `expressions` stays modest so that any deep nesting is an R error, not a browser crash.
+    // sysdata.rda holds APCalign's character tables (lower case, ASCII transliteration) used by strings.R.
     await Rrun(`e <- new.env(); e[["%>%"]] <- magrittr::\`%!>%\`
+      load("/home/web_user/R/sysdata.rda", envir = e)
       for (f in c(readLines("/home/web_user/R/manifest.txt"), "app.R")) sys.source(file.path("/home/web_user/R", f), envir = e, keep.source = FALSE)
       options(expressions = 5000)`);
     step(80, "Reading the plant census data …");

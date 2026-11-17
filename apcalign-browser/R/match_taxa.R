@@ -9,14 +9,14 @@
 #' 4. searches for string patterns that suggest a specific taxon rank
 #'
 #' @details
-#' - It cycles through more than 20 different string patterns, sequentially
-#'  searching for additional match patterns.
+#' - It runs 54 match steps in sequence, each searching for a further
+#'  string pattern.
 #' - It identifies string patterns in input names that suggest a name can only be
 #'  aligned to a genus (hybrids that are not accepted names; graded species;
 #'  taxa not identified to species).
 #' - It prioritises matches that do not require fuzzy matching (i.e. synonyms,
 #'  orthographic variants) over those that do.
-#' - If prioritises matches to taxa in the APC over names in the APNI.
+#' - It prioritises matches to taxa in the APC over names in the APNI.
 #'
 #' Each match step has the same shape: build a logical index `i` of the rows
 #' it can resolve, hand those rows to `apply_match()` to be stamped with the
@@ -43,9 +43,9 @@
 #'  corresponding to very distant spelling mistakes. This is FALSE as default
 #'  and all outputs should be checked as it often makes erroneous matches.
 #' @param APNI_matches Name matches to the APNI (Australian Plant Names Index)
-#'  are turned off as a default.
-#' @param identifier A dataset, location or other identifier,
-#'  which defaults to NA.
+#'  are turned on as a default.
+#'
+#' Each row's identifier is read from the `identifier` column of `taxa$tocheck`.
 #'
 #' @noRd
 match_taxa <- function(
@@ -55,8 +55,7 @@ match_taxa <- function(
     fuzzy_rel_dist = 0.2,
     fuzzy_matches = TRUE,
     imprecise_fuzzy_matches = FALSE,
-    APNI_matches = TRUE,
-    identifier = NA_character_
+    APNI_matches = TRUE
 ) {
 
   if(is.null(resources)){
@@ -64,21 +63,13 @@ match_taxa <- function(
     return(NULL)
   }
 
-  update_na_with <- function(current, new) {
-    ifelse(is.na(current), new, current)
-  }
-
-
-  ## A function that specifies particular fuzzy matching conditions (for the
-  ## function fuzzy_match) when matching is being done at the genus level.
-  if (fuzzy_matches == TRUE) {
-    fuzzy_match_genera <- function(x, y) {
-      purrr::map_chr(x, ~ fuzzy_match(.x, y, 2, 0.35, n_allowed = 1))
-    }
-  } else {
-    fuzzy_match_genera <- function(x, y) {
-      purrr::map_chr(x, ~ fuzzy_match(.x, y, 0, 0.0, n_allowed = 1))
-    }
+  ## The fuzzy matching conditions used when matching at the genus (and
+  ## family) level: more lenient than for full names, since these are single
+  ## words.
+  genus_fuzzy_abs_dist <- if (fuzzy_matches) 2 else 0
+  genus_fuzzy_rel_dist <- if (fuzzy_matches) 0.35 else 0
+  fuzzy_match_genera <- function(x, y) {
+    fuzzy_match_column(x, y, genus_fuzzy_abs_dist, genus_fuzzy_rel_dist)
   }
 
   ## set default imprecise fuzzy matching parameters
@@ -95,7 +86,6 @@ match_taxa <- function(
   }
 
   ## remove APNI-listed genera from resources if APNI matches are turned off
-  ##(the default)
   if (APNI_matches == TRUE) {
     resources$genera_all2 <- resources$genera_all
   } else {
@@ -106,21 +96,21 @@ match_taxa <- function(
   ## the rest of the name matches. Applied to `cleaned_name`, and re-evaluated
   ## by each match step because `tocheck` shrinks as matches are found.
   is_genus_sp <- function(x) {
-    stringr::str_detect(x, "[:space:]sp\\.$") & word(x, 2) %in% "sp."
+    re_detect(x, "[\\s\\p{Z}\\x85]sp\\.$") & word(x, 2) %in% "sp."
   }
 
-  is_intergrade <- function(x) stringr::str_detect(x, "\\ -- |\\--")
+  is_intergrade <- function(x) re_detect(x, "\\ -- |\\--")
 
-  is_hybrid <- function(x) stringr::str_detect(x, " [xX] ")
+  is_hybrid <- function(x) re_detect(x, " [xX] ")
 
   is_indecision <- function(x) {
     (
-      stringr::str_detect(x, "[:alpha:]\\/") |
-        stringr::str_detect(x, "\\s\\/")
+      re_detect(x, "\\p{L}\\/") |
+        re_detect(x, "[\\s\\p{Z}\\x85]\\/")
     ) &
-      !stringr::str_detect(x, "[:digit:]") &
-      !stringr::str_detect(x, "\\(") &
-      !stringr::str_detect(x, "\\'")
+      !re_detect(x, "\\p{Nd}") &
+      !re_detect(x, "\\(") &
+      !re_detect(x, "'")
   }
 
   ## `cf.` is only recognised by the exact-genus step (match_06a); the fuzzy
@@ -133,14 +123,14 @@ match_taxa <- function(
   affinis_qualifier <- paste0(" affinis", not_before_rank_marker, "\\s")
 
   has_affinity_or_cf <- function(x) {
-    stringr::str_detect(x, "[Aa]ff[\\.\\s]") |
-      stringr::str_detect(x, affinis_qualifier) |
-      stringr::str_detect(x, " cf[\\.\\s]")
+    re_detect(x, "[Aa]ff[.\\s\\p{Z}\\x85]") |
+      re_detect(x, affinis_qualifier) |
+      re_detect(x, " cf[.\\s\\p{Z}\\x85]")
   }
 
   has_affinity <- function(x) {
-    stringr::str_detect(x, "[Aa]ff[\\.\\s]") |
-      stringr::str_detect(x, affinis_qualifier)
+    re_detect(x, "[Aa]ff[.\\s\\p{Z}\\x85]") |
+      re_detect(x, affinis_qualifier)
   }
 
   ## Explanations shared between the exact and fuzzy variants of each
@@ -156,19 +146,22 @@ match_taxa <- function(
   taxa$tocheck <- taxa$tocheck %>%
     dplyr::mutate(
       identifier_string = ifelse(is.na(identifier), NA_character_, paste0(" [", identifier, "]")),
-      identifier_string2 = ifelse(is.na(identifier), NA_character_, paste0("; ", identifier))
+      identifier_string2 = ifelse(is.na(identifier), NA_character_, paste0("; ", identifier)),
+      aligned_reason_suffix = aligned_reason_suffix(resources)
     )
+
+  ## The hyphenated words of the reference names (`pes-caprae`); resources not
+  ## made by `load_taxonomic_resources()` may lack them
+  hyphenated_words <- resources$hyphenated_words
+  if (is.null(hyphenated_words)) hyphenated_words <- reference_hyphenated_words(resources)
 
   ## In the tocheck dataframe, add columns with manipulated versions of the string to match
   ## Various stripped versions of the string to match, versions with 1, 2 and 3 words (genus, binomial, trinomial), and fuzzy-matched genera are propagated.
   taxa$tocheck <- taxa$tocheck %>%
     dplyr::mutate(
-      cleaned_name = cleaned_name %>%
-        update_na_with(standardise_names(original_name)),
-      stripped_name = stripped_name %>%
-        update_na_with(strip_names(cleaned_name)),
-      stripped_name2 = stripped_name2 %>%
-        update_na_with(strip_names_extra(stripped_name)),
+      cleaned_name = dplyr::coalesce(cleaned_name, standardise_names(original_name)),
+      stripped_name = dplyr::coalesce(stripped_name, rehyphenate(strip_names(cleaned_name), hyphenated_words)),
+      stripped_name2 = dplyr::coalesce(stripped_name2, strip_names_extra(stripped_name)),
       trinomial = word(stripped_name2, start = 1, end = 3),
       binomial = word(stripped_name2, start = 1, end = 2),
       genus = extract_genus(original_name)
@@ -1003,7 +996,7 @@ match_taxa <- function(
   # The 'taxon name' is then reformatted  as `family sp.` with the original name in square brackets.
 
   i <-
-    stringr::str_detect(word(taxa$tocheck$cleaned_name, 1), "aceae$") &
+    re_detect(word(taxa$tocheck$cleaned_name, 1), "aceae$") &
     taxa$tocheck$genus %in% resources$family_accepted$canonical_name
 
   taxa <- apply_match(
@@ -1020,7 +1013,7 @@ match_taxa <- function(
   # Toward the end of the alignment function, see if first word of unmatched taxa is an APC-known family.
 
   i <-
-    stringr::str_detect(word(taxa$tocheck$cleaned_name, 1), "ae$") &
+    re_detect(word(taxa$tocheck$cleaned_name, 1), "ae$") &
     taxa$tocheck$genus %in% resources$family_synonym$canonical_name
 
   taxa <- apply_match(
@@ -1113,9 +1106,10 @@ match_taxa <- function(
 # `taxon_rank`, `aligned_name`, `aligned_reason` and `alignment_code` are each
 # either a single value or a vector with one element per selected row.
 #
-# `aligned_reason` is the explanation *without* the trailing run date. Appending
-# the date here means the ` (date)` separator is written once, rather than being
-# repeated in every match step where it can be (and has been) mistyped.
+# `aligned_reason` is the explanation *without* the trailing data version.
+# Appending the version here means the ` (APC/APNI version ...)` suffix is
+# written once, rather than being repeated in every match step where it can be
+# (and has been) mistyped.
 apply_match <- function(taxa, i, taxonomic_dataset, taxon_rank, aligned_name,
                         aligned_reason, alignment_code) {
   i[is.na(i)] <- FALSE
@@ -1124,7 +1118,8 @@ apply_match <- function(taxa, i, taxonomic_dataset, taxon_rank, aligned_name,
   taxa$tocheck$taxonomic_dataset[i] <- taxonomic_dataset
   taxa$tocheck$taxon_rank[i]        <- taxon_rank
   taxa$tocheck$aligned_name[i]      <- aligned_name
-  taxa$tocheck$aligned_reason[i]    <- paste0(aligned_reason, " (", Sys.Date(), ")")
+  taxa$tocheck$aligned_reason[i]    <-
+    paste0(aligned_reason, taxa$tocheck$aligned_reason_suffix[i])
   taxa$tocheck$alignment_code[i]    <- alignment_code
   taxa$tocheck$known[i]             <- TRUE
   taxa$tocheck$checked[i]           <- TRUE
@@ -1180,25 +1175,170 @@ higher_rank_name <- function(taxa, i, stem, marker = " sp.") {
 # rows are left unmatched.
 fuzzy_match_column <- function(x, accepted_list, max_distance_abs,
                                max_distance_rel, epithet_letters = 1) {
-  purrr::map_chr(x, function(txt) {
+  vapply(x, function(txt) {
     if (is.na(txt)) return(NA_character_)
-    fuzzy_match(
+    as.character(fuzzy_match(
       txt = txt,
       accepted_list = accepted_list,
       max_distance_abs = max_distance_abs,
       max_distance_rel = max_distance_rel,
       n_allowed = 1,
       epithet_letters = epithet_letters
-    )
-  })
+    ))
+  }, character(1), USE.NAMES = FALSE)
 }
 
 
 # Remove the columns that only exist while matching, so callers always see the
 # documented column set regardless of which match step finished the job.
+# Every exit from `match_taxa()` passes through here, so this is also where
+# `chars_changed` is filled in.
 drop_scratch <- function(taxa) {
-  scratch <- c("identifier_string", "identifier_string2")
-  taxa$tocheck <- taxa$tocheck %>% dplyr::select(-dplyr::any_of(scratch))
-  taxa$checked <- taxa$checked %>% dplyr::select(-dplyr::any_of(scratch))
+  scratch <- c("identifier_string", "identifier_string2", "aligned_reason_suffix")
+  taxa$tocheck <- taxa$tocheck %>% dplyr::select(-dplyr::any_of(scratch)) %>% add_chars_changed()
+  taxa$checked <- taxa$checked %>% dplyr::select(-dplyr::any_of(scratch)) %>% add_chars_changed()
   taxa
+}
+
+
+# The provenance suffix `apply_match()` appends to every `aligned_reason`: the
+# APC/APNI data version that `load_taxonomic_resources()` recorded on
+# `resources`, e.g. " (APC/APNI version 2024-10-11)". It names the data, not
+# the day of the run, so the same input and resources always give the same
+# output (#281). Resources assembled some other way carry no version, and then
+# no suffix is added rather than a guessed one.
+aligned_reason_suffix <- function(resources) {
+  version <- attr(resources, "version", exact = TRUE)
+  if (is.null(version) || length(version) != 1L || is.na(version)) return("")
+  paste0(" (APC/APNI version ", version, ")")
+}
+
+
+# For each fuzzy match step (by the `match_NNx` start of its `alignment_code`),
+# the column of `tocheck` it compared and the column holding the reference name
+# it matched -- the same two strings that step's `fuzzy_match()` call compared.
+# Any match step not listed is an exact match. Keep in step with `match_taxa()`
+# when adding or changing a fuzzy step.
+fuzzy_match_steps <- list(
+  match_02b = c("genus", "fuzzy_match_genus"),
+  match_02c = c("genus", "fuzzy_match_genus_synonym"),
+  match_03b = c("genus", "fuzzy_match_genus"),
+  match_03c = c("genus", "fuzzy_match_genus_synonym"),
+  match_03d = c("genus", "fuzzy_match_genus_APNI"),
+  match_04b = c("genus", "fuzzy_match_genus"),
+  match_04c = c("genus", "fuzzy_match_genus_synonym"),
+  match_04d = c("genus", "fuzzy_match_genus_APNI"),
+  match_05a = c("stripped_name", "fuzzy_match_cleaned_APC"),
+  match_05b = c("stripped_name", "fuzzy_match_cleaned_APC_synonym"),
+  match_06b = c("genus", "fuzzy_match_genus"),
+  match_06c = c("genus", "fuzzy_match_genus_synonym"),
+  match_06d = c("genus", "fuzzy_match_genus_APNI"),
+  match_07a = c("stripped_name", "fuzzy_match_cleaned_APC_imprecise"),
+  match_07b = c("stripped_name", "fuzzy_match_cleaned_APC_synonym_imprecise"),
+  match_08b = c("genus", "fuzzy_match_genus"),
+  match_08c = c("genus", "fuzzy_match_genus_synonym"),
+  match_08d = c("genus", "fuzzy_match_genus_APNI"),
+  match_09c = c("trinomial", "fuzzy_match_trinomial"),
+  match_09d = c("trinomial", "fuzzy_match_trinomial_synonym"),
+  match_10c = c("binomial", "fuzzy_match_binomial"),
+  match_10d = c("binomial", "fuzzy_match_binomial_APC_synonym"),
+  match_11a = c("stripped_name", "fuzzy_match_cleaned_APNI"),
+  match_11b = c("cleaned_name", "fuzzy_match_cleaned_APNI_imprecise"),
+  match_12f = c("genus", "fuzzy_match_genus"),
+  match_12g = c("genus", "fuzzy_match_genus_synonym"),
+  match_12h = c("genus", "fuzzy_match_family"),
+  match_12i = c("genus", "fuzzy_match_family_synonym")
+)
+
+
+# `chars_changed`: how many characters a fuzzy match step changed, as the
+# Damerau-Levenshtein distance `fuzzy_match()` uses to choose a match; `0` for
+# an exact match; `NA` where nothing was aligned. It counts only what the step
+# compared, so differences removed before matching (case, punctuation, filler
+# words, and for a genus-level match everything after the genus) are not
+# counted.
+#
+# Only rows a match step aligned in this run carry an `alignment_code`. Rows
+# read back from an `output` file of an earlier run do not (the file is
+# written by `update_taxonomy()`), so they keep the `chars_changed` they were
+# saved with -- read as text, hence the conversion -- rather than being
+# counted as exact matches.
+add_chars_changed <- function(data) {
+  n <- nrow(data)
+  out <- if (is.null(data[["chars_changed"]])) rep(NA_integer_, n) else
+    suppressWarnings(as.integer(data[["chars_changed"]]))
+  code <- if (is.null(data[["alignment_code"]])) rep(NA_character_, n) else
+    data[["alignment_code"]]
+  matched <- !is.na(data[["aligned_name"]]) & !is.na(code)
+  out[matched] <- 0L
+  step <- substr(code, 1, 9)
+  for (s in intersect(names(fuzzy_match_steps), step)) {
+    cols <- fuzzy_match_steps[[s]]
+    i <- which(step == s & matched)
+    out[i] <- as.integer(stringdist::stringdist(
+      data[[cols[1]]][i], data[[cols[2]]][i], method = "dl"
+    ))
+  }
+  data$chars_changed <- out
+  data
+}
+
+
+# The hyphenated words in the stripped reference names, e.g. `pes-caprae`,
+# `van-royena`, `roseo-albus`, for `rehyphenate()`. A word is left out if the
+# same letters also occur as separate words in a reference name ("a b" as well
+# as "a-b"), since then a name written "a b" may mean either.
+reference_hyphenated_words <- function(resources) {
+  stripped <- unique(c(
+    resources$APC_accepted$stripped_canonical,
+    resources$APC_synonyms$stripped_canonical,
+    resources$APNI_names$stripped_canonical
+  ))
+  stripped <- stripped[!is.na(stripped)]
+  with_hyphen <- stripped[grepl("-", stripped, fixed = TRUE)]
+  words <- unlist(strsplit(with_hyphen, " ", fixed = TRUE), use.names = FALSE)
+  words <- unique(words[grepl("^\\p{L}+(-\\p{L}+)+$", words, perl = TRUE)])
+  if (length(words) == 0) return(character(0))
+
+  spaced <- gsub("-", " ", words, fixed = TRUE)
+  # every pair of adjacent words in the reference names
+  split_words <- strsplit(stripped, " ", fixed = TRUE)
+  all_words <- unlist(split_words, use.names = FALSE)
+  name_id <- rep(seq_along(split_words), lengths(split_words))
+  n <- length(all_words)
+  same_name <- name_id[-1] == name_id[-n]
+  pairs <- paste(all_words[-n], all_words[-1])[same_name]
+
+  two_parts <- lengths(strsplit(words, "-", fixed = TRUE)) == 2
+  ambiguous <- spaced %in% pairs
+  # the few words of three or more parts are looked for directly
+  padded <- paste0(" ", stripped, " ")
+  ambiguous[!two_parts] <- vapply(spaced[!two_parts], function(s) {
+    any(grepl(paste0(" ", s, " "), padded, fixed = TRUE))
+  }, logical(1))
+  sort(words[!ambiguous])
+}
+
+# Put the hyphen back into a hyphenated word written with spaces instead:
+# `ipomoea pes caprae brasiliensis` -> `ipomoea pes-caprae brasiliensis`, when
+# `pes-caprae` is one of `hyphenated_words`. Applied to the stripped input
+# name, so that it, and the `binomial` and `trinomial` built from it, line up
+# with the stripped reference names, which keep their hyphens (#310).
+rehyphenate <- function(x, hyphenated_words) {
+  if (length(hyphenated_words) == 0) return(x)
+  spaced <- gsub("-", " ", hyphenated_words, fixed = TRUE)
+  # longest first, so that "a b c" is joined before "a b"
+  o <- order(-nchar(spaced))
+  spaced <- paste0(" ", spaced[o], " ")
+  joined <- paste0(" ", hyphenated_words[o], " ")
+
+  todo <- which(!is.na(x) & grepl(" ", x, fixed = TRUE))
+  if (length(todo) == 0) return(x)
+  y <- paste0(" ", x[todo], " ")
+  for (k in seq_along(spaced)) {
+    hit <- grepl(spaced[k], y, fixed = TRUE)
+    if (any(hit)) y[hit] <- gsub(spaced[k], joined[k], y[hit], fixed = TRUE)
+  }
+  x[todo] <- substring(y, 2L, nchar(y) - 1L)
+  x
 }

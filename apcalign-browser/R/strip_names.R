@@ -7,7 +7,9 @@
 #' @details
 #' Given a vector of taxonomic names, this function removes:
 #' -  subtaxa designations ("subsp.", "var.", "f.", and "ser")
-#' -  special characters (e.g., "-", ".", "(", ")", "?")
+#' -  special characters (e.g., "-", ".", "(", ")", "?"), except a hyphen
+#'   between two letters, which is part of a hyphenated genus or epithet
+#'   (`Van-royena`, `Alisma plantago-aquatica`)
 #' -  extra whitespace
 #' 
 #'  The resulting vector of names is also converted to lowercase.
@@ -22,25 +24,43 @@
 #' @examples
 #' strip_names(c("Abies lasiocarpa subsp. lasiocarpa",
 #'               "Quercus kelloggii",
-#'               "Pinus contorta var. latifolia"))
+#'               "Pinus contorta var. latifolia",
+#'               "Alisma plantago-aquatica"))
 #'
 #' @export
 strip_names <- function(taxon_names) {
-  taxon_names %>%
-    gsub_perl("\\.", "") %>%
-    gsub_perl("\\ \\)", "") %>%
-    gsub_perl("\\(\\ ", "") %>%
-    stringr::str_replace_all("[:punct:]", " ") %>%
-    stringr::str_replace_all("\\u2215", " ") %>%
-    gsub_perl("\\,", "") %>%
-    gsub_perl("\\=", " ") %>%
-    gsub_perl("  ", " ") %>%
-    gsub_perl(" subsp ", " ") %>%
-    gsub_perl(" var ", " ") %>%   
-    gsub_perl(" ser ", " ") %>%
-    gsub_perl(" f ", " ") %>%
-    stringr::str_squish() %>%
-    stringr::str_to_lower()
+  ## Steps run one after another, not as a single `%>%` chain (see gsub_perl_rules()).
+  x <- gsub_perl_rules(taxon_names, list(
+    ## the Unicode hyphens (U+2010, U+2011) are hyphens too
+    c("\u2010|\u2011", "-"),
+    ## a hyphen that touches a full stop, or follows a rank marker, qualifier
+    ## or hybrid marker, separates two words rather than joining one:
+    ## `sp.-Mt Magnet`, `sp-Mt Magnet`, `var-intermedia`, `aff-aneura`,
+    ## `Acacia x-aneura`. (Otherwise removing the full stop next would leave a
+    ## hyphen between two letters, `sp-Mt`, which is kept below.)
+    c("(?<=\\.)-|-(?=\\.)", " "),
+    c("(?i)(?<!\\p{L})(sp|spp|ssp|subsp|var|f|forma|ser|aff|cf|x)-(?=\\p{L})", "\\1 "),
+    c("\\.", ""),
+    c("\\ \\)", ""),
+    c("\\(\\ ", "")
+  ))
+  ## Punctuation becomes a space -- except a hyphen between two letters, which
+  ## joins the halves of one word: a hyphenated genus (`Van-royena`, ICN Art.
+  ## 20.3) or epithet (`plantago-aquatica`). Split, it would become two words
+  ## and shift every later word along, so the first-two- and first-three-word
+  ## keys (`binomial`, `trinomial`) would match the wrong names (#310).
+  x <- re_replace_all(x, "(?!(?<=\\p{L})-(?=\\p{L}))\\p{P}", " ")
+  x <- gsub("\u2215", " ", x, fixed = TRUE)  # division slash
+  x <- gsub_perl_rules(x, list(
+    c("\\,", ""),
+    c("\\=", " "),
+    c("  ", " "),
+    c(" subsp ", " "),
+    c(" var ", " "),
+    c(" ser ", " "),
+    c(" f ", " ")
+  ))
+  to_lower(squish(x))
 }
 
 #' @title Strip taxon names, extra
@@ -69,11 +89,12 @@ strip_names <- function(taxon_names) {
 #'
 #' @export
 strip_names_extra <- function(taxon_names) {
-  taxon_names %>%
-    gsub_perl(" species ", " ") %>%
-    gsub_perl(" x ", " ") %>%
-    gsub_perl(" sp ", " ") %>%
-    gsub_perl(" sp1", " 1") %>%
-    gsub_perl(" sp2", " 2") %>%
-    stringr::str_squish() 
+  x <- gsub_perl_rules(taxon_names, list(
+    c(" species ", " "),
+    c(" x ", " "),
+    c(" sp ", " "),
+    c(" sp1", " 1"),
+    c(" sp2", " 2")
+  ))
+  squish(x)
 }
