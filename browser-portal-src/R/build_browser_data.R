@@ -8,14 +8,14 @@
 #' [verify_browser_data()] and stops on any problem.
 #'
 #' @param src Folder with `austraits-data.parquet`,
-#'   `austraits-species-averages.parquet`, `trait_groups.rds`,
+#'   `austraits-species-averages.parquet` (the release's published observed
+#'   means, with the columns austraits.portal adds), `trait_groups.rds`,
 #'   `dropdown_cache.rds`, `sources.rds`, `synonyms.rds`, `flora_links.rds`,
-#'   `definitions.rds` and `sources.bib`.
-#' @param out Output folder, for example `data/7.1.0`. Created if missing.
-#' @param version Data version, for example `"7.1.0"`. Must match the version
-#'   in `zenodo`.
-#' @param zenodo The `austraits.json` Zenodo record for the release. Defaults
-#'   to the one next to `src`, as austraits.portal stores it.
+#'   `definitions.rds`, `release.rds` and `sources.bib`.
+#' @param out Output folder, for example `data/8.0.0`. Created if missing.
+#' @param version Data version, for example `"8.0.0"`. Must match the version
+#'   in `src`'s `release.rds` (version, DOIs and date, which austraits.portal
+#'   writes when it prepares the data).
 #' @param apc_version Date of the APC release the synonyms come from. Defaults
 #'   to the `apc_version` attribute stored in `synonyms.rds`.
 #' @param templates Folder with `filter_spec.json` and `portal.json`.
@@ -23,15 +23,13 @@
 #'   (see [build_default_view()]).
 #' @return `out`, invisibly.
 build_browser_data <- function(src, out, version,
-                               zenodo = file.path(dirname(src), "austraits.json"),
                                apc_version = NULL,
                                templates = file.path("browser-portal-src", "templates"),
                                site = "browser-portal") {
-  check_browser_inputs(src, zenodo, templates)
-  zen <- read_zenodo_meta(zenodo)
+  check_browser_inputs(src, templates)
+  zen <- read_release_meta(file.path(src, "release.rds"))
   if (!identical(zen$version, version)) {
-    stop(sprintf("The Zenodo record %s is for version %s, not %s. Pass the record for this release (--zenodo on the command line).",
-                 zenodo, zen$version, version), call. = FALSE)
+    stop(sprintf("The inputs in %s are AusTraits %s, not %s.", src, zen$version, version), call. = FALSE)
   }
   dir.create(out, showWarnings = FALSE, recursive = TRUE)
   con <- DBI::dbConnect(duckdb::duckdb())
@@ -67,20 +65,23 @@ required_columns <- list(
            "temporal_context_properties", "method_context_properties", "source_primary_key",
            "source_primary_citation", "data_contributors", "taxon_rank", "taxon_distribution",
            "establishment_means", "scientific_name", "taxon_id"),
-  species = c("taxon_name", "family", "genus", "trait_name", "dataset_id", "unit", "value_type",
-              "value_mean", "value_range", "value_min", "value_max", "all_replicates", "type"),
+  # the published observed means, plus source_primary_key (added by austraits.portal)
+  species = c("taxon_name", "family", "genus", "trait_name", "dataset_id", "source_id", "unit", "type",
+              "method", "value", "value_min", "value_max", "value_mode", "value_count", "n_records",
+              "n_datasets", "reliability", "taxon_rank", "establishment_means", "taxon_id",
+              "taxon_distribution", "source_primary_key"),
   synonyms = c("taxon_name", "name", "scientific_name", "taxonomic_status", "kind"),
   trait_groups = c("trait", "structure_measured", "trait_group_for_portal", "keywords", "core_trait", "Entity")
 )
 
 #' Stop with a clear message if an input file or a required column is missing
-check_browser_inputs <- function(src, zenodo, templates) {
+check_browser_inputs <- function(src, templates) {
   # austraits-display.parquet is not used in the build, but the golden cases need it (it is what the
   # Shiny portal filters), so a release with no display file fails here rather than half-way through
   files <- c("austraits-data.parquet", "austraits-display.parquet", "austraits-species-averages.parquet", "trait_groups.rds",
              "dropdown_cache.rds", "sources.rds", "synonyms.rds", "flora_links.rds",
-             "definitions.rds", "sources.bib")
-  missing <- c(file.path(src, files), zenodo, file.path(templates, c("filter_spec.json", "portal.json")))
+             "definitions.rds", "release.rds", "sources.bib")
+  missing <- c(file.path(src, files), file.path(templates, c("filter_spec.json", "portal.json")))
   missing <- missing[!file.exists(missing)]
   if (length(missing)) stop("Missing input files:\n  ", paste(missing, collapse = "\n  "), call. = FALSE)
   con <- DBI::dbConnect(duckdb::duckdb())
@@ -104,10 +105,14 @@ check_browser_inputs <- function(src, zenodo, templates) {
   invisible(TRUE)
 }
 
-read_zenodo_meta <- function(path) {
-  m <- jsonlite::read_json(path)$hits$hits[[1]]
-  list(version = sub("^v", "", m$metadata$version), doi = m$metadata$doi,
-       concept_doi = m$conceptdoi, date = m$metadata$publication_date)
+# The release record austraits.portal writes (portal_release_info()): version, the release DOI (empty for a
+# development build), the concept DOI, the publication date and the austraits package tag. The browser
+# shows the version and cites the DOIs, and its recreate.R loads the release by DOI with that package.
+read_release_meta <- function(path) {
+  r <- readRDS(path)
+  na <- function(x) if (is.null(x) || is.na(x)) NULL else x
+  Filter(Negate(is.null), list(version = r$version, doi = na(r$doi), concept_doi = r$concept_doi,
+                               date = na(r$publication_date), austraits_package = na(r$austraits_package)))
 }
 
 # Columns that describe the taxon; they move to taxa.parquet (one row per taxon) instead of being
@@ -138,9 +143,17 @@ build_data_tables <- function(con, src, out) {
   cols <- db_columns(con, "d")
   raw_cols <- setdiff(cols, c(taxon_columns, dropped_columns))
   pq <- function(name) file.path(out, paste0(name, ".parquet"))
-  # one row per taxon_name (verify_browser_data checks the taxon columns are constant per name)
-  copy_to_parquet(con, sprintf("SELECT DISTINCT taxon_name, %s FROM d ORDER BY taxon_name",
-                               sql_ids(taxon_columns)), pq("taxa"))
+  # one row per taxon_name (verify_browser_data checks the taxon columns are constant per name). The
+  # published means roll infraspecific names up to their species, so a few species have means but no
+  # records under their own name; they get a row from the species file's taxon columns, so the species
+  # view (joined to taxa) keeps them
+  scols0 <- db_columns(con, "s")
+  from_species <- vapply(taxon_columns, function(k) if (k %in% scols0) sql_id(k) else sprintf("NULL AS %s", sql_id(k)), "")
+  copy_to_parquet(con, sprintf(
+    "SELECT * FROM (SELECT DISTINCT taxon_name, %1$s FROM d
+       UNION ALL
+       SELECT DISTINCT taxon_name, %2$s FROM s WHERE taxon_name NOT IN (SELECT taxon_name FROM d))
+     ORDER BY taxon_name", sql_ids(taxon_columns), paste(from_species, collapse = ", ")), pq("taxa"))
   # `seq` is the row's position in the file's sort order; the browser pages by it
   raw <- function(order) {
     sprintf("SELECT row_number() OVER (ORDER BY %s)::INTEGER AS seq, d.family, d.genus, %s FROM d ORDER BY seq",
@@ -152,7 +165,7 @@ build_data_tables <- function(con, src, out) {
                   pq("raw_by_taxon"))
   scols <- db_columns(con, "s")
   skeep <- setdiff(scols, c(dropped_columns, setdiff(intersect(taxon_columns, scols), c("genus", "family"))))
-  first <- c("trait_name", "taxon_name", "dataset_id", "value_type")
+  first <- c("trait_name", "taxon_name")
   sorder <- sql_ids(c(first, setdiff(skeep, first)))
   copy_to_parquet(con, sprintf("SELECT row_number() OVER (ORDER BY %s)::INTEGER AS seq, %s FROM s ORDER BY seq",
                                sorder, sql_ids(skeep)), pq("species_averages"))
@@ -214,6 +227,8 @@ build_lookup_tables <- function(con, src, out, synonyms, apc_version) {
   if (!is.character(names_list) || !length(names_list)) {
     stop("dropdown_cache.rds has no all_taxon_names list.", call. = FALSE)
   }
+  # the few species that have means but no records under their own name (see build_data_tables())
+  names_list <- sort_c(unique(c(names_list, db_get(con, sprintf("SELECT taxon_name FROM %s", sql_str(pq("taxa"))))$taxon_name)))
   dd[["all_genus"]] <- sort_c(unique(sub("^[(]", "", dd[["all_genus"]])))  # as the Shiny loader does (issue #113)
   dd[["all_taxon_names"]] <- NULL
   dd[["taxon_name_count"]] <- length(names_list)

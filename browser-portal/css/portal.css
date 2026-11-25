@@ -1,4 +1,4 @@
-/* Design tokens match austraits.org and the Shiny portal (see data/7.0.0/portal.json). */
+/* Design tokens match austraits.org and the Shiny portal (see data/<version>/portal.json). */
 :root{
   --at-ink:#2b332f; --at-muted:#64726b; --at-green:#2f7d55; --at-green-dark:#235c43; --at-blue:#2a7f9e; --at-gold:#d9a441;
   --at-cream:#f7f7f4; --at-mint:#f2f6f3; --at-sky:#f3f7f8; --at-line:#e5e8e5; --at-white:#fff;
@@ -15,6 +15,8 @@ h2,h3{margin:0}
 .brand::after{content:"";position:absolute;inset:auto 0 0;height:4px;background:linear-gradient(90deg,var(--at-green),var(--at-blue),var(--at-gold))}
 .brand-link{display:inline-flex;align-items:center;gap:.6rem;color:#fff;text-decoration:none;font-size:1.15rem;font-weight:600}
 .brand-link:hover{color:#fff}
+.data-version{margin-left:.8rem;color:#fff;opacity:.85;font-size:.75rem;text-decoration:none;border:1px solid currentColor;border-radius:4px;padding:1px 6px;white-space:nowrap}
+.data-version:hover{color:#fff;opacity:1}
 .menu-btn{display:none;background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.35);border-radius:var(--at-radius);padding:.35rem .8rem;font:inherit}
 
 .tabs{display:flex;gap:.25rem;background:#fff;border-bottom:1px solid var(--at-line);padding:0 1rem}

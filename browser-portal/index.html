@@ -23,6 +23,7 @@
 </defs></svg>
 <header class="brand">
   <a class="brand-link" href="./"><img src="assets/austraits_hex.png" alt="" height="30"><span>AusTraits Data Portal</span></a>
+  <a id="data-version" class="data-version" target="_blank" rel="noopener noreferrer" hidden></a>
   <button id="menu-btn" class="menu-btn" aria-expanded="false" aria-controls="sidebar">Filters</button>
 </header>
 
@@ -166,7 +167,7 @@
         <hr>
         <h2>How to Use</h2>
         <div class="callout"><strong>Quick start:</strong> Select a dataset type → set your taxonomy → pick a trait (optional) → explore.</div>
-        <p><strong>Dataset type —</strong> Raw data or Species averages? Raw data has the individual observations submitted by contributors while Species averages presents species-level summary statistics (mean, min, max, median for numeric traits and value summaries for categorical traits). Pick based on the question you're asking.</p>
+        <p><strong>Dataset type —</strong> Raw data or Species averages? Raw data has the individual observations submitted by contributors. Species averages are the observed species means published with each AusTraits release: for numeric traits a geometric mean (arithmetic for traits on a signed scale) with the smallest and largest record, for categorical traits the most frequent value and the count of each value, plus the number of records and datasets behind each mean and a provisional reliability class. Subspecies, varieties and forms are rolled up to their species. Pick based on the question you're asking.</p>
         <p><strong>Taxonomy —</strong> Choose a taxonomic filter - Select All taxa or Family, Genus, or Taxon name (species and infraspecies), then select from the dropdown that appears. All taxa is selected as the default starting point.</p>
         <p><strong>Traits —</strong> Search or browse the trait dropdown – noting you can select multiple traits at a time. Switch to <strong>Trait features</strong> if you want to search by trait groupings, measured structures, or keywords. Enabling trait features filters also refines the trait selection in the dropdown menu, for easier searching. Note, Trait features is only enabled if a trait name is not yet selected.</p>
         <p><strong>Location —</strong> Data can be filtered by taxon distribution (per the APC) or by observation coordinates. You can opt to display all georeferenced data or specify a bounding box, filtering to data collected within a specific region of Australia. The <strong>APC taxon distribution</strong> (state/territory) filter works for both raw data and species average data outputs, while the <strong>Georeferenced records</strong> option is only enabled when Raw data are displayed.</p>

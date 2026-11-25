@@ -18,6 +18,11 @@ A data portal that runs only in the visitor's browser. There is no server. It is
 - `index.html`, `css/`, `js/`, `vendor/`, `assets/` in this folder are plain files. Edit them here.
 - `js/toSql.mjs` is **compiled output**. Do not edit it by hand. Its source is
   `../browser-portal-src/src/toSql.ts` in this repository.
+- `js/recreate.js` writes the `recreate.R` in each download: the same filter rules as `toSql`, printed as dplyr code
+  that loads the release by its DOI with the austraits package. A change to a filter rule in `toSql.ts` must be
+  made there too; the release's `check_recreate_scripts()` step catches a mismatch.
+- The species averages are the observed means published with each AusTraits release (prepared by austraits.portal).
+  The header badge, the usage text and the download names all show the release version from `portal.json`.
 
 ## Publishing a new data release
 
@@ -30,7 +35,7 @@ The filter logic is written in TypeScript (`browser-portal-src/src/toSql.ts`) an
 ```sh
 cd browser-portal-src
 npm install
-npm test          # the golden cases in DuckDB-WASM; DATA_DIR=<data folder> (default ./data/7.0.0)
+npm test          # the golden cases in DuckDB-WASM; DATA_DIR=<data folder> (default ./data/8.0.0)
 npm run build     # rewrites ../browser-portal/js/toSql.mjs
 ```
 

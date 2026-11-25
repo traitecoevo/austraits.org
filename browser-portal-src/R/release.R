@@ -12,6 +12,9 @@
 #' @param base,portal Passed to [build_static_pages()].
 #' @param cases The golden cases file; its expected values are recomputed for this release.
 #' @param browser_test Run [test_portal_in_browser()] (needs Chrome and internet access).
+#' @param database_dir Folder with the release's `austraits-<version>.rds` and
+#'   `-observed-means.rds`, for [check_recreate_scripts()]; by default the
+#'   folder above `src`, where austraits.portal's data preparation leaves them.
 #' @return A data frame of the steps and their times, invisibly.
 release_browser_data <- function(src, out, version, portal_repo, pages_out,
                                  base = "https://data.austraitsdata.org",
@@ -19,10 +22,11 @@ release_browser_data <- function(src, out, version, portal_repo, pages_out,
                                  cases = file.path("browser-portal-src", "golden", "golden_cases.json"),
                                  site = "browser-portal",
                                  templates = file.path("browser-portal-src", "templates"),
-                                 zenodo = file.path(dirname(src), "austraits.json"),
-                                 browser_test = TRUE) {
+                                 browser_test = TRUE,
+                                 database_dir = dirname(src)) {
+  database_dir <- normalizePath(database_dir)
   src <- normalizePath(src); portal_repo <- normalizePath(portal_repo); site <- normalizePath(site)
-  cases <- normalizePath(cases); templates <- normalizePath(templates); zenodo <- normalizePath(zenodo)
+  cases <- normalizePath(cases); templates <- normalizePath(templates)
   dir.create(out, showWarnings = FALSE, recursive = TRUE); out <- normalizePath(out)
   dir.create(pages_out, showWarnings = FALSE, recursive = TRUE); pages_out <- normalizePath(pages_out)
   cores <- default_workers()
@@ -33,7 +37,7 @@ release_browser_data <- function(src, out, version, portal_repo, pages_out,
   golden <- start_step("make golden cases", "make_golden_cases",
                        list(src = src, portal_repo = portal_repo, cases = cases, out = cases, workers = max(1L, cores %/% 2L)))
   steps$build <- run_step_here("build data folder", function() {
-    build_browser_data(src, out, version, zenodo = zenodo, templates = templates, site = site)
+    build_browser_data(src, out, version, templates = templates, site = site)
   })
   steps$golden <- finish_step(golden)
   stop_if_failed(steps)
@@ -43,7 +47,10 @@ release_browser_data <- function(src, out, version, portal_repo, pages_out,
     check = start_step("run golden cases", "run_golden_cases",
                        list(data = out, cases = cases, tosql = file.path(site, "js", "toSql.mjs"), workers = max(1L, cores %/% 3L))),
     pages = start_step("build Browse pages", "build_static_pages",
-                       list(data = out, out = pages_out, base = base, portal = portal, workers = max(1L, cores %/% 2L)))
+                       list(data = out, out = pages_out, base = base, portal = portal, workers = max(1L, cores %/% 2L))),
+    recreate = start_step("check recreate.R", "check_recreate_scripts",
+                          list(data = out, database_dir = database_dir, cases = cases,
+                               tosql = file.path(site, "js", "toSql.mjs"), recreate = file.path(site, "js", "recreate.js")))
   )
   if (browser_test) {
     running$browser <- start_step("test in a browser", "test_portal_in_browser", list(data = out, cases = cases, site = site))
