@@ -413,15 +413,15 @@ async function loadTaxon() {
     st.hidden = true; A.taxonKey = key;
   } catch (e) { if (tok === A.taxonTok) { st.hidden = true; fail(e); } }
 }
-// A taxon's published species means; an infraspecific taxon has none of its own (the means roll subspecies,
-// varieties and forms up to the species), so it shows its species'
+// A taxon's published species means. The means roll subspecies, varieties and forms up to the species, so an
+// infraspecific taxon with none of its own shows its species'. Its own come first: a hybrid formula such as
+// "Acacia adoxa var. adoxa x Acacia spondylophylla" has its own row.
 async function speciesMeans(taxon) {
   const cols = "trait_name, unit, value, value_min, value_max, value_mode, value_count, n_records, method, dataset_id, type";
   const get = (name) => run(`SELECT ${cols} FROM species_f WHERE taxon_name = ${q1(name)}`);
-  const sp = TX.speciesMeansName(taxon);
-  let rows = await get(sp);
-  if (rows.length || sp === taxon) return { taxon: sp, rows };
-  return { taxon, rows: await get(taxon) };
+  const own = await get(taxon), sp = TX.speciesMeansName(taxon);
+  if (own.length || sp === taxon) return { taxon, rows: own };
+  return { taxon: sp, rows: await get(sp) };
 }
 // Trait View: only worked out when the tab is open, and only again when the applied filters change
 function loadCss(href) { if (document.querySelector(`link[href="${href}"]`)) return; const l = document.createElement("link"); l.rel = "stylesheet"; l.href = href; document.head.append(l); }

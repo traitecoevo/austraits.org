@@ -4,8 +4,9 @@ const esc = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").
 const a = (t, u) => `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(t)}</a>`;
 // 3 significant figures (whole numbers from 100 up), as the Shiny portal shows species means
 export const sig3 = (v) => { const n = Number(v); if (v == null || v === "" || !Number.isFinite(n)) return String(v ?? ""); return Math.abs(n) >= 100 ? n.toFixed(0) : String(Number(n.toPrecision(3))); };
-// The published means roll subspecies, varieties and forms up to their species
-export const speciesMeansName = (taxon) => String(taxon).replace(/ (subsp\.|var\.|f\.) .*$/, "");
+// The published means roll subspecies, varieties and forms up to their species. A hybrid formula (" x ") is kept
+// whole: its parents are not its species
+export const speciesMeansName = (taxon) => (String(taxon).includes(" x ") ? String(taxon) : String(taxon).replace(/ (subsp\.|var\.|f\.) .*$/, ""));
 const cmp = (x, y) => (x < y ? -1 : x > y ? 1 : 0);
 
 export function emptyState() {

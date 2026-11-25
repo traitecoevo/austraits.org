@@ -127,6 +127,13 @@ build_static_pages <- function(data, out, base = "", portal = "/portal/index.htm
                           paste0('<a href="/pages/trait/', tr_slug[core_tbl$trait], '.html">', esc_v(core_tbl$trait), "</a>"),
                           esc_v(core_tbl$trait))
 
+  # The published means roll subspecies, varieties and forms up to their species: a taxon with no means of its
+  # own shows its species' (never for a hybrid formula), as the Taxon View does (app.js speciesMeans())
+  means_taxon <- function(t) {
+    if (!is.null(look(means, t))) return(t)
+    sp <- if (grepl(" x ", t, fixed = TRUE)) t else sub(" (subsp[.]|var[.]|f[.]) .*$", "", t)
+    if (sp != t && !is.null(look(means, sp))) sp else NA_character_
+  }
   core_groups <- function(t) {
     m_all <- look(means, t)
     if (is.null(m_all)) return("")
@@ -157,7 +164,10 @@ build_static_pages <- function(data, out, base = "", portal = "/portal/index.htm
                     paste0("<tr><td>", esc_v(by_n$dataset_id), "</td><td>", fmt_int(by_n$nt), "</td><td>", fmt_int(by_n$nr), "</td><td>",
                            vapply(by_n$ref, function(r) if (is.na(r) || !nzchar(r)) "" else inline_md(r), ""), "</td></tr>", collapse = ""),
                     "</tbody></table>")
-    state <- paste0('{"dataset":"species","rank":"taxon_name","taxon_name":[', json_str(t, ascii = TRUE), "]}")
+    # the portal link opens the species means when the taxon has its own, else its raw data
+    mt <- means_taxon(t)
+    state <- paste0('{"dataset":"', if (identical(mt, t)) "species" else "raw", '","rank":"taxon_name","taxon_name":[', json_str(t, ascii = TRUE), "]}")
+    rolled <- if (!is.na(mt) && mt != t) paste0(" Means are for the species <em>", esc(mt), "</em>, which includes this taxon's records.") else ""
     body <- paste0('<article class="prose">
 <h1>', esc(t), '</h1>
 <p class="cta"><a class="btn" href="', esc(portal_link(state)), '">Explore the data for this taxon in the portal</a></p>
@@ -169,8 +179,8 @@ build_static_pages <- function(data, out, base = "", portal = "/portal/index.htm
 <h2>Traits</h2>
 <p><strong>Top source datasets</strong>: ', paste0(esc_v(ds$dataset_id), " (", fmt_int(ds$nr), ")", collapse = ", "), '. See below for a full list of sources.<br>
 <strong>Summary</strong>: AusTraits contains ', fmt_int(nt), ' traits from ', fmt_comma(nrec), ' records in ', nrow(ds), ' datasets.</p>
-<p><strong>Traits by category</strong> (click to expand). Species-level observed means from the AusTraits release. For categorical traits, the number of records for each value is shown. For numerical traits, the mean and range are shown.</p>
-', core_groups(t), '
+<p><strong>Traits by category</strong> (click to expand). Species-level observed means from the AusTraits release. For categorical traits, the number of records for each value is shown. For numerical traits, the mean and range are shown.', rolled, '</p>
+', if (is.na(mt)) "" else core_groups(mt), '
 <h2>Sources</h2>
 <div class="tablewrap">', table, '</div>
 </article>')

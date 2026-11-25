@@ -146,7 +146,8 @@ build_data_tables <- function(con, src, out) {
   # one row per taxon_name (verify_browser_data checks the taxon columns are constant per name). The
   # published means roll infraspecific names up to their species, so a few species have means but no
   # records under their own name; they get a row from the species file's taxon columns, so the species
-  # view (joined to taxa) keeps them
+  # view (joined to taxa) keeps them. They stay out of the taxon-name list, as in the Shiny portal: with no
+  # records of their own their Taxon View would be empty, and family and genus filters reach their means.
   scols0 <- db_columns(con, "s")
   from_species <- vapply(taxon_columns, function(k) if (k %in% scols0) sql_id(k) else sprintf("NULL AS %s", sql_id(k)), "")
   copy_to_parquet(con, sprintf(
@@ -191,11 +192,13 @@ build_lookup_tables <- function(con, src, out, synonyms, apc_version) {
                                sql_str(file.path(src, "austraits-data.parquet"))), pq("dataset_citations"))
 
   # every accepted name, plus synonyms and misapplied names, pointing to the taxon_name used in the data
+  # (taxa with records only; see build_data_tables() for the species that have means only)
   register("synonyms_in", synonyms)
   copy_to_parquet(con, sprintf(
-    "SELECT taxon_name AS name, taxon_name, family, genus, 'accepted' AS kind FROM %1$s
+    "WITH t AS (SELECT * FROM %1$s WHERE taxon_name IN (SELECT taxon_name FROM d))
+     SELECT taxon_name AS name, taxon_name, family, genus, 'accepted' AS kind FROM t
      UNION ALL
-     SELECT s.name, s.taxon_name, t.family, t.genus, s.kind FROM synonyms_in s JOIN %1$s t USING (taxon_name)
+     SELECT s.name, s.taxon_name, t.family, t.genus, s.kind FROM synonyms_in s JOIN t USING (taxon_name)
      ORDER BY name", sql_str(pq("taxa"))), pq("taxon_lookup"))
   copy_to_parquet(con, "SELECT * FROM synonyms_in ORDER BY kind, scientific_name, taxon_name, name", pq("taxon_synonyms"))
 
@@ -227,8 +230,6 @@ build_lookup_tables <- function(con, src, out, synonyms, apc_version) {
   if (!is.character(names_list) || !length(names_list)) {
     stop("dropdown_cache.rds has no all_taxon_names list.", call. = FALSE)
   }
-  # the few species that have means but no records under their own name (see build_data_tables())
-  names_list <- sort_c(unique(c(names_list, db_get(con, sprintf("SELECT taxon_name FROM %s", sql_str(pq("taxa"))))$taxon_name)))
   dd[["all_genus"]] <- sort_c(unique(sub("^[(]", "", dd[["all_genus"]])))  # as the Shiny loader does (issue #113)
   dd[["all_taxon_names"]] <- NULL
   dd[["taxon_name_count"]] <- length(names_list)
@@ -239,7 +240,8 @@ build_lookup_tables <- function(con, src, out, synonyms, apc_version) {
 #' schema.json, filter_spec.json, portal.json and name_index.json
 write_contract_files <- function(con, src, out, version, zen, templates) {
   pq <- function(name) file.path(out, paste0(name, ".parquet"))
-  names_all <- db_get(con, sprintf("SELECT taxon_name FROM %s ORDER BY taxon_name", sql_str(pq("taxa"))))$taxon_name
+  names_all <- db_get(con, sprintf("SELECT taxon_name FROM %s WHERE taxon_name IN (SELECT taxon_name FROM d) ORDER BY taxon_name",
+                                   sql_str(pq("taxa"))))$taxon_name
   jsonlite::write_json(names_all, file.path(out, "name_index.json"))
 
   tables <- list(
