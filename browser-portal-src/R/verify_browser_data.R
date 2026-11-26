@@ -35,8 +35,9 @@ verify_browser_data <- function(src, out) {
   dd <- jsonlite::read_json(file.path(out, "dropdowns.json"), simplifyVector = TRUE)
   genus_in_data <- db_get(con, "SELECT DISTINCT genus FROM taxa")$genus
   family_in_data <- db_get(con, "SELECT DISTINCT family FROM taxa")$family
-  # the taxon-name list holds the taxa with records; species with means only are in taxa.parquet for the join
-  taxa_names <- db_get(con, "SELECT DISTINCT taxon_name FROM raw_by_trait")$taxon_name
+  # the taxon-name list holds the taxa with records that APCalign aligned to the APC (non-empty taxon_rank);
+  # species with means only are in taxa.parquet for the join
+  taxa_names <- db_get(con, "SELECT DISTINCT taxon_name FROM raw_by_trait JOIN taxa USING (taxon_name) WHERE taxon_rank IS NOT NULL")$taxon_name
   taxon_list <- jsonlite::read_json(file.path(out, "taxon_names.json"), simplifyVector = TRUE)
   if (!is.character(taxon_list)) taxon_list <- character()
 

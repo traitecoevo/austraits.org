@@ -230,6 +230,10 @@ build_lookup_tables <- function(con, src, out, synonyms, apc_version) {
   if (!is.character(names_list) || !length(names_list)) {
     stop("dropdown_cache.rds has no all_taxon_names list.", call. = FALSE)
   }
+  # Leave out names APCalign could not align to the APC (empty taxon_rank). The species means already
+  # leave them out (austraits.portal's prepare_species_means()); their raw rows stay in the data.
+  aligned <- db_get(con, sprintf("SELECT taxon_name FROM %s WHERE taxon_rank IS NOT NULL", sql_str(pq("taxa"))))$taxon_name
+  names_list <- names_list[names_list %in% aligned]
   dd[["all_genus"]] <- sort_c(unique(sub("^[(]", "", dd[["all_genus"]])))  # as the Shiny loader does (issue #113)
   dd[["all_taxon_names"]] <- NULL
   dd[["taxon_name_count"]] <- length(names_list)
