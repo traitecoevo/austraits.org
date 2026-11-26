@@ -1,5 +1,5 @@
 ---
-title: "APCalign name aligner (old version)"
+title: "APCalign (old version)"
 format:
   html:
     page-layout: full
@@ -7,7 +7,7 @@ format:
 ---
 
 ::: {.callout-warning appearance="simple"}
-This is the old version of the name aligner. We are keeping it for a short time. Please try the [new name aligner](apcalign.qmd), which runs in your browser.
+This is the old version of APCalign. We are keeping it for a short time. Please try the [new version](apcalign.qmd), which runs in your browser.
 :::
 
 The APCalign app aligns and updates Australian plant taxon names to the currently accepted standards
@@ -16,14 +16,14 @@ paste in a list of names or upload a CSV, no R or programming required. It is em
 can
 
 <p>
-<a class="btn-primary" href="https://app.austraits.org/APCalign-app/" target="_blank" rel="noopener"><i class="bi bi-box-arrow-up-right"></i> Open the name aligner in a new tab</a>
+<a class="btn-primary" href="https://app.austraits.org/APCalign-app/" target="_blank" rel="noopener"><i class="bi bi-box-arrow-up-right"></i> Open APCalign in a new tab</a>
 </p>
 
 ```{=html}
 <div style="position: relative; width: 100%; height: 80vh; min-height: 600px; border: 1px solid #ddd; border-radius: 6px; overflow: hidden; margin-top: 1rem;">
   <iframe
     src="https://app.austraits.org/APCalign-app/"
-    title="APCalign name aligner"
+    title="APCalign"
     loading="lazy"
     allowfullscreen
     style="width: 100%; height: 100%; border: none;">
