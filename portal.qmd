@@ -6,17 +6,21 @@ format:
     toc: false
 ---
 
+::: {.callout-tip appearance="simple"}
+This is the new data portal. It runs in your browser, with no server. If you find a problem, please [report it](mailto:austraits.database@gmail.com). You can still use the [old version](portal-old.qmd).
+:::
+
 The AusTraits data portal is a code-free, point-and-click interface for browsing, filtering, and
 downloading AusTraits data — no R or programming required. It is embedded below, or you can
 
 <p>
-<a class="btn-primary" href="https://app.austraits.org/austraits/" target="_blank" rel="noopener"><i class="bi bi-box-arrow-up-right"></i> Open the portal in a new tab</a>
+<a class="btn-primary" href="browser-portal/" target="_blank" rel="noopener"><i class="bi bi-box-arrow-up-right"></i> Open the portal in a new tab</a>
 </p>
 
 ```{=html}
 <div style="position: relative; width: 100%; height: 80vh; min-height: 600px; border: 1px solid #ddd; border-radius: 6px; overflow: hidden; margin-top: 1rem;">
   <iframe
-    src="https://app.austraits.org/austraits/"
+    src="browser-portal/"
     title="AusTraits data portal"
     loading="lazy"
     allowfullscreen
@@ -26,8 +30,8 @@ downloading AusTraits data — no R or programming required. It is embedded belo
 ```
 
 ::: {.callout-note appearance="simple"}
-The portal is hosted on AWS at [app.austraits.org](https://app.austraits.org/austraits/). For
-programmatic access to the same data, use the [`austraits`](https://traitecoevo.github.io/austraits/)
+For programmatic access to the same data, use the [`austraits`](https://traitecoevo.github.io/austraits/)
 R package. Source code for the portal lives in
+[`traitecoevo/austraits.org`](https://github.com/traitecoevo/austraits.org) and
 [`traitecoevo/austraits.portal`](https://github.com/traitecoevo/austraits.portal).
 :::
