@@ -22,10 +22,14 @@ export function markdownToHtml(md) {
   return out.join("\n");
 }
 
-export function citationText(meta, keys, refs) {
-  const { doi, concept_doi: cdoi, version, date } = meta;
+export function citationText(meta, keys, refs, today = new Date().toISOString().slice(0, 10)) {
+  const { concept_doi: cdoi, version } = meta;
+  // a development build has no release DOI or date of its own
+  const doi = meta.doi || cdoi, date = meta.date || today;
   const year = String(date).slice(0, 4);
-  return `The AusTraits dataset is available at [doi: ${cdoi}](http://doi.org/${cdoi}). AusTraits data is distributed under the CC BY 4.0 license (<https://creativecommons.org/licenses/by/4.0/>). The data is provided 'as is' without any warranties or guarantees of any kind. The AusTraits database is described in Falster et al. 2021, drawing from many the contributed datasets. Publications using AusTraits data should cite the AusTraits data paper and relevant datasets.
+  return `**Data:** AusTraits ${version}, doi: [${doi}](https://doi.org/${doi}), from the AusTraits Data Portal on ${today}.
+
+The AusTraits dataset is available at [doi: ${cdoi}](http://doi.org/${cdoi}). AusTraits data is distributed under the CC BY 4.0 license (<https://creativecommons.org/licenses/by/4.0/>). The data is provided 'as is' without any warranties or guarantees of any kind. The AusTraits database is described in Falster et al. 2021, drawing from many the contributed datasets. Publications using AusTraits data should cite the AusTraits data paper and relevant datasets.
 
 Taxa were aligned against the Australian Plant Census (APC, <https://biodiversity.org.au/nsl/services/search/taxonomy>) using the R package {APCalign} (Wenk et al 2024a), by first, searching for alignments with known names (via exact, then fuzzy matching), and then using known alignments to update taxon names to the currently accepted name. Original taxon names attributed by the data collectors are included.
 

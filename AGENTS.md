@@ -15,6 +15,8 @@ built with [Quarto](https://quarto.org/).
   `npm test` and `npm run build` there. See `browser-portal/README.md`. It is not linked from the navbar yet.
   Data releases and the static Browse pages are built in **R** (`browser-portal-src/tools/README.md`); the
   functions in `browser-portal-src/R/` are written as package code because they will move into austraits.portal.
+  The species averages are the release's published observed means; `js/recreate.js` writes each download's
+  `recreate.R` and must follow any filter-rule change in `toSql.ts` (`check_recreate_scripts()` enforces it).
 - **Embedded Shiny apps:** `portal.qmd` and `apcalign.qmd` are thin wrappers that `<iframe>` the
   apps deployed at `app.austraits.org` (`austraits.portal` and `APCalign-app` respectively). They
   hold no app code — to change what a visitor sees inside the frame, change and redeploy that app.

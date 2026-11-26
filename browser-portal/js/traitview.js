@@ -8,9 +8,9 @@ const el = (tag, attrs = {}, ...kids) => {
 };
 const fmt = (n) => Number(n).toLocaleString("en-AU");
 
-export function banner(isSpecies) {
+export function banner(isSpecies, version) {
   const title = isSpecies ? "Species Averages Dataset" : "Raw Observation Data";
-  const l1 = isSpecies ? "Showing aggregated species-level means. Location data not available." : "Showing individual observations with full location and measurement details.";
+  const l1 = isSpecies ? `Showing the observed species means published with AusTraits ${version ?? ""}. Location data not available.` : "Showing individual observations with full location and measurement details.";
   const l2 = isSpecies ? "To view individual observations, select 'Raw data' in the filters panel." : "To view species-level aggregated means, select 'Species averages' in the filters panel.";
   return el("div", { class: "tv-banner" }, el("div", { class: "tv-banner-t" }, "ⓘ " + title), el("p", {}, l1), el("p", { class: "tv-banner-i" }, l2));
 }

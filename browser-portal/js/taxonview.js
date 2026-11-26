@@ -2,7 +2,11 @@
 import { inline } from "./cite.js";
 const esc = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const a = (t, u) => `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(t)}</a>`;
-const r2 = (v) => { const n = Number(v); return Number.isFinite(n) ? String(Math.round(n * 100) / 100) : String(v ?? ""); };
+// 3 significant figures (whole numbers from 100 up), as the Shiny portal shows species means
+export const sig3 = (v) => { const n = Number(v); if (v == null || v === "" || !Number.isFinite(n)) return String(v ?? ""); return Math.abs(n) >= 100 ? n.toFixed(0) : String(Number(n.toPrecision(3))); };
+// The published means roll subspecies, varieties and forms up to their species. A hybrid formula (" x ") is kept
+// whole: its parents are not its species
+export const speciesMeansName = (taxon) => (String(taxon).includes(" x ") ? String(taxon) : String(taxon).replace(/ (subsp\.|var\.|f\.) .*$/, ""));
 const cmp = (x, y) => (x < y ? -1 : x > y ? 1 : 0);
 
 export function emptyState() {
@@ -38,21 +42,27 @@ function synonyms(rows, apcVersion) {
   return out || `<p><strong>Synonyms</strong>: none listed in the ${esc(src)}</p>`;
 }
 
-// info: row of taxa; datasets: [{dataset_id, n_traits, n_records, reference}]; means: species rows for the taxon; groups: trait_groups list
-export function taxonHtml({ taxon, info, datasets, means, groups, syn, apcVersion, floraLinks, nTraits }) {
+// info: row of taxa; datasets: [{dataset_id, n_traits, n_records, reference}]; means: published species means for the
+// taxon (or for its species, meansTaxon, when the taxon is infraspecific); groups: trait_groups list; defs: trait definitions
+export function taxonHtml({ taxon, info, datasets, means, groups, syn, apcVersion, floraLinks, nTraits, version, meansTaxon, defs }) {
   const ds = [...datasets].sort((x, y) => cmp(x.dataset_id, y.dataset_id));
   const nRecords = ds.reduce((s, d) => s + Number(d.n_records), 0);
-  const byTrait = new Map(means.map((m) => [m.trait_name, m]));
-  const core = new Map();
-  for (const g of groups) {
-    if (!g.core) continue; const m = byTrait.get(g.trait); if (!m || m.type == null) continue;
-    const u = m.unit ?? "";
+  const groupOf = new Map(groups.map((g) => [g.trait, g]));
+  // every trait with a mean, grouped as in trait_groups; core traits first, then the others
+  const sections = { core: new Map(), other: new Map() };
+  for (const m of means) {
+    if (m.type == null) continue;
+    const g = groupOf.get(m.trait_name), entity = g?.entity ?? defs?.[m.trait_name]?.entity_URI ?? "";
+    const u = m.unit ?? "", link = a(m.trait_name, entity);
     const line = m.type === "categorical"
-      ? `<li>${a(g.trait, g.entity)} (categorical): ${esc(m.value_range)}  [sources: ${esc(m.dataset_id)}]</li>`
-      : `<li>${a(g.trait, g.entity)} (numerical): ${esc(r2(m.value_mean))} ${esc(u)} (${esc(r2(m.value_min))}-${esc(r2(m.value_max))} ${esc(u)})  [sources: ${esc(m.dataset_id)}]</li>`;
-    if (!core.has(g.group)) core.set(g.group, []); core.get(g.group).push(line);
+      ? `<li>${link} (categorical): ${esc(m.value_count)}  [sources: ${esc(m.dataset_id)}]</li>`
+      : `<li>${link} (numerical, ${esc(m.method)} mean of ${esc(m.n_records)} records): ${esc(sig3(m.value))} ${esc(u)} (${esc(sig3(m.value_min))}-${esc(sig3(m.value_max))} ${esc(u)})  [sources: ${esc(m.dataset_id)}]</li>`;
+    const sec = g?.core ? sections.core : sections.other, key = g?.group ?? "other traits";
+    if (!sec.has(key)) sec.set(key, []); sec.get(key).push(line);
   }
-  const groupsHtml = [...core.keys()].sort(cmp).map((k) => `<details><summary>${esc(k)}</summary><ul>${core.get(k).join("")}</ul></details>`).join("");
+  const html = (sec) => [...sec.keys()].sort(cmp).map((k) => `<details><summary>${esc(k)}</summary><ul>${sec.get(k).sort(cmp).join("")}</ul></details>`).join("");
+  const groupsHtml = html(sections.core) + (sections.other.size ? `<p><strong>Other traits</strong> (click to expand):<br></p>` + html(sections.other) : "");
+  const rolledUp = meansTaxon && meansTaxon !== taxon ? ` Means are for the species <em>${esc(meansTaxon)}</em>, which includes this taxon's records.` : "";
   const links = portalLinks(info, floraLinks).map(([s, u]) => a(s, u)).join(", ");
   const bydesc = [...ds].sort((x, y) => Number(y.n_records) - Number(x.n_records));
   const table = `<table class="tx-table"><thead><tr><th>dataset_id</th><th>n_traits</th><th>n_records</th><th>reference</th></tr></thead><tbody>${bydesc.map((d) => `<tr><td>${esc(d.dataset_id)}</td><td>${esc(d.n_traits)}</td><td>${esc(d.n_records)}</td><td>${d.reference ? inline(d.reference) : ""}</td></tr>`).join("")}</tbody></table>`;
@@ -67,7 +77,7 @@ ${synonyms(syn, apcVersion)}
 <p><strong>Top source datasets</strong>: ${ds.map((d) => `${esc(d.dataset_id)} (${esc(d.n_records)})`).join(", ")}.     See below for a full list of sources.<br>
 <strong>Summary</strong>: AusTraits contains ${nTraits} traits from ${nRecords.toLocaleString("en-AU")} records in ${ds.length} datasets.<br></p>
 <p><strong>Traits by category</strong> (click to expand):<br></p>
-<ul><li>For categorical traits, the number of records for each value is shown. For numerical traits, the mean and range are shown.</li></ul>
+<ul><li>Species-level observed means from AusTraits ${esc(version ?? "")}. For categorical traits, the number of records for each value is shown. For numerical traits, the mean and range are shown.${rolledUp}</li></ul>
 ${groupsHtml}
 <h2>Sources</h2>
 ${table}</div>`;

@@ -9,43 +9,45 @@ You need R with the packages `DBI`, `duckdb`, `jsonlite`, `digest`, `V8`, `pkglo
 After preparing the inputs (step 1 below):
 
 ```sh
-Rscript browser-portal-src/tools/release.R --src SRC --out data/7.1.0 --version 7.1.0 \
+Rscript browser-portal-src/tools/release.R --src SRC --out data/8.0.0 --version 8.0.0 \
   --portal-repo ../austraits.portal --pages-out site-pages
 ```
 
-This runs steps 2–5 with as much overlap as their inputs allow: the golden cases (which need only the inputs) are computed while the data folder is built, then the golden check, the Browse pages and the browser test run at the same time. Each step uses several worker processes. On 7.0.0 on an 18-core laptop it takes about 100 seconds (the same steps one after another take about 285). It stops with the log of any step that failed, and the output is identical to running the steps one by one. Add `--no-browser-test true` to skip the browser test (for example on a machine without Chrome). The sections below describe each step and its own command, for running or rerunning one step alone.
+This runs steps 2–5 with as much overlap as their inputs allow: the golden cases (which need only the inputs) are computed while the data folder is built, then the golden check, the check of the downloads' `recreate.R` scripts, the Browse pages and the browser test run at the same time. Each step uses several worker processes. On 7.0.0 on an 18-core laptop it takes about 100 seconds (the same steps one after another take about 285). It stops with the log of any step that failed, and the output is identical to running the steps one by one. Add `--no-browser-test true` to skip the browser test (for example on a machine without Chrome). The sections below describe each step and its own command, for running or rerunning one step alone.
 
 ## 1. Prepare the inputs (in austraits.portal)
 
-The input is the folder that the austraits.portal package writes for its Shiny app. In the austraits.portal checkout, follow its README section "Data Preparation" (load the release with `austraits::load_austraits()`, apply any fix listed there for that version, then run `prepare_data_for_portal()`). The folder it writes, for example `inst/extdata/austraits/austraits-7.1.0-full/`, is `SRC` below. The release's Zenodo record `austraits.json` sits next to it.
+The input is the folder that the austraits.portal package writes for its Shiny app. In the austraits.portal checkout, follow its README section "Data Preparation" (load the release and its published observed means with `austraits::load_austraits()`, then run `prepare_data_for_portal()`). The folder it writes, for example `inst/extdata/austraits/austraits-8.0.0-full/`, is `SRC` below. Its `release.rds` holds the version and DOIs the portal shows and cites. The species averages are the release's published observed means; neither portal computes means.
+
+The release files `austraits-<version>.rds` and `austraits-<version>-observed-means.rds` that `load_austraits()` downloads sit in the folder above `SRC`; the `recreate.R` check (step 3) reads them.
 
 The build checks that every file and column the portal needs is present, and stops with a list of what is missing. That usually means the inputs were made with an older austraits.portal.
-
-> **Known problem (November 2026, traitecoevo/austraits.portal#143):** `prepare_data_for_portal()` reads `inst/extdata/austraits/trait_groups_for_portal.csv`, which was deleted from austraits.portal in PR #123, so it fails on a fresh checkout. Until that is fixed, restore the file with `git show dc8a965^:inst/extdata/austraits/trait_groups_for_portal.csv > inst/extdata/austraits/trait_groups_for_portal.csv`.
 
 ## 2. Build the data folder
 
 ```sh
-Rscript browser-portal-src/tools/build_release.R --src SRC --out data/7.1.0 --version 7.1.0
+Rscript browser-portal-src/tools/build_release.R --src SRC --out data/8.0.0 --version 8.0.0
 ```
 
 About 30 seconds. It writes the Parquet tables and JSON files, copies `sources.bib`, writes `default_view.json` (the first page of the default view, made with the browser's own query code), writes `manifest.json` (size, row count and sha256 of every file, plus the DuckDB version used), and then runs 23 checks against the input. If any check fails it stops with the list; do not upload a folder from a run that stopped.
 
-Options: `--zenodo` points at the Zenodo record if it is not next to `--src` (its version must match `--version`), and `--apc-version` overrides the APC date, which is otherwise read from `synonyms.rds`.
+`--version` must match the version in `SRC/release.rds`. `--apc-version` overrides the APC date, which is otherwise read from `synonyms.rds`.
 
 ## 3. Check the filters against the Shiny portal
 
 ```sh
 Rscript browser-portal-src/tools/make_golden_cases.R --src SRC --portal-repo ../austraits.portal
-Rscript browser-portal-src/tools/run_golden.R --data data/7.1.0
+Rscript browser-portal-src/tools/run_golden.R --data data/8.0.0
 ```
 
 The first command (about a minute) recomputes the expected results of the 375 golden cases in `browser-portal-src/golden/golden_cases.json` with the Shiny portal's own filter code (`parse_filters()` and `apply_filters()` from austraits.portal) on the release inputs. The second (about a minute) runs every case through the browser's filter code, `browser-portal/js/toSql.mjs` run in R's V8 engine, on the built data folder, and stops if any case returns different rows. Commit the updated `golden_cases.json` with the release.
 
+Each download also carries `recreate.R`, written by `browser-portal/js/recreate.js`: R code that loads the release by its DOI with the austraits package and applies the same filters. `check_recreate_scripts()` (run by `release.R`) runs that file in V8 for every golden case, evaluates each script on the release files and stops if any returns a different row count.
+
 ## 4. Build the Browse pages
 
 ```sh
-Rscript browser-portal-src/tools/build_static_pages.R --data data/7.1.0 --out site-pages \
+Rscript browser-portal-src/tools/build_static_pages.R --data data/8.0.0 --out site-pages \
   --base https://data.austraitsdata.org --portal https://www.austraits.org/browser-portal/
 ```
 
@@ -54,7 +56,7 @@ About two minutes. It writes `site-pages/pages/` (one page per taxon, trait and 
 ## 5. Test the portal in a browser
 
 ```sh
-Rscript browser-portal-src/tools/test_portal.R --data data/7.1.0
+Rscript browser-portal-src/tools/test_portal.R --data data/8.0.0
 ```
 
 About 30 seconds. It serves `browser-portal/` and the new data folder from a local web server, opens the portal in headless Chrome, and checks, the way a visitor would use it: the stored first page shows and matches what the engine returns; about 80 searches covering every kind of filter give the golden cases' row counts; the Taxon View, Trait View and Citations tabs fill in; a download completes; and no JavaScript error occurs. The database engine is still fetched from `engineBase` in `config.json`, so it needs internet access. Usage counting is switched off for the test.

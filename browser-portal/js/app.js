@@ -4,6 +4,7 @@ import { markdownToHtml, citationText } from "./cite.js";
 import * as TV from "./traitview.js";
 import * as TX from "./taxonview.js";
 import { buildZip, saveBlob } from "./download.js";
+import { recreateScript, downloadStem } from "./recreate.js";
 import { initTelemetry, track, monthly, counterCsv, counterJson } from "./telemetry.js";
 
 const $ = (s, r = document) => r.querySelector(s);
@@ -12,9 +13,10 @@ const idle = (f) => { try { "requestIdleCallback" in window ? requestIdleCallbac
 const abs = (p) => new URL(p, location.href).href.replace(/\/$/, "");
 const nf = new Intl.NumberFormat("en-AU");
 const pretty = (c) => c.replace(/\s*\(deg\)/, "").replace(/_/g, " ").replace(/^./, (x) => x.toUpperCase());
-const NUMERIC_SORT = new Set(["value", "replicates", "value_mean", "all_replicates"]);
+const NUMERIC_SORT = new Set(["value", "replicates", "value_min", "value_max", "n_records", "n_datasets"]);
 const RAW_COLS = ["family", "genus", "taxon_name", "trait_name", "dataset_id", "value", "unit", "entity_type", "value_type", "basis_of_value", "replicates", "basis_of_record", "life_stage", "collection_date", "measurement_remarks", "original_name", "location_name", "latitude (deg)", "longitude (deg)", "location_properties", "treatment_context_properties", "plot_context_properties", "entity_context_properties", "temporal_context_properties", "method_context_properties", "source_primary_citation", "data_contributors", "taxon_rank", "taxon_distribution", "establishment_means"];
-const SPECIES_COLS = ["family", "genus", "taxon_name", "trait_name", "dataset_id", "value_mean", "value_range", "all_replicates", "taxon_rank", "taxon_distribution", "establishment_means"];
+// The published observed means' own columns (see the release's observed-means dictionary)
+const SPECIES_COLS = ["family", "genus", "taxon_name", "trait_name", "value", "value_min", "value_max", "value_count", "n_records", "n_datasets", "method", "reliability", "dataset_id", "taxon_rank", "taxon_distribution", "establishment_means"];
 const STATES = ["ACT", "NSW", "NT", "Qld", "SA", "Tas", "Vic", "WA"];
 
 // ---------- engine ----------
@@ -161,6 +163,9 @@ async function main() {
   const quiet = (p) => p.catch(() => null);
   const [portal, spec, dd, dv] = await Promise.all([get("portal.json"), get("filter_spec.json"), get("dropdowns.json"), quiet(get("default_view.json"))]);
   A.portal = portal; A.spec = spec; A.dd = dd;
+  // the release this data comes from, linked to its DOI
+  const zm = portal.zenodo_meta || {}, vdoi = zm.doi || zm.concept_doi, badge = $("#data-version");
+  if (zm.version && badge) { badge.textContent = "data: AusTraits " + zm.version; badge.href = "https://doi.org/" + vdoi; badge.title = `AusTraits ${zm.version}, doi:${vdoi}`; badge.hidden = false; }
   document.title = portal.name;
   // the filters and the page are usable while the engine is still starting
   buildUI();
@@ -240,7 +245,8 @@ function buildUI() {
 function customRows() {
   const root = $("#f-custom"); root.innerHTML = "";
   const spec = A.spec.filters.find((f) => f.id === "custom"), S = A.S;
-  const cols = S.dataset === "species" ? spec.species_columns.filter((c) => c !== "value_count") : [...spec.controlled_vocabulary_columns, ...spec.free_text_columns];
+  const speciesOnly = spec.species_only_columns || [];
+  const cols = S.dataset === "species" ? spec.species_columns : [...spec.controlled_vocabulary_columns.filter((c) => !speciesOnly.includes(c)), ...spec.free_text_columns];
   S.custom = S.custom.filter((c) => !c.column || cols.includes(c.column));
   const n = Math.min(spec.max, S.custom.length + (S.custom.length === 0 || S.custom.at(-1).value.length ? 1 : 0));
   while (S.custom.length < n) S.custom.push({ column: "", value: [] });
@@ -358,15 +364,19 @@ async function doDownload() {
   btn.disabled = true; note.hidden = false;
   try {
     const stt = toFilterState(A.applied), t0 = performance.now();
-    const { zip } = await buildZip({ db: A.db, run, dataSql: T.downloadSql(stt, A.spec, A.feats, A.taxaCols), keysSql: T.keysSql(stt, A.spec, A.feats, A.taxaCols), base: A.base, meta: A.portal.zenodo_meta, onStep: (s) => { note.textContent = s; } });
+    // every file names the AusTraits release it came from; recreate.R rebuilds the download with the austraits package
+    const stem = downloadStem(A.portal.zenodo_meta.version, A.applied.dataset), day = new Date().toISOString().slice(0, 10);
+    const script = recreateScript(stt, A.spec, A.feats, A.portal.zenodo_meta, day);
+    const { zip } = await buildZip({ db: A.db, run, dataSql: T.downloadSql(stt, A.spec, A.feats, A.taxaCols), keysSql: T.keysSql(stt, A.spec, A.feats, A.taxaCols), base: A.base, meta: A.portal.zenodo_meta, csvName: stem + ".csv", script, onStep: (s) => { note.textContent = s; } });
     track("download", { dataset_type: A.applied.dataset, trait: A.applied.trait_name?.length ? A.applied.trait_name : null, rows: A.total });
-    saveBlob(zip, "austraits-" + new Date().toISOString().slice(0, 10) + ".zip");
+    saveBlob(zip, `${stem}-${day}.zip`);
     note.textContent = `Downloaded (${(zip.length / 1048576).toFixed(1)} MB, ${((performance.now() - t0) / 1000).toFixed(1)} s).`;
   } catch (e) { console.error(e); note.textContent = "The download failed: " + ((e && e.message) || e); }
   finally { btn.disabled = false; }
 }
 // Taxon View: needs rank = taxon name and exactly one taxon; reads only that taxon's rows
 const q1 = (s) => "'" + String(s).replace(/'/g, "''") + "'";
+const esc = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 async function loadTaxon() {
   if (!A.applied || !A.engineReady) return;
   const key = JSON.stringify(A.applied);
@@ -388,7 +398,7 @@ async function loadTaxon() {
     const [info, datasets, means, syn, fl] = await Promise.all([
       run(`SELECT * FROM taxa WHERE taxon_name = ${t}`),
       run(`SELECT r.dataset_id, count(DISTINCT r.trait_name) AS n_traits, count(*) AS n_records, any_value(c.source_primary_citation) AS reference FROM raw_taxon_f r LEFT JOIN dataset_citations c USING (dataset_id) WHERE r.taxon_name = ${t} GROUP BY r.dataset_id`),
-      run(`SELECT trait_name, unit, value_mean, value_min, value_max, value_range, dataset_id, type FROM species_f WHERE taxon_name = ${t}`),
+      speciesMeans(taxon),
       run(`SELECT scientific_name, taxonomic_status, kind FROM taxon_synonyms WHERE taxon_name = ${t} ORDER BY kind, scientific_name`),
       run(`SELECT source, url FROM flora_links WHERE taxon_name = ${t}`),
     ]);
@@ -397,9 +407,21 @@ async function loadTaxon() {
     const nTraits = (await run(`SELECT count(DISTINCT trait_name) AS n FROM raw_taxon_f WHERE taxon_name = ${t}`))[0].n;
     if (tok !== A.taxonTok) return;
     const clean = (rows) => rows.map((r) => Object.fromEntries(Object.entries(r).map(([k, v]) => [k, typeof v === "bigint" ? Number(v) : v])));
-    body.innerHTML = TX.taxonHtml({ taxon, info: clean(info)[0], datasets: clean(datasets), means: clean(means), groups: A.taxonExtras.trait_groups, syn: clean(syn), apcVersion: A.taxonExtras.apc_version, floraLinks: clean(fl), nTraits: Number(nTraits) });
+    if (!A.traitDefs) A.traitDefs = await getJson(A.base + "/trait_definitions.json");
+    if (tok !== A.taxonTok) return;
+    body.innerHTML = TX.taxonHtml({ taxon, info: clean(info)[0], datasets: clean(datasets), means: clean(means.rows), meansTaxon: means.taxon, groups: A.taxonExtras.trait_groups, syn: clean(syn), apcVersion: A.taxonExtras.apc_version, floraLinks: clean(fl), nTraits: Number(nTraits), version: A.portal.data_version, defs: A.traitDefs });
     st.hidden = true; A.taxonKey = key;
   } catch (e) { if (tok === A.taxonTok) { st.hidden = true; fail(e); } }
+}
+// A taxon's published species means. The means roll subspecies, varieties and forms up to the species, so an
+// infraspecific taxon with none of its own shows its species'. Its own come first: a hybrid formula such as
+// "Acacia adoxa var. adoxa x Acacia spondylophylla" has its own row.
+async function speciesMeans(taxon) {
+  const cols = "trait_name, unit, value, value_min, value_max, value_mode, value_count, n_records, method, dataset_id, type";
+  const get = (name) => run(`SELECT ${cols} FROM species_f WHERE taxon_name = ${q1(name)}`);
+  const own = await get(taxon), sp = TX.speciesMeansName(taxon);
+  if (own.length || sp === taxon) return { taxon, rows: own };
+  return { taxon: sp, rows: await get(sp) };
 }
 // Trait View: only worked out when the tab is open, and only again when the applied filters change
 function loadCss(href) { if (document.querySelector(`link[href="${href}"]`)) return; const l = document.createElement("link"); l.rel = "stylesheet"; l.href = href; document.head.append(l); }
@@ -421,16 +443,19 @@ async function loadTrait() {
     const trait = cov.trait;
     if (!A.traitDefs) A.traitDefs = await getJson(A.base + "/trait_definitions.json");
     if (tok !== A.traitTok) return;
-    $("#tv-banner").append(TV.banner(species));
+    $("#tv-banner").append(TV.banner(species, A.portal.data_version));
     $("#tv-profile").append(TV.profile(trait, A.traitDefs[trait], { n: Number(cov.n), taxa: Number(cov.taxa), families: Number(cov.families), datasets: Number(cov.datasets) }));
     st.hidden = true; body.hidden = false;
     // chart
     $("#tv-plottext").innerHTML = species
-      ? "<p>The plot below shows the distribution of species-level mean values for this trait.</p><p>Each point represents the mean trait value for a species, calculated from all available observations for that species.</p>"
+      ? `<p>The plot below shows the distribution of species-level mean values for this trait.</p><p>Each point is a species' observed mean, published with AusTraits ${esc(A.portal.data_version)}: for a numeric trait, a geometric mean over the dataset \u00d7 location groups of its records (arithmetic for a trait on a signed scale); for a categorical trait, the most frequent value.</p>`
       : "<p>The plot below shows the distribution of selected data for this trait, including data collected on individuals of all age classes (seedling, sapling, adult), in field and glasshouse settings.</p><p>Visualising data records across the families with the most data for the trait indicates the taxonomic breadth of information for this trait</p>";
     show("tv-plotcard", true); $("#tv-plot").textContent = "Drawing the chart…";
-    const valCol = species ? "value_mean" : "value";
-    const rows = await run(T.selectSql(stt, A.spec, A.feats, A.taxaCols, `family, taxon_name, dataset_id, ${valCol} AS value, value_type, unit`));
+    // species means: the mean, or a categorical trait's most frequent value; every point is a mean
+    const sel = species
+      ? "family, taxon_name, dataset_id, CASE WHEN type = 'categorical' THEN value_mode ELSE CAST(value AS VARCHAR) END AS value, 'mean' AS value_type, unit"
+      : "family, taxon_name, dataset_id, value, value_type, unit";
+    const rows = await run(T.selectSql(stt, A.spec, A.feats, A.taxaCols, sel));
     if (tok !== A.traitTok) return;
     const unit = rows.length ? rows[0].unit : null;
     if (unit == null) TV.drawCategorical($("#tv-plot"), rows); else TV.drawNumeric($("#tv-plot"), rows, unit);
@@ -483,7 +508,7 @@ async function loadPage(tok = A.token) {
   $("#table-wrap").classList.add("busy");
   try {
     const st = toFilterState(A.applied), c = cols();
-    const q = A.applied.dataset === "species" ? [...c, "unit"] : c;
+    const q = A.applied.dataset === "species" ? [...new Set([...c, "unit", "type", "value_mode"])] : c;
     const sort = A.sort ? { column: A.sort.column, desc: A.sort.desc, numeric: NUMERIC_SORT.has(A.sort.column) } : undefined;
     const P = T.pageSql(st, A.spec, A.feats, A.taxaCols, A.size, A.page * A.size, sort, q);
     const ids = (await run(P.idStep)).map((r) => r.seq);
@@ -513,7 +538,12 @@ function render(rows, c) {
   for (const r of rows) {
     const row = document.createElement("tr");
     for (const col of c) {
-      let v = r[col]; if (col === "value_mean" && v != null && r.unit) v = v + " " + r.unit;
+      let v = r[col];
+      if (A.applied.dataset === "species") {
+        // the mean with its unit, or a categorical trait's most frequent value; 3 significant figures for display
+        if (col === "value") v = r.type === "categorical" ? r.value_mode : v == null ? v : TX.sig3(v) + (r.unit ? " " + r.unit : "");
+        else if (col === "value_min" || col === "value_max") v = v == null ? v : TX.sig3(v);
+      }
       const td = document.createElement("td"); td.textContent = v == null ? "" : String(v); row.append(td);
     }
     frag.append(row);

@@ -33,7 +33,8 @@ build_default_view <- function(data, tosql = file.path("browser-portal", "js", "
   st$custom <- list()
 
   cols <- app_js_columns(app_js, if (identical(dataset, "species")) "SPECIES_COLS" else "RAW_COLS")
-  query_cols <- if (identical(dataset, "species")) c(cols, "unit") else cols
+  # as app.js loadPage(): the species display also reads the unit, the type and the most frequent value
+  query_cols <- if (identical(dataset, "species")) unique(c(cols, "unit", "type", "value_mode")) else cols
 
   total <- db_get(con, browser_sql(ctx, "countSql", st, spec, feats, as.list(taxa_cols)))$n
   ids <- db_get(con, browser_helper(ctx, "pageIdStep", st, spec, feats, as.list(taxa_cols), page_size, 0, V8::JS("null"), as.list(query_cols)))$seq

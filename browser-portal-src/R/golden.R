@@ -17,12 +17,13 @@ NULL
 # Columns that identify a row, per dataset (must match test/golden.test.ts)
 golden_id_columns <- list(
   raw = c("trait_name", "taxon_name", "dataset_id", "observation_id", "value"),
-  species = c("trait_name", "taxon_name", "dataset_id", "value_type", "value_mean")
+  species = c("trait_name", "taxon_name", "dataset_id", "value", "value_mode")
 )
 
 # Row count and checksum of the rows a SELECT returns
 golden_keyset <- function(con, from_sql, dataset) {
-  key <- paste0("coalesce(", sql_id(golden_id_columns[[dataset]]), ", '')", collapse = " || chr(31) || ")
+  # cast first: the species `value` is numeric
+  key <- paste0("coalesce(CAST(", sql_id(golden_id_columns[[dataset]]), " AS VARCHAR), '')", collapse = " || chr(31) || ")
   k <- db_get(con, sprintf("SELECT %s AS k FROM (%s) ORDER BY k", key, from_sql))$k
   list(rows = length(k), md5 = digest::digest(enc2utf8(paste(k, collapse = "\x1e")), algo = "md5", serialize = FALSE))
 }

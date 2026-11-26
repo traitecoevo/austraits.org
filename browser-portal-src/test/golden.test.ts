@@ -11,7 +11,7 @@ import { buildWhere, whereClause, viewSql, type FilterSpec, type FilterState, ty
 
 const require = createRequire(import.meta.url);
 const duckdb = require("@duckdb/duckdb-wasm/dist/duckdb-node-blocking.cjs");
-const DATA = process.env.DATA_DIR ?? path.resolve("data/7.0.0"); // folder with the Parquet files and filter_spec.json (see README)
+const DATA = process.env.DATA_DIR ?? path.resolve("data/8.0.0"); // folder with the Parquet files and filter_spec.json (see README)
 const DIST = path.dirname(require.resolve("@duckdb/duckdb-wasm/dist/duckdb-node-blocking.cjs"));
 
 const spec: FilterSpec = JSON.parse(readFileSync(path.join(DATA, "filter_spec.json"), "utf8"));
@@ -26,7 +26,7 @@ let features: TraitFeature[] = [];
 // Columns that identify a row, per dataset. They must match golden_id_columns in R/golden.R.
 const ID: Record<string, string[]> = {
   raw: ["trait_name", "taxon_name", "dataset_id", "observation_id", "value"],
-  species: ["trait_name", "taxon_name", "dataset_id", "value_type", "value_mean"],
+  species: ["trait_name", "taxon_name", "dataset_id", "value", "value_mode"],
 };
 
 beforeAll(async () => {
@@ -45,7 +45,7 @@ beforeAll(async () => {
 
 function run(state: FilterState) {
   const ids = ID[state.dataset]!;
-  const key = ids.map(c => `coalesce("${c}", '')`).join(" || chr(31) || ");
+  const key = ids.map(c => `coalesce(CAST("${c}" AS VARCHAR), '')`).join(" || chr(31) || "); // the species value is numeric
   const sql = `SELECT ${key} AS k FROM ${state.dataset}${whereClause(buildWhere(state, spec, features))} ORDER BY k`;
   const rows = conn.query(sql).toArray();
   const h = createHash("md5");

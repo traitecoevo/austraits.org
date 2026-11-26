@@ -84,7 +84,14 @@
         "life_stage",
         "original_name",
         "taxon_rank",
-        "establishment_means"
+        "establishment_means",
+        "method",
+        "reliability"
+      ],
+      "species_only_note": "Columns only the species means have: the raw-data custom filters offer controlled_vocabulary_columns minus these",
+      "species_only_columns": [
+        "method",
+        "reliability"
       ],
       "free_text_columns": [
         "collection_date",
@@ -101,8 +108,8 @@
       ],
       "species_columns": [
         "dataset_id",
-        "value_type",
-        "value_count",
+        "method",
+        "reliability",
         "taxon_rank",
         "establishment_means"
       ],

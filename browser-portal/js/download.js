@@ -1,4 +1,4 @@
-// Zip download: data CSV, sources.csv, sources.bib and usage.html, all built in the browser.
+// Zip download: data CSV (named after the release), sources.csv, sources.bib, usage.html and recreate.R, all built in the browser.
 import { zipSync, strToU8 } from "../vendor/fflate.min.mjs";
 import { markdownToHtml, citationText } from "./cite.js";
 
@@ -11,7 +11,7 @@ export function subsetBib(text, keys) {
   return out.join("\n\n") + (out.length ? "\n" : "");
 }
 
-export async function buildZip({ db, run, dataSql, keysSql, base, meta, onStep }) {
+export async function buildZip({ db, run, dataSql, keysSql, base, meta, csvName = "austraits-data.csv", script = null, onStep }) {
   const step = (s) => onStep && onStep(s);
   step("Collecting the rows…");
   await run(`COPY (${dataSql}) TO 'austraits-data.csv' (HEADER, DELIMITER ',')`);
@@ -20,7 +20,8 @@ export async function buildZip({ db, run, dataSql, keysSql, base, meta, onStep }
   step("Collecting the sources…");
   const rows = await run(keysSql);
   const keys = [...new Set(rows.flatMap((r) => (r.k == null ? [] : String(r.k).split("; "))))].sort();
-  const files = { "austraits-data.csv": csv };
+  const files = { [csvName]: csv };
+  if (script) files["recreate.R"] = strToU8(script);
   if (!keys.length) { files["sources.bib"] = strToU8(""); files["sources.csv"] = strToU8(""); files["usage.html"] = strToU8("<p>No data selected</p>"); }
   else {
     const inList = keys.map(q1).join(",");
