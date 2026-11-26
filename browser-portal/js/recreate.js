@@ -9,8 +9,8 @@ const rStr = (x) => JSON.stringify(String(x));
 // one value prints as "x", several as c("x", "y"), as R's deparse() does
 const rVec = (v) => (v.length === 1 ? rStr(v[0]) : "c(" + v.map(rStr).join(", ") + ")");
 const rName = (col) => (/^[A-Za-z.][A-Za-z0-9._]*$/.test(col) ? col : "`" + col + "`");
-const escRegex = (x) => x.replace(/[\]\[{}()+*^$|\\?.]/g, "\\$&");
-const nonEmpty = (a) => !!a && a.length > 0;
+const rEscRegex = (x) => x.replace(/[\]\[{}()+*^$|\\?.]/g, "\\$&");
+const rNonEmpty = (a) => !!a && a.length > 0;
 
 export function downloadStem(version, dataset) {
   return `austraits-${version}-${dataset === "species" ? "species-means" : "data"}`;
@@ -24,8 +24,8 @@ export function filterConditions(state, spec, features) {
   const tr = matchingTraits(state, features);
   if (tr !== null) out.push(`trait_name %in% ${tr.length ? rVec(tr) : "character(0)"}`);
   const tt = state.taxon_type;
-  if (tt && ["family", "genus", "taxon_name"].includes(tt) && nonEmpty(state[tt])) out.push(`${tt} %in% ${rVec(state[tt])}`);
-  for (const k of ["basis_of_record", "life_stage"]) if (nonEmpty(state[k]) && ds === "raw") out.push(`${k} %in% ${rVec(state[k])}`);
+  if (tt && ["family", "genus", "taxon_name"].includes(tt) && rNonEmpty(state[tt])) out.push(`${tt} %in% ${rVec(state[tt])}`);
+  for (const k of ["basis_of_record", "life_stage"]) if (rNonEmpty(state[k]) && ds === "raw") out.push(`${k} %in% ${rVec(state[k])}`);
   if (state.location === "georeferenced" && ds === "raw") {
     out.push("!is.na(`latitude (deg)`) & !is.na(`longitude (deg)`)");
     for (const [k, col, op] of [["min_latitude", "latitude (deg)", ">="], ["max_latitude", "latitude (deg)", "<="], ["min_longitude", "longitude (deg)", ">="], ["max_longitude", "longitude (deg)", "<="]]) {
@@ -33,17 +33,17 @@ export function filterConditions(state, spec, features) {
       if (v !== undefined && v !== null && !Number.isNaN(v)) out.push(`\`${col}\` ${op} ${Number(v)}`);
     }
   }
-  if (state.location === "apc" && nonEmpty(state.apc_taxon_distribution))
-    out.push(`stringr::str_detect(taxon_distribution, ${rStr(state.apc_taxon_distribution.map(escRegex).join("|"))})`);
+  if (state.location === "apc" && rNonEmpty(state.apc_taxon_distribution))
+    out.push(`stringr::str_detect(taxon_distribution, ${rStr(state.apc_taxon_distribution.map(rEscRegex).join("|"))})`);
   for (const cf of state.custom ?? []) {
     const { column, value } = cf;
     if (vocab.includes(column)) {
       if (column === "dataset_id" && ds === "species") // species rows hold several IDs joined with "; ": match whole IDs only
-        out.push(`stringr::str_detect(dataset_id, ${rStr("(^|; )(" + value.map(escRegex).join("|") + ")(;|$)")})`);
+        out.push(`stringr::str_detect(dataset_id, ${rStr("(^|; )(" + value.map(rEscRegex).join("|") + ")(;|$)")})`);
       else out.push(`${rName(column)} %in% ${rVec(value)}`);
     } else {
       const parts = value.join("|").toLowerCase().split("|").map((p) => p.trim()).filter(Boolean);
-      if (parts.length) out.push(`stringr::str_detect(tolower(${rName(column)}), ${rStr(parts.map(escRegex).join("|"))})`);
+      if (parts.length) out.push(`stringr::str_detect(tolower(${rName(column)}), ${rStr(parts.map(rEscRegex).join("|"))})`);
     }
   }
   return out;
@@ -80,6 +80,9 @@ export function recreateScript(state, spec, features, meta, day, load = true) {
   }
   L.push(`data <- ${species ? "means" : "austraits"} |>`);
   if (species) {
+    L.push(
+      "  # The portal leaves out names APCalign could not align to the APC (empty taxon_rank)",
+      "  dplyr::filter(!is.na(taxon_rank)) |>");
     if (uses("taxon_distribution")) L.push(
       "  # The APC distribution, from the database's taxa table",
       "  dplyr::left_join(",
