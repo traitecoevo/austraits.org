@@ -55,7 +55,7 @@ lives in [`austraits-meta`](https://github.com/traitecoevo/austraits-meta).
   <article class="plain-card">
     <h3>APD — AusTraits Plant Dictionary</h3>
     <p>The trait <strong>vocabulary</strong>: definitions, allowed categorical values, units, and links to other trait databases. Everything downstream conforms to it.</p>
-    <p><a href="https://w3id.org/APD" target="_blank" rel="noopener">w3id.org/APD</a> · <a href="https://github.com/traitecoevo/APD" target="_blank" rel="noopener">source</a></p>
+    <p><a href="https://w3id.org/APD" target="_blank" rel="noopener">w3id.org/APD</a> · <a href="https://github.com/traitecoevo/APD" target="_blank" rel="noopener">source</a> · <a href="https://traitecoevo.github.io/APD/trait_browser.html" target="_blank" rel="noopener">trait browser</a></p>
   </article>
   <article class="plain-card">
     <h3>APCalign — taxonomy alignment</h3>

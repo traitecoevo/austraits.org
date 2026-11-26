@@ -186,7 +186,7 @@ execute:
         <div>
           <h3>APD</h3>
           <p>Formal vocabulary for trait concepts, definitions, allowed values, units, and links ...
-            <a href="https://w3id.org/APD" target="_blank" rel="noopener">more</a>
+            <a href="https://w3id.org/APD" target="_blank" rel="noopener">more</a> · <a href="https://traitecoevo.github.io/APD/trait_browser.html" target="_blank" rel="noopener">trait browser</a></p>
         </div>
       </article>
     </div>

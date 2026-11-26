@@ -21,6 +21,8 @@ website:
         text: Data portal
       - href: apcalign.qmd
         text: Name aligner
+      - href: apd-trait-browser.qmd
+        text: APD trait browser
       - href: index.html#software
         text: Tools
       - text: About
