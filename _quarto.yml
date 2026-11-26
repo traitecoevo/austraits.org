@@ -23,6 +23,12 @@ website:
         text: Name aligner
       - href: apd-trait-browser.qmd
         text: APD trait browser
+      - text: Old versions
+        menu:
+          - href: portal-old.qmd
+            text: Old data portal
+          - href: apcalign-old.qmd
+            text: Old name aligner
       - href: index.html#software
         text: Tools
       - text: About
