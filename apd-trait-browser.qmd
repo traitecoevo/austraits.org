@@ -1,0 +1,34 @@
+---
+title: "APD trait browser"
+format:
+  html:
+    page-layout: full
+    toc: false
+---
+
+The APD trait browser lets you explore the traits in the AusTraits Plant Dictionary (APD) by trait
+group, read each trait's definition, and find related traits that share a facet. It is embedded
+below, or you can
+
+<p>
+<a class="btn-primary" href="https://traitecoevo.github.io/APD/trait_browser.html" target="_blank" rel="noopener"><i class="bi bi-box-arrow-up-right"></i> Open the trait browser in a new tab</a>
+</p>
+
+```{=html}
+<div style="position: relative; width: 100%; height: 80vh; min-height: 600px; border: 1px solid #ddd; border-radius: 6px; overflow: hidden; margin-top: 1rem;">
+  <iframe
+    src="https://traitecoevo.github.io/APD/trait_browser.html"
+    title="APD trait browser"
+    loading="lazy"
+    allowfullscreen
+    style="width: 100%; height: 100%; border: none;">
+  </iframe>
+</div>
+```
+
+::: {.callout-note appearance="simple"}
+The trait browser is part of the APD site at
+[traitecoevo.github.io/APD](https://traitecoevo.github.io/APD/). The APD itself, with its source,
+is at [w3id.org/APD](https://w3id.org/APD) and
+[`traitecoevo/APD`](https://github.com/traitecoevo/APD).
+:::
