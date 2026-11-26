@@ -21,6 +21,9 @@ website:
         text: Data portal
       - href: apcalign.qmd
         text: Name aligner
+      - href: https://traitecoevo.github.io/APD/trait_browser.html
+        text: APD trait browser
+        target: _blank
       - href: index.html#software
         text: Tools
       - text: About
