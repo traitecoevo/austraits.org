@@ -20,7 +20,7 @@ website:
       - href: portal.qmd
         text: Data portal
       - href: apcalign.qmd
-        text: Name aligner
+        text: APCalign
       - href: apd-trait-browser.qmd
         text: APD trait browser
       - text: Old versions
@@ -28,7 +28,7 @@ website:
           - href: portal-old.qmd
             text: Old data portal
           - href: apcalign-old.qmd
-            text: Old name aligner
+            text: Old APCalign
       - href: index.html#software
         text: Tools
       - text: About
